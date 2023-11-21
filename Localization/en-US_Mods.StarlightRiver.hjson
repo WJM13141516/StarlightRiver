@@ -3456,6 +3456,16 @@ Items: {
 		DisplayName: Pink Laser Pointer
 		Tooltip: ""
 	}
+
+	Release: {
+		DisplayName: Release
+		Tooltip:
+			'''
+			Lash out with tendrils of rage
+			<RIGHT> to calm yourself and heal
+			'Perhaps all you needed was to remember why you fell in love in the first place.'
+			'''
+	}
 }
 
 Tiles: {
@@ -4382,6 +4392,11 @@ Buffs: {
 			What lies below?
 			Increased mining speed
 			'''
+	}
+
+	ReleaseRage: {
+		DisplayName: Pure Rage
+		Description: ""
 	}
 }
 
