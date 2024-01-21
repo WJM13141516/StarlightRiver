@@ -34,6 +34,7 @@ namespace StarlightRiver.Content.GUI
 
 		public TextureGIF previewGif = null;
 		readonly UIList options = new();
+		readonly UIScrollbar scroll = new();
 		readonly InfusionMakerSlot inSlot = new();
 		readonly UIImageButton craftButton = new(Request<Texture2D>(AssetDirectory.GUI + "BackButton"));
 		readonly UIImageButton exitButton = new(Request<Texture2D>(AssetDirectory.GUI + "ExitButton"));
@@ -69,10 +70,11 @@ namespace StarlightRiver.Content.GUI
 
 		public void Constrain()
 		{
+			SetElement(scroll, new Vector2(390, 8), new Vector2(32, 390));
 			SetElement(inSlot, new Vector2(82, 220), new Vector2(32, 32));
 			SetElement(options, new Vector2(206, 16), new Vector2(180, 390));
-			SetElement(craftButton, new Vector2(394, 36), new Vector2(32, 32));
-			SetElement(exitButton, new Vector2(390, 0), new Vector2(32, 32));
+			SetElement(craftButton, new Vector2(414, 36), new Vector2(32, 32));
+			SetElement(exitButton, new Vector2(410, 0), new Vector2(32, 32));
 		}
 
 		public override void Draw(SpriteBatch spriteBatch)
@@ -205,6 +207,9 @@ namespace StarlightRiver.Content.GUI
 
 		public override void OnInitialize()
 		{
+			Append(scroll);
+			options.SetScrollbar(scroll);
+
 			Append(inSlot);
 			Append(options);
 
@@ -264,9 +269,10 @@ namespace StarlightRiver.Content.GUI
 			if (output != null)
 			{
 				if (output.Visible)
-				{
-					Texture2D tex = Request<Texture2D>(output.Texture).Value;
+				{				
+					Texture2D tex = TextureAssets.Item[output.TransformTo].Value;
 					output.Draw(spriteBatch, pos + new Vector2(14, 13), 1);
+					spriteBatch.Draw(tex, pos, Color.White);
 					Color color = (Parent.Parent.Parent as InfusionMaker).selected == this ? Color.Yellow : Color.White;
 					spriteBatch.DrawString(FontAssets.ItemStack.Value, output.Item.Name, pos + new Vector2(32, 6), color, 0, Vector2.Zero, 0.8f, 0, 0);
 				}

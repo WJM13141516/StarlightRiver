@@ -43,27 +43,7 @@ namespace StarlightRiver.Content.Items
 
 		public override bool? UseItem(Player player)
 		{
-			for (int x = 0; x < Main.maxTilesX; x++)
-			{
-				for (int y = 0; y < Main.maxTilesY; y++)
-				{
-					Framing.GetTileSafely(x, y).ClearEverything();
-				}
-			}
-
-			StarlightWorld.SpringGen(default, default);
-			return true;
-
-			StarlightEventSequenceSystem.sequence = 0;
-			player.GetHandler().unlockedAbilities.Clear();
-			player.GetHandler().InfusionLimit = 0;
-
-			Main.time = 53999;
-			Main.dayTime = true;
-			StarlightEventSequenceSystem.willOccur = true;
-
-			Dust.NewDustPerfect(Main.MouseWorld, ModContent.DustType<EchochainBurstDust>(), Vector2.Zero, 0, default, 1f);
-
+			player.GetHandler().InfusionLimit = 1;
 			return true;
 		}
 	}
