@@ -11,6 +11,9 @@ namespace StarlightRiver.Content.Tiles.UndergroundTemple
 {
 	class JarTall : DummyTile, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_UndergroundTemple_JarTallGlow2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/UndergroundTemple/JarTallGlow2");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_UndergroundTemple_JarTallGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/UndergroundTemple/JarTallGlow");
 		public override int DummyType => DummySystem.DummyType<JarDummy>();
 
 		public override string Texture => AssetDirectory.UndergroundTempleTile + Name;
@@ -49,8 +52,8 @@ namespace StarlightRiver.Content.Tiles.UndergroundTemple
 				if (dummy is null)
 					return;
 
-				Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Tiles/UndergroundTemple/JarTallGlow").Value;
-				Texture2D tex2 = Request<Texture2D>("StarlightRiver/Assets/Tiles/UndergroundTemple/JarTallGlow2").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Tiles_UndergroundTemple_JarTallGlow.Value;
+				Texture2D tex2 = texture_StarlightRiver_Assets_Tiles_UndergroundTemple_JarTallGlow2.Value;
 
 				spriteBatch.End();
 				spriteBatch.Begin(default, BlendState.Additive, SamplerState.PointClamp, default, default);
@@ -114,7 +117,7 @@ namespace StarlightRiver.Content.Tiles.UndergroundTemple
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Keys_Glow.Value;
 			spriteBatch.Draw(tex, Center - Main.screenPosition + Vector2.UnitY * 16, tex.Frame(), new Color(91, 211, 233) * 0.7f, 0, tex.Size() / 2, 0.8f, 0, 0);
 		}
 	}

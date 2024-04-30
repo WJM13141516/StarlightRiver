@@ -6,6 +6,9 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 {
 	class ArenaBlocker : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___TentacleBody = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "TentacleBody");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___TentacleGlow = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "TentacleGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___TentacleTop = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "TentacleTop");
 		public ref float Timer => ref NPC.ai[0];
 		public ref float State => ref NPC.ai[1];
 
@@ -65,9 +68,9 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 		{
 			if (Timer > 150)
 			{
-				Texture2D top = Request<Texture2D>(AssetDirectory.SquidBoss + "TentacleTop").Value;
-				Texture2D glow = Request<Texture2D>(AssetDirectory.SquidBoss + "TentacleGlow").Value;
-				Texture2D body = Request<Texture2D>(AssetDirectory.SquidBoss + "TentacleBody").Value;
+				Texture2D top = texture_AssetDirectory_SquidBoss___TentacleTop.Value;
+				Texture2D glow = texture_AssetDirectory_SquidBoss___TentacleGlow.Value;
+				Texture2D body = texture_AssetDirectory_SquidBoss___TentacleBody.Value;
 
 				for (int k = 0; k < Timer - top.Height; k += body.Height + 2)
 				{

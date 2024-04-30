@@ -12,6 +12,11 @@ namespace StarlightRiver.Content.NPCs.Moonstone
 	//bestiary needs to be done but there isnt a moonstone bestiary template thingy
 	public class Dreamprism : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Rock___i_ToString( = ModContent.Request<Texture2D>(Texture + "_Rock" + i.ToString();
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Items_Moonstone_DatsuzeiFlameMap2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Moonstone/DatsuzeiFlameMap2");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private enum Phase
 		{
 			rising = 0,
@@ -123,8 +128,8 @@ namespace StarlightRiver.Content.NPCs.Moonstone
 				drawColor = NPC.GetBestiaryEntryColor();
 
 			rockPosition = Vector2.Lerp(rockPosition, NPC.Center, 0.45f);
-			Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D texture = texture_Texture.Value;
+			Texture2D glowTexture = texture_Texture____Glow.Value;
 
 			SpriteEffects effects = SpriteEffects.None;
 			Vector2 origin = NPC.frame.Size() / 2;
@@ -218,8 +223,8 @@ namespace StarlightRiver.Content.NPCs.Moonstone
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.02f);
 			effect.Parameters["repeats"].SetValue(8f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
-			effect.Parameters["sampleTexture2"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Moonstone/DatsuzeiFlameMap2").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
+			effect.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_Items_Moonstone_DatsuzeiFlameMap2.Value);
 
 			trail?.Render(effect);
 
@@ -272,8 +277,8 @@ namespace StarlightRiver.Content.NPCs.Moonstone
 		{
 			for (int i = 1; i < 5; i++)
 			{
-				Texture2D rockTex = ModContent.Request<Texture2D>(Texture + "_Rock" + i.ToString()).Value;
-				Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Rock" + i.ToString() + "_Glow").Value;
+				Texture2D rockTex = texture_Texture____Rock___i_ToString().Value;
+				Texture2D glowTex = texture_Texture____Rock___i_ToString(+"_Glow").Value;
 				float angle = i / 4f * 6.28f + rockRotation;
 
 				Vector2 offset = (angle.ToRotationVector2() * new Vector2(30, 10)).RotatedBy(0.3f * Math.Sin(rockRotation * 0.2f));
@@ -479,7 +484,7 @@ namespace StarlightRiver.Content.NPCs.Moonstone
 
 		public void DrawOverTiles(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			int frameSize = (int)MathHelper.Min(frameCounter, tex.Height / 2);
 			var frame = new Rectangle(tex.Width / 2 - frameSize, tex.Height / 2 - frameSize, frameSize * 2, frameSize * 2);
 			var color = new Color(99, 71, 255, 0);

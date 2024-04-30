@@ -15,6 +15,15 @@ namespace StarlightRiver.Content.Items.Haunted
 {
 	public class EchochainWhip : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_Texture____TipGlow = ModContent.Request<Texture2D>(Texture + "_TipGlow");
+		public static readonly Asset<Texture2D> texture_Texture____TipBlur = ModContent.Request<Texture2D>(Texture + "_TipBlur");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_HauntedItem___EchochainWhipChain_Blur = ModContent.Request<Texture2D>(AssetDirectory.HauntedItem + "EchochainWhipChain_Blur");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_HauntedItem___EchochainWhipChain_Glow = ModContent.Request<Texture2D>(AssetDirectory.HauntedItem + "EchochainWhipChain_Glow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_HauntedItem___EchochainWhipChain = ModContent.Request<Texture2D>(AssetDirectory.HauntedItem + "EchochainWhipChain");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Noise_PerlinNoise = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/PerlinNoise");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Noise_SwirlyNoiseLooping = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/SwirlyNoiseLooping");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
 		internal int cooldown;
 		public override string Texture => AssetDirectory.HauntedItem + Name;
 
@@ -160,7 +169,7 @@ namespace StarlightRiver.Content.Items.Haunted
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 
 			float fadeOut = 1f;
 			if (DeathTimer > 0)
@@ -177,9 +186,9 @@ namespace StarlightRiver.Content.Items.Haunted
 
 			effect.Parameters["offset"].SetValue(new Vector2(0.001f));
 			effect.Parameters["repeats"].SetValue(2);
-			effect.Parameters["uImage1"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/SwirlyNoiseLooping").Value);
-			effect.Parameters["uImage2"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/PerlinNoise").Value);
-			effect.Parameters["noiseImage1"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/PerlinNoise").Value);
+			effect.Parameters["uImage1"].SetValue(texture_AssetDirectory_Assets___Noise_SwirlyNoiseLooping.Value);
+			effect.Parameters["uImage2"].SetValue(texture_AssetDirectory_Assets___Noise_PerlinNoise.Value);
+			effect.Parameters["noiseImage1"].SetValue(texture_AssetDirectory_Assets___Noise_PerlinNoise.Value);
 
 			Color color = new Color(150, 255, 25, 0) * 0.5f * fadeOut;
 			effect.Parameters["uColor"].SetValue(color.ToVector4());
@@ -577,10 +586,10 @@ namespace StarlightRiver.Content.Items.Haunted
 
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.HauntedItem + "EchochainWhipChain").Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>(AssetDirectory.HauntedItem + "EchochainWhipChain_Glow").Value;
-			Texture2D texBlur = ModContent.Request<Texture2D>(AssetDirectory.HauntedItem + "EchochainWhipChain_Blur").Value;
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D tex = texture_AssetDirectory_HauntedItem___EchochainWhipChain.Value;
+			Texture2D texGlow = texture_AssetDirectory_HauntedItem___EchochainWhipChain_Glow.Value;
+			Texture2D texBlur = texture_AssetDirectory_HauntedItem___EchochainWhipChain_Blur.Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 
 			Vector2 chainEnd = tilePosition;
 			Vector2 chainStart = Projectile.Center;
@@ -672,11 +681,11 @@ namespace StarlightRiver.Content.Items.Haunted
 
 		public override void DrawBehindWhip(ref Color lightColor)
 		{
-			Texture2D texBlur = ModContent.Request<Texture2D>(Texture + "_TipBlur").Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>(Texture + "_TipGlow").Value;
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D texBlur = texture_Texture____TipBlur.Value;
+			Texture2D texGlow = texture_Texture____TipGlow.Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 
-			Asset<Texture2D> texture = ModContent.Request<Texture2D>(Texture);
+			Asset<Texture2D> texture = texture_Texture;
 			Rectangle whipFrame = texture.Frame(1, 5, 0, 0);
 			int height = whipFrame.Height;
 

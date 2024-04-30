@@ -7,11 +7,16 @@ namespace StarlightRiver.Content.GUI
 {
 	public class BossBarOverlay : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___BossbarChains = ModContent.Request<Texture2D>(AssetDirectory.GUI + "BossbarChains");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___BossbarEdgeImmune = ModContent.Request<Texture2D>(AssetDirectory.GUI + "BossbarEdgeImmune");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___BossbarFillImmune = ModContent.Request<Texture2D>(AssetDirectory.GUI + "BossbarFillImmune");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___BossbarGlow = ModContent.Request<Texture2D>(AssetDirectory.GUI + "BossbarGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___BossBarFrame = ModContent.Request<Texture2D>(AssetDirectory.GUI + "BossBarFrame", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 		public static bool visible;
 
 		public static NPC tracked;
 		public static string text;
-		public static Texture2D texture = Request<Texture2D>(AssetDirectory.GUI + "BossBarFrame", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+		public static Texture2D texture = texture_AssetDirectory_GUI___BossBarFrame.Value;
 		public static Color glowColor = Color.Transparent;
 
 		public static bool? forceInvulnerabilityVisuals = null;
@@ -80,14 +85,14 @@ namespace StarlightRiver.Content.GUI
 				return;
 			}
 
-			Texture2D texGlow = Request<Texture2D>(AssetDirectory.GUI + "BossbarGlow").Value;
+			Texture2D texGlow = texture_AssetDirectory_GUI___BossbarGlow.Value;
 
 			int progress = (int)(BossBarOverlay.tracked?.life / (float)BossBarOverlay.tracked?.lifeMax * 456);
 
 			if (shouldDrawChains)
 			{
-				Texture2D texFill = Request<Texture2D>(AssetDirectory.GUI + "BossbarFillImmune").Value;
-				Texture2D texEdge = Request<Texture2D>(AssetDirectory.GUI + "BossbarEdgeImmune").Value;
+				Texture2D texFill = texture_AssetDirectory_GUI___BossbarFillImmune.Value;
+				Texture2D texEdge = texture_AssetDirectory_GUI___BossbarEdgeImmune.Value;
 
 				spriteBatch.Draw(texFill, new Rectangle((int)(pos.X + off.X), (int)(pos.Y + off.Y) + 2, progress, texFill.Height - 4), Color.White);
 				spriteBatch.Draw(texEdge, pos + off + Vector2.UnitX * progress, Color.White);
@@ -107,7 +112,7 @@ namespace StarlightRiver.Content.GUI
 			//spriteBatch.Draw(BossBarOverlay.Texture, pos, Color.White);           
 
 			if (shouldDrawChains)
-				spriteBatch.Draw(Request<Texture2D>(AssetDirectory.GUI + "BossbarChains").Value, pos, Color.White);
+				spriteBatch.Draw(texture_AssetDirectory_GUI___BossbarChains.Value, pos, Color.White);
 		}
 	}
 }

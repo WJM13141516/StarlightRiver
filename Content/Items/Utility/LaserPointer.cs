@@ -9,6 +9,10 @@ namespace StarlightRiver.Content.Items.Utility
 {
 	class LaserPointerLoader : IOrderedLoadable
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Keys_GlowSoft = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___GlowTrail = ModContent.Request<Texture2D>(AssetDirectory.Assets + "GlowTrail");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
 		public float Priority => 1;
 
 		public void Load()
@@ -76,13 +80,13 @@ namespace StarlightRiver.Content.Items.Utility
 
 		public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color ItemColor, Vector2 origin, float scale)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture + "Glow").Value;
+			Texture2D tex = texture_Texture___Glow.Value;
 			spriteBatch.Draw(tex, position, frame, color, 0, origin, scale, 0, 0);
 		}
 
 		public override void PostDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, float rotation, float scale, int whoAmI)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture + "Glow").Value;
+			Texture2D tex = texture_Texture___Glow.Value;
 			spriteBatch.Draw(tex, Item.position, null, color, 0, Vector2.Zero, scale, 0, 0);
 		}
 
@@ -152,14 +156,14 @@ namespace StarlightRiver.Content.Items.Utility
 		{
 			Vector2 OwnerCenterScreen = Owner.Center + new Vector2(0, Owner.gfxOffY) - Main.screenPosition;
 
-			Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture).Value, OwnerCenterScreen, null, lightColor, LaserRotation, new Vector2(0, ModContent.Request<Texture2D>(Texture).Value.Height - 3), 1, 0, 0);
-			Main.spriteBatch.Draw(ModContent.Request<Texture2D>(Texture + "Glow").Value, OwnerCenterScreen, null, color, LaserRotation, new Vector2(0, ModContent.Request<Texture2D>(Texture + "Glow").Value.Height - 3), 1, 0, 0);
+			Main.spriteBatch.Draw(texture_Texture.Value, OwnerCenterScreen, null, lightColor, LaserRotation, new Vector2(0, texture_Texture.Value.Height - 3), 1, 0, 0);
+			Main.spriteBatch.Draw(texture_Texture___Glow.Value, OwnerCenterScreen, null, color, LaserRotation, new Vector2(0, texture_Texture___Glow.Value.Height - 3), 1, 0, 0);
 			return false;
 		}
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D texBeam = ModContent.Request<Texture2D>(AssetDirectory.Assets + "GlowTrail").Value;
+			Texture2D texBeam = texture_AssetDirectory_Assets___GlowTrail.Value;
 
 			var origin = new Vector2(0, texBeam.Height / 2);
 
@@ -173,7 +177,7 @@ namespace StarlightRiver.Content.Items.Utility
 			for (int i = 0; i < width; i += 10)
 				Lighting.AddLight(pos + Vector2.UnitX.RotatedBy(LaserRotation) * i + Main.screenPosition, color.ToVector3() * height * 0.030f);
 
-			Texture2D impactTex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft").Value;
+			Texture2D impactTex = texture_AssetDirectory_Assets___Keys_GlowSoft.Value;
 			spriteBatch.Draw(impactTex, endPoint - Main.screenPosition, null, color, 0, impactTex.Size() / 2, 0.5f, 0, 0);
 		}
 

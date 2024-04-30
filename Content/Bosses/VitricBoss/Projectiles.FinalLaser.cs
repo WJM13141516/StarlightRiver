@@ -6,6 +6,17 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 {
 	class FinalLaser : ModProjectile, IDrawAdditive
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___GlowTrail = ModContent.Request<Texture2D>(AssetDirectory.Assets + "GlowTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ItemGlow = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ItemGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Keys_GlowSoft = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___GradientBlack = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "GradientBlack");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___BeamTrail = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "BeamTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___BeamCore = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "BeamCore");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___DirectionalBeam = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "DirectionalBeam");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___Name = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + Name);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_LaserBallDistort = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/LaserBallDistort");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_LaserBallMap = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/LaserBallMap");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow");
 		public VitricBoss parent;
 
 		public int direction = -1;
@@ -160,7 +171,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 			if (parent is null)
 				return;
 
-			Texture2D texGlow = Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value;
+			Texture2D texGlow = texture_StarlightRiver_Assets_Keys_Glow.Value;
 
 			int sin = (int)(Math.Sin(StarlightWorld.visualTimer * 3) * 40f);
 			var color = new Color(255, 160 + sin, 40 + sin / 2);
@@ -169,21 +180,21 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 			spriteBatch.Draw(texGlow, Projectile.Center - Main.screenPosition, null, color * Projectile.scale * 1.2f, 0, texGlow.Size() / 2, Projectile.scale * 1.6f, default, default);
 
 			Effect effect1 = Terraria.Graphics.Effects.Filters.Scene["SunPlasma"].GetShader().Shader;
-			effect1.Parameters["sampleTexture2"].SetValue(Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/LaserBallMap").Value);
-			effect1.Parameters["sampleTexture3"].SetValue(Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/LaserBallDistort").Value);
+			effect1.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_Bosses_VitricBoss_LaserBallMap.Value);
+			effect1.Parameters["sampleTexture3"].SetValue(texture_StarlightRiver_Assets_Bosses_VitricBoss_LaserBallDistort.Value);
 			effect1.Parameters["uTime"].SetValue(Main.GameUpdateCount * 0.01f);
 
 			spriteBatch.End();
 			spriteBatch.Begin(default, BlendState.NonPremultiplied, Main.DefaultSamplerState, default, RasterizerState.CullNone, effect1, Main.GameViewMatrix.TransformationMatrix);
 
-			spriteBatch.Draw(Request<Texture2D>(AssetDirectory.VitricBoss + Name).Value, Projectile.Center - Main.screenPosition, null, Color.White * Projectile.scale, 0, Projectile.Size / 2, Projectile.scale * 1.7f, 0, 0);
+			spriteBatch.Draw(texture_AssetDirectory_VitricBoss___Name.Value, Projectile.Center - Main.screenPosition, null, Color.White * Projectile.scale, 0, Projectile.Size / 2, Projectile.scale * 1.7f, 0, 0);
 
 			spriteBatch.End();
 			spriteBatch.Begin(default, BlendState.Additive, SamplerState.PointWrap, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
 			if (LaserTimer > 30 && LaserTimer <= 120) //tell line
 			{
-				Texture2D texTell = Request<Texture2D>(AssetDirectory.MiscTextures + "DirectionalBeam").Value;
+				Texture2D texTell = texture_AssetDirectory_MiscTextures___DirectionalBeam.Value;
 				var origin = new Vector2(0, texTell.Height / 2);
 
 				for (int k = 0; k < 40; k++)
@@ -203,9 +214,9 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 			if (LaserTimer > 150) //the actual laser
 			{
-				Texture2D texBeam = Request<Texture2D>(AssetDirectory.MiscTextures + "BeamCore").Value;
-				Texture2D texBeam2 = Request<Texture2D>(AssetDirectory.MiscTextures + "BeamTrail").Value;
-				Texture2D texDark = Request<Texture2D>(AssetDirectory.MiscTextures + "GradientBlack").Value;
+				Texture2D texBeam = texture_AssetDirectory_MiscTextures___BeamCore.Value;
+				Texture2D texBeam2 = texture_AssetDirectory_MiscTextures___BeamTrail.Value;
+				Texture2D texDark = texture_AssetDirectory_MiscTextures___GradientBlack.Value;
 
 				var origin = new Vector2(0, texBeam.Height / 2);
 				var origin2 = new Vector2(0, texBeam2.Height / 2);
@@ -259,9 +270,9 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 				spriteBatch.End();
 				spriteBatch.Begin(default, BlendState.Additive, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-				Texture2D impactTex = Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft").Value;
-				Texture2D impactTex2 = Request<Texture2D>(AssetDirectory.GUI + "ItemGlow").Value;
-				Texture2D glowTex = Request<Texture2D>(AssetDirectory.Assets + "GlowTrail").Value;
+				Texture2D impactTex = texture_AssetDirectory_Assets___Keys_GlowSoft.Value;
+				Texture2D impactTex2 = texture_AssetDirectory_GUI___ItemGlow.Value;
+				Texture2D glowTex = texture_AssetDirectory_Assets___GlowTrail.Value;
 
 				spriteBatch.Draw(glowTex, target, source, color * 0.95f, LaserRotation, new Vector2(0, glowTex.Height / 2), 0, 0);
 

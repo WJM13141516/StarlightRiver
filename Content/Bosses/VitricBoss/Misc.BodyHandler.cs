@@ -7,6 +7,11 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 {
 	class BodyHandler
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___Gore____tex = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "Gore/" + tex);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_ShieldMap = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/ShieldMap");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___VitricBossBodyShield = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBodyShield");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___VitricBossBodyGlow = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBodyGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___VitricBossBody = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBody");
 		private readonly VitricBoss parent;
 		private readonly VerletChain chain;
 		private bool stopDrawingBody;
@@ -59,8 +64,8 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 			if (stopDrawingBody && index > 0)
 				return;
 
-			Texture2D tex = Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBody").Value;
-			Texture2D glowTex = Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBodyGlow").Value;
+			Texture2D tex = texture_AssetDirectory_VitricBoss___VitricBossBody.Value;
+			Texture2D glowTex = texture_AssetDirectory_VitricBoss___VitricBossBodyGlow.Value;
 
 			float rot = 0;
 
@@ -155,7 +160,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 			if (index == 0)
 				return;
 
-			Texture2D tex = Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBodyShield").Value;
+			Texture2D tex = texture_AssetDirectory_VitricBoss___VitricBossBodyShield.Value;
 
 			float rot = (chain.ropeSegments[index].posNow - chain.ropeSegments[index - 1].posNow).ToRotation() - (float)Math.PI / 2;
 			Rectangle source = index switch
@@ -197,7 +202,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 				source.X += 114;
 
 			Effect effect = Terraria.Graphics.Effects.Filters.Scene["MoltenForm"].GetShader().Shader;
-			effect.Parameters["sampleTexture2"].SetValue(Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/ShieldMap").Value);
+			effect.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_Bosses_VitricBoss_ShieldMap.Value);
 			effect.Parameters["uTime"].SetValue(2 - parent.shieldShaderTimer / 120f * 2);
 			effect.Parameters["sourceFrame"].SetValue(new Vector4(source.X, source.Y, source.Width, source.Height));
 			effect.Parameters["texSize"].SetValue(tex.Size());
@@ -288,7 +293,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 		private void GoreMe(Vector2 pos, Vector2 offset, string tex)
 		{
-			Texture2D texture = Request<Texture2D>(AssetDirectory.VitricBoss + "Gore/" + tex).Value;
+			Texture2D texture = texture_AssetDirectory_VitricBoss___Gore____tex.Value;
 			Gore.NewGorePerfect(parent.NPC.GetSource_FromThis(), pos + offset - texture.Size() / 2, offset == Vector2.Zero ? Vector2.One.RotatedByRandom(6.28f) : Vector2.Normalize(offset) * Main.rand.NextFloat(6, 8), StarlightRiver.Instance.Find<ModGore>(tex).Type);
 		}
 	}

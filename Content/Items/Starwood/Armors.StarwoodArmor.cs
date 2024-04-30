@@ -12,9 +12,12 @@ namespace StarlightRiver.Content.Items.Starwood
 	[AutoloadEquip(EquipType.Head)]
 	public class StarwoodHat : StarwoodItem, IArmorLayerDrawable
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_StarwoodItem___StarwoodBoots_Alt = ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodBoots_Alt");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_StarwoodItem___StarwoodChest_Alt = ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodChest_Alt");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_StarwoodItem___StarwoodHat_Alt = ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodHat_Alt");
 		public override string Texture => AssetDirectory.StarwoodItem + Name;
 
-		public StarwoodHat() : base(Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodHat_Alt").Value) { }
+		public StarwoodHat() : base(texture_AssetDirectory_StarwoodItem___StarwoodHat_Alt.Value) { }
 
 		public override void SetStaticDefaults()
 		{
@@ -55,7 +58,7 @@ namespace StarlightRiver.Content.Items.Starwood
 	{
 		public override string Texture => AssetDirectory.StarwoodItem + Name;
 
-		public StarwoodChest() : base(Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodChest_Alt").Value) { }
+		public StarwoodChest() : base(texture_AssetDirectory_StarwoodItem___StarwoodChest_Alt.Value) { }
 
 		public override void Load()//adds method to Starlight Player event
 		{
@@ -164,7 +167,7 @@ namespace StarlightRiver.Content.Items.Starwood
 	{
 		public override string Texture => AssetDirectory.StarwoodItem + Name;
 
-		public StarwoodBoots() : base(Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodBoots_Alt").Value) { }
+		public StarwoodBoots() : base(texture_AssetDirectory_StarwoodItem___StarwoodBoots_Alt.Value) { }
 
 		public override void SetStaticDefaults()
 		{

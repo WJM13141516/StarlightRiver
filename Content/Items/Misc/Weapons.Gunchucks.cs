@@ -8,6 +8,7 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	public class Gunchucks : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Chain = ModContent.Request<Texture2D>(Texture + "_Chain");
 		private int combo;
 
 		public override string Texture => AssetDirectory.MiscItem + Name;
@@ -232,7 +233,7 @@ namespace StarlightRiver.Content.Items.Misc
 		private Vector2 _chainMidB;
 		private void DrawChainCurve(SpriteBatch spriteBatch, Vector2 projBottom, out Vector2[] chainPositions)
 		{
-			Texture2D chainTex = ModContent.Request<Texture2D>(Texture + "_Chain").Value;
+			Texture2D chainTex = texture_Texture____Chain.Value;
 
 			float progress = Timer / SwingTime;
 

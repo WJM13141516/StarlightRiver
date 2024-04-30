@@ -10,6 +10,8 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 {
 	class LavaDart : ModProjectile, IDrawPrimitive
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___Line = ModContent.Request<Texture2D>(AssetDirectory.GUI + "Line");
 		public static Vector2 midPointToAssign;
 		public static Vector2 endPointToAssign;
 
@@ -129,7 +131,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 			if (timer < 30)
 			{
-				Texture2D tellTex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "Line").Value;
+				Texture2D tellTex = texture_AssetDirectory_GUI___Line.Value;
 				float alpha = (float)Math.Sin(timer / 30f * 3.14f);
 
 				for (int k = 0; k < 20; k++)
@@ -199,7 +201,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(effect);
 		}

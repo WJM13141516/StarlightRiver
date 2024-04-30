@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 {
 	class Whirlwind : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.Glassweaver + Name;
 
 		public ref float Timer => ref Projectile.ai[0];
@@ -67,7 +68,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Asset<Texture2D> spinTexture = Request<Texture2D>(Texture);
+			Asset<Texture2D> spinTexture = texture_Texture;
 
 			Color glowColor = Glassweaver.GlassColor * Utils.GetLerpValue(0, 15, Timer, true) * Utils.GetLerpValue(70, 25, Timer, true) * 0.5f;
 			glowColor.A = 0;

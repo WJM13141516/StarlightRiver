@@ -7,6 +7,8 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 {
 	class TentacleTrail : ModProjectile, IDrawPrimitive
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_LiquidTrailAlt = ModContent.Request<Texture2D>("StarlightRiver/Assets/LiquidTrailAlt");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowBottomTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowBottomTrail");
 		private List<Vector2> cache;
 		private Trail trail;
 
@@ -102,10 +104,10 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
 
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowBottomTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowBottomTrail.Value);
 			trail?.Render(effect);
 
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/LiquidTrailAlt").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_LiquidTrailAlt.Value);
 			trail?.Render(effect);
 		}
 	}

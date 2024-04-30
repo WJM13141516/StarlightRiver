@@ -13,6 +13,10 @@ namespace StarlightRiver.Content.Biomes
 {
 	public class MoonstoneBiome : ModBiome
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Noise_MiscNoise4 = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/MiscNoise4");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Noise_MiscNoise3 = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/MiscNoise3");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Noise_MiscNoise1 = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/MiscNoise1");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Noise_SwirlyNoiseLooping = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/SwirlyNoiseLooping");
 		public override int Music => MusicLoader.GetMusicSlot("StarlightRiver/Sounds/Music/Moonstone");
 
 		public override SceneEffectPriority Priority => SceneEffectPriority.BiomeMedium;
@@ -126,8 +130,8 @@ namespace StarlightRiver.Content.Biomes
 				effect.Parameters["intensity"].SetValue(0.01f * distortion);
 				effect.Parameters["repeats"].SetValue(2);
 				effect.Parameters["time"].SetValue((float)Main.timeForVisualEffects * 0.003f);
-				effect.Parameters["noiseTexture1"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/SwirlyNoiseLooping").Value);
-				effect.Parameters["noiseTexture2"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/MiscNoise1").Value);
+				effect.Parameters["noiseTexture1"].SetValue(texture_AssetDirectory_Assets___Noise_SwirlyNoiseLooping.Value);
+				effect.Parameters["noiseTexture2"].SetValue(texture_AssetDirectory_Assets___Noise_MiscNoise1.Value);
 				effect.Parameters["screenPosition"].SetValue(Main.screenPosition * new Vector2(0.5f, 0.1f) / backgroundTarget.RenderTarget.Size());
 				effect.Parameters["distortionColor1"].SetValue(Color.DarkBlue.ToVector3());
 				effect.Parameters["distortionColor2"].SetValue(new Color(120, 65, 120).ToVector3());
@@ -192,8 +196,8 @@ namespace StarlightRiver.Content.Biomes
 			effect.Parameters["intensity"].SetValue(10f);
 			effect.Parameters["time"].SetValue((float)Main.timeForVisualEffects * 0.1f);
 
-			effect.Parameters["noiseTexture1"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/MiscNoise3").Value);
-			effect.Parameters["noiseTexture2"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/MiscNoise4").Value);
+			effect.Parameters["noiseTexture1"].SetValue(texture_AssetDirectory_Assets___Noise_MiscNoise3.Value);
+			effect.Parameters["noiseTexture2"].SetValue(texture_AssetDirectory_Assets___Noise_MiscNoise4.Value);
 			effect.Parameters["color1"].SetValue(Color.Magenta.ToVector4());
 			effect.Parameters["color2"].SetValue(Color.Cyan.ToVector4());
 			effect.Parameters["opacity"].SetValue(1f);

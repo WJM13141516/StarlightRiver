@@ -6,6 +6,8 @@ namespace StarlightRiver.Content.Items.Vitric.IgnitionGauntlets
 {
 	public class IgnitionPunch : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_Texture____After = ModContent.Request<Texture2D>(Texture + "_After");
+		public static readonly Asset<Texture2D> texture_Texture___(Front_? __:__Back = ModContent.Request<Texture2D>(Texture + (Front ? "" : "_Back");
 		private List<float> oldRotation = new();
 		private List<Vector2> oldPosition = new();
 
@@ -95,8 +97,8 @@ namespace StarlightRiver.Content.Items.Vitric.IgnitionGauntlets
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture + (Front ? "" : "_Back")).Value;
-			Texture2D afterTex = ModContent.Request<Texture2D>(Texture + "_After").Value;
+			Texture2D tex = texture_Texture___(Front_ ? __ : __Back).Value;
+			Texture2D afterTex = texture_Texture____After.Value;
 
 			/*Main.spriteBatch.End();
 			Main.spriteBatch.Begin(default, BlendState.Additive, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);*/

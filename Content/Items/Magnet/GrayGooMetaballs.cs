@@ -7,6 +7,8 @@ namespace StarlightRiver.Content.Items.Magnet
 {
 	internal class GrayGooMetaballs : MetaballActor
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowHarsh = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowHarsh");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowVerySoft = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowVerySoft");
 		public static bool visible;
 
 		public int DustType => ModContent.DustType<GrayGooDust>();
@@ -25,8 +27,8 @@ namespace StarlightRiver.Content.Items.Magnet
 		{
 			Effect borderNoise = Filters.Scene["BorderNoise"].GetShader().Shader;
 
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowVerySoft").Value;
-			Texture2D harshTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowHarsh").Value;
+			Texture2D tex = texture_AssetDirectory_Keys___GlowVerySoft.Value;
+			Texture2D harshTex = texture_AssetDirectory_Keys___GlowHarsh.Value;
 
 			if (borderNoise is null)
 				return;

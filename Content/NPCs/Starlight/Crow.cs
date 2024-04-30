@@ -14,6 +14,8 @@ namespace StarlightRiver.Content.NPCs.Starlight
 {
 	class Crow : ModNPC, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_StarTexture = ModContent.Request<Texture2D>("StarlightRiver/Assets/StarTexture");
 		public bool visible;
 		public bool leaving;
 
@@ -151,7 +153,7 @@ namespace StarlightRiver.Content.NPCs.Starlight
 		/// </summary>
 		private void DrawFlashingStar(SpriteBatch spriteBatch, float timer)
 		{
-			Texture2D star = ModContent.Request<Texture2D>("StarlightRiver/Assets/StarTexture").Value;
+			Texture2D star = texture_StarlightRiver_Assets_StarTexture.Value;
 			Vector2 pos = NPC.Center - Main.screenPosition;
 
 			// Fade in
@@ -320,7 +322,7 @@ namespace StarlightRiver.Content.NPCs.Starlight
 			SpriteEffects effects = NPC.direction == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
 			if (visible)
-				spriteBatch.Draw(ModContent.Request<Texture2D>(Texture).Value, NPC.Center + new Vector2(0, -10) - Main.screenPosition, NPC.frame, Lighting.GetColor((NPC.Center / 16).ToPoint()), 0, new Vector2(31, 44), 1, effects, 0);
+				spriteBatch.Draw(texture_Texture.Value, NPC.Center + new Vector2(0, -10) - Main.screenPosition, NPC.frame, Lighting.GetColor((NPC.Center / 16).ToPoint()), 0, new Vector2(31, 44), 1, effects, 0);
 
 			return false;
 		}

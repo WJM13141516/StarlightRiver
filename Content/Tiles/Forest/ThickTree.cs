@@ -9,6 +9,8 @@ namespace StarlightRiver.Content.Tiles.Forest
 {
 	internal class ThickTree : ModTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_ForestTile___Godray = ModContent.Request<Texture2D>(AssetDirectory.ForestTile + "Godray");
+		public static readonly Asset<Texture2D> texture_Texture___Top = ModContent.Request<Texture2D>(Texture + "Top");
 		public override string Texture => AssetDirectory.ForestTile + Name;
 
 		public override void SetStaticDefaults()
@@ -47,14 +49,14 @@ namespace StarlightRiver.Content.Tiles.Forest
 
 			if (right && !up && down)
 			{
-				Texture2D tex = ModContent.Request<Texture2D>(Texture + "Top").Value;
+				Texture2D tex = texture_Texture___Top.Value;
 				Vector2 pos = (new Vector2(i + 1, j) + Helpers.Helper.TileAdj) * 16;
 
 				Color color = Lighting.GetColor(i, j);
 
 				spriteBatch.Draw(tex, pos - Main.screenPosition, null, color, GetLeafSway(3, 0.05f, 0.008f), new Vector2(tex.Width / 2, tex.Height), 1, 0, 0);
 
-				Texture2D tex2 = ModContent.Request<Texture2D>(AssetDirectory.ForestTile + "Godray").Value;
+				Texture2D tex2 = texture_AssetDirectory_ForestTile___Godray.Value;
 				var godrayColor = new Color();
 				float godrayRot = 0;
 
@@ -116,7 +118,7 @@ namespace StarlightRiver.Content.Tiles.Forest
 
 			if (right && !up && down)
 			{
-				Texture2D tex = ModContent.Request<Texture2D>(Texture + "Top").Value;
+				Texture2D tex = texture_Texture___Top.Value;
 				Vector2 pos = (new Vector2(i + 1, j) + Helpers.Helper.TileAdj) * 16;
 
 				Color color = Lighting.GetColor(i, j);

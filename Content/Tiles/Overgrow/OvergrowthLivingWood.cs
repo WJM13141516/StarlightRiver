@@ -5,6 +5,7 @@ namespace StarlightRiver.Content.Tiles.Overgrow
 {
 	public class OvergrowthLivingWoodTile : ModTile
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 		public override string Texture => AssetDirectory.OvergrowTile + Name;
 		public override void SetStaticDefaults()
 		{
@@ -34,7 +35,7 @@ namespace StarlightRiver.Content.Tiles.Overgrow
 			int xPosition = tile.TileFrameX + frame * 288;
 			Vector2 zero = Main.drawToScreen ? Vector2.Zero : new Vector2(Main.offScreenRange);
 			Vector2 drawOffset = new Vector2(i * 16 - Main.screenPosition.X, j * 16 - Main.screenPosition.Y) + zero;
-			Texture2D glow = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D glow = texture_Texture____Glow.Value;
 
 			if (!tile.IsHalfBlock && tile.Slope == 0)
 				spriteBatch.Draw(glow, drawOffset, new Rectangle(xPosition, tile.TileFrameY, 18, 18), Color.White * 0.5f, 0f, Vector2.Zero, 1f, 0f, 0f);

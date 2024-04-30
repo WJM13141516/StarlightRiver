@@ -13,6 +13,23 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	public class RecursiveFocus : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_FireTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___MagicPixel = ModContent.Request<Texture2D>(AssetDirectory.Assets + "MagicPixel");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___LaserBallDistort = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "LaserBallDistort");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Noise_SwirlyNoiseLooping = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/SwirlyNoiseLooping");
+		public static readonly Asset<Texture2D> texture_crystal_Texture____Glow = ModContent.Request<Texture2D>(crystal.Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_crystal_Texture___Base_Orange = ModContent.Request<Texture2D>(crystal.Texture + "Base_Orange");
+		public static readonly Asset<Texture2D> texture_crystal_Texture____Orange = ModContent.Request<Texture2D>(crystal.Texture + "_Orange");
+		public static readonly Asset<Texture2D> texture_crystal_Texture = ModContent.Request<Texture2D>(crystal.Texture);
+		public static readonly Asset<Texture2D> texture_crystal_Texture___Base = ModContent.Request<Texture2D>(crystal.Texture + "Base");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture___Base_Glow = ModContent.Request<Texture2D>(Texture + "Base_Glow");
+		public static readonly Asset<Texture2D> texture_Texture___Base_Orange = ModContent.Request<Texture2D>(Texture + "Base_Orange");
+		public static readonly Asset<Texture2D> texture_Texture____Orange = ModContent.Request<Texture2D>(Texture + "_Orange");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_Texture___Base = ModContent.Request<Texture2D>(Texture + "Base");
 		public override string Texture => AssetDirectory.VitricItem + Name;
 
 		public override void SetStaticDefaults()
@@ -249,15 +266,15 @@ namespace StarlightRiver.Content.Items.Vitric
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D baseTex = ModContent.Request<Texture2D>(Texture + "Base").Value;
-			Texture2D crystalTex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D baseTex = texture_Texture___Base.Value;
+			Texture2D crystalTex = texture_Texture.Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 
-			Texture2D crystalTexOrange = ModContent.Request<Texture2D>(Texture + "_Orange").Value;
-			Texture2D baseTexOrange = ModContent.Request<Texture2D>(Texture + "Base_Orange").Value;
+			Texture2D crystalTexOrange = texture_Texture____Orange.Value;
+			Texture2D baseTexOrange = texture_Texture___Base_Orange.Value;
 
-			Texture2D baseTexGlow = ModContent.Request<Texture2D>(Texture + "Base_Glow").Value;
-			Texture2D crystalTexGlow = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D baseTexGlow = texture_Texture___Base_Glow.Value;
+			Texture2D crystalTexGlow = texture_Texture____Glow.Value;
 
 			if (MultiMode)
 				Main.spriteBatch.Draw(crystalTexGlow, Projectile.Center - Main.screenPosition, null, new Color(255, 150, 100, 0), Projectile.rotation, crystalTexGlow.Size() / 2f, Projectile.scale, 0f, 0f);
@@ -573,14 +590,14 @@ namespace StarlightRiver.Content.Items.Vitric
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D baseTex = ModContent.Request<Texture2D>(crystal.Texture + "Base").Value;
-			Texture2D crystalTex = ModContent.Request<Texture2D>(crystal.Texture).Value;
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D baseTex = texture_crystal_Texture___Base.Value;
+			Texture2D crystalTex = texture_crystal_Texture.Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 
-			Texture2D crystalTexOrange = ModContent.Request<Texture2D>(crystal.Texture + "_Orange").Value;
-			Texture2D baseTexOrange = ModContent.Request<Texture2D>(crystal.Texture + "Base_Orange").Value;
+			Texture2D crystalTexOrange = texture_crystal_Texture____Orange.Value;
+			Texture2D baseTexOrange = texture_crystal_Texture___Base_Orange.Value;
 
-			Texture2D crystalTexGlow = ModContent.Request<Texture2D>(crystal.Texture + "_Glow").Value;
+			Texture2D crystalTexGlow = texture_crystal_Texture____Glow.Value;
 
 			DrawTrail(Main.spriteBatch);
 
@@ -606,8 +623,8 @@ namespace StarlightRiver.Content.Items.Vitric
 
 				effect.Parameters["offset"].SetValue(new Vector2(0.001f));
 				effect.Parameters["repeats"].SetValue(1);
-				effect.Parameters["uImage1"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/SwirlyNoiseLooping").Value);
-				effect.Parameters["uImage2"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "LaserBallDistort").Value);
+				effect.Parameters["uImage1"].SetValue(texture_AssetDirectory_Assets___Noise_SwirlyNoiseLooping.Value);
+				effect.Parameters["uImage2"].SetValue(texture_AssetDirectory_VitricBoss___LaserBallDistort.Value);
 
 				Color color = new Color(255, 165, 115, 0) * 0.4f * fadeIn * (MultiMode ? 1f : (TimeSpentOnTarget / 540f));
 				if (pulseTimer > 0)
@@ -617,7 +634,7 @@ namespace StarlightRiver.Content.Items.Vitric
 					color *= 0.25f;
 
 				effect.Parameters["uColor"].SetValue(color.ToVector4());
-				effect.Parameters["noiseImage1"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "MagicPixel").Value);
+				effect.Parameters["noiseImage1"].SetValue(texture_AssetDirectory_Assets___MagicPixel.Value);
 
 				effect.CurrentTechnique.Passes[0].Apply();
 
@@ -822,14 +839,14 @@ namespace StarlightRiver.Content.Items.Vitric
 			effect.Parameters["time"].SetValue(lifetime * -0.02f);
 			effect.Parameters["repeats"].SetValue(1);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 
 			if (HasTarget && TimeSpentOnTarget > 2)
 			{
 				trail?.Render(effect);
 				trail2?.Render(effect);
 
-				effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail").Value);
+				effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_FireTrail.Value);
 
 				trail?.Render(effect);
 				trail3?.Render(effect);

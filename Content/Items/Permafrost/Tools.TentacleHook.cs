@@ -7,6 +7,11 @@ namespace StarlightRiver.Content.Items.Permafrost
 {
 	internal class TentacleHook : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_Texture____Neck = ModContent.Request<Texture2D>(Texture + "_Neck");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+		public static readonly Asset<Texture2D> texture_Texture____Chain = ModContent.Request<Texture2D>(Texture + "_Chain");
 		public override string Texture => AssetDirectory.PermafrostItem + "TentacleHook";
 
 		public override void SetStaticDefaults()
@@ -133,9 +138,9 @@ namespace StarlightRiver.Content.Items.Permafrost
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D chainTexture = ModContent.Request<Texture2D>(Texture + "_Chain").Value;
-			Texture2D chainGlowTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
-			Texture2D neckTexture = ModContent.Request<Texture2D>(Texture + "_Neck").Value;
+			Texture2D chainTexture = texture_Texture____Chain.Value;
+			Texture2D chainGlowTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
+			Texture2D neckTexture = texture_Texture____Neck.Value;
 			Vector2 playerCenter = Main.player[Projectile.owner].MountedCenter;
 			Vector2 center = Projectile.Center;
 			Vector2 directionToPlayer = playerCenter - Projectile.Center;
@@ -181,8 +186,8 @@ namespace StarlightRiver.Content.Items.Permafrost
 				chainNum++;
 			}
 
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 			var drawColor = new Color(0.5f + MathF.Cos(colorIncrement) * 0.2f, 0.8f, 0.5f + MathF.Sin(colorIncrement) * 0.2f);
 			Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, tex.Size() / 2, Projectile.scale, SpriteEffects.None, 0f);
 			Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, drawColor, Projectile.rotation, tex.Size() / 2, Projectile.scale, SpriteEffects.None, 0f);

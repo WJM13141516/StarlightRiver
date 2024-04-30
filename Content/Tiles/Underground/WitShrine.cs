@@ -8,6 +8,9 @@ namespace StarlightRiver.Content.Tiles.Underground
 {
 	class WitShrine : DummyTile, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Underground_WitRune = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Underground/WitRune");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Moonstone_GlowSmall = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Moonstone/GlowSmall");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Underground_WitPlayerTile = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Underground/WitPlayerTile");
 		public override int DummyType => DummySystem.DummyType<WitShrineDummy>();
 
 		public override string Texture => "StarlightRiver/Assets/Tiles/Underground/WitShrine";
@@ -215,7 +218,7 @@ namespace StarlightRiver.Content.Tiles.Underground
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Underground/WitPlayerTile").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Tiles_Underground_WitPlayerTile.Value;
 			Vector2 basePos = Center + new Vector2(-48 * 3 + 24, -16 * 22) - Main.screenPosition;
 			Vector2 targetPos = basePos + Vector2.SmoothStep(Player * 48, oldPlayer * 48, PlayerTimer / 30f) + Vector2.One;
 			var source = new Rectangle(0, 0, 34, 34);
@@ -227,13 +230,13 @@ namespace StarlightRiver.Content.Tiles.Underground
 		{
 			if (state != 0)
 			{
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Moonstone/GlowSmall").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Tiles_Moonstone_GlowSmall.Value;
 				var origin = new Vector2(tex.Width / 2, tex.Height);
 				spriteBatch.Draw(tex, Center - Main.screenPosition + new Vector2(0, 60), default, GetBeamColor(StarlightWorld.visualTimer), 0, origin, 3.5f, 0, 0);
 				spriteBatch.Draw(tex, Center - Main.screenPosition + new Vector2(10, 60), default, GetBeamColor(StarlightWorld.visualTimer + 2) * 0.8f, 0, origin, 2.5f, 0, 0);
 				spriteBatch.Draw(tex, Center - Main.screenPosition + new Vector2(-10, 60), default, GetBeamColor(StarlightWorld.visualTimer + 4) * 0.8f, 0, origin, 3.2f, 0, 0);
 
-				Texture2D runeTex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Underground/WitRune").Value;
+				Texture2D runeTex = texture_StarlightRiver_Assets_Tiles_Underground_WitRune.Value;
 				var runeFrame = new Rectangle(0, 0, 22, 22);
 				Vector2 basePos = Center + new Vector2(-48 * 3 + 24, -16 * 22) - Main.screenPosition;
 				Vector2 parallaxPoint = Center + new Vector2(0, -16 * 22 + 152);// - new Vector2(Main.screenWidth, Main.screenHeight) / 2;

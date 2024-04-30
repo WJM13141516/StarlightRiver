@@ -10,6 +10,7 @@ namespace StarlightRiver.Content.Tiles.Permafrost
 {
 	class DoorBombShooter : ModTile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_MotionTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/MotionTrail");
 		public override string Texture => "StarlightRiver/Assets/Tiles/Permafrost/DoorBombShooter";
 
 		public override void SetStaticDefaults()
@@ -37,7 +38,7 @@ namespace StarlightRiver.Content.Tiles.Permafrost
 			spriteBatch.End();
 			spriteBatch.Begin(default, BlendState.Additive, SamplerState.PointWrap, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D barrier = ModContent.Request<Texture2D>("StarlightRiver/Assets/MotionTrail").Value;
+			Texture2D barrier = texture_StarlightRiver_Assets_MotionTrail.Value;
 			var sourceRect = new Rectangle(0, (int)(Main.GameUpdateCount * 0.2f), barrier.Width, barrier.Height);
 			var sourceRect2 = new Rectangle(0, (int)(Main.GameUpdateCount * -0.42f), barrier.Width, barrier.Height);
 

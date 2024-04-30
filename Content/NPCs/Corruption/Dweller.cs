@@ -14,6 +14,10 @@ namespace StarlightRiver.Content.NPCs.Corruption
 {
 	class Dweller : ModNPC, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_Texture___Tops = ModContent.Request<Texture2D>(Texture + "Tops");
+		public static readonly Asset<Texture2D> texture_Texture___Branches = ModContent.Request<Texture2D>(Texture + "Branches");
+		public static readonly Asset<Texture2D> texture_Terraria_Images_Tiles_5_0 = ModContent.Request<Texture2D>("Terraria/Images/Tiles_5_0");
+		public static readonly Asset<Texture2D> texture_Texture___Variant = ModContent.Request<Texture2D>(Texture + Variant);
 		public enum States
 		{
 			Idle,
@@ -189,13 +193,13 @@ namespace StarlightRiver.Content.NPCs.Corruption
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
 			var rand = new Random(NPC.GetHashCode());
-			int frameHeight = Request<Texture2D>(Texture + Variant).Value.Height / 4;
-			int frameWidth = Request<Texture2D>(Texture + Variant).Value.Width;
+			int frameHeight = texture_Texture___Variant.Value.Height / 4;
+			int frameWidth = texture_Texture___Variant.Value.Width;
 
 			if (NPC.IsABestiaryIconDummy)
 			{
 				NPC.frame = new Rectangle(0, 0, frameWidth, frameHeight);
-				spriteBatch.Draw(Request<Texture2D>(Texture + Variant).Value, NPC.Center - screenPos, NPC.frame, Color.White, NPC.rotation, NPC.Size / 2, NPC.scale, 0, 0);
+				spriteBatch.Draw(texture_Texture___Variant.Value, NPC.Center - screenPos, NPC.frame, Color.White, NPC.rotation, NPC.Size / 2, NPC.scale, 0, 0);
 				return false;
 			}
 
@@ -204,7 +208,7 @@ namespace StarlightRiver.Content.NPCs.Corruption
 				case (int)States.Transforming: //fall-through moment
 				case (int)States.Idle:
 
-					Texture2D barkTex = Request<Texture2D>("Terraria/Images/Tiles_5_0").Value; //corruption tree bark 
+					Texture2D barkTex = texture_Terraria_Images_Tiles_5_0.Value; //corruption tree bark 
 
 					for (int k = 0; k < Height; k += 16)
 					{
@@ -226,7 +230,7 @@ namespace StarlightRiver.Content.NPCs.Corruption
 
 						if (rand.Next(6) == 0 && k > 48 && k < Height - 48)
 						{
-							Texture2D branchTex = Request<Texture2D>(Texture + "Branches").Value;
+							Texture2D branchTex = texture_Texture___Branches.Value;
 
 							bool right = rand.Next(2) == 0;
 							Vector2 branchPos = pos + new Vector2(right ? 16 : -branchTex.Width / 2 + 6, -16);
@@ -243,7 +247,7 @@ namespace StarlightRiver.Content.NPCs.Corruption
 						}
 					}
 
-					Texture2D topperTex = Request<Texture2D>(Texture + "Tops").Value;
+					Texture2D topperTex = texture_Texture___Tops.Value;
 
 					Vector2 topperPos = NPC.Center - new Vector2(NPC.Center.X % 16, NPC.Center.Y % 16) + new Vector2(11, 8);
 					var topperSource = new Rectangle((int)Variant * 82, 0, 82, 82);
@@ -258,7 +262,7 @@ namespace StarlightRiver.Content.NPCs.Corruption
 				case (int)States.Attacking:
 					NPC.frame = new Rectangle(0, (int)Timer / 7 % 3 * frameHeight, frameWidth, frameHeight);
 
-					spriteBatch.Draw(Request<Texture2D>(Texture + Variant).Value, NPC.Center - screenPos, NPC.frame, drawColor, NPC.rotation, NPC.Size / 2, NPC.scale, 0, 0);
+					spriteBatch.Draw(texture_Texture___Variant.Value, NPC.Center - screenPos, NPC.frame, drawColor, NPC.rotation, NPC.Size / 2, NPC.scale, 0, 0);
 
 					break;
 			}

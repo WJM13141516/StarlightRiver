@@ -10,6 +10,11 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 {
 	internal class ArenaBottom : ModNPC, IDrawAdditive
 	{
+		public static readonly Asset<Texture2D> texture_Texture___Hot = ModContent.Request<Texture2D>(Texture + "Hot");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___LongGlow = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "LongGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___MagMegg = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "MagMegg");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___CrystalWaveHot = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "CrystalWaveHot");
 		public VitricBoss Parent;
 
 		private float prevState = 0;
@@ -232,7 +237,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 				float maxOffset = Main.masterMode ? 64 : 32;
 				float off = Math.Min((NPC.ai[0] - 120) / 30f * maxOffset, maxOffset);
-				Texture2D tex = Request<Texture2D>(AssetDirectory.VitricBoss + "CrystalWaveHot").Value;
+				Texture2D tex = texture_AssetDirectory_VitricBoss___CrystalWaveHot.Value;
 
 				for (int k = 0; k < NPC.width; k += 18)
 				{
@@ -241,7 +246,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 					if (eggIndex == k)//ugly but I this way its only checked once
 					{
-						Texture2D eggTex = Request<Texture2D>(AssetDirectory.VitricBoss + "MagMegg").Value;
+						Texture2D eggTex = texture_AssetDirectory_VitricBoss___MagMegg.Value;
 						spriteBatch.Draw(eggTex, pos, null, Color.White, 0.1f * ((float)rand.NextDouble() - 0.5f), default, 1, default, default);
 						spriteBatch.Draw(eggTex, pos2, null, Color.White, 0.1f * ((float)rand.NextDouble() - 0.5f), default, 1, default, default);
 					}
@@ -261,7 +266,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 						if (eggIndex == k)//ugly but I this way its only checked once
 						{
-							Texture2D eggTex = Request<Texture2D>(AssetDirectory.VitricBoss + "MagMegg").Value;
+							Texture2D eggTex = texture_AssetDirectory_VitricBoss___MagMegg.Value;
 							spriteBatch.Draw(eggTex, pos, null, Color.White, 1.57f + 0.1f * ((float)rand.NextDouble() - 0.5f), default, 1, default, default);
 							spriteBatch.Draw(eggTex, pos2, null, Color.White, 1.57f + 0.1f * ((float)rand.NextDouble() - 0.5f), default, 1, default, default);
 						}
@@ -277,7 +282,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = Request<Texture2D>(AssetDirectory.VitricBoss + "LongGlow").Value;
+			Texture2D tex = texture_AssetDirectory_VitricBoss___LongGlow.Value;
 
 			if (NPC.ai[1] == 2)
 			{
@@ -353,10 +358,10 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 		public override void PostDraw(Color lightColor)
 		{
-			Main.spriteBatch.Draw(Request<Texture2D>(Texture).Value, Projectile.position - Main.screenPosition, Lighting.GetColor((int)Projectile.Center.X / 16, (int)Projectile.Center.Y / 16 - 2) * 1.4f);
+			Main.spriteBatch.Draw(texture_Texture.Value, Projectile.position - Main.screenPosition, Lighting.GetColor((int)Projectile.Center.X / 16, (int)Projectile.Center.Y / 16 - 2) * 1.4f);
 
 			Color color = Color.White * (Projectile.timeLeft / 30f);
-			Main.spriteBatch.Draw(Request<Texture2D>(Texture + "Hot").Value, Projectile.position - Main.screenPosition, color);
+			Main.spriteBatch.Draw(texture_Texture___Hot.Value, Projectile.position - Main.screenPosition, color);
 		}
 	}
 }

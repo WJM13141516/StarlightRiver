@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.Items.UndergroundTemple
 {
 	public class TempleLensSystem : IOrderedLoadable
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
 		public static ScreenTarget NPCTarget = new(DrawNPCTarget, () => Active, 1);
 		public static ScreenTarget LensTarget = new(DrawLensTarget, () => Active, 1);
 
@@ -66,7 +67,7 @@ namespace StarlightRiver.Content.Items.UndergroundTemple
 			spriteBatch.End();
 			spriteBatch.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D bloom = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D bloom = texture_AssetDirectory_Keys___GlowAlpha.Value;
 			Color gold = Color.Orange;
 			gold.A = 0;
 

@@ -10,6 +10,7 @@ namespace StarlightRiver.Content.Tiles.Mushroom
 {
 	class Lumishroom : ModTile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Mushroom_LumishroomGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Mushroom/LumishroomGlow");
 		public override string Texture => "StarlightRiver/Assets/Tiles/Mushroom/" + Name;
 
 		public override void SetStaticDefaults()
@@ -35,7 +36,7 @@ namespace StarlightRiver.Content.Tiles.Mushroom
 		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
 		{
 			Tile tile = Framing.GetTileSafely(i, j);
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Tiles/Mushroom/LumishroomGlow").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Tiles_Mushroom_LumishroomGlow.Value;
 			Vector2 pos = (new Vector2(i, j) + Helper.TileAdj) * 16 - Main.screenPosition;
 
 			spriteBatch.Draw(tex, pos, new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16), Color.White * (float)(0.8f + Math.Sin(StarlightWorld.visualTimer + i) * 0.5f));

@@ -9,6 +9,7 @@ namespace StarlightRiver.Content.GUI
 {
 	public class ChatboxOverUI : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_NPCButton = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/NPCButton");
 		public TownUpgrade activeUpgrade;
 
 		private readonly TownButton button = new();
@@ -53,7 +54,7 @@ namespace StarlightRiver.Content.GUI
 
 			bool locked = displayString == "Locked";
 
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/GUI/NPCButton").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_GUI_NPCButton.Value;
 			spriteBatch.Draw(tex, GetDimensions().ToRectangle(), tex.Frame(), Color.White * (locked ? 0.4f : 0.8f));
 
 			float x = FontAssets.ItemStack.Value.MeasureString(displayString).X;

@@ -13,6 +13,14 @@ namespace StarlightRiver.Content.CustomHooks
 {
 	class CharacterSelectAddons : HookGroup
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___GoldBorder = ModContent.Request<Texture2D>(AssetDirectory.GUI + "GoldBorder");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ShieldHeartLine = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldHeartLine");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ShieldHeart = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldHeart");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ShieldHeartOver = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldHeartOver");
+		public static readonly Asset<Texture2D> texture_texture = ModContent.Request<Texture2D>(texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_Stamina3 = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/Stamina3");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_Stamina = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/Stamina");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_box = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/box");
 		public static ParticleSystem sparkles;
 
 		//TODO: Create a reflection cache for this, or implement a global reflection caching utility
@@ -98,16 +106,16 @@ namespace StarlightRiver.Content.CustomHooks
 			var box = new Rectangle((int)(origin + new Vector2(110, 66)).X, (int)(origin + new Vector2(86, 66)).Y, 80, 25);
 			var box2 = new Rectangle((int)(origin + new Vector2(196, 66)).X, (int)(origin + new Vector2(86, 66)).Y, 104, 25);
 
-			spriteBatch.Draw(ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/box").Value, box, Color.White); //Stamina box
+			spriteBatch.Draw(texture_StarlightRiver_Assets_GUI_box.Value, box, Color.White); //Stamina box
 
 			if (mp.AnyUnlocked)//Draw stamina if any unlocked
 			{
-				spriteBatch.Draw(ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/Stamina").Value, origin + new Vector2(115, 68), Color.White);
+				spriteBatch.Draw(texture_StarlightRiver_Assets_GUI_Stamina.Value, origin + new Vector2(115, 68), Color.White);
 				Utils.DrawBorderString(spriteBatch, PlayerStamina + " SP", origin + new Vector2(142, 68), Color.White);
 			}
 			else//Myserious if locked
 			{
-				spriteBatch.Draw(ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/Stamina3").Value, origin + new Vector2(115, 68), Color.White);
+				spriteBatch.Draw(texture_StarlightRiver_Assets_GUI_Stamina3.Value, origin + new Vector2(115, 68), Color.White);
 				Utils.DrawBorderString(spriteBatch, "???", origin + new Vector2(142, 68), Color.White);
 			}
 
@@ -120,7 +128,7 @@ namespace StarlightRiver.Content.CustomHooks
 				string texture = Player.GetHandler().Unlocked(ability.GetType())
 					? ability.PreviewTexture
 					: ability.PreviewTextureOff;
-				spriteBatch.Draw(ModContent.Request<Texture2D>(texture).Value, origin + new Vector2(542 - k * 32, 64), Color.White);
+				spriteBatch.Draw(texture_texture.Value, origin + new Vector2(542 - k * 32, 64), Color.White);
 			}
 
 			if (Player.statLifeMax > 400) //why vanilla dosent do this I dont know
@@ -130,9 +138,9 @@ namespace StarlightRiver.Content.CustomHooks
 
 			if (Player.GetModPlayer<BarrierPlayer>().maxBarrier > 0)
 			{
-				Texture2D barrierTex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldHeartOver").Value;
-				Texture2D barrierTex2 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldHeart").Value;
-				Texture2D barrierTex3 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldHeartLine").Value;
+				Texture2D barrierTex = texture_AssetDirectory_GUI___ShieldHeartOver.Value;
+				Texture2D barrierTex2 = texture_AssetDirectory_GUI___ShieldHeart.Value;
+				Texture2D barrierTex3 = texture_AssetDirectory_GUI___ShieldHeartLine.Value;
 
 				Vector2 pos = origin + new Vector2(80, 37);
 				int width = barrierTex.Width / 2;
@@ -187,7 +195,7 @@ namespace StarlightRiver.Content.CustomHooks
 				!abilities.Any(n => !Player.GetHandler().Unlocked(n.GetType()))
 				)
 			{
-				Texture2D borderTex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "GoldBorder").Value;
+				Texture2D borderTex = texture_AssetDirectory_GUI___GoldBorder.Value;
 				spriteBatch.Draw(borderTex, origin, Color.White);
 
 				if (Main.rand.NextBool(3))

@@ -7,6 +7,8 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	internal class MagmaMetaballs : MetaballActor
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Noise_ShaderNoiseLooping = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/ShaderNoiseLooping");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscItem___MagmaGunProj = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + "MagmaGunProj");
 		public override bool Active => Main.projectile.Any(n => n.active && (n.type == ModContent.ProjectileType<MagmaGunPhantomProj>() || n.type == ModContent.ProjectileType<ArrowMagma>()));
 
 		public override Color OutlineColor => new(255, 254, 255);
@@ -15,7 +17,7 @@ namespace StarlightRiver.Content.Items.Misc
 		{
 			Effect borderNoise = Filters.Scene["BorderNoise"].GetShader().Shader;
 
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + "MagmaGunProj").Value;
+			Texture2D tex = texture_AssetDirectory_MiscItem___MagmaGunProj.Value;
 
 			if (borderNoise is null)
 				return;
@@ -61,7 +63,7 @@ namespace StarlightRiver.Content.Items.Misc
 			magmaNoise.Parameters["offset"].SetValue(2 * Main.screenPosition / new Vector2(Main.screenWidth, Main.screenHeight));
 			magmaNoise.Parameters["codedColor"].SetValue(Color.White.ToVector4());
 			magmaNoise.Parameters["newColor"].SetValue(new Color(255, 70, 10).ToVector4());
-			magmaNoise.Parameters["distort"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/ShaderNoiseLooping").Value);
+			magmaNoise.Parameters["distort"].SetValue(texture_AssetDirectory_Assets___Noise_ShaderNoiseLooping.Value);
 
 			magmaNoise.CurrentTechnique.Passes[0].Apply();
 			spriteBatch.Draw(target, Vector2.Zero, null, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);

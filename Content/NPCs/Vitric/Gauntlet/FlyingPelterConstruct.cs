@@ -14,6 +14,20 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 {
 	internal class FlyingPelterConstruct : VitricConstructNPC
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Keys_GlowSoft = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_Texture____Flare = ModContent.Request<Texture2D>(Texture + "_Flare");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_FireTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GauntletNpc___PelterConstructArrowLarge = ModContent.Request<Texture2D>(AssetDirectory.GauntletNpc + "PelterConstructArrowLarge");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___Shine = ModContent.Request<Texture2D>(AssetDirectory.Keys + "Shine");
+		public static readonly Asset<Texture2D> texture_Texture____Bow___glowTag = ModContent.Request<Texture2D>(Texture + "_Bow" + glowTag);
+		public static readonly Asset<Texture2D> texture_Texture____Head___glowTag = ModContent.Request<Texture2D>(Texture + "_Head" + glowTag);
+		public static readonly Asset<Texture2D> texture_Texture____Arms_Glow = ModContent.Request<Texture2D>(Texture + "_Arms_Glow");
+		public static readonly Asset<Texture2D> texture_Texture____Arms___glowTag = ModContent.Request<Texture2D>(Texture + "_Arms" + glowTag);
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture___glowTag = ModContent.Request<Texture2D>(Texture + glowTag);
+		public static readonly Asset<Texture2D> texture_PreviewTexturePath = ModContent.Request<Texture2D>(PreviewTexturePath);
 		private const int BOWFRAMES = 4;
 		private const int XFRAMES = 1;
 
@@ -246,7 +260,7 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 
 		private void DrawBestiary(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D tex = Request<Texture2D>(PreviewTexturePath).Value;
+			Texture2D tex = texture_PreviewTexturePath.Value;
 			spriteBatch.Draw(tex, NPC.Center - screenPos, null, drawColor, NPC.rotation, tex.Size() / 2, NPC.scale, NPC.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
 		}
 
@@ -263,15 +277,15 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 
 			string glowTag = glow ? "_White" : "";
 
-			Texture2D mainTex = Request<Texture2D>(Texture + glowTag).Value;
-			Texture2D glowTex = Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D mainTex = texture_Texture___glowTag.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 
-			Texture2D armTex = Request<Texture2D>(Texture + "_Arms" + glowTag).Value;
-			Texture2D armGlowTex = Request<Texture2D>(Texture + "_Arms_Glow").Value;
+			Texture2D armTex = texture_Texture____Arms___glowTag.Value;
+			Texture2D armGlowTex = texture_Texture____Arms_Glow.Value;
 
-			Texture2D headTex = Request<Texture2D>(Texture + "_Head" + glowTag).Value;
+			Texture2D headTex = texture_Texture____Head___glowTag.Value;
 
-			Texture2D bowTex = Request<Texture2D>(Texture + "_Bow" + glowTag).Value;
+			Texture2D bowTex = texture_Texture____Bow___glowTag.Value;
 
 			int armFrameSize = armTex.Height / 2;
 			var frontFrame = new Rectangle(0, 0, armTex.Width, armFrameSize);
@@ -320,7 +334,7 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 
 		private void DrawPredictor(Vector2 screenPos)
 		{
-			Texture2D predictorTex = Request<Texture2D>(AssetDirectory.Keys + "Shine").Value;
+			Texture2D predictorTex = texture_AssetDirectory_Keys___Shine.Value;
 			float rot = bowArmRotation + 1.57f;
 
 			float charge = EaseFunction.EaseQuadInOut.Ease(MathHelper.Clamp(BowFrameCounter / 100f, 0, 1));
@@ -338,7 +352,7 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 
 		private void DrawLaserArrow(Vector2 screenPos)
 		{
-			Texture2D arrowTex = Request<Texture2D>(AssetDirectory.GauntletNpc + "PelterConstructArrowLarge").Value;
+			Texture2D arrowTex = texture_AssetDirectory_GauntletNpc___PelterConstructArrowLarge.Value;
 
 			float rot = bowArmRotation;
 			Vector2 pos = BowPos + bowArmRotation.ToRotationVector2() * 25 - screenPos;
@@ -530,21 +544,21 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 			effect.Parameters["time"].SetValue(Projectile.timeLeft * -0.04f);
 			effect.Parameters["repeats"].SetValue((int)Projectile.ai[0] / 5);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(effect);
 
-			effect.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/FireTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_FireTrail.Value);
 
 			trail?.Render(effect);
 			Main.spriteBatch.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D flash = Request<Texture2D>(Texture + "_Flare").Value;
+			Texture2D flash = texture_Texture____Flare.Value;
 			Color flashFade = Color.OrangeRed * fade * fade;
 			flashFade.A = 0;
 			Main.EntitySpriteDraw(flash, firstPos - Main.screenPosition, null, flashFade, 0, flash.Size() / 2, 2.5f * MathHelper.Lerp(0.5f, 1, fade * fade), SpriteEffects.None, 0);
 
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.White * fade, Projectile.rotation, tex.Size() / 2, Projectile.scale, SpriteEffects.None, 0f);
 			return false;
 		}
@@ -627,7 +641,7 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 
 		public void DrawAdditive(SpriteBatch sb)
 		{
-			Texture2D tex = Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft").Value;
+			Texture2D tex = texture_AssetDirectory_Assets___Keys_GlowSoft.Value;
 
 			Color color = Color.OrangeRed;
 			for (int i = 0; i < 6; i++)

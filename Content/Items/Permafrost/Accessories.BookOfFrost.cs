@@ -10,6 +10,8 @@ namespace StarlightRiver.Content.Items.Permafrost
 {
 	public class BookOfFrost : SmartAccessory
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_LightningTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/LightningTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
 		public int cooldown;
 
 		public override string Texture => AssetDirectory.PermafrostItem + Name;
@@ -192,12 +194,12 @@ namespace StarlightRiver.Content.Items.Permafrost
 			effect.Parameters["time"].SetValue(Projectile.timeLeft * -0.01f);
 			effect.Parameters["repeats"].SetValue(5f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(effect);
 			trail2?.Render(effect);
 
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/LightningTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_LightningTrail.Value);
 
 			trail2?.Render(effect);
 		}

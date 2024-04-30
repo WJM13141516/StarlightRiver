@@ -10,6 +10,9 @@ namespace StarlightRiver.Content.Tiles.Underground.EvasionShrineBullets
 {
 	class Dart : EvasionProjectile, IDrawPrimitive
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_ShadowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/ShadowTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___Line = ModContent.Request<Texture2D>(AssetDirectory.GUI + "Line");
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
 		public static Vector2 midPointToAssign;
 		public static Vector2 endPointToAssign;
 		public static int durationToAssign;
@@ -120,13 +123,13 @@ namespace StarlightRiver.Content.Tiles.Underground.EvasionShrineBullets
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "Glow").Value;
+			Texture2D glowTex = texture_Texture___Glow.Value;
 
 			int timer = duration + 30 - Projectile.timeLeft;
 
 			if (timer < 30)
 			{
-				Texture2D tellTex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "Line").Value;
+				Texture2D tellTex = texture_AssetDirectory_GUI___Line.Value;
 				float alpha = (float)Math.Sin(timer / 30f * 3.14f);
 
 				for (int k = 0; k < 20; k++)
@@ -183,7 +186,7 @@ namespace StarlightRiver.Content.Tiles.Underground.EvasionShrineBullets
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/ShadowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_ShadowTrail.Value);
 
 			trail?.Render(effect);
 		}

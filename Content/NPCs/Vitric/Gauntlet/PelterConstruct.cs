@@ -13,6 +13,15 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 {
 	internal class PelterConstruct : VitricConstructNPC
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_FireTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
+		public static readonly Asset<Texture2D> texture_Texture____Bow = ModContent.Request<Texture2D>(Texture + "_Bow");
+		public static readonly Asset<Texture2D> texture_Texture____Head = ModContent.Request<Texture2D>(Texture + "_Head");
+		public static readonly Asset<Texture2D> texture_Texture____Arms_Glow = ModContent.Request<Texture2D>(Texture + "_Arms_Glow");
+		public static readonly Asset<Texture2D> texture_Texture____Arms = ModContent.Request<Texture2D>(Texture + "_Arms");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_PreviewTexturePath = ModContent.Request<Texture2D>(PreviewTexturePath);
 		private const int BOWFRAMES = 4;
 		private const int XFRAMES = 3;
 
@@ -154,7 +163,7 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 
 		private void DrawBestiary(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(PreviewTexturePath).Value;
+			Texture2D tex = texture_PreviewTexturePath.Value;
 			spriteBatch.Draw(tex, NPC.Center - screenPos, null, drawColor, NPC.rotation, tex.Size() / 2, NPC.scale, NPC.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0f);
 		}
 
@@ -163,15 +172,15 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 			SpriteEffects effects = SpriteEffects.None;
 			SpriteEffects bowEffects = SpriteEffects.None;
 
-			Texture2D mainTex = Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D mainTex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 
-			Texture2D armTex = Request<Texture2D>(Texture + "_Arms").Value;
-			Texture2D armGlowTex = Request<Texture2D>(Texture + "_Arms_Glow").Value;
+			Texture2D armTex = texture_Texture____Arms.Value;
+			Texture2D armGlowTex = texture_Texture____Arms_Glow.Value;
 
-			Texture2D headTex = Request<Texture2D>(Texture + "_Head").Value;
+			Texture2D headTex = texture_Texture____Head.Value;
 
-			Texture2D bowTex = Request<Texture2D>(Texture + "_Bow").Value;
+			Texture2D bowTex = texture_Texture____Bow.Value;
 
 			int armFrameSize = armTex.Height / 2;
 			var frontFrame = new Rectangle(0, 0, armTex.Width, armFrameSize);
@@ -657,17 +666,17 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 			effect.Parameters["time"].SetValue(Projectile.timeLeft * -0.04f);
 			effect.Parameters["repeats"].SetValue(1);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(effect);
 
-			effect.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/FireTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_FireTrail.Value);
 
 			trail?.Render(effect);
 			Main.spriteBatch.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D tex = Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 			Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, tex.Size() / 2, Projectile.scale, SpriteEffects.None, 0f);
 			Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation, tex.Size() / 2, Projectile.scale, SpriteEffects.None, 0f);
 			return false;

@@ -10,6 +10,8 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	public class MagmaArrow : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricItem___NeedlerBloom = ModContent.Request<Texture2D>(AssetDirectory.VitricItem + "NeedlerBloom");
 		public override string Texture => AssetDirectory.VitricItem + Name;
 
 		public override void SetStaticDefaults()
@@ -90,7 +92,7 @@ namespace StarlightRiver.Content.Items.Vitric
 		{
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			Texture2D tex = Request<Texture2D>(AssetDirectory.VitricItem + "NeedlerBloom").Value;
+			Texture2D tex = texture_AssetDirectory_VitricItem___NeedlerBloom.Value;
 			Color bloomColor = Color.Orange;
 			bloomColor.A = 0;
 
@@ -158,7 +160,7 @@ namespace StarlightRiver.Content.Items.Vitric
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			Color color = Color.Orange;
 			color.A = 0;
 			color *= 0.2f;

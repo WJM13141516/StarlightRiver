@@ -10,6 +10,9 @@ namespace StarlightRiver.Content.Tiles.Vitric
 {
 	public class VitricPylon : ModPylon
 	{
+		public static readonly Asset<Texture2D> texture_Texture____MapIcon = ModContent.Request<Texture2D>(Texture + "_MapIcon");
+		public static readonly Asset<Texture2D> texture_Texture____CrystalHighlight = ModContent.Request<Texture2D>(Texture + "_CrystalHighlight");
+		public static readonly Asset<Texture2D> texture_Texture____Crystal = ModContent.Request<Texture2D>(Texture + "_Crystal");
 		public const int CrystalVerticalFrameCount = 8;
 
 		public override string Texture => AssetDirectory.VitricTile + Name;
@@ -20,9 +23,9 @@ namespace StarlightRiver.Content.Tiles.Vitric
 
 		public override void Load()
 		{
-			crystalTexture = ModContent.Request<Texture2D>(Texture + "_Crystal");
-			crystalHighlightTexture = ModContent.Request<Texture2D>(Texture + "_CrystalHighlight");
-			mapIcon = ModContent.Request<Texture2D>(Texture + "_MapIcon");
+			crystalTexture = texture_Texture____Crystal;
+			crystalHighlightTexture = texture_Texture____CrystalHighlight;
+			mapIcon = texture_Texture____MapIcon;
 		}
 
 		public override void SetStaticDefaults()

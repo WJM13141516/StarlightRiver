@@ -10,11 +10,17 @@ namespace StarlightRiver.Content.Items.Starwood
 {
 	public class StarwoodSlingshot : StarwoodItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Items_Starwood_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Starwood/Glow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_StarwoodItem___StarwoodSlingshotGlowTrail = ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodSlingshotGlowTrail");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_StarwoodItem___StarwoodSlingshotStarWhite = ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodSlingshotStarWhite");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_StarwoodItem___StarwoodSlingshotParts = ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodSlingshotParts");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_StarwoodItem___StarwoodSlingshot_Alt = ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodSlingshot_Alt");
 		private int timesShot = 0;//Test: possible endless ammo
 
 		public override string Texture => AssetDirectory.StarwoodItem + Name;
 
-		public StarwoodSlingshot() : base(ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodSlingshot_Alt").Value) { }
+		public StarwoodSlingshot() : base(texture_AssetDirectory_StarwoodItem___StarwoodSlingshot_Alt.Value) { }
 
 		public override void SetStaticDefaults()
 		{
@@ -213,7 +219,7 @@ namespace StarlightRiver.Content.Items.Starwood
 					else
 						offset2 *= Helper.LerpFloat(0, 7, (float)Math.Sqrt((0.33f - (charge - i)) * 3));
 
-					Texture2D fragmenttexture = ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodSlingshotParts").Value;
+					Texture2D fragmenttexture = texture_AssetDirectory_StarwoodItem___StarwoodSlingshotParts.Value;
 					var frame2 = new Rectangle(0, (int)(i * 5 * 24), 22, 24);
 
 					if (empowered)
@@ -235,7 +241,7 @@ namespace StarlightRiver.Content.Items.Starwood
 				if (alpha < 0)
 					alpha = 0;
 
-				Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodSlingshotStarWhite").Value;
+				Texture2D tex = texture_AssetDirectory_StarwoodItem___StarwoodSlingshotStarWhite.Value;
 				Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, color * alpha, direction.ToRotation() + 1.57f, new Vector2(11, 12), Projectile.scale, SpriteEffects.None, 0);
 			}
 
@@ -351,7 +357,7 @@ namespace StarlightRiver.Content.Items.Starwood
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			var drawOrigin = new Vector2(TextureAssets.Projectile[Projectile.type].Value.Width * 0.5f, Projectile.height * 0.5f);
 
 			for (int k = 0; k < Projectile.oldPos.Length; k++)
@@ -359,7 +365,7 @@ namespace StarlightRiver.Content.Items.Starwood
 				Color color = Projectile.GetAlpha(Color.White) * ((Projectile.oldPos.Length - k) / (float)Projectile.oldPos.Length * 0.5f);
 				float scale = Projectile.scale * (Projectile.oldPos.Length - k) / Projectile.oldPos.Length;
 
-				Main.spriteBatch.Draw(ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodSlingshotGlowTrail").Value,
+				Main.spriteBatch.Draw(texture_AssetDirectory_StarwoodItem___StarwoodSlingshotGlowTrail.Value,
 				Projectile.oldPos[k] + drawOrigin - Main.screenPosition,
 				new Rectangle(0, 24 * Projectile.frame, 22, 24),
 				color,
@@ -384,7 +390,7 @@ namespace StarlightRiver.Content.Items.Starwood
 						color *= 1.2f;
 
 					float scale = Projectile.scale * (Projectile.oldPos.Length - k) / Projectile.oldPos.Length * 0.8f;
-					Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Starwood/Glow").Value;
+					Texture2D tex = texture_StarlightRiver_Assets_Items_Starwood_Glow.Value;
 
 					spriteBatch.Draw(tex, Projectile.oldPos[k] + Projectile.Size / 2 - Main.screenPosition, null, color, 0, tex.Size() / 2, scale, default, default);
 				}
@@ -439,7 +445,7 @@ namespace StarlightRiver.Content.Items.Starwood
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, new Rectangle(0, Projectile.ai[0] > 0 ? 10 : 0, 12, 10), Color.White, Projectile.rotation, new Vector2(6, 5), Projectile.scale, default, default);
 			return false;
 		}

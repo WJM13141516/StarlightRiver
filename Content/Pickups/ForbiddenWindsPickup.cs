@@ -15,6 +15,8 @@ namespace StarlightRiver.Content.Pickups
 {
 	internal class ForbiddenWindsPickup : AbilityPickup, IDrawPrimitive, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_FireTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail");
 		private List<Vector2> cache1;
 		private List<Vector2> cache2;
 		private List<Vector2> cache3;
@@ -226,13 +228,13 @@ namespace StarlightRiver.Content.Pickups
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * -0.01f);
 			effect.Parameters["repeats"].SetValue(4f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/FireTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_FireTrail.Value);
 
 			trail1?.Render(effect);
 			trail2?.Render(effect);
 			trail3?.Render(effect);
 
-			effect.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 
 			trail4?.Render(effect);
 			trail5?.Render(effect);

@@ -14,6 +14,11 @@ namespace StarlightRiver.Content.GUI
 {
 	class TownQuestList : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_Item_ModItem_Texture = ModContent.Request<Texture2D>(Item.ModItem.Texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_NPCButton = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/NPCButton");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_QuestCheck = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/QuestCheck");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_TownQuestBack = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/TownQuestBack");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_TownQuestPanel = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/TownQuestPanel");
 		private readonly UIList quests = new();
 		private readonly UIList ItemList = new();
 		private readonly UIScrollbar questScroll = new();
@@ -44,7 +49,7 @@ namespace StarlightRiver.Content.GUI
 		public override void Draw(SpriteBatch spriteBatch)
 		{
 			var pos = new Vector2(Main.screenWidth / 2 + 10, Main.screenHeight * 0.3f);
-			Texture2D panel = Request<Texture2D>("StarlightRiver/Assets/GUI/TownQuestPanel").Value;
+			Texture2D panel = texture_StarlightRiver_Assets_GUI_TownQuestPanel.Value;
 
 			spriteBatch.Draw(panel, pos, panel.Frame(), Color.White * 0.8f, 0, Vector2.Zero, 1, 0, 0);
 			if (activeQuest != null)
@@ -114,8 +119,8 @@ namespace StarlightRiver.Content.GUI
 			var parent = Parent.Parent.Parent as TownQuestList;
 			Vector2 pos = GetDimensions().ToRectangle().Center();
 
-			Texture2D back = Request<Texture2D>("StarlightRiver/Assets/GUI/TownQuestBack").Value;
-			Texture2D check = Request<Texture2D>("StarlightRiver/Assets/GUI/QuestCheck").Value;
+			Texture2D back = texture_StarlightRiver_Assets_GUI_TownQuestBack.Value;
+			Texture2D check = texture_StarlightRiver_Assets_GUI_QuestCheck.Value;
 
 			spriteBatch.Draw(back, pos, back.Frame(), Color.White * (parent.activeQuest == quest ? 1 : IsMouseHovering ? 0.7f : 0.5f), 0, back.Size() / 2, 1, 0, 0);
 			Utils.DrawBorderString(spriteBatch, quest.questName, pos + new Vector2(-16, 0), Color.White, 0.7f, 0.5f, 0.4f);
@@ -143,7 +148,7 @@ namespace StarlightRiver.Content.GUI
 			if (Quest != null && !Quest.Unlocked)
 			{
 				Vector2 pos = GetDimensions().ToRectangle().Center();
-				Texture2D back = Request<Texture2D>("StarlightRiver/Assets/GUI/NPCButton").Value;
+				Texture2D back = texture_StarlightRiver_Assets_GUI_NPCButton.Value;
 
 				spriteBatch.Draw(back, pos, back.Frame(), Color.White * (IsMouseHovering ? 1 : 0.7f), 0, back.Size() / 2, 1, 0, 0);
 				Utils.DrawBorderString(spriteBatch, "Submit", pos, Color.White, 0.7f, 0.5f, 0.4f);
@@ -192,7 +197,7 @@ namespace StarlightRiver.Content.GUI
 			if (type <= ItemID.Count)
 				icon = TextureAssets.Item[type].Value;
 			else
-				icon = Request<Texture2D>(Item.ModItem.Texture).Value;
+				icon = texture_Item_ModItem_Texture.Value;
 
 			name = Item.Name;
 		}

@@ -12,6 +12,11 @@ namespace StarlightRiver.Content.Items.Moonstone
 {
 	public class MoonstoneHamaxe : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Items_Moonstone_DatsuzeiFlameMap2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Moonstone/DatsuzeiFlameMap2");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_Texture____Crescent = ModContent.Request<Texture2D>(Texture + "_Crescent");
 		public override string Texture => AssetDirectory.MoonstoneItem + Name;
 
 		public override void SetStaticDefaults()
@@ -176,7 +181,7 @@ namespace StarlightRiver.Content.Items.Moonstone
 					{
 						//DustHelper.DrawStar(owner.Center + Projectile.rotation.ToRotationVector2() * 40f, ModContent.DustType<Dusts.GlowFastDecelerate>(), pointAmount: 5, mainSize: 1.5f, dustDensity: 0.7f, pointDepthMult: 0.3f, rotationAmount: Projectile.rotation, dustSize: 0.5f, color: new Color(120, 120, 255));
 						DustHelper.DrawDustImage(Owner.Center + Projectile.rotation.ToRotationVector2() * 40f, ModContent.DustType<Dusts.GlowFastDecelerate>(), 0.05f,
-							ModContent.Request<Texture2D>(Texture + "_Crescent").Value, 0.7f, 0, new Color(120, 120, 255));
+							texture_Texture____Crescent.Value, 0.7f, 0, new Color(120, 120, 255));
 						SoundEngine.PlaySound(SoundID.MaxMana, Projectile.Center);
 						flashTimer = 15;
 					}
@@ -240,8 +245,8 @@ namespace StarlightRiver.Content.Items.Moonstone
 		public override bool PreDraw(ref Color lightColor)
 		{
 			DrawPrimitives();
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 			SpriteEffects flip = Owner.direction == -1 ? SpriteEffects.FlipHorizontally : 0;
 			float rotation = Projectile.rotation + MathHelper.PiOver4 + (Owner.direction == -1 ? MathHelper.PiOver2 : 0f);
 			Vector2 drawPos = Owner.MountedCenter + new Vector2(0f, Owner.gfxOffY) + Projectile.rotation.ToRotationVector2() * 35f - Main.screenPosition + Main.rand.NextVector2Circular(0.5f, 0.5f);
@@ -347,8 +352,8 @@ namespace StarlightRiver.Content.Items.Moonstone
 			effect.Parameters["time"].SetValue(-Projectile.timeLeft * 0.05f);
 			effect.Parameters["repeats"].SetValue(8f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
-			effect.Parameters["sampleTexture2"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Moonstone/DatsuzeiFlameMap2").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
+			effect.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_Items_Moonstone_DatsuzeiFlameMap2.Value);
 
 			trail?.Render(effect);
 
@@ -458,7 +463,7 @@ namespace StarlightRiver.Content.Items.Moonstone
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 			effect.Parameters["alpha"].SetValue(1);
 
 			trail?.Render(effect);

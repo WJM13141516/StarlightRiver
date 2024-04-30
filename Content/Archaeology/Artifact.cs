@@ -11,6 +11,7 @@ namespace StarlightRiver.Content.Archaeology
 	//TODO: Manually load generic artifacts once manual loading for tile entities is supported
 	public abstract class Artifact : ModTileEntity
 	{
+		public static readonly Asset<Texture2D> texture_TexturePath = ModContent.Request<Texture2D>(TexturePath);
 		/// <summary>
 		/// Whether or not the artifact is displayed on the map
 		/// </summary>
@@ -130,7 +131,7 @@ namespace StarlightRiver.Content.Archaeology
 
 		public void GenericDraw(SpriteBatch spriteBatch) //I have no idea why but the drawing is offset by -192 on each axis by default, so I had to correct it
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(TexturePath).Value;
+			Texture2D tex = texture_TexturePath.Value;
 
 			var offScreen = new Vector2(Main.offScreenRange);
 			if (Main.drawToScreen)

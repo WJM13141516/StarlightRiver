@@ -12,6 +12,12 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	class Coalescence : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricItem___BossBowArrow = ModContent.Request<Texture2D>(AssetDirectory.VitricItem + "BossBowArrow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___DirectionalBeam = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "DirectionalBeam");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricItem___BossBowRing, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>(AssetDirectory.VitricItem + "BossBowRing", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Dust___Aurora = ModContent.Request<Texture2D>(AssetDirectory.Dust + "Aurora");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public int manaCharge = 0;
 
 		public override string Texture => AssetDirectory.VitricItem + Name;
@@ -160,7 +166,7 @@ namespace StarlightRiver.Content.Items.Vitric
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, tex.Size() / 2, 1, 0, 0);
 
 			return false;
@@ -168,8 +174,8 @@ namespace StarlightRiver.Content.Items.Vitric
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D texStar = Request<Texture2D>(AssetDirectory.Dust + "Aurora").Value;
-			Texture2D texGlow = Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
+			Texture2D texStar = texture_AssetDirectory_Dust___Aurora.Value;
+			Texture2D texGlow = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
 
 			var color1 = new Color(80, 240, 255);
 			var color2 = new Color(90, 200, 255);
@@ -204,7 +210,7 @@ namespace StarlightRiver.Content.Items.Vitric
 
 		private void DrawRing(SpriteBatch sb, Vector2 pos, float w, float h, float rotation, float prog, Color color) //optimization nightmare. Figure out smth later
 		{
-			Texture2D texRing = Request<Texture2D>(AssetDirectory.VitricItem + "BossBowRing", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+			Texture2D texRing = texture_AssetDirectory_VitricItem___BossBowRing, _ReLogic_Content_AssetRequestMode_ImmediateLoad.Value;
 			Effect effect = Filters.Scene["BowRing"].GetShader().Shader;
 
 			if (effect is null)
@@ -478,8 +484,8 @@ namespace StarlightRiver.Content.Items.Vitric
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = Request<Texture2D>(AssetDirectory.MiscTextures + "DirectionalBeam").Value;
-			Texture2D tex2 = Request<Texture2D>(AssetDirectory.VitricItem + "BossBowArrow").Value;
+			Texture2D tex = texture_AssetDirectory_MiscTextures___DirectionalBeam.Value;
+			Texture2D tex2 = texture_AssetDirectory_VitricItem___BossBowArrow.Value;
 			var color = new Color(100 + (int)(Projectile.ai[1] / 4f * 100), 200, 255);
 
 			if (Projectile.timeLeft < 30)

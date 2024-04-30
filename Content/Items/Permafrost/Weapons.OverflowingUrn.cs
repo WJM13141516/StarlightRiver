@@ -12,6 +12,17 @@ namespace StarlightRiver.Content.Items.Permafrost
 {
 	class OverflowingUrn : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_LaserBallDistort = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/LaserBallDistort");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Items_Gravedigger_GluttonyBG = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Gravedigger/GluttonyBG");
+		public static readonly Asset<Texture2D> texture_Texture____Top = ModContent.Request<Texture2D>(Texture + "_Top");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_PermafrostItem___UrnFreezeUnder_Overlay_Overload = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "UrnFreezeUnder_Overlay_Overload");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_PermafrostItem___UrnFreezeUnder_Overload = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "UrnFreezeUnder_Overload");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_PermafrostItem___UrnFreezeUnder_Divider = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "UrnFreezeUnder_Divider");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_PermafrostItem___UrnFreezeUnder_White = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "UrnFreezeUnder_White");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_PermafrostItem___UrnFreezeUnder_Icicle = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "UrnFreezeUnder_Icicle");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_PermafrostItem___UrnFreezeUnder_Overlay = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "UrnFreezeUnder_Overlay");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_PermafrostItem___UrnFreezeUnder = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "UrnFreezeUnder");
 		public const int FREEZETIME = 180;
 
 		public int freezeTimer;
@@ -64,18 +75,18 @@ namespace StarlightRiver.Content.Items.Permafrost
 			if (Player.HeldItem.type == ModContent.ItemType<OverflowingUrn>())
 			{
 				var item = Player.HeldItem.ModItem as OverflowingUrn;
-				Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "UrnFreezeUnder").Value;
-				Texture2D overlayTex = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "UrnFreezeUnder_Overlay").Value;
-				Texture2D icicleTex = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "UrnFreezeUnder_Icicle").Value;
-				Texture2D whiteTex = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "UrnFreezeUnder_White").Value;
-				Texture2D dividerTex = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "UrnFreezeUnder_Divider").Value;
+				Texture2D tex = texture_AssetDirectory_PermafrostItem___UrnFreezeUnder.Value;
+				Texture2D overlayTex = texture_AssetDirectory_PermafrostItem___UrnFreezeUnder_Overlay.Value;
+				Texture2D icicleTex = texture_AssetDirectory_PermafrostItem___UrnFreezeUnder_Icicle.Value;
+				Texture2D whiteTex = texture_AssetDirectory_PermafrostItem___UrnFreezeUnder_White.Value;
+				Texture2D dividerTex = texture_AssetDirectory_PermafrostItem___UrnFreezeUnder_Divider.Value;
 
 				if (item.animationTimer > 0)
 				{
 					if (Player.HasBuff(ModContent.BuffType<UrnFreeze>()))
 					{
-						tex = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "UrnFreezeUnder_Overload").Value;
-						overlayTex = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "UrnFreezeUnder_Overlay_Overload").Value;
+						tex = texture_AssetDirectory_PermafrostItem___UrnFreezeUnder_Overload.Value;
+						overlayTex = texture_AssetDirectory_PermafrostItem___UrnFreezeUnder_Overlay_Overload.Value;
 					}
 
 					spriteBatch.Draw(tex, Player.Center + Vector2.UnitY * (48 + Player.gfxOffY) - Main.screenPosition, null, Color.White * item.animationTimer, 0, new Vector2(16, 23), item.animationTimer, 0, 0);
@@ -366,8 +377,8 @@ namespace StarlightRiver.Content.Items.Permafrost
 			if (WindStrength > 0)
 				DrawWind();
 
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D topTex = ModContent.Request<Texture2D>(Texture + "_Top").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D topTex = texture_Texture____Top.Value;
 			float capOpacity = Owner.channel ? 1 - capCounter / 20f : 1 - MathHelper.Clamp((capCounter - 6) / 14f, 0, 1);
 
 			float rot = 0f;
@@ -415,7 +426,7 @@ namespace StarlightRiver.Content.Items.Permafrost
 
 		private void DrawWind()
 		{
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Gravedigger/GluttonyBG").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Items_Gravedigger_GluttonyBG.Value;
 			Main.spriteBatch.End();
 			Effect effect1 = Filters.Scene["CycloneIce"].GetShader().Shader;
 
@@ -437,7 +448,7 @@ namespace StarlightRiver.Content.Items.Permafrost
 			effect1.Parameters["startColor"].SetValue(Color.Cyan.ToVector3());
 			effect1.Parameters["endColor"].SetValue(Color.White.ToVector3());
 			effect1.Parameters["sampleTexture"].SetValue(tex);
-			effect1.Parameters["sampleTexture2"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/LaserBallDistort").Value);
+			effect1.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_Bosses_VitricBoss_LaserBallDistort.Value);
 
 			BlendState oldState = Main.graphics.GraphicsDevice.BlendState;
 			Main.graphics.GraphicsDevice.BlendState = BlendState.Additive;

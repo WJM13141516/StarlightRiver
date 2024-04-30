@@ -14,6 +14,9 @@ namespace StarlightRiver.Content.NPCs.Vitric
 {
 	internal class BoomBug : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowHarsh = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowHarsh");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private int yFrame = 0;
 
 		private int bugTimer = 0;
@@ -191,9 +194,9 @@ namespace StarlightRiver.Content.NPCs.Vitric
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D tex = Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = Request<Texture2D>(Texture + "_Glow").Value;
-			Texture2D magmaTex = Request<Texture2D>(AssetDirectory.Keys + "GlowHarsh").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
+			Texture2D magmaTex = texture_AssetDirectory_Keys___GlowHarsh.Value;
 
 			var magmaOffset = new Vector2(-13 * NPC.spriteDirection, 8);
 			SpriteEffects effects = SpriteEffects.None;
@@ -353,8 +356,8 @@ namespace StarlightRiver.Content.NPCs.Vitric
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D tex = Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 
 			SpriteEffects effects = SpriteEffects.None;
 			if (NPC.spriteDirection == 1)
@@ -489,7 +492,7 @@ namespace StarlightRiver.Content.NPCs.Vitric
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 
 			for (int i = 0; i < oldPos.Count; i++)
 			{

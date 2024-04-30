@@ -4,6 +4,7 @@ namespace StarlightRiver.Content.Items.Manabonds
 {
 	internal class DruidicManabond : Manabond
 	{
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
 		public override string Texture => AssetDirectory.ManabondItem + Name;
 
 		public DruidicManabond() : base("Druidic Manabond", "Your minions can store 40 mana\nYour minions siphon 6 mana per second from you untill full\nYour minions spend 15 mana to attack with a burst of poison thorns") { }
@@ -87,7 +88,7 @@ namespace StarlightRiver.Content.Items.Manabonds
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D glow = ModContent.Request<Texture2D>(Texture + "Glow").Value;
+			Texture2D glow = texture_Texture___Glow.Value;
 
 			for (int k = 0; k < Projectile.oldPos.Length; k += 2)
 			{

@@ -12,6 +12,10 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 {
 	class GlassHammer : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___SpikeTell = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "SpikeTell");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+		public static readonly Asset<Texture2D> texture_Texture___Small = ModContent.Request<Texture2D>(Texture + "Small");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		Vector2 origin;
 
 		float swingTimer;
@@ -129,7 +133,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Asset<Texture2D> hammer = Request<Texture2D>(Texture);
+			Asset<Texture2D> hammer = texture_Texture;
 			Rectangle frame = hammer.Frame(1, 2, 0, 0);
 			Rectangle hotFrame = hammer.Frame(1, 2, 0, 1);
 
@@ -145,7 +149,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 			Color hotFade = new Color(255, 255, 255, 128) * Utils.GetLerpValue(TotalTime, TotalTime * 0.95f, swingTimer, true) * Utils.GetLerpValue(TotalTime * 0.35f, TotalTime * 0.45f, swingTimer, true);
 			Main.EntitySpriteDraw(hammer.Value, Projectile.Center - Main.screenPosition, hotFrame, hotFade, Projectile.rotation, handle, scaleIn, effects, 0);
 
-			Asset<Texture2D> hammerSmall = Request<Texture2D>(Texture + "Small");
+			Asset<Texture2D> hammerSmall = texture_Texture___Small;
 			float scaleOut = Projectile.scale * Utils.GetLerpValue(TotalTime * 0.6f, TotalTime * 0.8f, swingTimer, true);
 			Main.EntitySpriteDraw(hammerSmall.Value, Projectile.Center - Main.screenPosition, null, hotFade, Projectile.rotation, hammerSmall.Size() * 0.5f, scaleOut, effects, 0);
 
@@ -321,7 +325,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 			if (Timer < RAISE_TIME + 10)
 				DrawGroundTell();
 
-			Asset<Texture2D> bloom = Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+			Asset<Texture2D> bloom = texture_AssetDirectory_Keys___GlowAlpha;
 
 			if (Timer > RAISE_TIME - 10)
 			{
@@ -363,7 +367,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		private void DrawSpikeGrowth(Vector2 position, float rotation, int size, float progress)
 		{
-			Asset<Texture2D> growth = Request<Texture2D>(Texture);
+			Asset<Texture2D> growth = texture_Texture;
 			Rectangle frame = growth.Frame(5, 2, size, 0);
 			Rectangle hotFrame = growth.Frame(5, 2, size, 1);
 			Vector2 origin = frame.Size() * new Vector2(0.5f, 0.77f);
@@ -381,7 +385,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		private void DrawGroundTell()
 		{
-			Asset<Texture2D> tellTex = Request<Texture2D>(AssetDirectory.MiscTextures + "SpikeTell");
+			Asset<Texture2D> tellTex = texture_AssetDirectory_MiscTextures___SpikeTell;
 			Rectangle frame = tellTex.Frame(2, 1, 1);
 			Rectangle frameGlow = tellTex.Frame(2, 1, 1);
 			Vector2 tellOrigin = frame.Size() * new Vector2(0.5f, 0.928f);

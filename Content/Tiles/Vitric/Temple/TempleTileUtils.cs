@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 {
 	internal static class TempleTileUtils
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Backgrounds_GlassTemple___k = ModContent.Request<Texture2D>("StarlightRiver/Assets/Backgrounds/GlassTemple" + k);
 		static readonly ScreenTarget bgTarget = new(DrawToTarget, Main.LocalPlayer.InModBiome<VitricTempleBiome>, 1);
 
 		public static void DrawToTarget(SpriteBatch spriteBatch)
@@ -16,7 +17,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 
 			for (int k = 0; k < 4; k++)
 			{
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Backgrounds/GlassTemple" + k).Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Backgrounds_GlassTemple___k.Value;
 				var parallax = new Vector2((center.X - Main.screenPosition.X - Main.screenWidth / 2) * 0.2f * (4 - k), (center.Y - Main.screenPosition.Y - Main.screenHeight / 2) * 0.2f * (4 - k));
 				spriteBatch.Draw(tex, center - Main.screenPosition - parallax, null, color, 0, tex.Size() / 2f, 1, 0, 0);
 			}
@@ -43,7 +44,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 				thisSource.Offset(offset.ToPoint());
 				thisSource.Offset(new Point((int)((center.X - Main.screenPosition.X) * 0.2f * (4 - k)), (int)((center.Y - Main.screenPosition.Y) * 0.2f * (4 - k))));
 
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Backgrounds/GlassTemple" + k).Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Backgrounds_GlassTemple___k.Value;
 				spriteBatch.Draw(tex, target, thisSource, color);
 			}
 		}

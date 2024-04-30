@@ -8,6 +8,9 @@ namespace StarlightRiver.Content.Tiles.Overgrow
 {
 	class WindowSmall : DummyTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_OvergrowTile___PitGlow = ModContent.Request<Texture2D>(AssetDirectory.OvergrowTile + "PitGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_OvergrowTile___WindowSmall = ModContent.Request<Texture2D>(AssetDirectory.OvergrowTile + "WindowSmall");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_OvergrowTile___Window3 = ModContent.Request<Texture2D>(AssetDirectory.OvergrowTile + "Window3");
 		public override string Texture => AssetDirectory.OvergrowTile + "WindowSmall";
 
 		public override int DummyType => DummySystem.DummyType<WindowSmallDummy>();
@@ -40,8 +43,8 @@ namespace StarlightRiver.Content.Tiles.Overgrow
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D tex = Request<Texture2D>(AssetDirectory.OvergrowTile + "Window3").Value;
-			Texture2D tex2 = Request<Texture2D>(AssetDirectory.OvergrowTile + "WindowSmall").Value;
+			Texture2D tex = texture_AssetDirectory_OvergrowTile___Window3.Value;
+			Texture2D tex2 = texture_AssetDirectory_OvergrowTile___WindowSmall.Value;
 
 			var target = new Rectangle((int)(position.X - Main.screenPosition.X), (int)(position.Y - Main.screenPosition.Y), 4 * 16, 6 * 16);
 
@@ -67,7 +70,7 @@ namespace StarlightRiver.Content.Tiles.Overgrow
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = Request<Texture2D>(AssetDirectory.OvergrowTile + "PitGlow").Value;
+			Texture2D tex = texture_AssetDirectory_OvergrowTile___PitGlow.Value;
 
 			float off = (float)Math.Sin(timer) * 0.05f;
 

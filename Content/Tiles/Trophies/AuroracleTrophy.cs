@@ -5,6 +5,10 @@ namespace StarlightRiver.Content.Tiles.Trophies
 {
 	class AuroracleTrophy : ModTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_TrophyTile___Name___Glow2 = ModContent.Request<Texture2D>(AssetDirectory.TrophyTile + Name + "Glow2");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___BodyOverSpecular = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "BodyOverSpecular");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___BodyOverGlow = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "BodyOverGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___BodyOver = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "BodyOver");
 		public override string Texture => AssetDirectory.TrophyTile + "TrophyGeneric";
 
 		public override void SetStaticDefaults()
@@ -18,11 +22,11 @@ namespace StarlightRiver.Content.Tiles.Trophies
 
 			if (tile.TileFrameX == 2 * 18 && tile.TileFrameY == 2 * 18)
 			{
-				Texture2D headBlob = Request<Texture2D>(AssetDirectory.SquidBoss + "BodyOver").Value;
-				Texture2D headBlobGlow = Request<Texture2D>(AssetDirectory.SquidBoss + "BodyOverGlow").Value;
-				Texture2D headBlobSpecular = Request<Texture2D>(AssetDirectory.SquidBoss + "BodyOverSpecular").Value;
+				Texture2D headBlob = texture_AssetDirectory_SquidBoss___BodyOver.Value;
+				Texture2D headBlobGlow = texture_AssetDirectory_SquidBoss___BodyOverGlow.Value;
+				Texture2D headBlobSpecular = texture_AssetDirectory_SquidBoss___BodyOverSpecular.Value;
 
-				Texture2D tex2 = Request<Texture2D>(AssetDirectory.TrophyTile + Name + "Glow2").Value;
+				Texture2D tex2 = texture_AssetDirectory_TrophyTile___Name___Glow2.Value;
 
 				Vector2 pos = (new Vector2(i, j) + Helpers.Helper.TileAdj) * 16 - Vector2.One * 8 - Main.screenPosition;
 

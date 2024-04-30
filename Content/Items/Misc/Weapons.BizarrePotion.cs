@@ -14,6 +14,9 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	public class BizarrePotion : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public override void Load()
@@ -119,7 +122,7 @@ namespace StarlightRiver.Content.Items.Misc
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D texture = texture_Texture.Value;
 			int xFrameSize = texture.Width / 4;
 			int yFrameSize = texture.Height / 4;
 
@@ -138,7 +141,7 @@ namespace StarlightRiver.Content.Items.Misc
 
 			Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition, frame, lightColor, Projectile.rotation, new Vector2(xFrameSize, yFrameSize) / 2, Projectile.scale, SpriteEffects.None, 0f);
 
-			Texture2D glowTexture = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D glowTexture = texture_Texture____Glow.Value;
 			Main.spriteBatch.Draw(glowTexture, Projectile.Center - Main.screenPosition, frame, Color.White, Projectile.rotation, new Vector2(xFrameSize, yFrameSize) / 2, Projectile.scale, SpriteEffects.None, 0f);
 			return false;
 		}
@@ -449,7 +452,7 @@ namespace StarlightRiver.Content.Items.Misc
 
 		public void DrawAdditive(SpriteBatch sb)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 
 			for (int i = 0; i < 3; i++)
 				sb.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.Yellow * Fade, 0, tex.Size() / 2, 0.55f, SpriteEffects.None, 0f);
@@ -586,7 +589,7 @@ namespace StarlightRiver.Content.Items.Misc
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(1f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 
 			trail?.Render(effect);
 			trail2?.Render(effect);

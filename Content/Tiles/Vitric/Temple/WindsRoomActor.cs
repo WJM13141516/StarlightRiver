@@ -11,6 +11,12 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 {
 	class WindsRoomActor : DummyTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___WindsRoomOrnamentRightGlow = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "WindsRoomOrnamentRightGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___WindsRoomOrnamentRight = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "WindsRoomOrnamentRight");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___WindsRoomOrnamentLeftGlow = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "WindsRoomOrnamentLeftGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___WindsRoomOrnamentLeft = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "WindsRoomOrnamentLeft");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___WindsRoomBackgroundGlow = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "WindsRoomBackgroundGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___WindsRoomBackground = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "WindsRoomBackground");
 		public override int DummyType => DummySystem.DummyType<WindsRoomActorDummy>();
 
 		public override string Texture => AssetDirectory.Invisible;
@@ -38,8 +44,8 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			Texture2D backdrop = Request<Texture2D>(AssetDirectory.VitricTile + "WindsRoomBackground").Value;
-			Texture2D backdropGlow = Request<Texture2D>(AssetDirectory.VitricTile + "WindsRoomBackgroundGlow").Value;
+			Texture2D backdrop = texture_AssetDirectory_VitricTile___WindsRoomBackground.Value;
+			Texture2D backdropGlow = texture_AssetDirectory_VitricTile___WindsRoomBackgroundGlow.Value;
 			Vector2 pos = Center + new Vector2(-backdrop.Width / 2, -backdrop.Height + 8) - Main.screenPosition;
 
 			var bgTarget = backdrop.Size().ToRectangle();
@@ -68,15 +74,15 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 
 			Color lighting = Lighting.GetColor((int)Center.X / 16, (int)Center.Y / 16 - 6);
 
-			Texture2D left = Request<Texture2D>(AssetDirectory.VitricTile + "WindsRoomOrnamentLeft").Value;
-			Texture2D leftGlow = Request<Texture2D>(AssetDirectory.VitricTile + "WindsRoomOrnamentLeftGlow").Value;
+			Texture2D left = texture_AssetDirectory_VitricTile___WindsRoomOrnamentLeft.Value;
+			Texture2D leftGlow = texture_AssetDirectory_VitricTile___WindsRoomOrnamentLeftGlow.Value;
 			Vector2 posLeft = Center + new Vector2(-100 + (float)System.Math.Cos(Main.GameUpdateCount / 45f) * 2, -140 + (float)System.Math.Sin(Main.GameUpdateCount / 45f) * 6) - Main.screenPosition;
 
 			spriteBatch.Draw(left, posLeft, null, lighting, (float)System.Math.Cos(Main.GameUpdateCount / 30f) * 0.05f, Vector2.Zero, 1, 0, 0);
 			spriteBatch.Draw(leftGlow, posLeft, null, Color.White, (float)System.Math.Cos(Main.GameUpdateCount / 30f) * 0.05f, Vector2.Zero, 1, 0, 0);
 
-			Texture2D right = Request<Texture2D>(AssetDirectory.VitricTile + "WindsRoomOrnamentRight").Value;
-			Texture2D rightGlow = Request<Texture2D>(AssetDirectory.VitricTile + "WindsRoomOrnamentRightGlow").Value;
+			Texture2D right = texture_AssetDirectory_VitricTile___WindsRoomOrnamentRight.Value;
+			Texture2D rightGlow = texture_AssetDirectory_VitricTile___WindsRoomOrnamentRightGlow.Value;
 			Vector2 posRight = Center + new Vector2(0 - (float)System.Math.Cos(Main.GameUpdateCount / 30f + 5) * 2, -220 + (float)System.Math.Sin(Main.GameUpdateCount / 30f + 5) * 8) - Main.screenPosition;
 
 			spriteBatch.Draw(right, posRight, null, lighting, (float)System.Math.Cos(Main.GameUpdateCount / 30f + 5) * 0.05f, Vector2.Zero, 1, 0, 0);

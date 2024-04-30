@@ -12,6 +12,7 @@ namespace StarlightRiver.Content.NPCs.Vitric
 
 	internal class CoolmiteSmol : CoolmitePassive, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		protected override int Offset => 4;
 		protected override float Size => 0.8f;
 		public override int MagmaTransformToNPC => NPCType<MagmiteSmol>();
@@ -88,7 +89,7 @@ namespace StarlightRiver.Content.NPCs.Vitric
 			if (NPC.spriteDirection == -1)
 				originX = 24;
 
-			spriteBatch.Draw(Request<Texture2D>(Texture).Value, pos, NPC.frame, Color.White * (1 - NPC.shimmerTransparency), 0, new Vector2(originX, 16), 1, NPC.spriteDirection == -1 ? 0 : SpriteEffects.FlipHorizontally, 0);
+			spriteBatch.Draw(texture_Texture.Value, pos, NPC.frame, Color.White * (1 - NPC.shimmerTransparency), 0, new Vector2(originX, 16), 1, NPC.spriteDirection == -1 ? 0 : SpriteEffects.FlipHorizontally, 0);
 			return false;
 		}
 
@@ -176,7 +177,7 @@ namespace StarlightRiver.Content.NPCs.Vitric
 			if (NPC.spriteDirection == -1)
 				originX = 42;
 
-			spriteBatch.Draw(Request<Texture2D>(Texture).Value, pos, NPC.frame, Color.White * (1 - NPC.shimmerTransparency), 0, new Vector2(originX, 28), 1, NPC.spriteDirection == -1 ? 0 : SpriteEffects.FlipHorizontally, 0);
+			spriteBatch.Draw(texture_Texture.Value, pos, NPC.frame, Color.White * (1 - NPC.shimmerTransparency), 0, new Vector2(originX, 28), 1, NPC.spriteDirection == -1 ? 0 : SpriteEffects.FlipHorizontally, 0);
 			return false;
 		}
 

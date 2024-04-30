@@ -8,6 +8,8 @@ namespace StarlightRiver.Content.Items.BaseTypes
 {
 	public abstract class CursedAccessory : SmartAccessory
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public static readonly Color CurseColor = new(25, 17, 49);
 
 		private static float tooltipProgress;
@@ -60,7 +62,7 @@ namespace StarlightRiver.Content.Items.BaseTypes
 		{
 			if (GoingBoom)
 			{
-				Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+				Texture2D tex = texture_Texture.Value;
 				position += Vector2.One.RotatedByRandom(6.28f) * boomTimer / 60;
 
 				spriteBatch.Draw(tex, position, frame, Color.White, 0, origin, scale, 0, 0);
@@ -171,7 +173,7 @@ namespace StarlightRiver.Content.Items.BaseTypes
 			if (line.Mod == "Terraria" && line.Name == "ItemName")
 			{
 				Effect effect = Filters.Scene["CursedTooltip"].GetShader().Shader;
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Keys_Glow.Value;
 
 				if (effect is null)
 					return true;

@@ -4,6 +4,9 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 {
 	internal class BurningGround : ModProjectile, IDrawOverTiles
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowAlpha = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowAlpha");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_GlassMiniboss_FireAura = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/GlassMiniboss/FireAura");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_LongGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/LongGlow");
 		public override string Texture => AssetDirectory.Invisible;
 
 		public ref float Timer => ref Projectile.ai[0];
@@ -57,7 +60,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/LongGlow").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Bosses_VitricBoss_LongGlow.Value;
 			var color = new Color(255, 140, 50, 0);
 
 			if (Timer > 300)
@@ -77,8 +80,8 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		public void DrawOverTiles(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/GlassMiniboss/FireAura").Value;
-			Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowAlpha").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Bosses_GlassMiniboss_FireAura.Value;
+			Texture2D tex2 = texture_StarlightRiver_Assets_Keys_GlowAlpha.Value;
 			var color = new Color(255, 110, 50, 0);
 			var color2 = new Color(255, 200, 50, 0);
 

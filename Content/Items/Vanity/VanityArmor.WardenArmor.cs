@@ -7,6 +7,7 @@ namespace StarlightRiver.Content.Items.Vanity
 	[AutoloadEquip(EquipType.Head)]
 	public class WardenHat : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VanityItem___WardenQuestionmark = ModContent.Request<Texture2D>(AssetDirectory.VanityItem + "WardenQuestionmark");
 		public override string Texture => AssetDirectory.VanityItem + Name;
 
 		public override void SetStaticDefaults()
@@ -81,7 +82,7 @@ namespace StarlightRiver.Content.Items.Vanity
 			if (!SetEquipped)
 				return;
 
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.VanityItem + "WardenQuestionmark").Value;
+			Texture2D tex = texture_AssetDirectory_VanityItem___WardenQuestionmark.Value;
 			Player armorOwner = drawInfo.drawPlayer;
 			Vector2 drawPos = armorOwner.MountedCenter - Main.screenPosition - new Vector2(0, 3 - armorOwner.gfxOffY);
 

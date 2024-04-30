@@ -8,6 +8,13 @@ namespace StarlightRiver.Content.Items.Forest
 {
 	public class SlimePrinceMinion : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___SmallBar0 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "SmallBar0");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___SmallBar1 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "SmallBar1");
+		public static readonly Asset<Texture2D> texture_Texture___Crown = ModContent.Request<Texture2D>(Texture + "Crown");
+		public static readonly Asset<Texture2D> texture_Texture___Big = ModContent.Request<Texture2D>(Texture + "Big");
+		public static readonly Asset<Texture2D> texture_Texture___Med = ModContent.Request<Texture2D>(Texture + "Med");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_Texture___Wing = ModContent.Request<Texture2D>(Texture + "Wing");
 		public const int MAX_LIFE = 400;
 
 		public int life = MAX_LIFE;
@@ -251,7 +258,7 @@ namespace StarlightRiver.Content.Items.Forest
 			SpriteBatch sb = Main.spriteBatch;
 
 			// Draw wings
-			Texture2D texWing = ModContent.Request<Texture2D>(Texture + "Wing").Value;
+			Texture2D texWing = texture_Texture___Wing.Value;
 			var wingFrame = new Rectangle(0, 46 * (int)(Main.GameUpdateCount * 0.2f % 4), 30, 46);
 
 			int wingOff = 0;
@@ -280,18 +287,18 @@ namespace StarlightRiver.Content.Items.Forest
 			// Drawing behavior for normal, non-fused
 			if (State < 2)
 			{
-				Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+				Texture2D tex = texture_Texture.Value;
 				var frame = new Rectangle(0, 26 * Projectile.frame, 28, 26);
 				sb.Draw(tex, Projectile.Center - Main.screenPosition, frame, Color.White, Projectile.rotation, new Vector2(14, 13), Projectile.scale, 0, 0);
 			}
 			else if (State == 2 && Timer < 10) // Transition
 			{
-				Texture2D tex = ModContent.Request<Texture2D>(Texture + "Med").Value;
+				Texture2D tex = texture_Texture___Med.Value;
 				sb.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation, tex.Size() / 2f, Projectile.scale, 0, 0);
 			}
 			else // Merged
 			{
-				Texture2D tex = ModContent.Request<Texture2D>(Texture + "Big").Value;
+				Texture2D tex = texture_Texture___Big.Value;
 				var frame = new Rectangle(0, 62 * Projectile.frame, 64, 62);
 				sb.Draw(tex, Projectile.Center - Main.screenPosition, frame, Color.White, Projectile.rotation, new Vector2(32, 31), Projectile.scale, 0, 0);
 			}
@@ -305,7 +312,7 @@ namespace StarlightRiver.Content.Items.Forest
 		public override void PostDraw(Color lightColor)
 		{
 			// Draw crown
-			Texture2D texCrown = ModContent.Request<Texture2D>(Texture + "Crown").Value;
+			Texture2D texCrown = texture_Texture___Crown.Value;
 
 			var crownOff = new Vector2(0, -13 - Projectile.frame * 2);
 
@@ -322,8 +329,8 @@ namespace StarlightRiver.Content.Items.Forest
 			{
 				float fill = life / (float)MAX_LIFE;
 
-				Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "SmallBar1").Value;
-				Texture2D tex2 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "SmallBar0").Value;
+				Texture2D tex = texture_AssetDirectory_GUI___SmallBar1.Value;
+				Texture2D tex2 = texture_AssetDirectory_GUI___SmallBar0.Value;
 
 				var pos = (Projectile.Center + new Vector2(-tex.Width / 2, -50) + Vector2.UnitY * Projectile.height / 2f - Main.screenPosition).ToPoint();
 

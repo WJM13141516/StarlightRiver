@@ -11,6 +11,10 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 {
 	internal class SupporterConstruct : VitricConstructNPC
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___BeamTrail = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "BeamTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___BeamCore = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "BeamCore");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private int direction = 0;
 		private int directionCounter = 0;
 		private int directionThreshhold = 15;
@@ -244,8 +248,8 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D mainTex = Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D mainTex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 			SpriteEffects spriteEffects = SpriteEffects.None;
 
 			int frameHeight = mainTex.Height / Main.npcFrameCount[NPC.type];
@@ -258,8 +262,8 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 				Color color = Color.OrangeRed;
 				Vector2 pos = NPC.Center - Main.screenPosition;
 				float laserRotation = NPC.DirectionTo(healingTarget.Center).ToRotation(); //TODO: Simplyify from copy/paste ceiros laser
-				Texture2D texBeam = Request<Texture2D>(AssetDirectory.MiscTextures + "BeamCore").Value;
-				Texture2D texBeam2 = Request<Texture2D>(AssetDirectory.MiscTextures + "BeamTrail").Value;
+				Texture2D texBeam = texture_AssetDirectory_MiscTextures___BeamCore.Value;
+				Texture2D texBeam2 = texture_AssetDirectory_MiscTextures___BeamTrail.Value;
 
 				Vector2 origin = new(0, texBeam.Height / 2);
 				Vector2 origin2 = new(0, texBeam2.Height / 2);

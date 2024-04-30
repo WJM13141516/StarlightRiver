@@ -7,6 +7,7 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	internal class VitricHamaxe : ModItem, IGlowingItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
 		public const int MAX_HEAT = 100;
 
 		public int heat = 0;
@@ -104,7 +105,7 @@ namespace StarlightRiver.Content.Items.Vitric
 
 		public override void PostDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color ItemColor, Vector2 origin, float scale)
 		{
-			Texture2D tex = Request<Texture2D>(Texture + "Glow").Value;
+			Texture2D tex = texture_Texture___Glow.Value;
 			Color color = Color.White * (heat / 100f);
 
 			spriteBatch.Draw(tex, position, frame, color, 0, origin, scale, 0, 0);
@@ -117,7 +118,7 @@ namespace StarlightRiver.Content.Items.Vitric
 			if (Player.itemAnimation == 0)
 				return;
 
-			Texture2D tex = Request<Texture2D>(Texture + "Glow").Value;
+			Texture2D tex = texture_Texture___Glow.Value;
 			Color color = Color.White * (heat / (float)MAX_HEAT);
 			Vector2 origin = Player.direction == 1 ? new Vector2(0, tex.Height) : new Vector2(tex.Width, tex.Height);
 

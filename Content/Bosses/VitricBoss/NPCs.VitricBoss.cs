@@ -22,6 +22,17 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 	[AutoloadBossHead]
 	public sealed partial class VitricBoss : ModNPC, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___GUI_HealthBar, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "GUI/HealthBar", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___VitricBossBarOver = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBarOver");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___VitricBossBarUnder = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBarUnder");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_ShieldMap = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/ShieldMap");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_Shield = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/Shield");
+		public static readonly Asset<Texture2D> texture_Texture___Godray = ModContent.Request<Texture2D>(Texture + "Godray");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_ProgressionMap = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/ProgressionMap");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_CrackMap = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/CrackMap");
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_Texture___Body = ModContent.Request<Texture2D>(Texture + "Body");
 		public Vector2 startPos;
 		public Vector2 endPos;
 		public Vector2 homePos;
@@ -219,11 +230,11 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 			offset = new Vector2(60, 140);
 
-			spriteBatch.Draw(Request<Texture2D>(Texture + "Body").Value, NPC.Center - screenPos + offset, new Rectangle(228, 0, 114, 232), Color.White, -0.1f, new Vector2(114, 232) / 2, 1, 0, 0);
+			spriteBatch.Draw(texture_Texture___Body.Value, NPC.Center - screenPos + offset, new Rectangle(228, 0, 114, 232), Color.White, -0.1f, new Vector2(114, 232) / 2, 1, 0, 0);
 
 			offset = new Vector2(20, 0);
 
-			spriteBatch.Draw(Request<Texture2D>(Texture).Value, NPC.Center - screenPos + offset, NPC.frame, Color.White, -0.2f, NPC.frame.Size() / 2, 1, 0, 0);
+			spriteBatch.Draw(texture_Texture.Value, NPC.Center - screenPos + offset, NPC.frame, Color.White, -0.2f, NPC.frame.Size() / 2, 1, 0, 0);
 		}
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
@@ -249,29 +260,29 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 			NPC.frame.Width = 204;
 			NPC.frame.Height = 190;
 			SpriteEffects effects = NPC.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : 0;
-			spriteBatch.Draw(Request<Texture2D>(Texture).Value, NPC.Center - screenPos + PainOffset, NPC.frame, new Color(Lighting.GetSubLight(NPC.Center)), NPC.rotation, NPC.frame.Size() / 2, NPC.scale, effects, 0);
-			spriteBatch.Draw(Request<Texture2D>(Texture + "Glow").Value, NPC.Center - screenPos + PainOffset, NPC.frame, Color.White, NPC.rotation, NPC.frame.Size() / 2, NPC.scale, effects, 0);
+			spriteBatch.Draw(texture_Texture.Value, NPC.Center - screenPos + PainOffset, NPC.frame, new Color(Lighting.GetSubLight(NPC.Center)), NPC.rotation, NPC.frame.Size() / 2, NPC.scale, effects, 0);
+			spriteBatch.Draw(texture_Texture___Glow.Value, NPC.Center - screenPos + PainOffset, NPC.frame, Color.White, NPC.rotation, NPC.frame.Size() / 2, NPC.scale, effects, 0);
 
 			if (Phase == (int)AIStates.Dying) //death
 			{
 				Effect effect = Terraria.Graphics.Effects.Filters.Scene["MagmaCracks"].GetShader().Shader;
-				effect.Parameters["sampleTexture2"].SetValue(Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/CrackMap").Value);
-				effect.Parameters["sampleTexture3"].SetValue(Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/ProgressionMap").Value);
+				effect.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_Bosses_VitricBoss_CrackMap.Value);
+				effect.Parameters["sampleTexture3"].SetValue(texture_StarlightRiver_Assets_Bosses_VitricBoss_ProgressionMap.Value);
 				effect.Parameters["uTime"].SetValue((GlobalTimer - 160) / 600f);
 				effect.Parameters["drawColor"].SetValue(new Color(Lighting.GetSubLight(NPC.Center)).ToVector4());
 
 				effect.Parameters["sourceFrame"].SetValue(new Vector4(NPC.frame.X, NPC.frame.Y, NPC.frame.Width, NPC.frame.Height));
-				effect.Parameters["texSize"].SetValue(Request<Texture2D>(Texture).Value.Size());
+				effect.Parameters["texSize"].SetValue(texture_Texture.Value.Size());
 
 				spriteBatch.End();
 				spriteBatch.Begin(default, BlendState.NonPremultiplied, Main.DefaultSamplerState, default, RasterizerState.CullNone, effect, Main.GameViewMatrix.TransformationMatrix);
 
-				spriteBatch.Draw(Request<Texture2D>(Texture).Value, NPC.Center - screenPos + PainOffset, NPC.frame, new Color(Lighting.GetSubLight(NPC.Center)), NPC.rotation, NPC.frame.Size() / 2, NPC.scale, effects, 0);
+				spriteBatch.Draw(texture_Texture.Value, NPC.Center - screenPos + PainOffset, NPC.frame, new Color(Lighting.GetSubLight(NPC.Center)), NPC.rotation, NPC.frame.Size() / 2, NPC.scale, effects, 0);
 
 				spriteBatch.End();
 				spriteBatch.Begin(default, BlendState.Additive, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-				spriteBatch.Draw(Request<Texture2D>(Texture + "Godray").Value, NPC.Center - screenPos + PainOffset + new Vector2(NPC.spriteDirection == 1 ? 20 : -20, -30), null, new Color(255, 175, 100) * ((GlobalTimer - 160) / 600f), NPC.rotation, Request<Texture2D>(Texture + "Godray").Value.Size() / 2, NPC.scale, effects, 0);
+				spriteBatch.Draw(texture_Texture___Godray.Value, NPC.Center - screenPos + PainOffset + new Vector2(NPC.spriteDirection == 1 ? 20 : -20, -30), null, new Color(255, 175, 100) * ((GlobalTimer - 160) / 600f), NPC.rotation, texture_Texture___Godray.Value.Size() / 2, NPC.scale, effects, 0);
 
 				spriteBatch.End();
 				spriteBatch.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
@@ -284,11 +295,11 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 		{
 			if (Phase == (int)AIStates.FirstPhase && NPC.dontTakeDamage) //draws the NPC's shield when immune and in the first phase
 			{
-				Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/Shield").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Bosses_VitricBoss_Shield.Value;
 				SpriteEffects effects = NPC.spriteDirection == 1 ? SpriteEffects.FlipHorizontally : 0;
 
 				Effect effect = Terraria.Graphics.Effects.Filters.Scene["MoltenForm"].GetShader().Shader;
-				effect.Parameters["sampleTexture2"].SetValue(Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/ShieldMap").Value);
+				effect.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_Bosses_VitricBoss_ShieldMap.Value);
 				effect.Parameters["uTime"].SetValue(2 - shieldShaderTimer / 120f * 2);
 				effect.Parameters["sourceFrame"].SetValue(new Vector4(NPC.frame.X, NPC.frame.Y, NPC.frame.Width, NPC.frame.Height));
 				effect.Parameters["texSize"].SetValue(tex.Size());
@@ -309,8 +320,8 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			Texture2D tex = Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBarUnder").Value;
-			Texture2D texOver = Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBarOver").Value;
+			Texture2D tex = texture_AssetDirectory_VitricBoss___VitricBossBarUnder.Value;
+			Texture2D texOver = texture_AssetDirectory_VitricBoss___VitricBossBarOver.Value;
 			float progress = (float)NPC.life / NPC.lifeMax;
 
 			var target = new Rectangle((int)(position.X - Main.screenPosition.X) + 2, (int)(position.Y - Main.screenPosition.Y), (int)(progress * tex.Width - 4), tex.Height);
@@ -542,7 +553,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 			if (!BossBarOverlay.visible && Phase != (int)AIStates.Leaving && Phase != (int)AIStates.Dying && Main.netMode != NetmodeID.Server && arena.Contains(Main.LocalPlayer.Center.ToPoint()))
 			{
 				//in case the player joined late or something for the hp bar
-				BossBarOverlay.SetTracked(NPC, ", Shattered Sentinel", Request<Texture2D>(AssetDirectory.VitricBoss + "GUI/HealthBar", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value);
+				BossBarOverlay.SetTracked(NPC, ", Shattered Sentinel", texture_AssetDirectory_VitricBoss___GUI_HealthBar, _ReLogic_Content_AssetRequestMode_ImmediateLoad.Value);
 				BossBarOverlay.visible = true;
 			}
 

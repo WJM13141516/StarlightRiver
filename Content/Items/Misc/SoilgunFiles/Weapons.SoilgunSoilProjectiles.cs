@@ -10,6 +10,9 @@ namespace StarlightRiver.Content.Items.Misc.SoilgunFiles
 {
 	public abstract class BaseSoilProjectile : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscItem___SoilgunMuddyTrail = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + "SoilgunMuddyTrail");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public int dustID;
 
 		public bool Gravity = true;
@@ -88,7 +91,7 @@ namespace StarlightRiver.Content.Items.Misc.SoilgunFiles
 			if (Projectile.spriteDirection == -1)
 				spriteEffects = SpriteEffects.FlipHorizontally;
 
-			Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D texture = texture_Texture.Value;
 
 			int frameHeight = texture.Height / Main.projFrames[Projectile.type];
 			int startY = frameHeight * Projectile.frame;
@@ -149,11 +152,11 @@ namespace StarlightRiver.Content.Items.Misc.SoilgunFiles
 			effect.Parameters["time"].SetValue(Projectile.timeLeft * -0.01f);
 			effect.Parameters["repeats"].SetValue(1);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.MiscItem + "SoilgunMuddyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_AssetDirectory_MiscItem___SoilgunMuddyTrail.Value);
 
 			trail?.Render(effect);
 
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(effect);
 			Main.spriteBatch.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);

@@ -13,6 +13,9 @@ namespace StarlightRiver.Content.NPCs.Forest
 {
 	class Warbanner : ModNPC, IDrawAdditive, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Misc_GlowRingTransparent = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/GlowRingTransparent");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public enum BehaviorStates
 		{
 			Wandering,
@@ -263,7 +266,7 @@ namespace StarlightRiver.Content.NPCs.Forest
 
 		private void DrawBestiary(SpriteBatch spriteBatch, Vector2 screenPos)
 		{
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			spriteBatch.Draw(tex, NPC.Center + new Vector2(0, -32) - screenPos, null, Color.White, NPC.rotation, tex.Size() / 2f, NPC.scale, 0, 0);
 
 			var target = new Rectangle((int)NPC.Center.X - 14, (int)NPC.Center.Y - 16, 28, 100);
@@ -290,15 +293,15 @@ namespace StarlightRiver.Content.NPCs.Forest
 				return false;
 			}
 
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			spriteBatch.Draw(tex, NPC.Center + new Vector2(0, -64) - screenPos, null, drawColor, NPC.rotation, tex.Size() / 2f, NPC.scale, 0, 0);
 			return false;
 		}
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D auraTex = Request<Texture2D>("StarlightRiver/Assets/Misc/GlowRingTransparent").Value;
-			Texture2D ballTex = Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
+			Texture2D auraTex = texture_StarlightRiver_Assets_Misc_GlowRingTransparent.Value;
+			Texture2D ballTex = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
 			float maxScale = auraTex.Width / MAX_BUFF_RADIUS;
 
 			spriteBatch.Draw(auraTex, NPC.Center - Main.screenPosition, null, Color.Red * VFXAlpha * 0.4f, 0, auraTex.Size() / 2, VFXAlpha * maxScale, 0, 0);

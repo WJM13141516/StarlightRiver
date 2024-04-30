@@ -9,6 +9,10 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 {
 	public class ConstructSpawner : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_ShieldMap = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/ShieldMap");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowAlpha = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowAlpha");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
+		public static readonly Asset<Texture2D> texture_(fakeNPC_ModNPC_as_VitricConstructNPC = ModContent.Request<Texture2D>(fakeNPC.ModNPC as VitricConstructNPC;
 		private List<Vector2> cache;
 		private Trail trail;
 
@@ -97,7 +101,7 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 			if (fakeNPC is null)
 				return false;
 
-			Texture2D tex = ModContent.Request<Texture2D>((fakeNPC.ModNPC as VitricConstructNPC).PreviewTexturePath).Value;
+			Texture2D tex = texture_(fakeNPC_ModNPC_as_VitricConstructNPC.PreviewTexturePath).Value;
 
 			Effect trailEffect = Filters.Scene["CeirosRing"].GetShader().Shader;
 
@@ -108,11 +112,11 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 			trailEffect.Parameters["time"].SetValue(Projectile.timeLeft * -0.04f);
 			trailEffect.Parameters["repeats"].SetValue(1);
 			trailEffect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			trailEffect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			trailEffect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(trailEffect);
 
-			Texture2D glowTex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowAlpha").Value;
+			Texture2D glowTex = texture_StarlightRiver_Assets_Keys_GlowAlpha.Value;
 			var color = new Color(255, 160, 100, 0);
 
 			Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, color * (1 - Timer / 25f), 0, glowTex.Size() / 2, Timer * 0.1f, 0, 0);
@@ -122,7 +126,7 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 			Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, color * 2 * ((25 - Timer) / 25f), 0, glowTex.Size() / 2, 0.25f, 0, 0);
 
 			Effect effect = Filters.Scene["MoltenForm"].GetShader().Shader;
-			effect.Parameters["sampleTexture2"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/ShieldMap").Value);
+			effect.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_Bosses_VitricBoss_ShieldMap.Value);
 			effect.Parameters["uTime"].SetValue(Timer / 70f * 2);
 			effect.Parameters["sourceFrame"].SetValue(new Vector4(0, 0, fakeNPC.frame.Width, fakeNPC.frame.Height));
 			effect.Parameters["texSize"].SetValue(tex.Size());

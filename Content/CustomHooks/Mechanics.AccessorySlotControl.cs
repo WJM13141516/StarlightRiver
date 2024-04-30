@@ -5,6 +5,8 @@ namespace StarlightRiver.Content.CustomHooks
 {
 	public class AccessorySlotControl : HookGroup
 	{
+		public static readonly Asset<Texture2D> texture_Item_ModItem_Texture = ModContent.Request<Texture2D>(Item.ModItem.Texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_CursedBack = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/CursedBack");
 		//Should be a fairly stable hook in theory, but some vanilla behavior is repeated/replaced here. Could be refactored in the future, this is old code.
 		public override void Load()
 		{
@@ -15,7 +17,7 @@ namespace StarlightRiver.Content.CustomHooks
 		{
 			if (inv[slot].ModItem is CursedAccessory && context == 10)
 			{
-				Texture2D back = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/CursedBack").Value;
+				Texture2D back = texture_StarlightRiver_Assets_GUI_CursedBack.Value;
 				Color backcolor = (!Main.expertMode && slot == 8) ? Color.White * 0.25f : Color.White * 0.75f;
 
 				sb.Draw(back, position, null, backcolor, 0f, default, Main.inventoryScale, SpriteEffects.None, 0f);
@@ -32,7 +34,7 @@ namespace StarlightRiver.Content.CustomHooks
 		{
 			Item Item = inv[slot];
 			Vector2 scaleVector = Vector2.One * 52 * Main.inventoryScale;
-			Texture2D PopupTexture = ModContent.Request<Texture2D>(Item.ModItem.Texture).Value;
+			Texture2D PopupTexture = texture_Item_ModItem_Texture.Value;
 			Rectangle source = PopupTexture.Frame(1, 1, 0, 0);
 			Color currentColor = color;
 			float scaleFactor2 = 1f;

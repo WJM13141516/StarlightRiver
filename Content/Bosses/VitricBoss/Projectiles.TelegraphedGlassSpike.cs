@@ -6,6 +6,9 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 {
 	public class TelegraphedGlassSpike : ModProjectile, IDrawAdditive
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___RoarLine = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "RoarLine");
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		Vector2 savedVelocity;
 
 		public override string Texture => AssetDirectory.VitricBoss + "GlassSpike";
@@ -79,15 +82,15 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 			Color color = Helpers.Helper.MoltenVitricGlow(MathHelper.Min(200 - Projectile.timeLeft, 120));
 
-			spriteBatch.Draw(Request<Texture2D>(Texture).Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, 22, 22), lightColor, Projectile.rotation, Vector2.One * 11, Projectile.scale, 0, 0);
-			spriteBatch.Draw(Request<Texture2D>(Texture).Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 22, 22, 22), color, Projectile.rotation, Vector2.One * 11, Projectile.scale, 0, 0);
+			spriteBatch.Draw(texture_Texture.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, 22, 22), lightColor, Projectile.rotation, Vector2.One * 11, Projectile.scale, 0, 0);
+			spriteBatch.Draw(texture_Texture.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 22, 22, 22), color, Projectile.rotation, Vector2.One * 11, Projectile.scale, 0, 0);
 
 			return false;
 		}
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = Request<Texture2D>(Texture + "Glow").Value;
+			Texture2D tex = texture_Texture___Glow.Value;
 			float alpha = Projectile.timeLeft > 160 ? 1 - (Projectile.timeLeft - 160) / 20f : 1;
 			Color color = Helpers.Helper.MoltenVitricGlow(MathHelper.Min(200 - Projectile.timeLeft, 120)) * alpha;
 
@@ -96,7 +99,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 			if (Projectile.timeLeft > 180)
 			{
-				Texture2D tex2 = Request<Texture2D>(AssetDirectory.VitricBoss + "RoarLine").Value;
+				Texture2D tex2 = texture_AssetDirectory_VitricBoss___RoarLine.Value;
 				float alpha2 = (float)Math.Sin((Projectile.timeLeft - 180) / 60f * 3.14f);
 				Color color2 = new Color(255, 180, 80) * alpha2;
 				var source = new Rectangle(0, tex2.Height / 2, tex2.Width, tex2.Height / 2);

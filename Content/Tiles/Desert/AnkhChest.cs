@@ -13,6 +13,7 @@ namespace StarlightRiver.Content.Tiles.Desert
 {
 	public class AnkhChest : DummyTile, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_DesertTile___AnkhChestGlow = ModContent.Request<Texture2D>(AssetDirectory.DesertTile + "AnkhChestGlow");
 		public override string Texture => AssetDirectory.DesertTile + Name;
 
 		public override int DummyType => DummySystem.DummyType<AnkhChestDummy>();
@@ -281,7 +282,7 @@ namespace StarlightRiver.Content.Tiles.Desert
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.DesertTile + "AnkhChestGlow").Value;
+			Texture2D tex = texture_AssetDirectory_DesertTile___AnkhChestGlow.Value;
 			Color color = Helper.IndicatorColorProximity(150, 300, Center);
 
 			Main.spriteBatch.Draw(tex, position - new Vector2(1, -1) - Main.screenPosition, color);

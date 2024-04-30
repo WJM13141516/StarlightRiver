@@ -7,6 +7,10 @@ namespace StarlightRiver.Content.Items.Permafrost
 {
 	internal class AuroraThroneMountMinion : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowAlpha = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowAlpha");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___AuroralingGlow2 = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "AuroralingGlow2");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___AuroralingGlow = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "AuroralingGlow");
 		public override string Texture => AssetDirectory.SquidBoss + "Auroraling";
 
 		public override void SetStaticDefaults()
@@ -85,9 +89,9 @@ namespace StarlightRiver.Content.Items.Permafrost
 			SpriteBatch spriteBatch = Main.spriteBatch;
 			var frame = new Rectangle(26 * ((int)(Projectile.ai[0] / 5) % 3), 0, 26, 30);
 
-			Texture2D tex = Request<Texture2D>(AssetDirectory.SquidBoss + "AuroralingGlow").Value;
-			Texture2D tex2 = Request<Texture2D>(AssetDirectory.SquidBoss + "AuroralingGlow2").Value;
-			Texture2D tex3 = Request<Texture2D>("StarlightRiver/Assets/Keys/GlowAlpha").Value;
+			Texture2D tex = texture_AssetDirectory_SquidBoss___AuroralingGlow.Value;
+			Texture2D tex2 = texture_AssetDirectory_SquidBoss___AuroralingGlow2.Value;
+			Texture2D tex3 = texture_StarlightRiver_Assets_Keys_GlowAlpha.Value;
 
 			for (int k = 0; k < Projectile.oldPos.Length; k++)
 			{
@@ -105,7 +109,7 @@ namespace StarlightRiver.Content.Items.Permafrost
 				float cos = 1 + (float)Math.Cos(Projectile.ai[0] / 10f);
 				Color color = new Color(0.5f + cos * 0.2f, 0.8f, 0.5f + sin * 0.2f) * 0.7f * opacity;
 
-				spriteBatch.Draw(Request<Texture2D>(Texture).Value, pos - Main.screenPosition, frame, drawColor * 1.2f * opacity, Projectile.oldRot[k], Projectile.Size / 2, scale, 0, 0);
+				spriteBatch.Draw(texture_Texture.Value, pos - Main.screenPosition, frame, drawColor * 1.2f * opacity, Projectile.oldRot[k], Projectile.Size / 2, scale, 0, 0);
 				spriteBatch.Draw(tex, pos - Main.screenPosition, frame, color * 0.8f, Projectile.oldRot[k], Projectile.Size / 2, scale, 0, 0);
 				spriteBatch.Draw(tex2, pos - Main.screenPosition, frame, color, Projectile.oldRot[k], Projectile.Size / 2, scale, 0, 0);
 

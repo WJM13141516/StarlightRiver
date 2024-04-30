@@ -10,6 +10,8 @@ namespace StarlightRiver.Content.Items.Overgrow
 {
 	internal class Shaker : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Interactive_WispSwitchGlow2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Interactive/WispSwitchGlow2");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Items_Overgrow_ShakerChain = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Overgrow/ShakerChain");
 		public bool lifting;
 
 		public override string Texture => AssetDirectory.OvergrowItem + "Shaker";
@@ -229,7 +231,7 @@ namespace StarlightRiver.Content.Items.Overgrow
 
 			if (State != 0)
 			{
-				Texture2D chainTex = Request<Texture2D>("StarlightRiver/Assets/Items/Overgrow/ShakerChain").Value;
+				Texture2D chainTex = texture_StarlightRiver_Assets_Items_Overgrow_ShakerChain.Value;
 
 				for (float k = 0; k <= 1; k += 1 / (Vector2.Distance(Player.Center, Projectile.Center) / 16))
 				{
@@ -256,14 +258,14 @@ namespace StarlightRiver.Content.Items.Overgrow
 			{
 				float colormult = Timer / 100f * 0.7f;
 				float scale = 1.2f - Timer / 100f * 0.5f;
-				Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Tiles/Interactive/WispSwitchGlow2").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Tiles_Interactive_WispSwitchGlow2.Value;
 				Vector2 pos = (Projectile.Center - Main.screenPosition + new Vector2(0, Main.player[Projectile.owner].gfxOffY)).PointAccur();
 				spriteBatch.Draw(tex, pos, tex.Frame(), Color.LightYellow * colormult, 0, tex.Size() / 2, scale, 0, 0);
 			}
 
 			if (Timer == 100)
 			{
-				Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Tiles/Interactive/WispSwitchGlow2").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Tiles_Interactive_WispSwitchGlow2.Value;
 				Vector2 pos = (Projectile.Center - Main.screenPosition + new Vector2(0, Main.player[Projectile.owner].gfxOffY)).PointAccur();
 				spriteBatch.Draw(tex, pos, tex.Frame(), Color.LightYellow * (6.28f - StarlightWorld.visualTimer) * 0.2f, 0, tex.Size() / 2, StarlightWorld.visualTimer * 0.17f, 0, 0);
 				spriteBatch.Draw(tex, pos, tex.Frame(), Color.LightYellow * (6.28f - (StarlightWorld.visualTimer + 3.14f)) * 0.2f, 0, tex.Size() / 2, (StarlightWorld.visualTimer + 3.14f) * 0.17f, 0, 0);

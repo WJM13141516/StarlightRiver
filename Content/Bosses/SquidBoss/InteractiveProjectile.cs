@@ -6,6 +6,8 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 {
 	public abstract class InteractiveProjectile : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Misc_SquareGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/SquareGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___Highlight = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "Highlight");
 		public List<Point16> ValidPoints { get; set; } = new List<Point16>(); //the points this Projectile allows tile placement at
 
 		public bool CheckPoint(int x, int y)
@@ -55,8 +57,8 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "Highlight").Value;
-			Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/SquareGlow").Value;
+			Texture2D tex = texture_AssetDirectory_SquidBoss___Highlight.Value;
+			Texture2D tex2 = texture_StarlightRiver_Assets_Misc_SquareGlow.Value;
 
 			int off = 16 * ((int)Projectile.ai[0] % 5);
 

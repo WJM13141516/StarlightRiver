@@ -13,6 +13,8 @@ namespace StarlightRiver.Content.NPCs.Actors
 {
 	public class StarlightWaterActor : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Moonstone_GlowSmall = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Moonstone/GlowSmall");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
 		const int DUST_RANGE = 250;//used for horizontal dust distance and circularrange of underwater lights
 		const int ITEM_RANGE = 200;//circular range for detecting items
 
@@ -371,7 +373,7 @@ namespace StarlightRiver.Content.NPCs.Actors
 				spriteBatch.End();
 				spriteBatch.Begin(default, BlendState.Additive, SamplerMode, default, RasterizerCullMode, default, Main.UIScaleMatrix);
 
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
 				spriteBatch.Draw(tex, position, null, new Color(130, 200, 255) * (StarwaterConversion.StarwaterGlobalItemGlow + (float)Math.Sin(StarlightWorld.visualTimer) * 0.2f), 0, tex.Size() / 2, 1, 0, 0);
 
 				spriteBatch.End();
@@ -431,7 +433,7 @@ namespace StarlightRiver.Content.NPCs.Actors
 					spriteBatch.End();
 					spriteBatch.Begin(default, BlendState.Additive, SamplerMode, default, RasterizerCullMode, default, Main.GameViewMatrix.TransformationMatrix);
 
-					Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Tiles/Moonstone/GlowSmall").Value;
+					Texture2D tex = texture_StarlightRiver_Assets_Tiles_Moonstone_GlowSmall.Value;
 
 					float alphaMaster = (float)Math.Sin(starlightWaterActor.transformTimer / 300f * 3.14f);
 
@@ -462,7 +464,7 @@ namespace StarlightRiver.Content.NPCs.Actors
 					spriteBatch.End();
 					spriteBatch.Begin(default, BlendState.Additive, SamplerMode, default, RasterizerCullMode, default, Main.GameViewMatrix.TransformationMatrix);
 
-					Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
+					Texture2D tex = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
 					spriteBatch.Draw(tex, Item.Center - Main.screenPosition, null, new Color(100, 150, 255) * (starlightWaterActor.windDown / 240f), 0, tex.Size() / 2, starlightWaterActor.windDown / 240f * 2, 0, 0);
 
 					spriteBatch.End();

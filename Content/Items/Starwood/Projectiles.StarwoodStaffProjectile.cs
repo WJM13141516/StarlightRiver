@@ -6,6 +6,8 @@ namespace StarlightRiver.Content.Items.Starwood
 {
 	class StarwoodStaffProjectile : ModProjectile, IDrawAdditive
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Items_Starwood_StarwoodStarfallGlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Starwood/StarwoodStarfallGlowTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Items_Starwood_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Starwood/Glow");
 		private const int MAX_TIME_LEFT = 60;
 
 		//These stats get scaled when empowered
@@ -95,7 +97,7 @@ namespace StarlightRiver.Content.Items.Starwood
 					color *= 1.2f;
 
 				float scale = Projectile.scale * (Projectile.oldPos.Length - k) / Projectile.oldPos.Length * 0.8f * 0.5f;
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Starwood/Glow").Value;//TEXTURE PATH
+				Texture2D tex = texture_StarlightRiver_Assets_Items_Starwood_Glow.Value;//TEXTURE PATH
 
 				spriteBatch.Draw(tex, (Projectile.oldPos[k] + Projectile.Size / 2 + Projectile.Center) * 0.5f - Main.screenPosition, null, color, 0, tex.Size() / 2, scale, default, default);
 			}
@@ -185,7 +187,7 @@ namespace StarlightRiver.Content.Items.Starwood
 					color *= 1.2f;
 
 				float scale = Projectile.scale * (Projectile.oldPos.Length - k) / Projectile.oldPos.Length * 0.8f;
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Starwood/Glow").Value;//TEXTURE PATH
+				Texture2D tex = texture_StarlightRiver_Assets_Items_Starwood_Glow.Value;//TEXTURE PATH
 
 				spriteBatch.Draw(tex, (Projectile.oldPos[k] + Projectile.Size / 2 + Projectile.Center) * 0.50f - Main.screenPosition, null, color, 0, tex.Size() / 2, scale, default, default);
 			}
@@ -198,7 +200,7 @@ namespace StarlightRiver.Content.Items.Starwood
 					color *= 1.2f;
 
 				float scale = Projectile.scale * (Projectile.oldPos.Length - k) / Projectile.oldPos.Length * 0.8f;
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Starwood/StarwoodStarfallGlowTrail").Value;//TEXTURE PATH
+				Texture2D tex = texture_StarlightRiver_Assets_Items_Starwood_StarwoodStarfallGlowTrail.Value;//TEXTURE PATH
 
 				spriteBatch.Draw(tex, (Projectile.oldPos[k] + Projectile.Size / 2 + Projectile.Center) * 0.50f - Main.screenPosition, null, color, 0, tex.Size() / 2, scale, default, default);
 			}

@@ -16,6 +16,11 @@ namespace StarlightRiver.Content.Tiles.Underground
 {
 	class CombatShrine : ShrineTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___RingGlow = ModContent.Request<Texture2D>(AssetDirectory.GUI + "RingGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ItemGlow = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ItemGlow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_MotionTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/MotionTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Moonstone_GlowSmall = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Moonstone/GlowSmall");
 
 		public const int COMBAT_SHRINE_TILE_WIDTH = 3;
 		public const int COMBAT_SHRINE_TILE_HEIGHT = 6;
@@ -284,7 +289,7 @@ namespace StarlightRiver.Content.Tiles.Underground
 		{
 			if (state != SHRINE_STATE_IDLE && state != SHRINE_STATE_DEFEATED)
 			{
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Moonstone/GlowSmall").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Tiles_Moonstone_GlowSmall.Value;
 				var origin = new Vector2(tex.Width / 2, tex.Height);
 				spriteBatch.Draw(tex, Center - Main.screenPosition + new Vector2(0, 60), default, GetBeamColor(StarlightWorld.visualTimer), 0, origin, 3.5f, 0, 0);
 				spriteBatch.Draw(tex, Center - Main.screenPosition + new Vector2(10, 60), default, GetBeamColor(StarlightWorld.visualTimer + 2) * 0.8f, 0, origin, 2.5f, 0, 0);
@@ -297,13 +302,13 @@ namespace StarlightRiver.Content.Tiles.Underground
 
 				for (int k = 0; k < Math.Min(state - 2, maxWaves - 1); k++)
 				{
-					Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
+					Texture2D tex2 = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
 					spriteBatch.Draw(tex, Center - Main.screenPosition + new Vector2(0, -44) + Vector2.UnitX.RotatedBy(k / (float)(maxWaves - 2) * 3.14f) * rad, default, new Color(255, 100, 100), 0, tex.Size() / 2, 0.3f, 0, 0);
 					spriteBatch.Draw(tex2, Center - Main.screenPosition + new Vector2(0, -32) + Vector2.UnitX.RotatedBy(k / (float)(maxWaves - 2) * 3.14f) * rad, default, new Color(255, 100, 100), 0, tex2.Size() / 2, 0.3f, 0, 0);
 					spriteBatch.Draw(tex2, Center - Main.screenPosition + new Vector2(0, -32) + Vector2.UnitX.RotatedBy(k / (float)(maxWaves - 2) * 3.14f) * rad, default, Color.White, 0, tex2.Size() / 2, 0.1f, 0, 0);
 				}
 
-				Texture2D barrier = ModContent.Request<Texture2D>("StarlightRiver/Assets/MotionTrail").Value;
+				Texture2D barrier = texture_StarlightRiver_Assets_MotionTrail.Value;
 				var sourceRect = new Rectangle(0, (int)(Main.GameUpdateCount * 0.4f), barrier.Width, barrier.Height);
 				var sourceRect2 = new Rectangle(0, (int)(Main.GameUpdateCount * -0.73f), barrier.Width, barrier.Height);
 
@@ -383,8 +388,8 @@ namespace StarlightRiver.Content.Tiles.Underground
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ItemGlow").Value;
-			Texture2D texRing = ModContent.Request<Texture2D>(AssetDirectory.GUI + "RingGlow").Value;
+			Texture2D tex = texture_AssetDirectory_GUI___ItemGlow.Value;
+			Texture2D texRing = texture_AssetDirectory_GUI___RingGlow.Value;
 
 			float bright = Helpers.Helper.BezierEase(1 - (Projectile.timeLeft - 60) / 120f);
 
@@ -413,7 +418,7 @@ namespace StarlightRiver.Content.Tiles.Underground
 
 			if (Projectile.timeLeft < 30)
 			{
-				Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
+				Texture2D tex2 = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
 				spriteBatch.Draw(tex2, Projectile.Center - Main.screenPosition, null, new Color(255, 50, 50) * (Projectile.timeLeft / 30f), 0, tex2.Size() / 2, (1 - Projectile.timeLeft / 30f) * 7 * Projectile.scale, 0, 0);
 				spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, new Color(255, 150, 150) * (Projectile.timeLeft / 30f), 0, tex.Size() / 2, (1 - Projectile.timeLeft / 30f) * 1 * Projectile.scale, 0, 0);
 

@@ -13,6 +13,9 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	class BalloonGun : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_Texture____Cloud = ModContent.Request<Texture2D>(Texture + "_Cloud");
+		public static readonly Asset<Texture2D> texture_Texture___textureNumber = ModContent.Request<Texture2D>(Texture + textureNumber);
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public override void SetStaticDefaults()
@@ -155,10 +158,10 @@ namespace StarlightRiver.Content.Items.Misc
 		{
 			List<Vector2> points = GetChainPoints();
 			Vector2 pos = points[NUM_SEGMENTS - 1];
-			Texture2D tex = Request<Texture2D>(Texture + textureNumber).Value;
+			Texture2D tex = texture_Texture___textureNumber.Value;
 
 			if (Owner.name == "cloud")
-				tex = Request<Texture2D>(Texture + "_Cloud").Value;
+				tex = texture_Texture____Cloud.Value;
 
 			DrawChain();
 
@@ -266,7 +269,7 @@ namespace StarlightRiver.Content.Items.Misc
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 			effect.Parameters["alpha"].SetValue(1);
 
 			trail?.Render(effect);

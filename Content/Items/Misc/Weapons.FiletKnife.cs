@@ -8,6 +8,7 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	internal class FiletKnife : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscItem___FiletKnifeEmbedded = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + "FiletKnifeEmbedded");
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public override void SetStaticDefaults()
@@ -128,7 +129,7 @@ namespace StarlightRiver.Content.Items.Misc
 		{
 			if (hasSword)
 			{
-				Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + "FiletKnifeEmbedded").Value;
+				Texture2D tex = texture_AssetDirectory_MiscItem___FiletKnifeEmbedded.Value;
 				bool facingLeft = NPC.direction == -1;
 
 				Vector2 origin = facingLeft ? new Vector2(0, tex.Height) : new Vector2(tex.Width, tex.Height);

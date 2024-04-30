@@ -5,6 +5,7 @@ namespace StarlightRiver.Content.Items.Starwood
 {
 	class StarwoodCharm : SmartAccessory
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.StarwoodItem + Name;
 
 		public StarwoodCharm() : base("Starwood Charm", "Critical strikes generate mana stars\n-3% critical strike chance\n+3% critical strike chance when empowered by Starwood Armor") { }
@@ -66,18 +67,18 @@ namespace StarlightRiver.Content.Items.Starwood
 
 			if (!mp.empowered)
 			{
-				spriteBatch.Draw(ModContent.Request<Texture2D>(Texture).Value, position, frame, drawColor, 0, origin, scale, 0, 0);
+				spriteBatch.Draw(texture_Texture.Value, position, frame, drawColor, 0, origin, scale, 0, 0);
 				return false;
 			}
 
 			frame.Y += frame.Height + 2;
-			spriteBatch.Draw(ModContent.Request<Texture2D>(Texture).Value, position, frame, drawColor, 0, origin, scale, 0, 0);
+			spriteBatch.Draw(texture_Texture.Value, position, frame, drawColor, 0, origin, scale, 0, 0);
 			return false;
 		}
 
 		public override bool PreDrawInWorld(SpriteBatch spriteBatch, Color lightColor, Color alphaColor, ref float rotation, ref float scale, int whoAmI)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			StarlightPlayer mp = Main.LocalPlayer.GetModPlayer<StarlightPlayer>();
 
 			Rectangle frame = new Rectangle(0, 0, tex.Width, (tex.Height - 2) / 2);

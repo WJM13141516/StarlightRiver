@@ -12,6 +12,9 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 {
 	public class Buzzsaw : ModItem //PORTTODO: Graydee rework this to be... not this.
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Blade_White = ModContent.Request<Texture2D>(Texture + "_Blade_White");
+		public static readonly Asset<Texture2D> texture_Texture____White = ModContent.Request<Texture2D>(Texture + "_White");
+		public static readonly Asset<Texture2D> texture_Texture____Blade = ModContent.Request<Texture2D>(Texture + "_Blade");
 		public override string Texture => AssetDirectory.SteampunkItem + Name;
 
 		public override Vector2? HoldoutOffset()
@@ -240,7 +243,7 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 
 			Player Player = Main.player[Projectile.owner];
 			Texture2D texture = TextureAssets.Projectile[Projectile.type].Value;
-			Texture2D texture2 = ModContent.Request<Texture2D>(Texture + "_Blade").Value;
+			Texture2D texture2 = texture_Texture____Blade.Value;
 			int height1 = texture.Height;
 			int height2 = texture2.Height / Main.projFrames[Projectile.type];
 			int y2 = height2 * Projectile.frame;
@@ -264,8 +267,8 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 
 			if (Charge >= MAX_CHARGE && !released && flickerTime < 16)
 			{
-				texture = ModContent.Request<Texture2D>(Texture + "_White").Value;
-				texture2 = ModContent.Request<Texture2D>(Texture + "_Blade_White").Value;
+				texture = texture_Texture____White.Value;
+				texture2 = texture_Texture____Blade_White.Value;
 				Color color = Color.White;
 				float flickerTime2 = (float)(flickerTime / 20f);
 				float alpha = 1.5f - (flickerTime2 * flickerTime2 / 2 + 2f * flickerTime2);

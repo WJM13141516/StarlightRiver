@@ -10,6 +10,11 @@ namespace StarlightRiver.Content.Tiles.Vitric
 {
 	class ForgeActor : DummyTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Glassweaver___BackdropBlack = ModContent.Request<Texture2D>(AssetDirectory.Glassweaver + "BackdropBlack");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Glassweaver___FarBackdropGlow = ModContent.Request<Texture2D>(AssetDirectory.Glassweaver + "FarBackdropGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Glassweaver___BackdropGlow = ModContent.Request<Texture2D>(AssetDirectory.Glassweaver + "BackdropGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Glassweaver___FarBackdrop = ModContent.Request<Texture2D>(AssetDirectory.Glassweaver + "FarBackdrop");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Glassweaver___Backdrop = ModContent.Request<Texture2D>(AssetDirectory.Glassweaver + "Backdrop");
 		public override int DummyType => DummySystem.DummyType<ForgeActorDummy>();
 
 		public override string Texture => AssetDirectory.Invisible;
@@ -41,13 +46,13 @@ namespace StarlightRiver.Content.Tiles.Vitric
 
 			Vector2 pos = position - new Vector2(567, 400) - Main.screenPosition;
 
-			Texture2D backdrop = Request<Texture2D>(AssetDirectory.Glassweaver + "Backdrop").Value;
-			Texture2D farBackdrop = Request<Texture2D>(AssetDirectory.Glassweaver + "FarBackdrop").Value;
+			Texture2D backdrop = texture_AssetDirectory_Glassweaver___Backdrop.Value;
+			Texture2D farBackdrop = texture_AssetDirectory_Glassweaver___FarBackdrop.Value;
 
-			Texture2D backdropGlow = Request<Texture2D>(AssetDirectory.Glassweaver + "BackdropGlow").Value;
-			Texture2D farBackdropGlow = Request<Texture2D>(AssetDirectory.Glassweaver + "FarBackdropGlow").Value;
+			Texture2D backdropGlow = texture_AssetDirectory_Glassweaver___BackdropGlow.Value;
+			Texture2D farBackdropGlow = texture_AssetDirectory_Glassweaver___FarBackdropGlow.Value;
 
-			Texture2D backdropBlack = Request<Texture2D>(AssetDirectory.Glassweaver + "BackdropBlack").Value;
+			Texture2D backdropBlack = texture_AssetDirectory_Glassweaver___BackdropBlack.Value;
 
 			Vector2 parallaxOffset = new Vector2(Main.screenPosition.X + Main.screenWidth / 2f - position.X, 0) * 0.15f;
 

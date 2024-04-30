@@ -13,6 +13,10 @@ namespace StarlightRiver.Content.Items.Hell
 {
 	public class CharonsObol : CursedAccessory
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_HellItem___ObolFlash = ModContent.Request<Texture2D>(AssetDirectory.HellItem + "ObolFlash");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
 		public override string Texture => AssetDirectory.HellItem + Name;
 
 		public override void SetStaticDefaults()
@@ -302,7 +306,7 @@ namespace StarlightRiver.Content.Items.Hell
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D bloom = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D bloom = texture_AssetDirectory_Keys___GlowAlpha.Value;
 			Color bloomColor = TrailColor;
 			bloomColor.A = 0;
 
@@ -318,7 +322,7 @@ namespace StarlightRiver.Content.Items.Hell
 				return false;
 
 			Color coinColor = bouncedOff ? lightColor : Color.White;
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			int frameHeight = tex.Height / Main.projFrames[Projectile.type];
 			var frameBox = new Rectangle(0, frameHeight * Projectile.frame, tex.Width, frameHeight);
 
@@ -327,7 +331,7 @@ namespace StarlightRiver.Content.Items.Hell
 			if (flashTimer <= 0)
 				return false;
 
-			Texture2D whiteTex = ModContent.Request<Texture2D>(AssetDirectory.HellItem + "ObolFlash").Value;
+			Texture2D whiteTex = texture_AssetDirectory_HellItem___ObolFlash.Value;
 			Main.spriteBatch.Draw(whiteTex, Projectile.Center - Main.screenPosition, frameBox, Color.White * (flashTimer / 15f), Projectile.rotation, frameBox.Size() / 2, Projectile.scale, SpriteEffects.None, 0f);
 
 			return false;
@@ -405,7 +409,7 @@ namespace StarlightRiver.Content.Items.Hell
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 			effect.Parameters["alpha"].SetValue(trailWidth / 4f);
 
 			trail?.Render(effect);
@@ -447,7 +451,7 @@ namespace StarlightRiver.Content.Items.Hell
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 
 			Color color2 = color * (1 - Projectile.alpha / 255f);
 			color2.A = 0;

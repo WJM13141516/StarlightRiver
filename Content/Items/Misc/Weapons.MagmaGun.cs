@@ -9,6 +9,7 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	public class MagmaGun : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 		[CloneByReference]
 		private Projectile proj;
 
@@ -420,7 +421,7 @@ namespace StarlightRiver.Content.Items.Misc
 			foreach (MagmaGlob glob in Globs)
 			{
 				if (glob.active)
-					glob.Draw(Main.spriteBatch, ModContent.Request<Texture2D>(Texture + "_Glow").Value);
+					glob.Draw(Main.spriteBatch, texture_Texture____Glow.Value);
 			}
 
 			return false;
@@ -501,7 +502,7 @@ namespace StarlightRiver.Content.Items.Misc
 			{
 				if (glob.active)
 				{
-					glob.DrawSinge(spriteBatch, ModContent.Request<Texture2D>(Texture + "_Glow").Value);
+					glob.DrawSinge(spriteBatch, texture_Texture____Glow.Value);
 				}
 			}
 		}*/

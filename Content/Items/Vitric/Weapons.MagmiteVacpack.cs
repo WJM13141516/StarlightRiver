@@ -9,6 +9,7 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	public class MagmiteVacpack : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricItem___MagmiteVacpack_Tank = ModContent.Request<Texture2D>(AssetDirectory.VitricItem + "MagmiteVacpack_Tank");
 		public override string Texture => AssetDirectory.VitricItem + Name;
 
 		public override void SetStaticDefaults()
@@ -70,7 +71,7 @@ namespace StarlightRiver.Content.Items.Vitric
 			if (drawInfo.shadow != 0f)
 				return;
 
-			Texture2D tankTexture = ModContent.Request<Texture2D>(AssetDirectory.VitricItem + "MagmiteVacpack_Tank").Value;
+			Texture2D tankTexture = texture_AssetDirectory_VitricItem___MagmiteVacpack_Tank.Value;
 
 			Player drawplayer = drawInfo.drawPlayer;
 

@@ -6,6 +6,9 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 {
 	class Auroraborn : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___AurorabornGlow2 = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "AurorabornGlow2");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___AurorabornGlow = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "AurorabornGlow");
 		public ref float Timer => ref NPC.ai[0];
 
 		public override string Texture => AssetDirectory.SquidBoss + Name;
@@ -63,14 +66,14 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 				NPC.frame = new Rectangle((int)(NPC.ai[0] / 10) % 6 * 58, 0, 58, 50);
 			}
 
-			Texture2D tex = Request<Texture2D>(AssetDirectory.SquidBoss + "AurorabornGlow").Value;
-			Texture2D tex2 = Request<Texture2D>(AssetDirectory.SquidBoss + "AurorabornGlow2").Value;
+			Texture2D tex = texture_AssetDirectory_SquidBoss___AurorabornGlow.Value;
+			Texture2D tex2 = texture_AssetDirectory_SquidBoss___AurorabornGlow2.Value;
 
 			float sin = 1 + (float)Math.Sin(NPC.ai[0] / 10f);
 			float cos = 1 + (float)Math.Cos(NPC.ai[0] / 10f);
 			var color = new Color(0.5f + cos * 0.2f, 0.8f, 0.5f + sin * 0.2f);
 
-			spriteBatch.Draw(Request<Texture2D>(Texture).Value, NPC.Center - screenPos, NPC.frame, drawColor * 1.2f, NPC.rotation, NPC.Size / 2, 1, 0, 0);
+			spriteBatch.Draw(texture_Texture.Value, NPC.Center - screenPos, NPC.frame, drawColor * 1.2f, NPC.rotation, NPC.Size / 2, 1, 0, 0);
 			spriteBatch.Draw(tex, NPC.Center - screenPos, NPC.frame, color * 0.8f, NPC.rotation, NPC.Size / 2, 1, 0, 0);
 			spriteBatch.Draw(tex2, NPC.Center - screenPos, NPC.frame, color, NPC.rotation, NPC.Size / 2, 1, 0, 0);
 			Lighting.AddLight(NPC.Center, color.ToVector3() * 0.5f);

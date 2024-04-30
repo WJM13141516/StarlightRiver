@@ -14,6 +14,13 @@ namespace StarlightRiver.Content.Items.Dungeon
 {
 	public class ThousandthDegree : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_FireTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_DungeonItem___ThousandthDegreeProjectileFired_Glowy = ModContent.Request<Texture2D>(AssetDirectory.DungeonItem + "ThousandthDegreeProjectileFired_Glowy");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_DungeonItem___ThousandthDegreeProjectileFired = ModContent.Request<Texture2D>(AssetDirectory.DungeonItem + "ThousandthDegreeProjectileFired");
+		public static readonly Asset<Texture2D> texture_Texture____Glowy = ModContent.Request<Texture2D>(Texture + "_Glowy");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.DungeonItem + Name;
 
 		public override bool CanUseItem(Player player)
@@ -239,11 +246,11 @@ namespace StarlightRiver.Content.Items.Dungeon
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>(Texture + "_Glowy").Value;
-			Texture2D wheelTex = ModContent.Request<Texture2D>(AssetDirectory.DungeonItem + "ThousandthDegreeProjectileFired").Value;
-			Texture2D wheelTexGlow = ModContent.Request<Texture2D>(AssetDirectory.DungeonItem + "ThousandthDegreeProjectileFired_Glowy").Value;
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D texGlow = texture_Texture____Glowy.Value;
+			Texture2D wheelTex = texture_AssetDirectory_DungeonItem___ThousandthDegreeProjectileFired.Value;
+			Texture2D wheelTexGlow = texture_AssetDirectory_DungeonItem___ThousandthDegreeProjectileFired_Glowy.Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 			Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, Projectile.GetAlpha(lightColor), Projectile.rotation, tex.Size() / 2f, Projectile.scale, owner.direction == -1 ? SpriteEffects.FlipHorizontally : 0, 0f);
 
 			if (flashTimer > 0)
@@ -479,9 +486,9 @@ namespace StarlightRiver.Content.Items.Dungeon
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>(Texture + "_Glowy").Value;
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D texGlow = texture_Texture____Glowy.Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 			var bloomColor = Color.Lerp(Color.Transparent, new Color(255, 50, 15, 0), inputHeat / MAXHEAT);
 			DrawPrimitives();
 			Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation, tex.Size() / 2f, Projectile.scale, 0, 0f);
@@ -724,13 +731,13 @@ namespace StarlightRiver.Content.Items.Dungeon
 			effect.Parameters["time"].SetValue(Projectile.timeLeft * -0.04f);
 			effect.Parameters["repeats"].SetValue(1);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail2?.Render(effect);
 
 			trail?.Render(effect);
 
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_FireTrail.Value);
 
 			trail2?.Render(effect);
 

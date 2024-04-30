@@ -10,6 +10,7 @@ namespace StarlightRiver.Content.Tiles.Forest
 {
 	class MonkSpear : DummyTile, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_ForestTile___MonkSpearOver = ModContent.Request<Texture2D>(AssetDirectory.ForestTile + "MonkSpearOver");
 		public override int DummyType => DummySystem.DummyType<MonkSpearDummy>();
 
 		public override string Texture => AssetDirectory.ForestTile + Name;
@@ -87,7 +88,7 @@ namespace StarlightRiver.Content.Tiles.Forest
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D tex = Request<Texture2D>(AssetDirectory.ForestTile + "MonkSpearOver").Value;
+			Texture2D tex = texture_AssetDirectory_ForestTile___MonkSpearOver.Value;
 
 			for (int k = 0; k < 3; k++)
 			{

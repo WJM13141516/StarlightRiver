@@ -13,6 +13,8 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 {
 	class OldCeirosShrine : DummyTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___LongGlow = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "LongGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___OldCeirosOrnament___Parent_TileFrameX = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "OldCeirosOrnament" + Parent.TileFrameX);
 		public override int DummyType => DummySystem.DummyType<OldCeirosShrineDummy>();
 
 		public override string Texture => AssetDirectory.VitricTile + Name;
@@ -114,7 +116,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 			if (!Main.LocalPlayer.InModBiome<VitricTempleBiome>())
 				return;
 
-			Texture2D tex = Request<Texture2D>(AssetDirectory.VitricTile + "OldCeirosOrnament" + Parent.TileFrameX).Value;
+			Texture2D tex = texture_AssetDirectory_VitricTile___OldCeirosOrnament___Parent_TileFrameX.Value;
 			float sin = (float)Math.Sin(Main.GameUpdateCount / 30f);
 			Vector2 pos = position - Main.screenPosition + new Vector2(32, -32 + sin * 4);
 
@@ -128,7 +130,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 			if (!Main.LocalPlayer.InModBiome<VitricTempleBiome>())
 				return;
 
-			Texture2D texGlow = Request<Texture2D>(AssetDirectory.VitricBoss + "LongGlow").Value;
+			Texture2D texGlow = texture_AssetDirectory_VitricBoss___LongGlow.Value;
 			Vector2 pos = position - Main.screenPosition + new Vector2(33, 10);
 
 			float sin = (float)Math.Sin(Main.GameUpdateCount / 18f);

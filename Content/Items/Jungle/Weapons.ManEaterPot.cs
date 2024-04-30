@@ -10,6 +10,10 @@ namespace StarlightRiver.Content.Items.Jungle
 {
 	internal class ManEaterPot : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture___Pot = ModContent.Request<Texture2D>(Texture + "Pot");
+		public static readonly Asset<Texture2D> texture_Texture___Blob = ModContent.Request<Texture2D>(Texture + "Blob");
+		public static readonly Asset<Texture2D> texture_Texture___Vine = ModContent.Request<Texture2D>(Texture + "Vine");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.JungleItem + Name;
 
 		public override void SetStaticDefaults()
@@ -287,12 +291,12 @@ namespace StarlightRiver.Content.Items.Jungle
 
 			float dist = Vector2.Distance(Projectile.Center, Origin);
 
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 
-			Texture2D texVine = ModContent.Request<Texture2D>(Texture + "Vine").Value;
-			Texture2D texBlob = ModContent.Request<Texture2D>(Texture + "Blob").Value;
+			Texture2D texVine = texture_Texture___Vine.Value;
+			Texture2D texBlob = texture_Texture___Blob.Value;
 
-			Texture2D texPot = ModContent.Request<Texture2D>(Texture + "Pot").Value;
+			Texture2D texPot = texture_Texture___Pot.Value;
 
 			for (int k = texVine.Height; k < dist; k++)
 			{

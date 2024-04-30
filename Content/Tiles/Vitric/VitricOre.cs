@@ -12,6 +12,8 @@ namespace StarlightRiver.Content.Tiles.Vitric
 {
 	internal class VitricOre : DummyTile, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___VitricOreFloatGlow = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "VitricOreFloatGlow");
+		public static readonly Asset<Texture2D> texture_Texture___texNum = ModContent.Request<Texture2D>(Texture + texNum);
 		public override int DummyType => DummySystem.DummyType<VitricOreDummy>();
 
 		public override string Texture => AssetDirectory.VitricTile + Name;
@@ -159,7 +161,7 @@ namespace StarlightRiver.Content.Tiles.Vitric
 		public override void PostDraw(Color lightColor)
 		{
 			int texNum = 1 + Parent.TileFrameX / 36;
-			Texture2D tex = Request<Texture2D>(Texture + texNum).Value;
+			Texture2D tex = texture_Texture___texNum.Value;
 			Color color = Helper.IndicatorColorProximity(150, 300, Center);
 
 			var offset = new Vector2(-1, -1);
@@ -201,7 +203,7 @@ namespace StarlightRiver.Content.Tiles.Vitric
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D tex = Request<Texture2D>(AssetDirectory.VitricTile + "VitricOreFloatGlow").Value;
+			Texture2D tex = texture_AssetDirectory_VitricTile___VitricOreFloatGlow.Value;
 			Color color = Helper.IndicatorColorProximity(150, 300, Center);
 
 			Main.spriteBatch.Draw(tex, position - new Vector2(1, 1) - Main.screenPosition, color);

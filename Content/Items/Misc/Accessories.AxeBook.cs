@@ -13,6 +13,8 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	internal class AxeBook : SmartAccessory
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_MagicPixel = ModContent.Request<Texture2D>("StarlightRiver/Assets/MagicPixel");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
 		public int comboState;
 
 		public override string Texture => AssetDirectory.MiscItem + "AxeBook";
@@ -395,8 +397,8 @@ namespace StarlightRiver.Content.Items.Misc
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.02f);
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
-			effect.Parameters["sampleTexture2"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/MagicPixel").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
+			effect.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_MagicPixel.Value);
 
 			trail?.Render(effect);
 		}
@@ -611,8 +613,8 @@ namespace StarlightRiver.Content.Items.Misc
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.02f);
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
-			effect.Parameters["sampleTexture2"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/MagicPixel").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
+			effect.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_MagicPixel.Value);
 
 			trail?.Render(effect);
 		}

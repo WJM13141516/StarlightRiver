@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.Items.Vitric.IgnitionGauntlets
 {
 	public class IgnitionGauntletCharge : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		int charge = 0;
 
 		private Player Owner => Main.player[Projectile.owner];
@@ -39,7 +40,7 @@ namespace StarlightRiver.Content.Items.Vitric.IgnitionGauntlets
 		public override bool PreDraw(ref Color lightColor)
 		{
 			IgnitionPlayer modPlayer = Owner.GetModPlayer<IgnitionPlayer>();
-			Texture2D starTex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D starTex = texture_Texture.Value;
 			Vector2 handOffset = new Vector2(8 * Owner.direction, 0).RotatedBy(Owner.fullRotation);
 			Main.spriteBatch.Draw(starTex, Owner.MountedCenter + handOffset - Main.screenPosition, null, new Color(255, 255, 255, 0) * (charge / (float)modPlayer.charge), Main.GameUpdateCount * 0.085f, starTex.Size() / 2, 0.5f + 0.07f * (float)Math.Sin(Main.GameUpdateCount * 0.285f), SpriteEffects.None, 0f);
 			return false;

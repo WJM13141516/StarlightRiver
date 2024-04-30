@@ -7,6 +7,7 @@ namespace StarlightRiver.Content.NPCs.Corruption
 {
 	class Stalker : ModNPC, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.Assets + "NPCs/Corruption/" + Name;
 
 		public ref float Timer => ref NPC.ai[0];
@@ -95,7 +96,7 @@ namespace StarlightRiver.Content.NPCs.Corruption
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			spriteBatch.Draw(tex, NPC.Center - screenPos, NPC.frame, Color.White * (NPC.alpha / 255f), 0, NPC.Size / 2, 1, 0, 0);
 
 			return false;

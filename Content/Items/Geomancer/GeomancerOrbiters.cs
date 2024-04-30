@@ -5,6 +5,7 @@ namespace StarlightRiver.Content.Items.Geomancer
 {
 	public abstract class GeoProj : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_Texture____White = ModContent.Request<Texture2D>(Texture + "_White");
 		protected const float bigScale = 1.4f;
 		protected const int STARTOFFSET = 45;
 		protected float offsetLerper = 1;
@@ -123,7 +124,7 @@ namespace StarlightRiver.Content.Items.Geomancer
 		{
 			if (!released)
 				return;
-			Texture2D tex = ModContent.Request<Texture2D>(Texture + "_White").Value;
+			Texture2D tex = texture_Texture____White.Value;
 
 			float progress2 = 1 - fade;
 			float transparency2 = (float)Math.Pow(1 - progress2, 2);

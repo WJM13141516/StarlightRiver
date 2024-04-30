@@ -5,6 +5,10 @@ namespace StarlightRiver.Core
 {
 	internal class ResourceReservationPlayer : ModPlayer
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ReservedMana = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ReservedMana");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ReservedLifeLine = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ReservedLifeLine");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ReservedLife = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ReservedLife");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ReservedBar = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ReservedBar");
 		public int reservedLife;
 		public int reservedMana;
 
@@ -111,7 +115,7 @@ namespace StarlightRiver.Core
 
 				if (Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBars" || Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBarsWithText" || Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBarsWithFullText")
 				{
-					Texture2D texBar = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ReservedBar").Value;
+					Texture2D texBar = texture_AssetDirectory_GUI___ReservedBar.Value;
 					float yOffset = 24f;
 
 					if (Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBarsWithText")
@@ -170,8 +174,8 @@ namespace StarlightRiver.Core
 
 				k -= 20 - vanillaHearts;
 
-				Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ReservedLife").Value;
-				Texture2D texLine = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ReservedLifeLine").Value;
+				Texture2D tex = texture_AssetDirectory_GUI___ReservedLife.Value;
+				Texture2D texLine = texture_AssetDirectory_GUI___ReservedLifeLine.Value;
 				int width = 0;
 
 				if (player.GetModPlayer<ResourceReservationPlayer>().reservedLifeAnimation >= (k + 1) * lifePerHeart)
@@ -211,7 +215,7 @@ namespace StarlightRiver.Core
 				{
 					if (manaDrawn - reservedManaAmount < 20)
 					{
-						Texture2D tex1 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ReservedMana").Value;
+						Texture2D tex1 = texture_AssetDirectory_GUI___ReservedMana.Value;
 						var pos1 = new Vector2(Main.screenWidth - 25, 30 + TextureAssets.Mana.Height() / 2f + (TextureAssets.Mana.Height() - TextureAssets.Mana.Height() * starHeight) / 2f + 28 * (i - 1));
 
 						int off = (int)(reservedManaAmount % 20 / 20f * tex1.Height);
@@ -222,7 +226,7 @@ namespace StarlightRiver.Core
 						continue;
 					}
 
-					Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ReservedMana").Value;
+					Texture2D tex = texture_AssetDirectory_GUI___ReservedMana.Value;
 					var pos = new Vector2(Main.screenWidth - 25, 30 + TextureAssets.Mana.Height() / 2f + (TextureAssets.Mana.Height() - TextureAssets.Mana.Height() * starHeight) / 2f + 28 * (i - 1));
 
 					Main.spriteBatch.Draw(tex, pos, null, Color.White, 0f, tex.Size() / 2, 1, 0, 0);
@@ -244,7 +248,7 @@ namespace StarlightRiver.Core
 				{
 					if (manaDrawn - reservedManaAmount < 20)
 					{
-						Texture2D tex1 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ReservedMana").Value;
+						Texture2D tex1 = texture_AssetDirectory_GUI___ReservedMana.Value;
 						var pos1 = new Vector2(Main.screenWidth - 25, 38 + 22 * (i - 1));
 
 						int off = (int)(reservedManaAmount % 20 / 20f * tex1.Height);
@@ -255,7 +259,7 @@ namespace StarlightRiver.Core
 						continue;
 					}
 
-					Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ReservedMana").Value;
+					Texture2D tex = texture_AssetDirectory_GUI___ReservedMana.Value;
 					var pos = new Vector2(Main.screenWidth - 25, 38 + 22 * (i - 1));
 
 					Main.spriteBatch.Draw(tex, pos, null, Color.White, 0f, tex.Size() / 2, 1, 0, 0);
@@ -272,7 +276,7 @@ namespace StarlightRiver.Core
 
 			for (int k = 0; k <= fullStarsToDraw; k++)
 			{
-				Texture2D texBar = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ReservedBar").Value;
+				Texture2D texBar = texture_AssetDirectory_GUI___ReservedBar.Value;
 				var pos = new Vector2(Main.screenWidth - 70 - vanillaStars * 12 + k * 12, yOffset);
 
 				int width2 = 0;

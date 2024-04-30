@@ -11,6 +11,7 @@ namespace StarlightRiver.Content.NPCs.Vitric
 {
 	internal class MagmitePassive : ModNPC, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public int maxLifeTime = 450; // how many ticks before the magmite starts searching for lava to kill itself :))
 
 		protected int frameCounter = 0;
@@ -263,7 +264,7 @@ namespace StarlightRiver.Content.NPCs.Vitric
 			if (NPC.spriteDirection == -1)
 				originX = 30;
 
-			spriteBatch.Draw(Request<Texture2D>(Texture).Value, pos, NPC.frame, Color.White * (1 - NPC.shimmerTransparency), 0, new Vector2(originX, 20), 1, NPC.spriteDirection == -1 ? 0 : SpriteEffects.FlipHorizontally, 0);
+			spriteBatch.Draw(texture_Texture.Value, pos, NPC.frame, Color.White * (1 - NPC.shimmerTransparency), 0, new Vector2(originX, 20), 1, NPC.spriteDirection == -1 ? 0 : SpriteEffects.FlipHorizontally, 0);
 			return false;
 		}
 

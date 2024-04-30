@@ -10,6 +10,10 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	internal class VitricArmorProjectileIdle : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
+		public static readonly Asset<Texture2D> texture_Texture___Hot = ModContent.Request<Texture2D>(Texture + "Hot");
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public Vector2 offset = Vector2.Zero;
 		public float rotOffset = 0;
 		public VitricHead parent;
@@ -160,9 +164,9 @@ namespace StarlightRiver.Content.Items.Vitric
 		{
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>(Texture + "Glow").Value;
-			Texture2D texHot = ModContent.Request<Texture2D>(Texture + "Hot").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D texGlow = texture_Texture___Glow.Value;
+			Texture2D texHot = texture_Texture___Hot.Value;
 
 			spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, tex.Size() / 2, Projectile.scale, 0, 0);
 
@@ -286,7 +290,7 @@ namespace StarlightRiver.Content.Items.Vitric
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(effect);
 		}

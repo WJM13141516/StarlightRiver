@@ -14,6 +14,8 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 {
 	class GlassweaverWaiting : ModNPC, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Misc_Exclaim = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/Exclaim");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public const int FRAME_WIDTH = 124;
 
 		public const int FRAME_HEIGHT = 92;
@@ -256,7 +258,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			Vector2 pos = NPC.Center - Vector2.UnitY * 14 - Main.screenPosition;
 			Vector2 origin = new Vector2(FRAME_WIDTH, FRAME_HEIGHT) * 0.5f;
 
@@ -270,7 +272,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 				State == 7 && Main.LocalPlayer.GetHandler().InfusionLimit == 0)
 				&& talkingTo is null)
 			{
-				Texture2D exclaim = Request<Texture2D>("StarlightRiver/Assets/Misc/Exclaim").Value;
+				Texture2D exclaim = texture_StarlightRiver_Assets_Misc_Exclaim.Value;
 				Vector2 exclaimPos = NPC.Center + Vector2.UnitY * -95 - Main.screenPosition;
 				exclaimPos.Y += (float)Math.Sin(Main.GameUpdateCount * 0.025f) * 5;
 				spriteBatch.Draw(exclaim, exclaimPos, null, Color.White, (float)Math.Sin(Main.GameUpdateCount * 0.05f) * 0.15f, exclaim.Size() / 2f, 1, 0, 0);

@@ -12,6 +12,8 @@ namespace StarlightRiver.Content.Items.Gravedigger
 {
 	public class BloodBolter : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		// SYNC TODO: a projectile hitting a mob and "killing" them but not having it actually kill is really jank in mp. this probably needs another pass
 
 		public override string Texture => AssetDirectory.GravediggerItem + Name;
@@ -119,8 +121,8 @@ namespace StarlightRiver.Content.Items.Gravedigger
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 
 			int frameHeight = tex.Height / Main.projFrames[Projectile.type];
 			var frame = new Rectangle(0, frameHeight * Projectile.frame, tex.Width, frameHeight);
@@ -176,7 +178,7 @@ namespace StarlightRiver.Content.Items.Gravedigger
 		public override bool PreDraw(ref Color lightColor)
 		{
 			SpriteBatch spriteBatch = Main.spriteBatch;
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 
 			spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, tex.Size() / 2, Projectile.scale, SpriteEffects.None, 0f);
 			return false;

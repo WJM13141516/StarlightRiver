@@ -6,6 +6,11 @@ namespace StarlightRiver.Content.Tiles.Underground.EvasionShrineBullets
 {
 	class Spear : EvasionProjectile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Moonstone_GlowSmall = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Moonstone/GlowSmall");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Underground_SpearBody = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Underground/SpearBody");
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
 		public static Vector2 endPointToAssign;
 		public static int riseTimeToAssign;
 		public static int retractTimeToAssign;
@@ -89,11 +94,11 @@ namespace StarlightRiver.Content.Tiles.Underground.EvasionShrineBullets
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "Glow").Value;
+			Texture2D glowTex = texture_Texture___Glow.Value;
 			Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, new Color(100, 0, 255) * Alpha, Projectile.rotation, glowTex.Size() / 2, 1, 0, 0);
 
 			float dist = Vector2.Distance(Projectile.Center, startPoint);
-			Texture2D bodyTex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Underground/SpearBody").Value;
+			Texture2D bodyTex = texture_StarlightRiver_Assets_Tiles_Underground_SpearBody.Value;
 
 			for (int k = bodyTex.Height; k < dist; k += bodyTex.Height)
 			{
@@ -113,8 +118,8 @@ namespace StarlightRiver.Content.Tiles.Underground.EvasionShrineBullets
 
 			if (timer > teleTime)
 			{
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Moonstone/GlowSmall").Value;
-				Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Tiles_Moonstone_GlowSmall.Value;
+				Texture2D tex2 = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
 
 				float opacity;
 
@@ -135,7 +140,7 @@ namespace StarlightRiver.Content.Tiles.Underground.EvasionShrineBullets
 			}
 			else
 			{
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_GlowTrail.Value;
 				float opacity = (float)Math.Sin(timer / (float)teleTime * 3.14f) * 0.5f;
 
 				Vector2 pos = Projectile.Center - Main.screenPosition;
@@ -146,7 +151,7 @@ namespace StarlightRiver.Content.Tiles.Underground.EvasionShrineBullets
 				target.Height = 16;
 				spriteBatch.Draw(tex, target, null, Color.White * opacity * 0.7f, Projectile.rotation + 1.57f, new Vector2(tex.Width, tex.Height / 2), 0, 0);
 
-				Texture2D tex2 = ModContent.Request<Texture2D>(Texture + "Glow").Value;
+				Texture2D tex2 = texture_Texture___Glow.Value;
 				spriteBatch.Draw(tex2, endPoint - Main.screenPosition, null, Color.White * opacity, Projectile.rotation, new Vector2(tex2.Width / 2, tex2.Height - 5), 1.0f, 0, 0);
 			}
 

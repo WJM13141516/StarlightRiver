@@ -9,6 +9,8 @@ namespace StarlightRiver.Core
 {
 	class MedalPlayer : ModPlayer
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Medals_Cheater = ModContent.Request<Texture2D>("StarlightRiver/Assets/Medals/Cheater");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Medals____name = ModContent.Request<Texture2D>("StarlightRiver/Assets/Medals/" + name);
 		public List<Medal> medals = new();
 		public List<DeathCounter> deathCounters = new();
 
@@ -104,10 +106,10 @@ namespace StarlightRiver.Core
 
 		public Texture2D GetMedalTexture(string name)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Medals/" + name).Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Medals____name.Value;
 
 			if (tex is null)
-				return ModContent.Request<Texture2D>("StarlightRiver/Assets/Medals/Cheater").Value;
+				return texture_StarlightRiver_Assets_Medals_Cheater.Value;
 			else
 				return tex;
 		}

@@ -8,6 +8,9 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple.GearPuzzle
 {
 	class GearPuzzleOrigin : GearTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricNpc___MagmitePassive = ModContent.Request<Texture2D>(AssetDirectory.VitricNpc + "MagmitePassive");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___OriginGear = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "OriginGear");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___OriginGearBase = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "OriginGearBase");
 		public override int DummyType => DummySystem.DummyType<GearPuzzleOriginDummy>();
 
 		public override bool RightClick(int i, int j)
@@ -49,14 +52,14 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple.GearPuzzle
 			if (!Main.LocalPlayer.InModBiome<VitricTempleBiome>())
 				return;
 
-			Texture2D bgTex = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "OriginGearBase").Value;
+			Texture2D bgTex = texture_AssetDirectory_VitricTile___OriginGearBase.Value;
 			Main.EntitySpriteDraw(bgTex, Center - Main.screenPosition, null, lightColor, 0, new Vector2(bgTex.Width / 2, 4), 1, 0, 0);
 
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "OriginGear").Value;
+			Texture2D tex = texture_AssetDirectory_VitricTile___OriginGear.Value;
 
 			Main.EntitySpriteDraw(tex, Center - Main.screenPosition, null, lightColor, Rotation, tex.Size() / 2, 1, 0, 0);
 
-			Texture2D magmiteTex = ModContent.Request<Texture2D>(AssetDirectory.VitricNpc + "MagmitePassive").Value;
+			Texture2D magmiteTex = texture_AssetDirectory_VitricNpc___MagmitePassive.Value;
 			float sinTimer = Main.GameUpdateCount / 20f;
 			var frame = new Rectangle(42, sinTimer % 6.28f < 1.57f ? 0 : (int)(Main.GameUpdateCount / 3f) % 5 * 40, 42, 40);
 

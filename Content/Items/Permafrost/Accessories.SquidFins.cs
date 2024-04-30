@@ -8,6 +8,7 @@ namespace StarlightRiver.Content.Items.Permafrost
 {
 	public class SquidFins : SmartAccessory
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_PermafrostItem___SquidFinsBack = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "SquidFinsBack");
 		public override string Texture => AssetDirectory.PermafrostItem + Name;
 
 		public SquidFins() : base("Squid Fins", "Allows you to swim like a jellysquid") { }
@@ -37,7 +38,7 @@ namespace StarlightRiver.Content.Items.Permafrost
 
 			if (Equipped(player))
 			{
-				Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + "SquidFinsBack").Value;
+				Texture2D tex = texture_AssetDirectory_PermafrostItem___SquidFinsBack.Value;
 				SpriteEffects effects = player.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 				var offset = new Vector2(-7 * player.direction, player.gfxOffY);
 

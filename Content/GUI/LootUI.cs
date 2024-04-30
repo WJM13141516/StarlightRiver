@@ -13,6 +13,11 @@ namespace StarlightRiver.Content.GUI
 {
 	public class LootUI : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_Item_ModItem_Texture = ModContent.Request<Texture2D>(Item.ModItem.Texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_LootSlot = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/LootSlot");
+		public static readonly Asset<Texture2D> texture_BigItem_ModItem_Texture = ModContent.Request<Texture2D>(BigItem.ModItem.Texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_LootSlotOn = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/LootSlotOn");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ItemGlow = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ItemGlow");
 		public Point16 OriginPosition;
 		//const float MaxDistance = 300;
 
@@ -65,7 +70,7 @@ namespace StarlightRiver.Content.GUI
 			spriteBatch.End();
 			spriteBatch.Begin(default, BlendState.Additive, Main.DefaultSamplerState, default, default, default, Main.UIScaleMatrix);
 
-			Texture2D glowTex = Request<Texture2D>(AssetDirectory.GUI + "ItemGlow").Value;
+			Texture2D glowTex = texture_AssetDirectory_GUI___ItemGlow.Value;
 			float sin = (float)Math.Sin(Main.GameUpdateCount / 20f);
 			spriteBatch.Draw(glowTex, GetDimensions().Center(), null, Color.Gold * (0.4f + sin * 0.05f), Main.GameUpdateCount / 120f, glowTex.Size() / 2, 0.65f + sin * 0.03f, 0, 0);
 			spriteBatch.Draw(glowTex, GetDimensions().Center(), null, Color.White * (0.4f + sin * 0.05f), -Main.GameUpdateCount / 60f, glowTex.Size() / 2, 0.5f + sin * 0.03f, 0, 0);
@@ -73,7 +78,7 @@ namespace StarlightRiver.Content.GUI
 			spriteBatch.End();
 			spriteBatch.Begin(default, default, SamplerState.PointClamp, default, default, default, Main.UIScaleMatrix);
 
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/GUI/LootSlotOn").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_GUI_LootSlotOn.Value;
 
 			Utils.DrawBorderStringBig(spriteBatch, Quotes[QuoteID], GetDimensions().Center() + new Vector2(0, -80) - 1.5f * Terraria.GameContent.FontAssets.ItemStack.Value.MeasureString(Quotes[QuoteID]) / 2, Color.White, 0.5f);
 
@@ -88,7 +93,7 @@ namespace StarlightRiver.Content.GUI
 			if (!BigItem.IsAir)
 			{
 				Main.instance.LoadItem(BigItem.type);
-				Texture2D tex2 = BigItem.type > ItemID.Count ? Request<Texture2D>(BigItem.ModItem.Texture).Value : Terraria.GameContent.TextureAssets.Item[BigItem.type].Value;
+				Texture2D tex2 = BigItem.type > ItemID.Count ? texture_BigItem_ModItem_Texture.Value : Terraria.GameContent.TextureAssets.Item[BigItem.type].Value;
 				float scale = tex2.Frame().Size().Length() < 47 ? 1 : 47f / tex2.Frame().Size().Length();
 
 				spriteBatch.Draw(tex2, GetDimensions().Center(), tex2.Frame(), Color.White, 0, tex2.Frame().Size() / 2, scale, 0, 0);
@@ -155,7 +160,7 @@ namespace StarlightRiver.Content.GUI
 			if (Parent is LootUI)
 			{
 				var parent = Parent as LootUI;
-				Texture2D tex = parent.Selections.Any(n => n == Item) ? Request<Texture2D>("StarlightRiver/Assets/GUI/LootSlotOn").Value : Request<Texture2D>("StarlightRiver/Assets/GUI/LootSlot").Value;
+				Texture2D tex = parent.Selections.Any(n => n == Item) ? texture_StarlightRiver_Assets_GUI_LootSlotOn.Value : texture_StarlightRiver_Assets_GUI_LootSlot.Value;
 				float opacity = IsMouseHovering ? 1 : 0.6f;
 
 				spriteBatch.Draw(tex, GetDimensions().Position(), tex.Frame(), Color.White * opacity, 0, Vector2.Zero, 1, 0, 0);
@@ -163,7 +168,7 @@ namespace StarlightRiver.Content.GUI
 				if (!Item.IsAir)
 				{
 					Main.instance.LoadItem(Item.type);
-					Texture2D tex2 = Item.type > ItemID.Count ? Request<Texture2D>(Item.ModItem.Texture).Value : Terraria.GameContent.TextureAssets.Item[Item.type].Value;
+					Texture2D tex2 = Item.type > ItemID.Count ? texture_Item_ModItem_Texture.Value : Terraria.GameContent.TextureAssets.Item[Item.type].Value;
 					float scale = tex2.Frame().Size().Length() < 47 ? 1 : 47f / tex2.Frame().Size().Length();
 
 					spriteBatch.Draw(tex2, GetDimensions().Center(), tex2.Frame(), Color.White, 0, tex2.Frame().Size() / 2, 1, 0, 0);

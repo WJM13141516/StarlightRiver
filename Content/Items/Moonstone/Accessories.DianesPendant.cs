@@ -15,6 +15,10 @@ namespace StarlightRiver.Content.Items.Moonstone
 	[AutoloadEquip(EquipType.Neck)]
 	public class DianesPendant : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Items_Moonstone_DatsuzeiFlameMap2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Moonstone/DatsuzeiFlameMap2");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.MoonstoneItem + Name;
 
 		public override void SetStaticDefaults()
@@ -207,8 +211,8 @@ namespace StarlightRiver.Content.Items.Moonstone
 
 			Main.spriteBatch.End();
 			Main.spriteBatch.Begin(default, BlendState.Additive, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "Glow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture___Glow.Value;
 
 			for (int k = AfterimageLength; k > 0; k--)
 			{
@@ -438,8 +442,8 @@ namespace StarlightRiver.Content.Items.Moonstone
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.02f);
 			effect.Parameters["repeats"].SetValue(8f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
-			effect.Parameters["sampleTexture2"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Moonstone/DatsuzeiFlameMap2").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
+			effect.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_Items_Moonstone_DatsuzeiFlameMap2.Value);
 
 			trail?.Render(effect);
 

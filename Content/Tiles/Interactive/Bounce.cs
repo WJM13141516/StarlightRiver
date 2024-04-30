@@ -10,6 +10,7 @@ namespace StarlightRiver.Content.Tiles.Interactive
 {
 	internal class Bouncer : DummyTile, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Interactive_BouncerGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Interactive/BouncerGlow");
 		public override int DummyType => DummySystem.DummyType<BouncerDummy>();
 
 		public override string Texture => AssetDirectory.InteractiveTile + Name;
@@ -73,7 +74,7 @@ namespace StarlightRiver.Content.Tiles.Interactive
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Tiles/Interactive/BouncerGlow").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Tiles_Interactive_BouncerGlow.Value;
 			Color color = Helper.IndicatorColorProximity(150, 300, Center);
 			Main.spriteBatch.Draw(tex, position - Vector2.One - Main.screenPosition, color);
 		}

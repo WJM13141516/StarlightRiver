@@ -6,6 +6,9 @@ namespace StarlightRiver.Content.GUI
 {
 	public class StaminaOverhead : IOrderedLoadable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_StaminaSmall = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaSmall");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_StaminaSmallEmpty = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaSmallEmpty");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_StaminaFlag = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaFlag");
 		float fade;
 		int time;
 
@@ -27,9 +30,9 @@ namespace StarlightRiver.Content.GUI
 			Vector2 basepos = player.Center - Main.screenPosition - Vector2.UnitY * 48 + Vector2.UnitX * 4;
 			basepos.Y += player.gfxOffY;
 
-			Texture2D flagTex = Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaFlag").Value;
-			Texture2D emptyTex = Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaSmallEmpty").Value;
-			Texture2D fillTex = Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaSmall").Value;
+			Texture2D flagTex = texture_StarlightRiver_Assets_GUI_StaminaFlag.Value;
+			Texture2D emptyTex = texture_StarlightRiver_Assets_GUI_StaminaSmallEmpty.Value;
+			Texture2D fillTex = texture_StarlightRiver_Assets_GUI_StaminaSmall.Value;
 
 			float width = mp.StaminaMax * (fillTex.Width / 2 + 1);
 

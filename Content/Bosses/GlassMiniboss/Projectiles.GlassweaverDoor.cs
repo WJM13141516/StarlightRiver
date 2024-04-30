@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 {
 	class GlassweaverDoor : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.Glassweaver + Name;
 
 		private float closeTimer;
@@ -63,7 +64,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			int height = (int)(tex.Height * closeTimer);
 
 			var frame = new Rectangle(0, 0, tex.Width, height);

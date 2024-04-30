@@ -10,6 +10,10 @@ namespace StarlightRiver.Content.Tiles.Permafrost
 {
 	class AuroraIce : ModTile, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Permafrost_AuroraIceGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Permafrost/AuroraIceGlow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Permafrost_AuroraIceGlow2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Permafrost/AuroraIceGlow2");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Permafrost_AuroraIce = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Permafrost/AuroraIce");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Permafrost_AuroraIceUnder = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Permafrost/AuroraIceUnder");
 		public override string Texture => "StarlightRiver/Assets/Tiles/Permafrost/AuroraIce";
 
 		public override void SetStaticDefaults()
@@ -104,7 +108,7 @@ namespace StarlightRiver.Content.Tiles.Permafrost
 			if (tile.TileFrameY >= 4 * 18 || CheckIce(i - 1, j) || CheckIce(i, j - 1) || CheckIce(i + 1, j) || CheckIce(i, j + 1))
 			{
 				Color light = Lighting.GetColor(i, j);
-				spriteBatch.Draw(Request<Texture2D>("StarlightRiver/Assets/Tiles/Permafrost/AuroraIceUnder").Value, (new Vector2(i, j) + Helper.TileAdj) * 16 - Main.screenPosition, new Rectangle(tile.TileFrameX, tile.TileFrameY % (4 * 18), 16, 16), light);
+				spriteBatch.Draw(texture_StarlightRiver_Assets_Tiles_Permafrost_AuroraIceUnder.Value, (new Vector2(i, j) + Helper.TileAdj) * 16 - Main.screenPosition, new Rectangle(tile.TileFrameX, tile.TileFrameY % (4 * 18), 16, 16), light);
 			}
 
 			if (tile.TileFrameY >= 4 * 18)
@@ -128,9 +132,9 @@ namespace StarlightRiver.Content.Tiles.Permafrost
 
 			spriteBatch.Draw(TextureAssets.Tile[tile.TileType].Value, pos, frame, color * 0.3f);
 
-			spriteBatch.Draw(Request<Texture2D>("StarlightRiver/Assets/Tiles/Permafrost/AuroraIce").Value, pos, frame, Color.Lerp(color, Color.White, 0.2f) * 0.1f);
-			spriteBatch.Draw(Request<Texture2D>("StarlightRiver/Assets/Tiles/Permafrost/AuroraIceGlow2").Value, pos, frame, Color.Lerp(color, Color.White, 0.4f) * 0.4f);
-			spriteBatch.Draw(Request<Texture2D>("StarlightRiver/Assets/Tiles/Permafrost/AuroraIceGlow").Value, pos, frame, Color.Lerp(color, Color.White, 0.7f) * 0.8f);
+			spriteBatch.Draw(texture_StarlightRiver_Assets_Tiles_Permafrost_AuroraIce.Value, pos, frame, Color.Lerp(color, Color.White, 0.2f) * 0.1f);
+			spriteBatch.Draw(texture_StarlightRiver_Assets_Tiles_Permafrost_AuroraIceGlow2.Value, pos, frame, Color.Lerp(color, Color.White, 0.4f) * 0.4f);
+			spriteBatch.Draw(texture_StarlightRiver_Assets_Tiles_Permafrost_AuroraIceGlow.Value, pos, frame, Color.Lerp(color, Color.White, 0.7f) * 0.8f);
 
 			if (Main.rand.NextBool(24))
 			{

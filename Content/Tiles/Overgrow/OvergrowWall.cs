@@ -7,6 +7,7 @@ namespace StarlightRiver.Content.Tiles.Overgrow
 {
 	public class WallOvergrowGrass : ModWall
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Overgrow_WallOvergrowGrassFlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Overgrow/WallOvergrowGrassFlow");
 		public override string Texture => AssetDirectory.OvergrowTile + "WallOvergrowGrass";
 
 		public override void SetStaticDefaults()
@@ -18,7 +19,7 @@ namespace StarlightRiver.Content.Tiles.Overgrow
 		{
 			if (i + 1 > Main.screenPosition.X / 16 && i - 1 < Main.screenPosition.X / 16 + Main.screenWidth / 16 && j + 1 > Main.screenPosition.Y / 16 && j - 1 < Main.screenPosition.Y / 16 + Main.screenHeight / 16)
 			{
-				Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Tiles/Overgrow/WallOvergrowGrassFlow").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Tiles_Overgrow_WallOvergrowGrassFlow.Value;
 				float offset = i * j % 6.28f;
 				float sin = (float)Math.Sin(StarlightWorld.visualTimer + offset);
 				int variant = i * i * j % 4;

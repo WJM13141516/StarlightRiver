@@ -12,6 +12,13 @@ namespace StarlightRiver.Content.Items.Breacher
 {
 	class BreacherLaserUpdater : ModSystem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Keys_GlowSoft = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Noise_ShaderNoiseLooping = ModContent.Request<Texture2D>("StarlightRiver/Assets/Noise/ShaderNoiseLooping");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_Texture____Base_Glow = ModContent.Request<Texture2D>(Texture + "_Base_Glow");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture____Base = ModContent.Request<Texture2D>(Texture + "_Base");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override void PreUpdateProjectiles()
 		{
 			for (int index = 0; index < Main.projectile.Length; index++)
@@ -161,11 +168,11 @@ namespace StarlightRiver.Content.Items.Breacher
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
 			DrawTrail(spriteBatch);
-			Texture2D cannonTex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D baseTex = ModContent.Request<Texture2D>(Texture + "_Base").Value;
+			Texture2D cannonTex = texture_Texture.Value;
+			Texture2D baseTex = texture_Texture____Base.Value;
 
-			Texture2D cannonGlowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
-			Texture2D baseGlowTex = ModContent.Request<Texture2D>(Texture + "_Base_Glow").Value;
+			Texture2D cannonGlowTex = texture_Texture____Glow.Value;
+			Texture2D baseGlowTex = texture_Texture____Base_Glow.Value;
 
 			float baseRotation = -1.57f + originAngleRad;
 			var baseOrigin = new Vector2(baseTex.Width / 2, baseTex.Height + 8);
@@ -348,8 +355,8 @@ namespace StarlightRiver.Content.Items.Breacher
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
-			effect.Parameters["noiseTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/Noise/ShaderNoiseLooping").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
+			effect.Parameters["noiseTexture"].SetValue(texture_StarlightRiver_Assets_Noise_ShaderNoiseLooping.Value);
 
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.25f);
 			effect.Parameters["stretch"].SetValue(2f / laserLength);
@@ -373,8 +380,8 @@ namespace StarlightRiver.Content.Items.Breacher
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
-			effect.Parameters["noiseTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/Noise/ShaderNoiseLooping").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
+			effect.Parameters["noiseTexture"].SetValue(texture_StarlightRiver_Assets_Noise_ShaderNoiseLooping.Value);
 
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.25f);
 			effect.Parameters["stretch"].SetValue(2f / laserLength);
@@ -451,15 +458,15 @@ namespace StarlightRiver.Content.Items.Breacher
 
 		private void DrawBalls(SpriteBatch sb, BlendState endState, Color topColor, Color bottomColor, float scale)
 		{
-			Texture2D ballTex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft").Value;
+			Texture2D ballTex = texture_AssetDirectory_Assets___Keys_GlowSoft.Value;
 
 			float ballRotation = (laserEndpoint - laserStartpoint).ToRotation();
 
 			sb.End();
 
 			Effect effect = Filters.Scene["BreachLaserBloom"].GetShader().Shader;
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
-			effect.Parameters["noiseTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/Noise/ShaderNoiseLooping").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
+			effect.Parameters["noiseTexture"].SetValue(texture_StarlightRiver_Assets_Noise_ShaderNoiseLooping.Value);
 
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.25f);
 			effect.Parameters["stretch"].SetValue(1);
@@ -490,7 +497,7 @@ namespace StarlightRiver.Content.Items.Breacher
 		{
 			var blue = new Color(0, 0, 255);
 			var blueCyan = Color.Lerp(Color.Cyan, blue, 0.5f);
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft").Value;
+			Texture2D tex = texture_AssetDirectory_Assets___Keys_GlowSoft.Value;
 
 			sb.Draw(tex, laserStartpoint - Main.screenPosition, null, blueCyan, 0, tex.Size() / 2, 0.45f * laserSizeMult, SpriteEffects.None, 0f);
 			sb.Draw(tex, laserEndpoint - Main.screenPosition, null, blueCyan, 0, tex.Size() / 2, 0.35f * laserSizeMult, SpriteEffects.None, 0f);

@@ -8,6 +8,9 @@ namespace StarlightRiver.Content.GUI
 {
 	public class CombatMountInfo : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_ModPlayer_activeMount_SecondaryIconTexture = ModContent.Request<Texture2D>(ModPlayer.activeMount.SecondaryIconTexture);
+		public static readonly Asset<Texture2D> texture_ModPlayer_activeMount_PrimaryIconTexture = ModContent.Request<Texture2D>(ModPlayer.activeMount.PrimaryIconTexture);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___MountAbilitySlot = ModContent.Request<Texture2D>(AssetDirectory.GUI + "MountAbilitySlot");
 		public override bool Visible => !Main.playerInventory && ModPlayer.activeMount != null;
 
 		CombatMountPlayer ModPlayer => Main.LocalPlayer.GetModPlayer<CombatMountPlayer>();
@@ -20,10 +23,10 @@ namespace StarlightRiver.Content.GUI
 		public override void Draw(SpriteBatch spriteBatch)
 		{
 			var pos = new Vector2(480, 24);
-			Texture2D tex = Request<Texture2D>(AssetDirectory.GUI + "MountAbilitySlot").Value;
+			Texture2D tex = texture_AssetDirectory_GUI___MountAbilitySlot.Value;
 
-			Texture2D icon1 = Request<Texture2D>(ModPlayer.activeMount.PrimaryIconTexture).Value;
-			Texture2D icon2 = Request<Texture2D>(ModPlayer.activeMount.SecondaryIconTexture).Value;
+			Texture2D icon1 = texture_ModPlayer_activeMount_PrimaryIconTexture.Value;
+			Texture2D icon2 = texture_ModPlayer_activeMount_SecondaryIconTexture.Value;
 
 			spriteBatch.Draw(tex, pos, Color.White);
 			spriteBatch.Draw(icon1, pos + Vector2.One * 22, null, Color.White, 0, icon1.Size() / 2, 1, 0, 0);

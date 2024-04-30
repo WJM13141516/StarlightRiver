@@ -13,6 +13,9 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	class ForgeMap : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricItem___GlassweaverGauntletGang, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>(AssetDirectory.VitricItem + "GlassweaverGauntletGang", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricItem___GlassTempleMap, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>(AssetDirectory.VitricItem + "GlassTempleMap", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricItem___GlassTempleMapClose, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>(AssetDirectory.VitricItem + "GlassTempleMapClose", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 		public bool isEpic = false;
 
 		public override string Texture => AssetDirectory.DesertItem + "Sandscript";
@@ -87,10 +90,10 @@ namespace StarlightRiver.Content.Items.Vitric
 
 	public class GlassTempleMapUI : SmartUIState
 	{
-		public UIImage exitButton = new(Request<Texture2D>(AssetDirectory.VitricItem + "GlassTempleMapClose", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value);
+		public UIImage exitButton = new(texture_AssetDirectory_VitricItem___GlassTempleMapClose, _ReLogic_Content_AssetRequestMode_ImmediateLoad.Value);
 
-		public Texture2D mapTexture = Request<Texture2D>(AssetDirectory.VitricItem + "GlassTempleMap", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
-		public Texture2D swmgTexture = Request<Texture2D>(AssetDirectory.VitricItem + "GlassweaverGauntletGang", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+		public Texture2D mapTexture = texture_AssetDirectory_VitricItem___GlassTempleMap, _ReLogic_Content_AssetRequestMode_ImmediateLoad.Value;
+		public Texture2D swmgTexture = texture_AssetDirectory_VitricItem___GlassweaverGauntletGang, _ReLogic_Content_AssetRequestMode_ImmediateLoad.Value;
 
 		public Vector2 basePos;
 

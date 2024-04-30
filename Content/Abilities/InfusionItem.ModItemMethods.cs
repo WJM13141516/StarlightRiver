@@ -5,12 +5,15 @@ namespace StarlightRiver.Content.Abilities
 {
 	public abstract partial class InfusionItem : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_FrameTexture = ModContent.Request<Texture2D>(FrameTexture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Abilities_DefaultFrame, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>("StarlightRiver/Assets/Abilities/DefaultFrame", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 		public override string Texture => "StarlightRiver/Assets/Invisible";
 		public virtual string FrameTexture => AssetDirectory.Debug;
 
 		public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color ItemColor, Vector2 origin, float scale)
 		{
-			Texture2D back = Request<Texture2D>("StarlightRiver/Assets/Abilities/DefaultFrame", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+			Texture2D back = texture_StarlightRiver_Assets_Abilities_DefaultFrame, _ReLogic_Content_AssetRequestMode_ImmediateLoad.Value;
 			Draw(spriteBatch, position, 1, scale);
 			return false;
 		}
@@ -24,9 +27,9 @@ namespace StarlightRiver.Content.Abilities
 		/// ///<param name="scale">the scale at which this infusion should be drawn</param>
 		public void Draw(SpriteBatch spriteBatch, Vector2 position, float opacity, float scale = 1)
 		{
-			Texture2D outlineTex = Request<Texture2D>(FrameTexture).Value;
+			Texture2D outlineTex = texture_FrameTexture.Value;
 			spriteBatch.Draw(outlineTex, position, null, Color.White * opacity, 0, outlineTex.Size() / 2, scale, 0, 0);
-			Texture2D mainTex = Request<Texture2D>(Texture).Value;
+			Texture2D mainTex = texture_Texture.Value;
 			spriteBatch.Draw(mainTex, position, null, Color.White * opacity, 0, mainTex.Size() / 2, scale, 0, 0);
 		}
 

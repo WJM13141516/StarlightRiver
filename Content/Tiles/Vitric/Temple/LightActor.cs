@@ -9,6 +9,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 {
 	internal class LightActor : DummyTile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
 		public override string Texture => AssetDirectory.Invisible;
 
 		public override int DummyType => DummySystem.DummyType<LightActorDummy>();
@@ -96,7 +97,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 				A = 0
 			};
 
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_GlowTrail.Value;
 
 			Vector2 pos = Center - Main.screenPosition;
 

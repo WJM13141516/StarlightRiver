@@ -15,6 +15,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 {
 	public sealed partial class VitricBoss : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___GUI_HealthBar = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "GUI/HealthBar");
 		private bool IsInsideArena()
 		{
 			//certain client side effects should only happen when Player is in arena (or everywhere in single Player)
@@ -223,7 +224,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 			{
 				if (Main.netMode != NetmodeID.Server)
 				{
-					BossBarOverlay.SetTracked(NPC, ", Shattered Sentinel", Request<Texture2D>(AssetDirectory.VitricBoss + "GUI/HealthBar").Value);
+					BossBarOverlay.SetTracked(NPC, ", Shattered Sentinel", texture_AssetDirectory_VitricBoss___GUI_HealthBar.Value);
 					BossBarOverlay.visible = true;
 				}
 

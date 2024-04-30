@@ -12,6 +12,7 @@ namespace StarlightRiver.Content.Items.Misc.SoilgunFiles
 
 	public class Soilgun : MultiAmmoWeapon
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscItem___Soilgun_White = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + "Soilgun_White");
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public override List<AmmoStruct> ValidAmmos => new()
@@ -425,7 +426,7 @@ namespace StarlightRiver.Content.Items.Misc.SoilgunFiles
 		{
 			if (CurrentCharge >= MaxCharge && DrawWhiteTimer > 0)
 			{
-				Texture2D texture = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + "Soilgun_White").Value;
+				Texture2D texture = texture_AssetDirectory_MiscItem___Soilgun_White.Value;
 				SpriteEffects spriteEffects = Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
 				float progress = 1 - DrawWhiteTimer / 30f;

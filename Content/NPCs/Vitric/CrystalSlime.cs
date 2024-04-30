@@ -14,6 +14,8 @@ namespace StarlightRiver.Content.NPCs.Vitric
 {
 	internal class CrystalSlime : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_NPCs_Vitric_CrystalGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/NPCs/Vitric/CrystalGlow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_NPCs_Vitric_Crystal = ModContent.Request<Texture2D>("StarlightRiver/Assets/NPCs/Vitric/Crystal");
 		public int badHits;
 		private bool performedSpawnEffects = false;
 
@@ -156,8 +158,8 @@ namespace StarlightRiver.Content.NPCs.Vitric
 		{
 			if (Shield == 1)
 			{
-				Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/NPCs/Vitric/Crystal").Value;
-				Texture2D texGlow = Request<Texture2D>("StarlightRiver/Assets/NPCs/Vitric/CrystalGlow").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_NPCs_Vitric_Crystal.Value;
+				Texture2D texGlow = texture_StarlightRiver_Assets_NPCs_Vitric_CrystalGlow.Value;
 				Color color = Helper.IndicatorColor;
 
 				spriteBatch.Draw(tex, NPC.Center - screenPos, null, drawColor, NPC.rotation, tex.Size() / 2f, NPC.scale, 0, 0);

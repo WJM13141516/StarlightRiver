@@ -115,6 +115,17 @@ namespace StarlightRiver.Content.GUI
 	/// </summary>
 	internal class StaminaBar : SmartUIElement
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_StarAlpha = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/StarAlpha");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_StaminaGlowNormal = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaGlowNormal");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Abilities_Stamina2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Abilities/Stamina2");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Abilities_Stamina1 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Abilities/Stamina1");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_Stamina = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/Stamina");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_StaminaEmpty = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaEmpty");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_StaminaBarEdge = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaBarEdge");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_StaminaBarFill = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaBarFill");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_StaminaBarEmpty = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaBarEmpty");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_StaminaBarOrnament = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaBarOrnament");
+
 		/// <summary>
 		/// Allows overriding the fill texture of stamina with icon styles. Reset every frame.
 		/// </summary>
@@ -166,10 +177,10 @@ namespace StarlightRiver.Content.GUI
 			Player Player = Main.LocalPlayer;
 			AbilityHandler mp = Player.GetHandler();
 
-			Texture2D ornament = Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaBarOrnament").Value;
-			Texture2D empty = Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaBarEmpty").Value;
-			Texture2D fill = Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaBarFill").Value;
-			Texture2D edge = Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaBarEdge").Value;
+			Texture2D ornament = texture_StarlightRiver_Assets_GUI_StaminaBarOrnament.Value;
+			Texture2D empty = texture_StarlightRiver_Assets_GUI_StaminaBarEmpty.Value;
+			Texture2D fill = texture_StarlightRiver_Assets_GUI_StaminaBarFill.Value;
+			Texture2D edge = texture_StarlightRiver_Assets_GUI_StaminaBarEdge.Value;
 
 			Vector2 pos = dimensions.TopLeft();
 
@@ -211,8 +222,8 @@ namespace StarlightRiver.Content.GUI
 			AbilityHandler mp = Player.GetHandler();
 
 			//logic for other UI styles
-			Texture2D emptyTex = Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaEmpty").Value;
-			Texture2D fillTex = overrideTexture is null ? Request<Texture2D>("StarlightRiver/Assets/GUI/Stamina").Value : overrideTexture;
+			Texture2D emptyTex = texture_StarlightRiver_Assets_GUI_StaminaEmpty.Value;
+			Texture2D fillTex = overrideTexture is null ? texture_StarlightRiver_Assets_GUI_Stamina.Value : overrideTexture;
 
 			int row = 0;
 			for (int k = 0; k <= mp.StaminaMax; k++)
@@ -225,8 +236,8 @@ namespace StarlightRiver.Content.GUI
 
 				if (k >= mp.StaminaMax) //draws the incomplete vessel
 				{
-					Texture2D shard1 = Request<Texture2D>("StarlightRiver/Assets/Abilities/Stamina1").Value;
-					Texture2D shard2 = Request<Texture2D>("StarlightRiver/Assets/Abilities/Stamina2").Value;
+					Texture2D shard1 = texture_StarlightRiver_Assets_Abilities_Stamina1.Value;
+					Texture2D shard2 = texture_StarlightRiver_Assets_Abilities_Stamina2.Value;
 
 					if (mp.ShardCount % 3 >= 1)
 						spriteBatch.Draw(shard1, pos, shard1.Frame(), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
@@ -241,7 +252,7 @@ namespace StarlightRiver.Content.GUI
 
 				// Changes slot textures if needed
 				if (k >= mp.StaminaMax - specialVesselTextures.Count)
-					slotTex = Request<Texture2D>(specialVesselTextures[(int)mp.StaminaMax - k - 1]).Value;
+					slotTex = ModContent.Request<Texture2D>(specialVesselTextures[(int)(mp.StaminaMax - k - 1)]).Value;
 
 				spriteBatch.Draw(slotTex, pos, slotTex.Frame(), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
@@ -260,172 +271,176 @@ namespace StarlightRiver.Content.GUI
 			specialVesselTextures.Clear();
 		}
 
-		/// <summary>
-		/// Handles drawing the animation for gaining the ability to use stamina
-		/// </summary>
-		/// <param name="spriteBatch">The spriteBatch to draw with</param>
-		/// <param name="dimensions">The dimensions of this UIElement</param>
-		/// <param name="timer">The timer associated with the animation</param>
-		private void DrawGainAnimation(SpriteBatch spriteBatch, Rectangle dimensions, int timer)
+
+		
+
+
+	/// <summary>
+	/// Handles drawing the animation for gaining the ability to use stamina
+	/// </summary>
+	/// <param name="spriteBatch">The spriteBatch to draw with</param>
+	/// <param name="dimensions">The dimensions of this UIElement</param>
+	/// <param name="timer">The timer associated with the animation</param>
+	private void DrawGainAnimation(SpriteBatch spriteBatch, Rectangle dimensions, int timer)
+	{
+		/*if (Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBars")
+			DrawGainAnimationBar(spriteBatch, dimensions, timer);
+		else*/
+		DrawGainAnimationIcon(spriteBatch, dimensions, timer);
+
+		gainAnimationParticles.DrawParticles(spriteBatch);
+	}
+
+	/// <summary>
+	/// Animation for gain for bar styles
+	/// </summary>
+	/// <param name="spriteBatch">The spriteBatch to draw with</param>
+	/// <param name="dimensions">The dimensions of this UIElement</param>
+	/// <param name="timer">The timer associated with the animation</param>
+	/*private void DrawGainAnimationBar(SpriteBatch spriteBatch, Rectangle dimensions, int timer)
+	{
+
+	}*/
+
+	/// <summary>
+	/// Animation for gain for icon styles
+	/// </summary>
+	/// <param name="spriteBatch">The spriteBatch to draw with</param>
+	/// <param name="dimensions">The dimensions of this UIElement</param>
+	/// <param name="timer">The timer associated with the animation</param>
+	private void DrawGainAnimationIcon(SpriteBatch spriteBatch, Rectangle dimensions, int timer)
+	{
+		Texture2D slotTex = texture_StarlightRiver_Assets_GUI_StaminaEmpty.Value;
+		Texture2D slotTexGlow = texture_StarlightRiver_Assets_GUI_StaminaGlowNormal.Value;
+		Texture2D star = texture_StarlightRiver_Assets_Keys_StarAlpha.Value;
+		Vector2 pos = dimensions.TopLeft();
+
+		// Spawn particles
+		if (timer < 64)
 		{
-			/*if (Main.ResourceSetsManager.ActiveSetKeyName == "HorizontalBars")
-				DrawGainAnimationBar(spriteBatch, dimensions, timer);
-			else*/
-			DrawGainAnimationIcon(spriteBatch, dimensions, timer);
+			float prog = timer / 80f;
 
-			gainAnimationParticles.DrawParticles(spriteBatch);
-		}
-
-		/// <summary>
-		/// Animation for gain for bar styles
-		/// </summary>
-		/// <param name="spriteBatch">The spriteBatch to draw with</param>
-		/// <param name="dimensions">The dimensions of this UIElement</param>
-		/// <param name="timer">The timer associated with the animation</param>
-		/*private void DrawGainAnimationBar(SpriteBatch spriteBatch, Rectangle dimensions, int timer)
-		{
-
-		}*/
-
-		/// <summary>
-		/// Animation for gain for icon styles
-		/// </summary>
-		/// <param name="spriteBatch">The spriteBatch to draw with</param>
-		/// <param name="dimensions">The dimensions of this UIElement</param>
-		/// <param name="timer">The timer associated with the animation</param>
-		private void DrawGainAnimationIcon(SpriteBatch spriteBatch, Rectangle dimensions, int timer)
-		{
-			Texture2D slotTex = Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaEmpty").Value;
-			Texture2D slotTexGlow = Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaGlowNormal").Value;
-			Texture2D star = Request<Texture2D>("StarlightRiver/Assets/Keys/StarAlpha").Value;
-			Vector2 pos = dimensions.TopLeft();
-
-			// Spawn particles
-			if (timer < 64)
+			if (Main.rand.NextFloat() < prog)
 			{
-				float prog = timer / 80f;
+				float rot = Main.rand.NextFloat(6.28f);
 
-				if (Main.rand.NextFloat() < prog)
-				{
-					float rot = Main.rand.NextFloat(6.28f);
-
-					gainAnimationParticles.AddParticle(
-						new Particle(
-								position: pos + Vector2.One * 12 + Vector2.One.RotatedBy(rot) * Main.rand.NextFloat(80, 150),
-								velocity: Vector2.One.RotatedBy(rot + 1.57f) * 3.5f,
-								rotation: 0,
-								scale: Main.rand.NextFloat(0.5f, 1f),
-								color: new Color(150, 220, 250),
-								timer: 80,
-								storedPosition: pos + Vector2.One * 12,
-								alpha: 0
-							)
-						);
-				}
-			}
-
-			// Fade in
-			if (timer > 40 && timer < 120)
-			{
-				float prog = (timer - 40) / 80f;
-				float opacity = Helpers.Helper.BezierEase(prog);
-
-				spriteBatch.Draw(slotTexGlow, pos + slotTexGlow.Size() / 2f, slotTexGlow.Frame(), new Color(50, 120, 255) * opacity, 0, slotTexGlow.Size() / 2f, opacity, SpriteEffects.None, 0);
-
-				Color starColor = new Color(150, 220, 255) * Helpers.Helper.SwoopEase(prog);
-				starColor.A = 0;
-
-				spriteBatch.Draw(star, pos + slotTexGlow.Size() / 2f, star.Frame(), starColor, 0, star.Size() / 2f, Helpers.Helper.SwoopEase(prog), SpriteEffects.None, 0);
-			}
-
-			// Hold
-			if (timer >= 120 && timer <= 140)
-			{
-				float colorProg = Helpers.Helper.BezierEase((timer - 120) / 20f);
-				var color = Color.Lerp(new Color(50, 120, 255), Color.White, colorProg);
-
-				spriteBatch.Draw(slotTexGlow, pos, slotTexGlow.Frame(), color, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-
-				Color starColor = Color.Lerp(new Color(150, 220, 255), Color.White, colorProg) * (1 - colorProg);
-				starColor.A = 0;
-
-				spriteBatch.Draw(star, pos + slotTexGlow.Size() / 2f, star.Frame(), starColor, 0, star.Size() / 2f, 1 + colorProg, SpriteEffects.None, 0);
-			}
-
-			// Fade out with slot underneath
-			if (timer > 140 && timer < 170)
-			{
-				float prog = (timer - 140) / 30f;
-				float opacity = 1 - Helpers.Helper.BezierEase(prog);
-
-				spriteBatch.Draw(slotTex, pos, slotTex.Frame(), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-				spriteBatch.Draw(slotTexGlow, pos, slotTexGlow.Frame(), Color.White * opacity, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-			}
-
-			if (timer >= 90 && Main.rand.NextBool(9))
-			{
-				sparkleParticles.AddParticle(
+				gainAnimationParticles.AddParticle(
 					new Particle(
-						position: pos + new Vector2(Main.rand.Next(34), Main.rand.Next(34)),
-						velocity: Vector2.UnitY * Main.rand.NextFloat(0.2f),
-						rotation: 0,
-						scale: 0,
-						color: new Color(255, 50, 50),
-						timer: 90,
-						storedPosition: new Vector2(Main.rand.NextFloat(0.4f, 0.7f), 0),
-						frame: new Rectangle(0, 0, 15, 15))
+							position: pos + Vector2.One * 12 + Vector2.One.RotatedBy(rot) * Main.rand.NextFloat(80, 150),
+							velocity: Vector2.One.RotatedBy(rot + 1.57f) * 3.5f,
+							rotation: 0,
+							scale: Main.rand.NextFloat(0.5f, 1f),
+							color: new Color(150, 220, 250),
+							timer: 80,
+							storedPosition: pos + Vector2.One * 12,
+							alpha: 0
+						)
 					);
 			}
-
-			if (timer >= 170)
-			{
-				spriteBatch.Draw(slotTex, pos, slotTex.Frame(), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
-			}
-
-			if (timer == 239)
-				gainAnimationParticles.ClearParticles();
 		}
 
-		/// <summary>
-		/// Update method for the gain animation particles
-		/// </summary>
-		/// <param name="particle">The particle to process</param>
-		private static void UpdateGainParticles(Particle particle)
+		// Fade in
+		if (timer > 40 && timer < 120)
 		{
-			particle.Timer--;
+			float prog = (timer - 40) / 80f;
+			float opacity = Helpers.Helper.BezierEase(prog);
 
-			if (Vector2.Distance(particle.Position, particle.StoredPosition) <= 48)
-			{
-				particle.Alpha *= 0.95f;
-				particle.Velocity *= 0.92f;
-				particle.Scale *= 0.92f;
-			}
-			else
-			{
-				particle.Alpha += 0.03f;
-				particle.Velocity += Vector2.Normalize(particle.Position - particle.StoredPosition) * -0.34f;
+			spriteBatch.Draw(slotTexGlow, pos + slotTexGlow.Size() / 2f, slotTexGlow.Frame(), new Color(50, 120, 255) * opacity, 0, slotTexGlow.Size() / 2f, opacity, SpriteEffects.None, 0);
 
-				if (particle.Velocity.Length() > 4)
-					particle.Velocity = Vector2.Normalize(particle.Velocity) * 4;
-			}
+			Color starColor = new Color(150, 220, 255) * Helpers.Helper.SwoopEase(prog);
+			starColor.A = 0;
 
-			particle.Position += particle.Velocity;
+			spriteBatch.Draw(star, pos + slotTexGlow.Size() / 2f, star.Frame(), starColor, 0, star.Size() / 2f, Helpers.Helper.SwoopEase(prog), SpriteEffects.None, 0);
 		}
 
-		/// <summary>
-		/// Update method for the sparkle particles
-		/// </summary>
-		/// <param name="particle">The particle to process</param>
-		private static void UpdateSparkleParticles(Particle particle)
+		// Hold
+		if (timer >= 120 && timer <= 140)
 		{
-			particle.Timer--;
+			float colorProg = Helpers.Helper.BezierEase((timer - 120) / 20f);
+			var color = Color.Lerp(new Color(50, 120, 255), Color.White, colorProg);
 
-			particle.Scale = (float)Math.Sin(particle.Timer / 60f * 3.14f) * particle.StoredPosition.X;
+			spriteBatch.Draw(slotTexGlow, pos, slotTexGlow.Frame(), color, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
 
-			particle.Color = new Color(180, 200, (byte)(Math.Sin(particle.Timer / 60f * 3.14f) * 230)) * (float)Math.Sin(particle.Timer / 60f * 3.14f);
-			particle.Position += particle.Velocity;
+			Color starColor = Color.Lerp(new Color(150, 220, 255), Color.White, colorProg) * (1 - colorProg);
+			starColor.A = 0;
 
-			particle.Rotation += 0.05f;
+			spriteBatch.Draw(star, pos + slotTexGlow.Size() / 2f, star.Frame(), starColor, 0, star.Size() / 2f, 1 + colorProg, SpriteEffects.None, 0);
 		}
+
+		// Fade out with slot underneath
+		if (timer > 140 && timer < 170)
+		{
+			float prog = (timer - 140) / 30f;
+			float opacity = 1 - Helpers.Helper.BezierEase(prog);
+
+			spriteBatch.Draw(slotTex, pos, slotTex.Frame(), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+			spriteBatch.Draw(slotTexGlow, pos, slotTexGlow.Frame(), Color.White * opacity, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+		}
+
+		if (timer >= 90 && Main.rand.NextBool(9))
+		{
+			sparkleParticles.AddParticle(
+				new Particle(
+					position: pos + new Vector2(Main.rand.Next(34), Main.rand.Next(34)),
+					velocity: Vector2.UnitY * Main.rand.NextFloat(0.2f),
+					rotation: 0,
+					scale: 0,
+					color: new Color(255, 50, 50),
+					timer: 90,
+					storedPosition: new Vector2(Main.rand.NextFloat(0.4f, 0.7f), 0),
+					frame: new Rectangle(0, 0, 15, 15))
+				);
+		}
+
+		if (timer >= 170)
+		{
+			spriteBatch.Draw(slotTex, pos, slotTex.Frame(), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+		}
+
+		if (timer == 239)
+			gainAnimationParticles.ClearParticles();
 	}
+
+	/// <summary>
+	/// Update method for the gain animation particles
+	/// </summary>
+	/// <param name="particle">The particle to process</param>
+	private static void UpdateGainParticles(Particle particle)
+	{
+		particle.Timer--;
+
+		if (Vector2.Distance(particle.Position, particle.StoredPosition) <= 48)
+		{
+			particle.Alpha *= 0.95f;
+			particle.Velocity *= 0.92f;
+			particle.Scale *= 0.92f;
+		}
+		else
+		{
+			particle.Alpha += 0.03f;
+			particle.Velocity += Vector2.Normalize(particle.Position - particle.StoredPosition) * -0.34f;
+
+			if (particle.Velocity.Length() > 4)
+				particle.Velocity = Vector2.Normalize(particle.Velocity) * 4;
+		}
+
+		particle.Position += particle.Velocity;
+	}
+
+	/// <summary>
+	/// Update method for the sparkle particles
+	/// </summary>
+	/// <param name="particle">The particle to process</param>
+	private static void UpdateSparkleParticles(Particle particle)
+	{
+		particle.Timer--;
+
+		particle.Scale = (float)Math.Sin(particle.Timer / 60f * 3.14f) * particle.StoredPosition.X;
+
+		particle.Color = new Color(180, 200, (byte)(Math.Sin(particle.Timer / 60f * 3.14f) * 230)) * (float)Math.Sin(particle.Timer / 60f * 3.14f);
+		particle.Position += particle.Velocity;
+
+		particle.Rotation += 0.05f;
+	}
+}
 }

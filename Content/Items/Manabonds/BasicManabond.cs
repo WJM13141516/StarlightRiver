@@ -9,6 +9,7 @@ namespace StarlightRiver.Content.Items.Manabonds
 {
 	internal class BasicManabond : Manabond
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
 		public override string Texture => AssetDirectory.ManabondItem + Name;
 
 		public BasicManabond() : base("Manabond", "Your minions can store 40 mana\nYour minions siphon 6 mana per second from you untill full\nYour minions spend 6 mana to attack with a magic bolt occasionally") { }
@@ -164,7 +165,7 @@ namespace StarlightRiver.Content.Items.Manabonds
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(effect);
 		}

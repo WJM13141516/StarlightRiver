@@ -9,6 +9,9 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 {
 	public class Cogwheel : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SteampunkItem___CogwheelMount_Base = ModContent.Request<Texture2D>(AssetDirectory.SteampunkItem + "CogwheelMount_Base");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SteampunkItem___CogwheelMount_Wheel = ModContent.Request<Texture2D>(AssetDirectory.SteampunkItem + "CogwheelMount_Wheel");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SteampunkItem___CogwheelMount = ModContent.Request<Texture2D>(AssetDirectory.SteampunkItem + "CogwheelMount");
 		public override string Texture => AssetDirectory.SteampunkItem + Name;
 
 		public override void SetStaticDefaults()
@@ -123,9 +126,9 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 			// Draw is called for each mount texture we provide, so we check drawType to avoid duplicate draws.
 			if (drawType == 0)
 			{
-				Texture2D platformTex = ModContent.Request<Texture2D>(AssetDirectory.SteampunkItem + "CogwheelMount").Value;
-				Texture2D wheelTex = ModContent.Request<Texture2D>(AssetDirectory.SteampunkItem + "CogwheelMount_Wheel").Value;
-				Texture2D baseTex = ModContent.Request<Texture2D>(AssetDirectory.SteampunkItem + "CogwheelMount_Base").Value;
+				Texture2D platformTex = texture_AssetDirectory_SteampunkItem___CogwheelMount.Value;
+				Texture2D wheelTex = texture_AssetDirectory_SteampunkItem___CogwheelMount_Wheel.Value;
+				Texture2D baseTex = texture_AssetDirectory_SteampunkItem___CogwheelMount_Base.Value;
 				Vector2 drawPos = drawPosition;
 				playerDrawData.Add(new DrawData(baseTex, drawPos + new Vector2(0, 17 + (int)(2 * Math.Sin(((CogWheelSpecificData)drawPlayer.mount._mountSpecificData).rotation * 2))), new Rectangle(0, 0, platformTex.Width, platformTex.Height), drawColor, drawPlayer.fullRotation, baseTex.Size() / 2 / new Vector2(1, 3) + new Vector2(0, 17), drawScale, SpriteEffects.None, 0));
 				playerDrawData.Add(new DrawData(wheelTex, drawPos + new Vector2(0, 17 + (int)(1 * Math.Sin(((CogWheelSpecificData)drawPlayer.mount._mountSpecificData).rotation * 2))), new Rectangle(0, 0, wheelTex.Width, wheelTex.Height), drawColor, ((CogWheelSpecificData)drawPlayer.mount._mountSpecificData).rotation, wheelTex.Size() / 2, drawScale, SpriteEffects.None, 0));

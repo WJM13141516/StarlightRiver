@@ -13,6 +13,12 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 {
 	public class VitricBackdropLeft : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_VitricRightEasterEgg = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/VitricRightEasterEgg");
+		public static readonly Asset<Texture2D> texture_path___SideReflectionMap = ModContent.Request<Texture2D>(path + "SideReflectionMap");
+		public static readonly Asset<Texture2D> texture_path___ReflectionMap = ModContent.Request<Texture2D>(path + "ReflectionMap");
+		public static readonly Asset<Texture2D> texture_path___Side = ModContent.Request<Texture2D>(path + "Side");
+		public static readonly Asset<Texture2D> texture_path___Top = ModContent.Request<Texture2D>(path + "Top");
+		public static readonly Asset<Texture2D> texture_path = ModContent.Request<Texture2D>(path);
 		public const int Scrolltime = 1000;
 		public const int Risetime = 360;
 		public List<NPC> platforms = new();
@@ -238,9 +244,9 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 		public virtual void MainDraw(SpriteBatch sb)
 		{
 			string path = AssetDirectory.VitricBoss + Name;
-			Texture2D tex = Request<Texture2D>(path).Value;
-			Texture2D tex2 = Request<Texture2D>(path + "Top").Value;
-			Texture2D tex3 = Request<Texture2D>(path + "Side").Value;
+			Texture2D tex = texture_path.Value;
+			Texture2D tex2 = texture_path___Top.Value;
+			Texture2D tex3 = texture_path___Side.Value;
 			int targetHeight = (int)(Timer / Risetime * tex.Height);
 
 			if (State >= 3) //ignore timer after rising is done
@@ -264,8 +270,8 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 			sb.End();
 			sb.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D reflectionMap = Request<Texture2D>(path + "ReflectionMap").Value;
-			Texture2D reflectionMapSide = Request<Texture2D>(path + "SideReflectionMap").Value;
+			Texture2D reflectionMap = texture_path___ReflectionMap.Value;
+			Texture2D reflectionMapSide = texture_path___SideReflectionMap.Value;
 
 			DrawReflections(sb, reflectionMap, target.TopLeft());
 			DrawReflections(sb, reflectionMapSide, target2.TopLeft());
@@ -288,7 +294,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 		public virtual void ScrollDraw(SpriteBatch sb) //im lazy
 		{
 			string path = AssetDirectory.VitricBoss + Name;
-			Texture2D tex = Request<Texture2D>(path).Value;
+			Texture2D tex = texture_path.Value;
 			int height1 = (int)(ScrollTimer / Scrolltime * tex.Height);
 			int height2 = tex.Height - height1;
 			//Color color = new Color(180, 225, 255);
@@ -305,7 +311,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 			sb.End();
 			sb.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D reflectionMap = Request<Texture2D>(path + "ReflectionMap").Value;
+			Texture2D reflectionMap = texture_path___ReflectionMap.Value;
 
 			DrawReflections(sb, reflectionMap, target1.TopLeft(), source1);
 			DrawReflections(sb, reflectionMap, target2.TopLeft(), source2);
@@ -375,9 +381,9 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 		public override void MainDraw(SpriteBatch sb)
 		{
 			string path = AssetDirectory.VitricBoss + Name;
-			Texture2D tex = Request<Texture2D>(path).Value;
-			Texture2D tex2 = Request<Texture2D>(path + "Top").Value;
-			Texture2D tex3 = Request<Texture2D>(path + "Side").Value;
+			Texture2D tex = texture_path.Value;
+			Texture2D tex2 = texture_path___Top.Value;
+			Texture2D tex3 = texture_path___Side.Value;
 			int targetHeight = (int)(Timer / Risetime * tex.Height);
 
 			if (State >= 3) //ignore timer after rising is done
@@ -400,15 +406,15 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 			if (Holidays.AnySpecialEvent)//1 in 32 or any special date event
 			{
-				Texture2D egg = Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/VitricRightEasterEgg").Value;
+				Texture2D egg = texture_StarlightRiver_Assets_Bosses_VitricBoss_VitricRightEasterEgg.Value;
 				Core.Systems.LightingSystem.LightingBufferRenderer.DrawWithLighting(target, egg, source);
 			}
 
 			sb.End();
 			sb.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D reflectionMap = Request<Texture2D>(path + "ReflectionMap").Value;
-			Texture2D reflectionMapSide = Request<Texture2D>(path + "SideReflectionMap").Value;
+			Texture2D reflectionMap = texture_path___ReflectionMap.Value;
+			Texture2D reflectionMapSide = texture_path___SideReflectionMap.Value;
 
 			DrawReflections(sb, reflectionMap, target.TopLeft());
 			DrawReflections(sb, reflectionMapSide, target2.TopLeft());
@@ -420,7 +426,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 		public override void ScrollDraw(SpriteBatch sb)
 		{
 			string path = AssetDirectory.VitricBoss + Name;
-			Texture2D tex = Request<Texture2D>(path).Value;
+			Texture2D tex = texture_path.Value;
 			int height1 = (int)(ScrollTimer / Scrolltime * tex.Height);
 			int height2 = tex.Height - height1;
 			//Color color = new Color(180, 225, 255);
@@ -437,7 +443,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 			sb.End();
 			sb.Begin(SpriteSortMode.Immediate, BlendState.Additive, SamplerState.LinearClamp, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D reflectionMap = Request<Texture2D>(path + "ReflectionMap").Value;
+			Texture2D reflectionMap = texture_path___ReflectionMap.Value;
 
 			DrawReflections(sb, reflectionMap, target1.TopLeft(), source1);
 			DrawReflections(sb, reflectionMap, target2.TopLeft(), source2);
@@ -447,7 +453,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 			if (Holidays.AnySpecialEvent)//1 in 32 or any special date event
 			{
-				Texture2D egg = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/VitricRightEasterEgg").Value;
+				Texture2D egg = texture_StarlightRiver_Assets_Bosses_VitricBoss_VitricRightEasterEgg.Value;
 				Core.Systems.LightingSystem.LightingBufferRenderer.DrawWithLighting(target1, egg, source1);
 				Core.Systems.LightingSystem.LightingBufferRenderer.DrawWithLighting(target2, egg, source2);
 			}

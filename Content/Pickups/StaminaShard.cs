@@ -9,6 +9,7 @@ namespace StarlightRiver.Content.Pickups
 {
 	class StaminaShardPickup : AbilityPickup
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_StarTexture = ModContent.Request<Texture2D>("StarlightRiver/Assets/StarTexture");
 		Tile Parent => Framing.GetTileSafely((int)NPC.Center.X / 16, (int)NPC.Center.Y / 16);
 
 		public override string Texture => GetStaminaTexture();
@@ -33,7 +34,7 @@ namespace StarlightRiver.Content.Pickups
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/StarTexture").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_StarTexture.Value;
 			float sin = (float)Math.Sin(Main.GameUpdateCount * 0.05f);
 			float sin2 = (float)Math.Sin(Main.GameUpdateCount * 0.05f + 2f);
 

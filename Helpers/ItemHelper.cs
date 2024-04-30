@@ -6,6 +6,7 @@ namespace StarlightRiver.Helpers
 {
 	public static partial class Helper
 	{
+		public static readonly Asset<Texture2D> texture_Item_ModItem_Texture = ModContent.Request<Texture2D>(Item.ModItem.Texture);
 		public static void NewItemSpecific(Vector2 position, Item Item)
 		{
 			int targetIndex = 400;
@@ -132,7 +133,7 @@ namespace StarlightRiver.Helpers
 			if (Item.type < ItemID.Count)
 				return Terraria.GameContent.TextureAssets.Item[Item.type].Value;
 			else
-				return Request<Texture2D>(Item.ModItem.Texture).Value;
+				return texture_Item_ModItem_Texture.Value;
 		}
 
 		public static Texture2D GetItemTexture(int type)
@@ -145,7 +146,7 @@ namespace StarlightRiver.Helpers
 			{
 				var Item = new Item();
 				Item.SetDefaults(type);
-				return Request<Texture2D>(Item.ModItem.Texture).Value;
+				return texture_Item_ModItem_Texture.Value;
 			}
 		}
 	}

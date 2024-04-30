@@ -19,6 +19,12 @@ namespace StarlightRiver.Content.Tiles.Vitric
 {
 	internal class VitricBossAltar : DummyTile, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___VitricBossBarrierTop = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBarrierTop");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___VitricBossBarrier2 = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBarrier2");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___VitricBossBarrier = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBarrier");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___VitricBossAltarGlow = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "VitricBossAltarGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___VitricBossAltarReflectionMap = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "VitricBossAltarReflectionMap");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Symbol = ModContent.Request<Texture2D>("StarlightRiver/Assets/Symbol");
 		public override int DummyType => DummySystem.DummyType<VitricBossAltarDummy>();
 
 		public override string Texture => AssetDirectory.VitricTile + Name;
@@ -340,7 +346,7 @@ namespace StarlightRiver.Content.Tiles.Vitric
 
 			if (parent.TileFrameX >= 90 && !NPC.AnyNPCs(NPCType<VitricBoss>()))
 			{
-				Texture2D texSkull = Request<Texture2D>("StarlightRiver/Assets/Symbol").Value;
+				Texture2D texSkull = texture_StarlightRiver_Assets_Symbol.Value;
 				spriteBatch.Draw(texSkull, Center - Main.screenPosition, null, new Color(255, 100, 100) * (1 - Vector2.Distance(Main.LocalPlayer.Center, Center) / 200f), 0, texSkull.Size() / 2, 1, 0, 0);
 			}
 
@@ -348,19 +354,19 @@ namespace StarlightRiver.Content.Tiles.Vitric
 			{
 				if (ShouldDrawReflection())
 				{
-					ReflectionTarget.DrawReflection(spriteBatch, screenPos: position - Main.screenPosition, normalMap: Request<Texture2D>(AssetDirectory.VitricTile + "VitricBossAltarReflectionMap").Value, flatOffset: new Vector2(-0.0075f, 0.011f), tintColor: new Color(150, 150, 255, 200), offsetScale: 0.05f);
+					ReflectionTarget.DrawReflection(spriteBatch, screenPos: position - Main.screenPosition, normalMap: texture_AssetDirectory_VitricTile___VitricBossAltarReflectionMap.Value, flatOffset: new Vector2(-0.0075f, 0.011f), tintColor: new Color(150, 150, 255, 200), offsetScale: 0.05f);
 					ReflectionTarget.isDrawReflectablesThisFrame = true;
 				}
 
-				Texture2D glow = Request<Texture2D>(AssetDirectory.VitricTile + "VitricBossAltarGlow").Value;
+				Texture2D glow = texture_AssetDirectory_VitricTile___VitricBossAltarGlow.Value;
 				spriteBatch.Draw(glow, position - Main.screenPosition + new Vector2(-1, 7), glow.Frame(), Helper.IndicatorColorProximity(300, 600, Center), 0, Vector2.Zero, 1, 0, 0);
 			}
 
 			//Barriers
 			Vector2 center = Center + new Vector2(0, 56);
-			Texture2D tex = Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBarrier").Value;
-			Texture2D tex2 = Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBarrier2").Value;
-			Texture2D texTop = Request<Texture2D>(AssetDirectory.VitricBoss + "VitricBossBarrierTop").Value;
+			Texture2D tex = texture_AssetDirectory_VitricBoss___VitricBossBarrier.Value;
+			Texture2D tex2 = texture_AssetDirectory_VitricBoss___VitricBossBarrier2.Value;
+			Texture2D texTop = texture_AssetDirectory_VitricBoss___VitricBossBarrierTop.Value;
 			//Color color = new Color(180, 225, 255);
 
 			int off = (int)(barrierTimer / 120f * tex.Height);

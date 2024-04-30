@@ -17,6 +17,8 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	public class SpearBook : SmartAccessory, IPostLoadable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Items_Moonstone_DatsuzeiFlameMap2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Moonstone/DatsuzeiFlameMap2");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
 		public int comboState;
 		public static Dictionary<int, bool> spearList;
 
@@ -706,8 +708,8 @@ namespace StarlightRiver.Content.Items.Misc
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.02f);
 			effect.Parameters["repeats"].SetValue(8f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
-			effect.Parameters["sampleTexture2"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Moonstone/DatsuzeiFlameMap2").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
+			effect.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_Items_Moonstone_DatsuzeiFlameMap2.Value);
 
 			if (motion != Motion.Stab)
 				trail?.Render(effect);

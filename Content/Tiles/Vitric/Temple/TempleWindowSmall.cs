@@ -11,6 +11,9 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 {
 	abstract class TallWindowDummyBase : Dummy
 	{
+		public static readonly Asset<Texture2D> texture_TextureOver___Glow = ModContent.Request<Texture2D>(TextureOver + "Glow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___VitricTempleWall = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "VitricTempleWall");
+		public static readonly Asset<Texture2D> texture_TextureOver = ModContent.Request<Texture2D>(TextureOver);
 		public virtual string TextureOver => AssetDirectory.VitricTile + "TallWindowOver";
 
 		public TallWindowDummyBase(int type) : base(type, 16, 16) { }
@@ -19,7 +22,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 		{
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			Texture2D tex = Request<Texture2D>(TextureOver).Value;
+			Texture2D tex = texture_TextureOver.Value;
 			Vector2 pos = Center - Main.screenPosition - Vector2.One * 8;
 
 			var bgTarget = new Rectangle(6, 32, 84, 256);
@@ -42,7 +45,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 
 		public void RedrawWall(int i, int j)
 		{
-			Texture2D tex = Request<Texture2D>(AssetDirectory.VitricTile + "VitricTempleWall").Value;
+			Texture2D tex = texture_AssetDirectory_VitricTile___VitricTempleWall.Value;
 			var target = new Vector2(i * 16 - Main.screenPosition.X, j * 16 - Main.screenPosition.Y);
 			var source = new Rectangle(i % 14 * 16, j % 25 * 16, 16, 16);
 
@@ -112,7 +115,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			Texture2D tex = Request<Texture2D>(TextureOver + "Glow").Value;
+			Texture2D tex = texture_TextureOver___Glow.Value;
 			Vector2 pos = Center - Main.screenPosition - Vector2.One * 8;
 			float sin = 0.5f + (float)Math.Sin(Main.GameUpdateCount * 0.05f + position.X * 1 / 16f) * 0.25f;
 

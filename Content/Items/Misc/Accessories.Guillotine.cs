@@ -5,6 +5,7 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	class Guillotine : SmartAccessory
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscItem___Guillotine = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + "Guillotine");
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public Guillotine() : base("Golden Guillotine", "Critical strikes gain power as your foes lose health\nExecutes normal enemies on low health") { }
@@ -122,7 +123,7 @@ namespace StarlightRiver.Content.Items.Misc
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + "Guillotine").Value;
+			Texture2D tex = texture_AssetDirectory_MiscItem___Guillotine.Value;
 			Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.White * (Projectile.timeLeft / 45f), 0, tex.Size() / 2f, (1 - Projectile.timeLeft / 45f) * 3f, 0, 0);
 
 			return false;

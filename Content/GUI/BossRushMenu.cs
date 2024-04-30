@@ -15,6 +15,9 @@ namespace StarlightRiver.Content.GUI
 {
 	internal class BossRushButton : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_texture = ModContent.Request<Texture2D>(texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_BossRushLock = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/BossRushLock");
+		public static readonly Asset<Texture2D> texture_Images_UI_CharCreation_PanelGrayscale = ModContent.Request<Texture2D>("Images/UI/CharCreation/PanelGrayscale");
 		public UIText button;
 
 		public bool Unlocked => BossRushDataStore.UnlockedBossRush;
@@ -66,7 +69,7 @@ namespace StarlightRiver.Content.GUI
 		{
 			var dims = button.GetDimensions().ToRectangle();
 
-			Texture2D background = Main.Assets.Request<Texture2D>("Images/UI/CharCreation/PanelGrayscale").Value;
+			Texture2D background = Main.Assets.texture_Images_UI_CharCreation_PanelGrayscale.Value;
 			float opacity = Unlocked ? (button.IsMouseHovering ? 1 : 0.75f) : 0.75f;
 			Color color = (Unlocked ? new Color(73, 94, 171) : new Color(80, 80, 80)) * opacity;
 
@@ -78,7 +81,7 @@ namespace StarlightRiver.Content.GUI
 
 			if (!Unlocked)
 			{
-				Texture2D lockTex = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/BossRushLock").Value;
+				Texture2D lockTex = texture_StarlightRiver_Assets_GUI_BossRushLock.Value;
 				spriteBatch.Draw(lockTex, dims.Center.ToVector2(), null, Color.White, 0, lockTex.Size() / 2f, 1, 0, 0);
 			}
 
@@ -143,8 +146,8 @@ namespace StarlightRiver.Content.GUI
 
 			dims.Offset(new Point(0, yOffset));
 
-			Texture2D background = Main.Assets.Request<Texture2D>("Images/UI/CharCreation/PanelGrayscale").Value;
-			Texture2D icon = ModContent.Request<Texture2D>(texture).Value;
+			Texture2D background = Main.Assets.texture_Images_UI_CharCreation_PanelGrayscale.Value;
+			Texture2D icon = texture_texture.Value;
 
 			float opacity = Ease(animationTimer / 30f);
 			Color color = (Unlocked ? new Color(73, 94, 171) : new Color(80, 80, 80)) * 0.75f * opacity;
@@ -223,7 +226,7 @@ namespace StarlightRiver.Content.GUI
 		{
 			var dims = button.GetDimensions().ToRectangle();
 
-			Texture2D background = Main.Assets.Request<Texture2D>("Images/UI/CharCreation/PanelGrayscale").Value;
+			Texture2D background = Main.Assets.texture_Images_UI_CharCreation_PanelGrayscale.Value;
 			float opacity = button.IsMouseHovering ? 1 : 0.75f;
 			Color color = new Color(73, 94, 171) * opacity;
 
@@ -260,7 +263,7 @@ namespace StarlightRiver.Content.GUI
 			CalculatedStyle dims = GetDimensions();
 			Vector2 pos = dims.Position();
 
-			Texture2D background = Main.Assets.Request<Texture2D>("Images/UI/CharCreation/PanelGrayscale").Value;
+			Texture2D background = Main.Assets.texture_Images_UI_CharCreation_PanelGrayscale.Value;
 			float opacity = IsMouseHovering ? 1 : 0.75f;
 
 			Utils.DrawSplicedPanel(spriteBatch, background, (int)dims.X, (int)dims.Y, (int)dims.Width, (int)dims.Height, 10, 10, 10, 10, new Color(73, 94, 171) * opacity);

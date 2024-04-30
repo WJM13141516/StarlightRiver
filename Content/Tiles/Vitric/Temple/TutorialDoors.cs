@@ -11,6 +11,9 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 {
 	class TutorialDoor1 : DummyTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___TutorialDoor2Glow = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "TutorialDoor2Glow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___TutorialDoor2 = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "TutorialDoor2");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___TutorialDoor1 = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "TutorialDoor1");
 		public override int DummyType => DummySystem.DummyType<TutorialDoor1Dummy>();
 
 		public override string Texture => AssetDirectory.Invisible;
@@ -64,7 +67,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 
 			if (progress > 0)
 			{
-				Texture2D tex = Request<Texture2D>(AssetDirectory.VitricTile + "TutorialDoor1").Value;
+				Texture2D tex = texture_AssetDirectory_VitricTile___TutorialDoor1.Value;
 				int off = (int)(tex.Height * progress);
 				Vector2 pos = position - Main.screenPosition;
 				var source = new Rectangle(0, 0, tex.Width, off);
@@ -142,8 +145,8 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 
 			if (ShouldBeOn(Player))
 			{
-				Main.spriteBatch.Draw(Request<Texture2D>(AssetDirectory.VitricTile + "TutorialDoor2").Value, position - Main.screenPosition, lightColor);
-				Main.spriteBatch.Draw(Request<Texture2D>(AssetDirectory.VitricTile + "TutorialDoor2Glow").Value, position - Main.screenPosition, Helper.IndicatorColor);
+				Main.spriteBatch.Draw(texture_AssetDirectory_VitricTile___TutorialDoor2.Value, position - Main.screenPosition, lightColor);
+				Main.spriteBatch.Draw(texture_AssetDirectory_VitricTile___TutorialDoor2Glow.Value, position - Main.screenPosition, Helper.IndicatorColor);
 			}
 		}
 	}

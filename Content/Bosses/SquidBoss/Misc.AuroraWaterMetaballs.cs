@@ -9,13 +9,15 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 {
 	internal class AuroraWaterMetaballs : MetaballActor
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___AuroraWaterSplash = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "AuroraWaterSplash");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscItem___MagmaGunProj = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + "MagmaGunProj");
 		public override bool Active => Main.LocalPlayer.InModBiome(ModContent.GetInstance<Biomes.PermafrostTempleBiome>());
 
 		public override Color OutlineColor => new(255, 254, 255);
 
 		public override void DrawShapes(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + "MagmaGunProj").Value;
+			Texture2D tex = texture_AssetDirectory_MiscItem___MagmaGunProj.Value;
 
 			for (int k = 0; k < Main.maxNPCs; k++)
 			{
@@ -47,7 +49,7 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 
 			foreach (Projectile proj in Main.projectile.Where(n => n.active && n.type == ModContent.ProjectileType<AuroraWaterSplash>()))
 			{
-				Texture2D tex2 = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "AuroraWaterSplash").Value;
+				Texture2D tex2 = texture_AssetDirectory_SquidBoss___AuroraWaterSplash.Value;
 				var frame = new Rectangle(0, (int)(6 - proj.timeLeft / 40f * 6) * 106, 72, 106);
 
 				spriteBatch.Draw(tex2, (proj.Center - Main.screenPosition) / 2f, frame, new Color(0.4f, 1, 1), 0, new Vector2(36, 53), 0.5f, 0, 0);

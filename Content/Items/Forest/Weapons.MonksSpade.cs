@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.Items.Forest
 {
 	class MonkSpade : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public float bonusChance = 0;
 
 		public override string Texture => AssetDirectory.ForestItem + Name;
@@ -70,7 +71,7 @@ namespace StarlightRiver.Content.Items.Forest
 				Projectile.timeLeft < 5 ? Projectile.timeLeft / 5f :
 				1;
 
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, lightColor * fade, (Projectile.Center - Player.Center).ToRotation() + (float)Math.PI - (float)Math.PI / 4, new Vector2(8, 8), 1, 0, 0);
 
 			return false;

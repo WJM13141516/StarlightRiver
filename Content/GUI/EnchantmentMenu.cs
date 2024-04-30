@@ -13,6 +13,13 @@ namespace StarlightRiver.Content.GUI
 {
 	class EnchantmentMenu : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow");
+		public static readonly Asset<Texture2D> texture_enchant_Texture = ModContent.Request<Texture2D>(enchant.Texture);
+		public static readonly Asset<Texture2D> texture_Terraria_Item____Item_type = ModContent.Request<Texture2D>("Terraria/Item_" + Item.type);
+		public static readonly Asset<Texture2D> texture_Item_ModItem_Texture = ModContent.Request<Texture2D>(Item.ModItem.Texture);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___EnchantSlotIcon = ModContent.Request<Texture2D>(AssetDirectory.GUI + "EnchantSlotIcon");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___EnchantSlotOpen = ModContent.Request<Texture2D>(AssetDirectory.GUI + "EnchantSlotOpen");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___EnchantSlotClosed = ModContent.Request<Texture2D>(AssetDirectory.GUI + "EnchantSlotClosed");
 		public static EnchantNPC activeEnchanter;
 
 		private static Vector2 centerPoint;
@@ -225,9 +232,9 @@ namespace StarlightRiver.Content.GUI
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			Texture2D closedTex = Request<Texture2D>(AssetDirectory.GUI + "EnchantSlotClosed").Value;
-			Texture2D openTex = Request<Texture2D>(AssetDirectory.GUI + "EnchantSlotOpen").Value;
-			Texture2D iconTex = Request<Texture2D>(AssetDirectory.GUI + "EnchantSlotIcon").Value;
+			Texture2D closedTex = texture_AssetDirectory_GUI___EnchantSlotClosed.Value;
+			Texture2D openTex = texture_AssetDirectory_GUI___EnchantSlotOpen.Value;
+			Texture2D iconTex = texture_AssetDirectory_GUI___EnchantSlotIcon.Value;
 
 			leafParticles.DrawParticles(spriteBatch);
 
@@ -258,7 +265,7 @@ namespace StarlightRiver.Content.GUI
 
 				if (!Item.IsAir)
 				{
-					Texture2D PopupTexture = Item.type > ItemID.Count ? Request<Texture2D>(Item.ModItem.Texture).Value : Request<Texture2D>("Terraria/Item_" + Item.type).Value;
+					Texture2D PopupTexture = Item.type > ItemID.Count ? texture_Item_ModItem_Texture.Value : texture_Terraria_Item____Item_type.Value;
 					float scale = PopupTexture.Frame().Size().Length() < 52 ? 1 : 52f / PopupTexture.Frame().Size().Length();
 
 					spriteBatch.Draw(PopupTexture, GetDimensions().Center(), PopupTexture.Frame(), Color.White, 0, PopupTexture.Frame().Size() / 2, scale, 0, 0);
@@ -339,7 +346,7 @@ namespace StarlightRiver.Content.GUI
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = Request<Texture2D>(enchant.Texture).Value;
+			Texture2D tex = texture_enchant_Texture.Value;
 			Vector2 pos = GetDimensions().Center();
 
 			spriteBatch.Draw(tex, pos, null, Color.White, 0, tex.Size() / 2, 1, 0, 0);
@@ -347,7 +354,7 @@ namespace StarlightRiver.Content.GUI
 
 		public void DrawAdditive(SpriteBatch spriteBatch) //batched and drawn in parent
 		{
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Keys_Glow.Value;
 			Vector2 pos = GetDimensions().Center();
 			float scale = 1 + animationTimer / 30f;
 			float opacity = 1 - animationTimer / 30f;

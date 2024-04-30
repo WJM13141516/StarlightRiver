@@ -7,6 +7,9 @@ namespace StarlightRiver.Content.Bestiary
 {
 	public class ModBiomeSpawnCondition : IFilterInfoProvider, IProvideSearchFilterString, IBestiaryInfoElement, IBestiaryBackgroundImagePathAndColorProvider, IBestiaryPrioritizedElement
 	{
+		public static readonly Asset<Texture2D> texture_Images_UI_Bestiary_Stat_Panel = ModContent.Request<Texture2D>("Images/UI/Bestiary/Stat_Panel");
+		public static readonly Asset<Texture2D> texture_iconPath = ModContent.Request<Texture2D>(iconPath);
+		public static readonly Asset<Texture2D> texture_backgroundPath = ModContent.Request<Texture2D>(backgroundPath);
 		private readonly string name;
 
 		private readonly string iconPath;
@@ -36,12 +39,12 @@ namespace StarlightRiver.Content.Bestiary
 
 		public Asset<Texture2D> GetBackgroundImage()
 		{
-			return backgroundPath == null ? null : ModContent.Request<Texture2D>(backgroundPath);
+			return backgroundPath == null ? null : texture_backgroundPath;
 		}
 
 		public UIElement GetFilterImage()
 		{
-			Asset<Texture2D> asset = ModContent.Request<Texture2D>(iconPath);
+			Asset<Texture2D> asset = texture_iconPath;
 			return new UIImageFramed(asset, new Rectangle(0, 0, asset.Width(), asset.Height()))
 			{
 				HAlign = 0.5f,
@@ -64,7 +67,7 @@ namespace StarlightRiver.Content.Bestiary
 			if (HideInPortraitInfo)// || info.UnlockState == BestiaryEntryUnlockState.NotKnownAtAll_0
 				return null;
 
-			UIElement uIElement = new UIPanel(Main.Assets.Request<Texture2D>("Images/UI/Bestiary/Stat_Panel"), null, 12, 7)
+			UIElement uIElement = new UIPanel(Main.Assets.texture_Images_UI_Bestiary_Stat_Panel, null, 12, 7)
 			{
 				Width = new StyleDimension(-14f, 1f),
 				Height = new StyleDimension(34f, 0f),

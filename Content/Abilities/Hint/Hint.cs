@@ -10,6 +10,7 @@ namespace StarlightRiver.Content.Abilities.Hint
 {
 	internal class HintAbility : CooldownAbility, IOrderedLoadable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Abilities_HintCursor = ModContent.Request<Texture2D>("StarlightRiver/Assets/Abilities/HintCursor");
 		public static int effectTimer;
 		public static string hintToDisplay;
 
@@ -46,7 +47,7 @@ namespace StarlightRiver.Content.Abilities.Hint
 		{
 			if (effectTimer > 0)
 			{
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Abilities/HintCursor").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Abilities_HintCursor.Value;
 				int frame = (int)(effectTimer / 20f * 9);
 				var source = new Rectangle(0, frame * 30, 50, 30);
 				Main.spriteBatch.Draw(tex, Main.MouseScreen + Vector2.One * 8, source, Color.White, 0, new Vector2(25, 15), 1, 0, 0);

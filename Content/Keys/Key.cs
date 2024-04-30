@@ -9,6 +9,7 @@ namespace StarlightRiver.Content.Keys
 {
 	public class Key
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public Vector2 Position = new(0, 0);
 
 		public string Name { get; set; }
@@ -32,7 +33,7 @@ namespace StarlightRiver.Content.Keys
 		{
 			PreDraw(spriteBatch);
 
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			spriteBatch.Draw(tex, Position + new Vector2(0, (float)Math.Sin(StarlightWorld.visualTimer) * 5) - Main.screenPosition, tex.Frame(), Lighting.GetColor((int)Position.X / 16, (int)Position.Y / 16));
 
 			if (Hitbox.Contains(Main.MouseWorld.ToPoint()))

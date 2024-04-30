@@ -8,6 +8,8 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 {
 	internal class VitricBossSwoosh
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Keys_GlowSoft = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___FireTrail = ModContent.Request<Texture2D>(AssetDirectory.Assets + "FireTrail");
 		readonly VitricBoss parent;
 		readonly VerletChain chain;
 		readonly Effect fireEffect;
@@ -49,7 +51,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 			fireEffect.Parameters["time"].SetValue(-Main.GameUpdateCount / 45f);
 			fireEffect.Parameters["upscale"].SetValue(matrix);
-			fireEffect.Parameters["sampleTexture"].SetValue(Request<Texture2D>(AssetDirectory.Assets + "FireTrail").Value);
+			fireEffect.Parameters["sampleTexture"].SetValue(texture_AssetDirectory_Assets___FireTrail.Value);
 
 			chain.DrawStrip(PrepareStrip, fireEffect);
 			chain.UpdateChain(parent.NPC.Center + parent.PainOffset + Vector2.UnitX * -parent.twistTarget * 18 + position.RotatedBy(parent.NPC.rotation));
@@ -97,7 +99,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 		public void DrawAdditive(SpriteBatch sb)
 		{
-			Texture2D tex = Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft").Value;
+			Texture2D tex = texture_AssetDirectory_Assets___Keys_GlowSoft.Value;
 
 			for (int k = 0; k < chain.segmentCount; k++)
 			{

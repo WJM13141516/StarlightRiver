@@ -9,6 +9,7 @@ namespace StarlightRiver.Content.Waters.WaterAddons
 {
 	class HotspringAddon : WaterAddon
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Misc_HotspringWaterMap, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/HotspringWaterMap", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 		public static ScreenTarget hotspringMapTarget = new(RenderMainTarget, () => HotspringFountainDummy.AnyOnscreen, 1);
 
 		public static ScreenTarget hotspringBackShineTarget = new(RenderForegroundShine, () => HotspringFountainDummy.AnyOnscreen, 1, (a) => Main.waterTarget.Size());
@@ -41,7 +42,7 @@ namespace StarlightRiver.Content.Waters.WaterAddons
 			spriteBatch.End();
 			Main.spriteBatch.Begin(default, BlendState.Additive, SamplerState.PointWrap, default, default);
 
-			Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/HotspringWaterMap", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+			Texture2D tex2 = texture_StarlightRiver_Assets_Misc_HotspringWaterMap, _ReLogic_Content_AssetRequestMode_ImmediateLoad.Value;
 
 			for (int i = -tex2.Width; i <= Main.screenWidth + tex2.Width; i += tex2.Width)
 			{
@@ -67,7 +68,7 @@ namespace StarlightRiver.Content.Waters.WaterAddons
 			spriteBatch.End();
 			Main.spriteBatch.Begin(default, BlendState.Additive, SamplerState.PointWrap, default, default);
 
-			Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/HotspringWaterMap", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+			Texture2D tex2 = texture_StarlightRiver_Assets_Misc_HotspringWaterMap, _ReLogic_Content_AssetRequestMode_ImmediateLoad.Value;
 
 			for (int i = -tex2.Width; i <= Main.screenWidth + tex2.Width; i += tex2.Width)
 			{

@@ -8,6 +8,7 @@ namespace StarlightRiver.Content.Metaballs
 {
 	internal class BloodMetaballs : MetaballActor
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Dust___BloodLine = ModContent.Request<Texture2D>(AssetDirectory.Dust + "BloodLine");
 		public static bool Visible = false;
 
 		public override bool Active => Visible;
@@ -22,7 +23,7 @@ namespace StarlightRiver.Content.Metaballs
 		{
 			Effect borderNoise = Filters.Scene["BorderNoise"].GetShader().Shader;
 
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.Dust + "BloodLine").Value;
+			Texture2D tex = texture_AssetDirectory_Dust___BloodLine.Value;
 
 			if (borderNoise is null)
 				return;

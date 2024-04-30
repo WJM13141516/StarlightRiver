@@ -12,6 +12,7 @@ namespace StarlightRiver.Content.Tiles.Underground
 {
 	class HotspringFountain : DummyTile, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow");
 		public override int DummyType => DummySystem.DummyType<HotspringFountainDummy>();
 
 		public override string Texture => AssetDirectory.Assets + "Tiles/Underground/HotspringFountain";
@@ -122,7 +123,7 @@ namespace StarlightRiver.Content.Tiles.Underground
 
 		public void DrawMap(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Keys_Glow.Value;
 			spriteBatch.Draw(tex, Center - Main.screenPosition, null, Color.White, 0, tex.Size() / 2, scale: 24f, 0, 0);
 		}
 	}

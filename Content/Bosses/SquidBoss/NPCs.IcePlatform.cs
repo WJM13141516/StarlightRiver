@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 {
 	class IcePlatform : MovingPlatform
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public int bobTime = 0;
 		public int index;
 
@@ -92,7 +93,7 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			spriteBatch.Draw(tex, NPC.Center - Main.screenPosition, null, Lighting.GetColor((int)NPC.Center.X / 16, (int)NPC.Center.Y / 16) * 1.5f, NPC.rotation, tex.Size() / 2, 1, 0, 0);
 			return false;
 		}
@@ -122,7 +123,7 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 
 		public void DrawUnderWater(SpriteBatch spriteBatch, int NPCLayer)
 		{
-			spriteBatch.Draw(ModContent.Request<Texture2D>(Texture).Value, NPC.position - Main.screenPosition, Lighting.GetColor((int)NPC.Center.X / 16, (int)NPC.Center.Y / 16) * 1.5f);
+			spriteBatch.Draw(texture_Texture.Value, NPC.position - Main.screenPosition, Lighting.GetColor((int)NPC.Center.X / 16, (int)NPC.Center.Y / 16) * 1.5f);
 		}
 
 		public override void SafeSetDefaults()
@@ -177,7 +178,7 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 
 		public void DrawUnderWater(SpriteBatch spriteBatch, int NPCLayer)
 		{
-			spriteBatch.Draw(ModContent.Request<Texture2D>(Texture).Value, NPC.position - Main.screenPosition, Lighting.GetColor((int)NPC.Center.X / 16, (int)NPC.Center.Y / 16));
+			spriteBatch.Draw(texture_Texture.Value, NPC.position - Main.screenPosition, Lighting.GetColor((int)NPC.Center.X / 16, (int)NPC.Center.Y / 16));
 		}
 
 		public override void SafeSetDefaults()
@@ -224,7 +225,7 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 		public void DrawUnderWater(SpriteBatch spriteBatch, int NPCLayer)
 		{
 			float opacity = dontCollide ? 0.25f : 1f;
-			spriteBatch.Draw(ModContent.Request<Texture2D>(Texture).Value, NPC.position - Main.screenPosition, Lighting.GetColor((int)NPC.Center.X / 16, (int)NPC.Center.Y / 16) * opacity);
+			spriteBatch.Draw(texture_Texture.Value, NPC.position - Main.screenPosition, Lighting.GetColor((int)NPC.Center.X / 16, (int)NPC.Center.Y / 16) * opacity);
 		}
 
 		public override void SafeSetDefaults()

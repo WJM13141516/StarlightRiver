@@ -9,6 +9,7 @@ namespace StarlightRiver.Content.Items.Jungle
 {
 	public class Slitherring : SmartAccessory
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.JungleItem + Name;
 
 		public Slitherring() : base("Slitherring", "A small snake occasionally attacks with you when you use a whip") { }
@@ -122,7 +123,7 @@ namespace StarlightRiver.Content.Items.Jungle
 			}
 
 			//whip
-			Asset<Texture2D> texture = ModContent.Request<Texture2D>(Texture);
+			Asset<Texture2D> texture = texture_Texture;
 			Rectangle whipFrame = texture.Frame(1, 5, 0, 0);
 			int height = whipFrame.Height;
 			Vector2 firstPoint = points[0];

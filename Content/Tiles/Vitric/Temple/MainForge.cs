@@ -11,6 +11,13 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 {
 	class MainForge : DummyTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___GlowTrail = ModContent.Request<Texture2D>(AssetDirectory.Assets + "GlowTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___GradientBlack = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "GradientBlack");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___BeamTrail = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "BeamTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___BeamCore = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "BeamCore");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___MainForgeGlow = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MainForgeGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___MainForgeHammer = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MainForgeHammer");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___MainForgeOver = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MainForgeOver");
 		public override int DummyType => DummySystem.DummyType<MainForgeDummy>();
 
 		public override string Texture => AssetDirectory.Invisible;
@@ -103,8 +110,8 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 
 			TempleTileUtils.DrawBackground(spriteBatch, bgTarget);
 
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MainForgeOver").Value;
-			Texture2D texHammer = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MainForgeHammer").Value;
+			Texture2D tex = texture_AssetDirectory_VitricTile___MainForgeOver.Value;
+			Texture2D texHammer = texture_AssetDirectory_VitricTile___MainForgeHammer.Value;
 
 			var offset = new Vector2(0, HammerFunction(timer * 0.01f));
 
@@ -115,15 +122,15 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 
 			spriteBatch.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D texGlow = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MainForgeGlow").Value;
+			Texture2D texGlow = texture_AssetDirectory_VitricTile___MainForgeGlow.Value;
 			spriteBatch.Draw(texGlow, pos, Color.White);
 		}
 
 		public void DrawLaser(SpriteBatch spriteBatch)
 		{
-			Texture2D texBeam = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "BeamCore").Value;
-			Texture2D texBeam2 = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "BeamTrail").Value;
-			Texture2D texDark = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "GradientBlack").Value;
+			Texture2D texBeam = texture_AssetDirectory_MiscTextures___BeamCore.Value;
+			Texture2D texBeam2 = texture_AssetDirectory_MiscTextures___BeamTrail.Value;
+			Texture2D texDark = texture_AssetDirectory_MiscTextures___GradientBlack.Value;
 
 			var origin = new Vector2(0, texBeam.Height / 2);
 			var origin2 = new Vector2(0, texBeam2.Height / 2);
@@ -172,7 +179,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 			spriteBatch.End();
 			spriteBatch.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D glowTex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "GlowTrail").Value;
+			Texture2D glowTex = texture_AssetDirectory_Assets___GlowTrail.Value;
 
 			color.A = 0;
 			spriteBatch.Draw(glowTex, target, source, color * 0.95f, rot, new Vector2(0, glowTex.Height / 2), 0, 0);

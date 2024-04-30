@@ -11,6 +11,10 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	public class RhythmicResonator : SmartAccessory
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___RhythmicResonatorUISmall_Outline = ModContent.Request<Texture2D>(AssetDirectory.GUI + "RhythmicResonatorUISmall_Outline");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___RhythmicResonatorUISmall = ModContent.Request<Texture2D>(AssetDirectory.GUI + "RhythmicResonatorUISmall");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___RhythmicResonatorUIBig_Outline = ModContent.Request<Texture2D>(AssetDirectory.GUI + "RhythmicResonatorUIBig_Outline");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___RhythmicResonatorUIBig = ModContent.Request<Texture2D>(AssetDirectory.GUI + "RhythmicResonatorUIBig");
 		public bool equipped;
 		public int RhythmTimer;
 		public int MaxRhythmTimer; //just used visually for the UI
@@ -166,11 +170,11 @@ namespace StarlightRiver.Content.Items.Misc
 
 		public override void Draw(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "RhythmicResonatorUIBig").Value;
-			Texture2D texOutline = ModContent.Request<Texture2D>(AssetDirectory.GUI + "RhythmicResonatorUIBig_Outline").Value;
+			Texture2D tex = texture_AssetDirectory_GUI___RhythmicResonatorUIBig.Value;
+			Texture2D texOutline = texture_AssetDirectory_GUI___RhythmicResonatorUIBig_Outline.Value;
 
-			Texture2D texSmall = ModContent.Request<Texture2D>(AssetDirectory.GUI + "RhythmicResonatorUISmall").Value;
-			Texture2D texSmallOutline = ModContent.Request<Texture2D>(AssetDirectory.GUI + "RhythmicResonatorUISmall_Outline").Value;
+			Texture2D texSmall = texture_AssetDirectory_GUI___RhythmicResonatorUISmall.Value;
+			Texture2D texSmallOutline = texture_AssetDirectory_GUI___RhythmicResonatorUISmall_Outline.Value;
 
 			Vector2 mouse = Main.MouseWorld;
 

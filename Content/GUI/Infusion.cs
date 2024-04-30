@@ -12,6 +12,14 @@ namespace StarlightRiver.Content.GUI
 {
 	public class Infusion : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Abilities_HexGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Abilities/HexGlow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_InfusionLock = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/InfusionLock");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_StarAlpha = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/StarAlpha");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_InfusionGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/InfusionGlow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_InfusionAnimUnder = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/InfusionAnimUnder");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_InfusionFrameFlash = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/InfusionFrameFlash");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_InfusionFrame = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/InfusionFrame");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_Infusions = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/Infusions");
 		public static int animationProgress = 20;
 		public static Color animationColor;
 
@@ -115,7 +123,7 @@ namespace StarlightRiver.Content.GUI
 				return;
 
 			// We want this to draw under even if in the gain animation
-			Texture2D background = Request<Texture2D>("StarlightRiver/Assets/GUI/Infusions").Value;
+			Texture2D background = texture_StarlightRiver_Assets_GUI_Infusions.Value;
 			var backgroundColor = Color.Lerp(Color.White, new Color(100, 220, 255), 0.5f + 0.5f * (float)Math.Sin(Main.GameUpdateCount * 0.05f));
 			backgroundColor *= 0.25f + 0.15f * (float)Math.Sin(Main.GameUpdateCount * 0.035f);
 			spriteBatch.Draw(background, new Vector2(infusionElement.Left.Pixels + 2, infusionElement.Top.Pixels), null, backgroundColor);
@@ -139,11 +147,11 @@ namespace StarlightRiver.Content.GUI
 
 			if (mp.InfusionLimit > 0)
 			{
-				Texture2D texture = Request<Texture2D>("StarlightRiver/Assets/GUI/InfusionFrame").Value;
+				Texture2D texture = texture_StarlightRiver_Assets_GUI_InfusionFrame.Value;
 				var source = new Rectangle(60 * (mp.InfusionLimit - 1), 0, 60, 56);
 				spriteBatch.Draw(texture, new Vector2(infusionElement.Left.Pixels + 2, infusionElement.Top.Pixels), source, Color.White);
 
-				Texture2D textureGlow = Request<Texture2D>("StarlightRiver/Assets/GUI/InfusionFrameFlash").Value;
+				Texture2D textureGlow = texture_StarlightRiver_Assets_GUI_InfusionFrameFlash.Value;
 				var sourceGlow = new Rectangle(60 * (mp.InfusionLimit - 1), (int)(animationProgress / 4f) * 56, 60, 56);
 				spriteBatch.Draw(textureGlow, new Vector2(infusionElement.Left.Pixels + 6, infusionElement.Top.Pixels), sourceGlow, animationColor * (1 - animationProgress / 40f));
 			}
@@ -170,9 +178,9 @@ namespace StarlightRiver.Content.GUI
 		/// <param name="timer">The timer associated with the animation</param>
 		private void DrawGainAnimation(SpriteBatch spriteBatch, int timer)
 		{
-			Texture2D slotTex = Request<Texture2D>("StarlightRiver/Assets/GUI/InfusionAnimUnder").Value;
-			Texture2D slotTexGlow = Request<Texture2D>("StarlightRiver/Assets/GUI/InfusionGlow").Value;
-			Texture2D star = Request<Texture2D>("StarlightRiver/Assets/Keys/StarAlpha").Value;
+			Texture2D slotTex = texture_StarlightRiver_Assets_GUI_InfusionAnimUnder.Value;
+			Texture2D slotTexGlow = texture_StarlightRiver_Assets_GUI_InfusionGlow.Value;
+			Texture2D star = texture_StarlightRiver_Assets_Keys_StarAlpha.Value;
 			var pos = new Vector2(infusionElement.Left.Pixels + 2, infusionElement.Top.Pixels);
 			var starOff = new Vector2(0, -12);
 
@@ -329,7 +337,7 @@ namespace StarlightRiver.Content.GUI
 
 			if (!Unlocked) //draw a lock instead for locked slots
 			{
-				Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/GUI/InfusionLock").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_GUI_InfusionLock.Value;
 				//spriteBatch.Draw(tex, GetDimensions().Center(), null, Color.White, 0f, tex.Size() / 2, 1, SpriteEffects.None, 0);
 			}
 
@@ -339,7 +347,7 @@ namespace StarlightRiver.Content.GUI
 				spriteBatch.End();
 				spriteBatch.Begin(default, BlendState.Additive, Main.DefaultSamplerState, default, default, default, Main.UIScaleMatrix);
 
-				Texture2D glowTex = Request<Texture2D>("StarlightRiver/Assets/Abilities/HexGlow").Value;
+				Texture2D glowTex = texture_StarlightRiver_Assets_Abilities_HexGlow.Value;
 				float sin = 0.75f + (float)Math.Sin(Main.GameUpdateCount / 20f) * 0.25f;
 				spriteBatch.Draw(glowTex, GetDimensions().Center(), null, equipped.color * sin, 0, glowTex.Size() / 2, 1.2f, 0, 0);
 

@@ -11,6 +11,9 @@ namespace StarlightRiver.Content.Items.Breacher
 {
 	public class Scrapshot : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_BreacherItem___ScrapshotHookChain2 = ModContent.Request<Texture2D>(AssetDirectory.BreacherItem + "ScrapshotHookChain2");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_BreacherItem___ScrapshotHookChain1 = ModContent.Request<Texture2D>(AssetDirectory.BreacherItem + "ScrapshotHookChain1");
 		public ScrapshotHook hook;
 
 		public override string Texture => AssetDirectory.BreacherItem + Name;
@@ -397,8 +400,8 @@ namespace StarlightRiver.Content.Items.Breacher
 			if (struck)
 				return false;
 
-			Texture2D chainTex1 = ModContent.Request<Texture2D>(AssetDirectory.BreacherItem + "ScrapshotHookChain1").Value;
-			Texture2D chainTex2 = ModContent.Request<Texture2D>(AssetDirectory.BreacherItem + "ScrapshotHookChain2").Value;
+			Texture2D chainTex1 = texture_AssetDirectory_BreacherItem___ScrapshotHookChain1.Value;
+			Texture2D chainTex2 = texture_AssetDirectory_BreacherItem___ScrapshotHookChain2.Value;
 			Player Player = Main.player[Projectile.owner];
 
 			float dist = Vector2.Distance(Player.Center, Projectile.Center);
@@ -501,7 +504,7 @@ namespace StarlightRiver.Content.Items.Breacher
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 
 			trail?.Render(effect);
 		}

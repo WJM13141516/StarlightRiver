@@ -12,6 +12,8 @@ namespace StarlightRiver.Content.Tiles.CrashTech
 {
 	class CrashPod : DummyTile, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Glow2 = ModContent.Request<Texture2D>(Texture + "_Glow2");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 		public override string Texture => "StarlightRiver/Assets/Tiles/CrashTech/CrashPod";
 
 		public override int DummyType => DummySystem.DummyType<CrashPodDummy>();
@@ -48,8 +50,8 @@ namespace StarlightRiver.Content.Tiles.CrashTech
 				if (dummy is null)
 					return;
 
-				Texture2D tex = Request<Texture2D>(Texture + "_Glow").Value;
-				Texture2D tex2 = Request<Texture2D>(Texture + "_Glow2").Value;
+				Texture2D tex = texture_Texture____Glow.Value;
+				Texture2D tex2 = texture_Texture____Glow2.Value;
 
 				spriteBatch.Draw(tex, (Helper.TileAdj + new Vector2(i, j)) * 16 - Main.screenPosition, null, Color.White);
 				spriteBatch.Draw(tex2, (Helper.TileAdj + new Vector2(i, j)) * 16 + new Vector2(-1, 0) - Main.screenPosition, null, Helper.IndicatorColorProximity(150, 300, dummy.Center));

@@ -6,6 +6,8 @@ namespace StarlightRiver.Content.NPCs.Town
 {
 	class EnchantNPC : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___EnchantSlotClosed = ModContent.Request<Texture2D>(AssetDirectory.GUI + "EnchantSlotClosed");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___EnchantOver = ModContent.Request<Texture2D>(AssetDirectory.GUI + "EnchantOver");
 		int textState = 0;
 		public bool enchanting;
 		public DialogManager manager;
@@ -90,10 +92,10 @@ namespace StarlightRiver.Content.NPCs.Town
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor) //Temporary solution untill this can be drawn by the structure
 		{
-			spriteBatch.Draw(ModContent.Request<Texture2D>(AssetDirectory.GUI + "EnchantOver").Value, NPC.Center + new Vector2(0, -300) - Main.screenPosition, null, Color.White, 0, Vector2.One * 160, 1, 0, 0);
+			spriteBatch.Draw(texture_AssetDirectory_GUI___EnchantOver.Value, NPC.Center + new Vector2(0, -300) - Main.screenPosition, null, Color.White, 0, Vector2.One * 160, 1, 0, 0);
 
 			if (!enchanting)
-				spriteBatch.Draw(ModContent.Request<Texture2D>(AssetDirectory.GUI + "EnchantSlotClosed").Value, NPC.Center + new Vector2(0, -500) - Main.screenPosition, new Rectangle(0, 0, 34, 34), Color.White, 0, Vector2.One * 17, 1, 0, 0);
+				spriteBatch.Draw(texture_AssetDirectory_GUI___EnchantSlotClosed.Value, NPC.Center + new Vector2(0, -500) - Main.screenPosition, new Rectangle(0, 0, 34, 34), Color.White, 0, Vector2.One * 17, 1, 0, 0);
 
 			return true;
 		}

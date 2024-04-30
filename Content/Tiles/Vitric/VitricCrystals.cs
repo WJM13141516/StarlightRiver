@@ -11,6 +11,7 @@ namespace StarlightRiver.Content.Tiles.Vitric
 {
 	public abstract class WalkableCrystalItem : QuickTileItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___VitricLavaFade = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "VitricLavaFade");
 		private bool held = false;
 
 		public WalkableCrystalItem(string name, string placetype, string texturepath) : base(placetype + "Item", name, "The slot this Item is in changes the type placed", placetype, ItemRarityID.Blue, texturepath) { }
@@ -87,7 +88,7 @@ namespace StarlightRiver.Content.Tiles.Vitric
 
 		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
 		{
-			Texture2D lavaFadeTex = Request<Texture2D>(AssetDirectory.VitricTile + "VitricLavaFade").Value;
+			Texture2D lavaFadeTex = texture_AssetDirectory_VitricTile___VitricLavaFade.Value;
 
 			if (Main.tile[i, j].TileType == Type)
 			{

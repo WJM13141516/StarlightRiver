@@ -8,6 +8,7 @@ namespace StarlightRiver.Content.GUI
 {
 	public class KeyInventory : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_parent_Texture = ModContent.Request<Texture2D>(parent.Texture);
 		public static List<KeyIcon> keys = new();
 
 		public override int InsertionIndex(List<GameInterfaceLayer> layers)
@@ -42,7 +43,7 @@ namespace StarlightRiver.Content.GUI
 		public void DrawKey(SpriteBatch spriteBatch, Vector2 pos)
 		{
 			var center = new Vector2(Main.screenWidth / 2, Main.screenHeight / 2);
-			Texture2D tex = Request<Texture2D>(parent.Texture).Value;
+			Texture2D tex = texture_parent_Texture.Value;
 			float x = (timer - 30) / 30f;
 			float scale = 1 + (0.7f - 0.7f * (x * x));
 			Color color = parent.ShowCondition ? Color.White : Color.White * 0.2f;

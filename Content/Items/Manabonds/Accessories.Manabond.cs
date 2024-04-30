@@ -7,6 +7,8 @@ namespace StarlightRiver.Content.Items.Manabonds
 	/// <summary>
 	/// An abstract class for which to build manabond accessories off of
 	/// </summary>
+	public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___SmallBar0 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "SmallBar0");
+	public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___SmallBar1 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "SmallBar1");
 	internal abstract class Manabond : SmartAccessory
 	{
 		public Manabond(string name, string tooltip) : base(name, tooltip) { }
@@ -153,8 +155,8 @@ namespace StarlightRiver.Content.Items.Manabonds
 
 			float fill = mana / (float)maxMana;
 
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "SmallBar1").Value;
-			Texture2D tex2 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "SmallBar0").Value;
+			Texture2D tex = texture_AssetDirectory_GUI___SmallBar1.Value;
+			Texture2D tex2 = texture_AssetDirectory_GUI___SmallBar0.Value;
 
 			var pos = (projectile.Center + new Vector2(-tex.Width / 2, -40) + Vector2.UnitY * projectile.height / 2f - Main.screenPosition).ToPoint();
 			var target = new Rectangle(pos.X, pos.Y, (int)(fill * tex.Width), tex.Height);

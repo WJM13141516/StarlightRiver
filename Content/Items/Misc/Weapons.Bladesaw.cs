@@ -10,6 +10,10 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	public class Bladesaw : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture____ChainGlow = ModContent.Request<Texture2D>(Texture + "_ChainGlow");
+		public static readonly Asset<Texture2D> texture_Texture____Chain = ModContent.Request<Texture2D>(Texture + "_Chain");
+		public static readonly Asset<Texture2D> texture_Texture____Blade = ModContent.Request<Texture2D>(Texture + "_Blade");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private int swingDirection = 1;
 
 		public override string Texture => AssetDirectory.MiscItem + Name;
@@ -290,10 +294,10 @@ namespace StarlightRiver.Content.Items.Misc
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = Request<Texture2D>(Texture).Value;
-			Texture2D bladeTex = Request<Texture2D>(Texture + "_Blade").Value;
-			Texture2D chainTex = Request<Texture2D>(Texture + "_Chain").Value;
-			Texture2D chainGlowTex = Request<Texture2D>(Texture + "_ChainGlow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D bladeTex = texture_Texture____Blade.Value;
+			Texture2D chainTex = texture_Texture____Chain.Value;
+			Texture2D chainGlowTex = texture_Texture____ChainGlow.Value;
 			SpriteEffects flip = Owner.direction == -1 ? SpriteEffects.FlipHorizontally : 0;
 			float rotation = Projectile.rotation + MathHelper.PiOver4 + (Owner.direction == -1 ? MathHelper.PiOver2 : 0f);
 			Rectangle sourceRectangle = tex.Frame(1, Main.projFrames[Projectile.type], frameY: Projectile.frame);

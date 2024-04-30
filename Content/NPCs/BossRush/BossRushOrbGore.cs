@@ -5,6 +5,9 @@ namespace StarlightRiver.Content.NPCs.BossRush
 {
 	internal class BossRushOrbGoreProjectile : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_NPCs_BossRush_Gore_RockGlow___type_ToString( = ModContent.Request<Texture2D>("StarlightRiver/Assets/NPCs/BossRush/Gore/RockGlow" + type.ToString();
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_NPCs_BossRush_Gore_Rock___type_ToString( = ModContent.Request<Texture2D>("StarlightRiver/Assets/NPCs/BossRush/Gore/Rock" + type.ToString();
 		int type = 1;
 
 		public override string Texture => "StarlightRiver/Assets/NPCs/BossRush/Gore/Rock1";
@@ -45,9 +48,9 @@ namespace StarlightRiver.Content.NPCs.BossRush
 			Color color = Color.Cyan;
 			color.R += 128;
 
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/NPCs/BossRush/Gore/Rock" + type.ToString()).Value;
-			Texture2D glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/NPCs/BossRush/Gore/RockGlow" + type.ToString()).Value;
-			Texture2D bloom = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_NPCs_BossRush_Gore_Rock___type_ToString().Value;
+			Texture2D glow = texture_StarlightRiver_Assets_NPCs_BossRush_Gore_RockGlow___type_ToString().Value;
+			Texture2D bloom = texture_StarlightRiver_Assets_Keys_Glow.Value;
 
 			Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, tex.Size() * 0.5f, 1, SpriteEffects.None, 0);
 

@@ -8,6 +8,10 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 {
 	public class JetwelderFinal : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Front = ModContent.Request<Texture2D>(Texture + "_Front");
+		public static readonly Asset<Texture2D> texture_Texture____Back = ModContent.Request<Texture2D>(Texture + "_Back");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private const int MAX_RANGE = 400;
 		private const int MIN_RANGE = 150;
 		private const float SPEED = 5f;
@@ -106,8 +110,8 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 		{
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 			SpriteEffects spriteEffects = Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
 			int frameHeight = tex.Height / Main.projFrames[Projectile.type];
@@ -115,8 +119,8 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 
 			var frame = new Rectangle(0, frameHeight * Projectile.frame, tex.Width, frameHeight);
 
-			Texture2D backTex = ModContent.Request<Texture2D>(Texture + "_Back").Value;
-			Texture2D frontTex = ModContent.Request<Texture2D>(Texture + "_Front").Value;
+			Texture2D backTex = texture_Texture____Back.Value;
+			Texture2D frontTex = texture_Texture____Front.Value;
 
 			Vector2 backOffsetReal = new Vector2(backOffset.X * Projectile.spriteDirection, backOffset.Y + backOffsetY).RotatedBy(Projectile.rotation);
 
@@ -344,8 +348,8 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 
 			int frameHeight = tex.Height / Main.projFrames[Projectile.type];
 			var origin = new Vector2(tex.Width / 2, frameHeight / 2);

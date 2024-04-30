@@ -8,6 +8,7 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	public class CopperCoil : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
 		public override string Texture => AssetDirectory.MiscItem + "CopperCoil";
 
 		public override void SetStaticDefaults()
@@ -193,7 +194,7 @@ namespace StarlightRiver.Content.Items.Misc
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			ReLogic.Content.Asset<Texture2D> texture = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+			ReLogic.Content.Asset<Texture2D> texture = texture_StarlightRiver_Assets_GlowTrail;
 
 			float t = Utils.GetLerpValue(0, 80, Projectile.timeLeft, true);
 			var glowColor = Color.Lerp(new Color(120, 230, 255), Color.AliceBlue, 0.5f);

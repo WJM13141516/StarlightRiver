@@ -10,6 +10,7 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	class MagmiteBottle : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow");
 		public override string Texture => AssetDirectory.VitricItem + Name;
 
 		public override void SetStaticDefaults()
@@ -160,7 +161,7 @@ namespace StarlightRiver.Content.Items.Vitric
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Keys_Glow.Value;
 			Color color = new Color(255, 100, 50) * 0.3f * (Projectile.timeLeft / 180f);
 			spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, tex.Frame(), color, 0, tex.Size() / 2, 1.2f * (Projectile.timeLeft / 180f), 0, 0);
 		}

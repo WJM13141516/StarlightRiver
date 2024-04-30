@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.NPCs.BaseTypes
 {
 	class GravityOrbTest : ModNPC, IDrawAdditive
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Interactive_WispSwitchGlow2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Interactive/WispSwitchGlow2");
 		public int radius = 100;
 		public int attract = 100;
 
@@ -61,7 +62,7 @@ namespace StarlightRiver.Content.NPCs.BaseTypes
 			{
 				float time = (Main.GameUpdateCount + k / (6 / 4f) * 200) / 200f;
 
-				Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Tiles/Interactive/WispSwitchGlow2").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Tiles_Interactive_WispSwitchGlow2.Value;
 				float rad = (radius + attract) * 2 / (float)tex.Width;
 				spriteBatch.Draw(tex, NPC.Center - Main.screenPosition, null, Color.Cyan * (time % rad / (rad / 4)) * 0.4f, 0, tex.Size() / 2, rad - time % rad, 0, 0);
 			}

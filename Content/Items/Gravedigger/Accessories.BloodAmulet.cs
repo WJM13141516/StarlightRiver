@@ -11,6 +11,7 @@ namespace StarlightRiver.Content.Items.Gravedigger
 {
 	public class BloodAmulet : SmartAccessory
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_FireTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail");
 		public int storedDamage;
 
 		public override string Texture => AssetDirectory.GravediggerItem + Name;
@@ -196,7 +197,7 @@ namespace StarlightRiver.Content.Items.Gravedigger
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount);
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_FireTrail.Value);
 
 			trail?.Render(effect);
 		}

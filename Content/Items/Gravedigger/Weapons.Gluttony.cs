@@ -13,6 +13,10 @@ namespace StarlightRiver.Content.Items.Gravedigger
 {
 	public class Gluttony : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___ConeTell = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "ConeTell");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Items_Gravedigger_GluttonyBG = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Gravedigger/GluttonyBG");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_LaserBallDistort = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/LaserBallDistort");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
 		public override string Texture => AssetDirectory.GravediggerItem + Name;
 
 		public override void SetStaticDefaults()
@@ -249,8 +253,8 @@ namespace StarlightRiver.Content.Items.Gravedigger
 			effect.Parameters["time"].SetValue(0.05f * Main.GameUpdateCount);
 			effect.Parameters["repeats"].SetValue(3f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
-			effect.Parameters["sampleTexture2"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/LaserBallDistort").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
+			effect.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_Bosses_VitricBoss_LaserBallDistort.Value);
 
 			effect.Parameters["row"].SetValue(0);
 			trail?.Render(effect);
@@ -325,7 +329,7 @@ namespace StarlightRiver.Content.Items.Gravedigger
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Gravedigger/GluttonyBG").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Items_Gravedigger_GluttonyBG.Value;
 			float prog = Helper.SwoopEase(Math.Min(1, timer / 80f));
 
 			Effect effect1 = Filters.Scene["Cyclone"].GetShader().Shader;
@@ -339,7 +343,7 @@ namespace StarlightRiver.Content.Items.Gravedigger
 			effect1.Parameters["Resolution"].SetValue(tex.Size());
 			effect1.Parameters["mainColor"].SetValue(new Vector3(0.8f, 0.03f, 0.18f));
 
-			effect1.Parameters["sampleTexture2"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/LaserBallDistort").Value);
+			effect1.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_Bosses_VitricBoss_LaserBallDistort.Value);
 
 			Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.Black * prog * 0.8f, Projectile.rotation + 1.57f + 0.1f, new Vector2(tex.Width / 2, tex.Height), prog * 0.55f, 0, 0);
 
@@ -358,7 +362,7 @@ namespace StarlightRiver.Content.Items.Gravedigger
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
 			float prog = Helper.SwoopEase(Math.Min(1, timer / 50f));
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "ConeTell").Value;
+			Texture2D tex = texture_AssetDirectory_VitricBoss___ConeTell.Value;
 			//spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, new Color(255, 60, 80) * prog * 0.4f, Projectile.rotation + 1.57f + 0.1f, new Vector2(tex.Width / 2, tex.Height), prog * 0.55f, 0, 0);
 		}
 	}

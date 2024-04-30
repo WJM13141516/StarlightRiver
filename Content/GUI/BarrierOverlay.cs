@@ -9,6 +9,11 @@ namespace StarlightRiver.Content.GUI
 {
 	class BarrierOverlay : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___PlayerShieldBarOver = ModContent.Request<Texture2D>(AssetDirectory.GUI + "PlayerShieldBarOver");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___PlayerShieldBar = ModContent.Request<Texture2D>(AssetDirectory.GUI + "PlayerShieldBar");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ShieldHeartLine = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldHeartLine");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ShieldHeartOver = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldHeartOver");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ShieldHeart = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldHeart");
 		readonly List<string> resourceSetsWithText = new() { "Default", "HorizontalBarsWithText", "HorizontalBarsWithFullText", "NewWithText" };
 		public override bool Visible => true;
 
@@ -62,9 +67,9 @@ namespace StarlightRiver.Content.GUI
 				int partialHeartMax = fullHeartsToDraw < 20 ? sp.barrier % 20 : 0;
 				float shieldPerHeart = sp.maxBarrier > vanillaHearts * 20 ? sp.maxBarrier / (float)vanillaHearts : 20;
 
-				Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldHeart").Value;
-				Texture2D texOver = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldHeartOver").Value;
-				Texture2D texLine = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldHeartLine").Value;
+				Texture2D tex = texture_AssetDirectory_GUI___ShieldHeart.Value;
+				Texture2D texOver = texture_AssetDirectory_GUI___ShieldHeartOver.Value;
+				Texture2D texLine = texture_AssetDirectory_GUI___ShieldHeartLine.Value;
 
 				for (int k = 0; k <= fullHeartsToDraw; k++)
 				{
@@ -81,8 +86,8 @@ namespace StarlightRiver.Content.GUI
 
 						pos = new Vector2(Main.screenWidth - 72 - k * 12, yOffset);
 
-						Texture2D texBar = ModContent.Request<Texture2D>(AssetDirectory.GUI + "PlayerShieldBar").Value;
-						Texture2D texOverBar = ModContent.Request<Texture2D>(AssetDirectory.GUI + "PlayerShieldBarOver").Value;
+						Texture2D texBar = texture_AssetDirectory_GUI___PlayerShieldBar.Value;
+						Texture2D texOverBar = texture_AssetDirectory_GUI___PlayerShieldBarOver.Value;
 						Texture2D texLineBar = Terraria.GameContent.TextureAssets.MagicPixel.Value;
 
 						int width2 = 0;

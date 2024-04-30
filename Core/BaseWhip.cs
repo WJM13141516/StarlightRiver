@@ -10,6 +10,7 @@ namespace StarlightRiver.Core
 {
 	public abstract class BaseWhip : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		protected string name;
 		protected int segments;
 		protected float rangeMultiplier;
@@ -175,7 +176,7 @@ namespace StarlightRiver.Core
 			}
 
 			//whip
-			Asset<Texture2D> texture = ModContent.Request<Texture2D>(Texture);
+			Asset<Texture2D> texture = texture_Texture;
 			Rectangle whipFrame = texture.Frame(1, 5, 0, 0);
 			int height = whipFrame.Height;
 			Vector2 firstPoint = points[0];

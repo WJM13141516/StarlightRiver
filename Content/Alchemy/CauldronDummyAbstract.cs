@@ -6,6 +6,8 @@ namespace StarlightRiver.Content.Alchemy
 {
 	public abstract class CauldronDummyAbstract : Dummy
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Alchemy___BubbleSheetGlow = ModContent.Request<Texture2D>(AssetDirectory.Alchemy + "BubbleSheetGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Alchemy___BubbleSheet = ModContent.Request<Texture2D>(AssetDirectory.Alchemy + "BubbleSheet");
 		//This serves as the core logic driver of the alchemy system
 		//any inputs and outputs will be routed through here
 		//and this will execute the calls to any ingredient logic and visuals
@@ -110,8 +112,8 @@ namespace StarlightRiver.Content.Alchemy
 		{
 			if (mostRecentIngredient != null && wrapper.bubbleOpacity > 0f)
 			{
-				Texture2D bubbleSheet = Request<Texture2D>(AssetDirectory.Alchemy + "BubbleSheet").Value;
-				Texture2D bubbleGlow = Request<Texture2D>(AssetDirectory.Alchemy + "BubbleSheetGlow").Value;
+				Texture2D bubbleSheet = texture_AssetDirectory_Alchemy___BubbleSheet.Value;
+				Texture2D bubbleGlow = texture_AssetDirectory_Alchemy___BubbleSheetGlow.Value;
 				int frameHeight = bubbleSheet.Height / bubbleAnimationFrames;
 
 				if (wrapper.bubbleOpacity > 1f)

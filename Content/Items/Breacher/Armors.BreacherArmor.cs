@@ -16,6 +16,10 @@ namespace StarlightRiver.Content.Items.Breacher
 	[AutoloadEquip(EquipType.Head)]
 	public class BreacherHead : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_Texture____BatteryCharge = ModContent.Request<Texture2D>(Texture + "_BatteryCharge");
+		public static readonly Asset<Texture2D> texture_Texture____Battery = ModContent.Request<Texture2D>(Texture + "_Battery");
+		public static readonly Asset<Texture2D> texture_Texture____Display = ModContent.Request<Texture2D>(Texture + "_Display");
 		public override string Texture => AssetDirectory.BreacherItem + "BreacherHead";
 
 		public override void SetStaticDefaults()
@@ -255,18 +259,18 @@ namespace StarlightRiver.Content.Items.Breacher
 			Color scanColor = Color.Lerp(Color.Red, Color.Green, batteryCharge / 5f) * MathHelper.Min(batteryFade, 1);
 			scanColor.A = 0;
 
-			Texture2D tex = Request<Texture2D>(Texture + "_Display").Value;
+			Texture2D tex = texture_Texture____Display.Value;
 			Vector2 position = Projectile.Center - Main.screenPosition;
 			var origin = new Vector2(tex.Width / 2, tex.Height);
 			Main.spriteBatch.Draw(tex, position, null, scanColor * 2, 0, origin, new Vector2(0.46f, 0.85f), SpriteEffects.None, 0);
 
-			tex = Request<Texture2D>(Texture + "_Battery").Value;
+			tex = texture_Texture____Battery.Value;
 			position = Projectile.Center - Main.screenPosition - new Vector2(0, 30);
 			origin = tex.Size() / 2;
 
 			Main.spriteBatch.Draw(tex, position, null, scanColor, 0, origin, 1, SpriteEffects.None, 0);
 
-			tex = Request<Texture2D>(Texture + "_BatteryCharge").Value;
+			tex = texture_Texture____BatteryCharge.Value;
 			var frame = new Rectangle(0, 0, 11 + 4 * batteryCharge, tex.Height);
 
 			Main.spriteBatch.Draw(tex, position, frame, scanColor, 0, origin, 1, SpriteEffects.None, 0);
@@ -637,7 +641,7 @@ namespace StarlightRiver.Content.Items.Breacher
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 			effect.Parameters["alpha"].SetValue(Alpha);
 
 			trail?.Render(effect);
@@ -765,7 +769,7 @@ namespace StarlightRiver.Content.Items.Breacher
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 			effect.Parameters["alpha"].SetValue(1);
 
 			trail?.Render(effect);

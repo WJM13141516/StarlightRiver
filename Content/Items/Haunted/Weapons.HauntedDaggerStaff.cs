@@ -17,6 +17,12 @@ namespace StarlightRiver.Content.Items.Haunted
 {
 	public class HauntedDaggerStaff : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Noise_PerlinNoise = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/PerlinNoise");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Noise_SwirlyNoiseLooping = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/SwirlyNoiseLooping");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___StarTexture = ModContent.Request<Texture2D>(AssetDirectory.Assets + "StarTexture");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.HauntedItem + Name;
 
 		public override void SetStaticDefaults()
@@ -419,10 +425,10 @@ namespace StarlightRiver.Content.Items.Haunted
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
-			Texture2D starTex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "StarTexture").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D texGlow = texture_Texture____Glow.Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
+			Texture2D starTex = texture_AssetDirectory_Assets___StarTexture.Value;
 
 			Main.spriteBatch.Draw(bloomTex, Projectile.Center - Main.screenPosition, null, new Color(70, 200, 100, 0) * 0.25f, Projectile.rotation + MathHelper.ToRadians(rotTimer), bloomTex.Size() / 2f, 1f, 0f, 0f);
 
@@ -441,13 +447,13 @@ namespace StarlightRiver.Content.Items.Haunted
 
 			effect.Parameters["offset"].SetValue(new Vector2(0.001f));
 			effect.Parameters["repeats"].SetValue(2);
-			effect.Parameters["uImage1"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/SwirlyNoiseLooping").Value);
-			effect.Parameters["uImage2"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/PerlinNoise").Value);
+			effect.Parameters["uImage1"].SetValue(texture_AssetDirectory_Assets___Noise_SwirlyNoiseLooping.Value);
+			effect.Parameters["uImage2"].SetValue(texture_AssetDirectory_Assets___Noise_PerlinNoise.Value);
 
 			Color color = new Color(70, 200, 100, 0) * 0.4f * Utils.Clamp((float)Math.Sin(Main.GlobalTimeWrappedHourly * 2f), 0.5f, 1f);
 
 			effect.Parameters["uColor"].SetValue(color.ToVector4());
-			effect.Parameters["noiseImage1"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "Noise/PerlinNoise").Value);
+			effect.Parameters["noiseImage1"].SetValue(texture_AssetDirectory_Assets___Noise_PerlinNoise.Value);
 
 			effect.CurrentTechnique.Passes[0].Apply();
 

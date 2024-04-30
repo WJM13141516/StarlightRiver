@@ -9,6 +9,8 @@ namespace StarlightRiver.Content.Lavas
 {
 	class LavaLoader : IOrderedLoadable
 	{
+		public static readonly Asset<Texture2D> texture_path____Block = ModContent.Request<Texture2D>(path + "_Block");
+		public static readonly Asset<Texture2D> texture_Terraria_Liquid_1 = ModContent.Request<Texture2D>("Terraria/Liquid_1");
 		public static List<LavaStyle> lavas = new();
 		public static LavaStyle ActiveStyle;
 
@@ -82,12 +84,12 @@ namespace StarlightRiver.Content.Lavas
 			if (ActiveStyle is null)
 				return arg;
 
-			if (arg != Request<Texture2D>("Terraria/Liquid_1").Value)
+			if (arg != texture_Terraria_Liquid_1.Value)
 				return arg;
 
 			string path = ActiveStyle.texturePath;
 			ActiveStyle.DrawBlockEffects(x, y, up, left, right, down);
-			return Request<Texture2D>(path + "_Block").Value;
+			return texture_path____Block.Value;
 		}
 
 		private void SwapLavaDrawEffects(ILContext il)

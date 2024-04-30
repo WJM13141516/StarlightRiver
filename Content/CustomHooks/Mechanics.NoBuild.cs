@@ -12,6 +12,7 @@ namespace StarlightRiver.Content.CustomHooks
 {
 	class ProtectionGlobalTime : GlobalTile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_MagicPixel = ModContent.Request<Texture2D>("StarlightRiver/Assets/MagicPixel");
 		public override bool CanExplode(int i, int j, int type)
 		{
 			if (IsProtected(i, j))
@@ -345,7 +346,7 @@ namespace StarlightRiver.Content.CustomHooks
 
 			foreach (Rectangle rect in ProtectedRegions)
 			{
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/MagicPixel").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_MagicPixel.Value;
 				var target = new Rectangle(rect.X * 16 - (int)Main.screenPosition.X, rect.Y * 16 - (int)Main.screenPosition.Y, rect.Width * 16, rect.Height * 16);
 				Main.spriteBatch.Draw(tex, target, Color.Red * 0.25f);
 			}
@@ -353,7 +354,7 @@ namespace StarlightRiver.Content.CustomHooks
 			foreach (Ref<Rectangle> rectRef in RuntimeProtectedRegions)
 			{
 				Rectangle rect = rectRef.Value;
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/MagicPixel").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_MagicPixel.Value;
 				var target = new Rectangle(rect.X * 16 - (int)Main.screenPosition.X, rect.Y * 16 - (int)Main.screenPosition.Y, rect.Width * 16, rect.Height * 16);
 				Main.spriteBatch.Draw(tex, target, Color.Blue * 0.25f);
 			}

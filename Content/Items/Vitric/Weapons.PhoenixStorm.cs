@@ -12,6 +12,10 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	public class PhoenixStorm : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_FireTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture____White = ModContent.Request<Texture2D>(Texture + "_White");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public int stormTimer = 0;
 
 		public override string Texture => AssetDirectory.VitricItem + Name;
@@ -265,9 +269,9 @@ namespace StarlightRiver.Content.Items.Vitric
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D whiteTex = Request<Texture2D>(Texture + "_White").Value;
-			Texture2D glowTex = Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D whiteTex = texture_Texture____White.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 			int frameHeight = tex.Height / Main.projFrames[Projectile.type];
 			var frame = new Rectangle(0, frameHeight * Projectile.frame, tex.Width, frameHeight);
 
@@ -360,7 +364,7 @@ namespace StarlightRiver.Content.Items.Vitric
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount);
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/FireTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_FireTrail.Value);
 
 			trail?.Render(effect);
 		}

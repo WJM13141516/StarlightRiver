@@ -11,6 +11,9 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 {
 	public class JetwelderJumper : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_MotionTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/MotionTrail");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private readonly int BASE_DURATION = 1200;
 
 		private bool jumping = false;
@@ -61,7 +64,7 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			int frameHeight = tex.Height / Main.projFrames[Projectile.type];
 			var frame = new Rectangle(0, frameHeight * Projectile.frame, tex.Width, frameHeight);
 
@@ -235,8 +238,8 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 		public override bool PreDraw(ref Color lightColor)
 		{
 			DrawTrail(Main.spriteBatch);
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 
 			int frameHeight = tex.Height / Main.projFrames[Projectile.type];
 			var origin = new Vector2(tex.Width / 2, frameHeight / 2);
@@ -333,7 +336,7 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/MotionTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_MotionTrail.Value);
 
 			trail?.Render(effect);
 

@@ -8,6 +8,16 @@ namespace StarlightRiver.Content.Tiles.Overgrow
 {
 	internal class BossWindowDummy : Dummy
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_OvergrowTile___Dor1 = ModContent.Request<Texture2D>(AssetDirectory.OvergrowTile + "Dor1");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_OvergrowTile___Dor2 = ModContent.Request<Texture2D>(AssetDirectory.OvergrowTile + "Dor2");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_OvergrowTile___Window1 = ModContent.Request<Texture2D>(AssetDirectory.OvergrowTile + "Window1");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_OvergrowTile___Waterfall = ModContent.Request<Texture2D>(AssetDirectory.OvergrowTile + "Waterfall");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_OvergrowTile___PitGlow = ModContent.Request<Texture2D>(AssetDirectory.OvergrowTile + "PitGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_OvergrowTile___Window2 = ModContent.Request<Texture2D>(AssetDirectory.OvergrowTile + "Window2");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_OvergrowTile___Window3 = ModContent.Request<Texture2D>(AssetDirectory.OvergrowTile + "Window3");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_OvergrowTile___Window4 = ModContent.Request<Texture2D>(AssetDirectory.OvergrowTile + "Window4");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_OvergrowTile___WindowGlass = ModContent.Request<Texture2D>(AssetDirectory.OvergrowTile + "WindowGlass");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_OvergrowTile___WindowFrame = ModContent.Request<Texture2D>(AssetDirectory.OvergrowTile + "WindowFrame");
 		public float timer;
 
 		private ParticleSystem particles = new("StarlightRiver/Assets/GUI/HolyBig", UpdateParticles);
@@ -18,8 +28,8 @@ namespace StarlightRiver.Content.Tiles.Overgrow
 		{
 			Vector2 dpos = Center - Main.screenPosition + Vector2.UnitY * 16;
 
-			Texture2D frametex = Request<Texture2D>(AssetDirectory.OvergrowTile + "WindowFrame").Value;
-			Texture2D glasstex = Request<Texture2D>(AssetDirectory.OvergrowTile + "WindowGlass").Value;
+			Texture2D frametex = texture_AssetDirectory_OvergrowTile___WindowFrame.Value;
+			Texture2D glasstex = texture_AssetDirectory_OvergrowTile___WindowGlass.Value;
 
 			Main.spriteBatch.Draw(glasstex, dpos, glasstex.Frame(), Color.White * 0.15f, 0, glasstex.Frame().Size() / 2, 1, 0, 0); //glass
 			Main.spriteBatch.Draw(frametex, dpos, frametex.Frame(), new Color(255, 255, 200), 0, frametex.Frame().Size() / 2, 1, 0, 0); //frame
@@ -131,13 +141,13 @@ namespace StarlightRiver.Content.Tiles.Overgrow
 				return;
 
 			//background
-			Texture2D backtex1 = Request<Texture2D>(AssetDirectory.OvergrowTile + "Window4").Value;
+			Texture2D backtex1 = texture_AssetDirectory_OvergrowTile___Window4.Value;
 			spriteBatch.Draw(backtex1, target, GetSource(0, backtex1), Color.White, 0, Vector2.Zero, 0, 0);
 
-			Texture2D backtex2 = Request<Texture2D>(AssetDirectory.OvergrowTile + "Window3").Value;
+			Texture2D backtex2 = texture_AssetDirectory_OvergrowTile___Window3.Value;
 			spriteBatch.Draw(backtex2, target, GetSource(0.4f, backtex2), Color.White, 0, Vector2.Zero, 0, 0);
 
-			Texture2D backtex3 = Request<Texture2D>(AssetDirectory.OvergrowTile + "Window2").Value;
+			Texture2D backtex3 = texture_AssetDirectory_OvergrowTile___Window2.Value;
 			spriteBatch.Draw(backtex3, target, GetSource(0.3f, backtex3), Color.White, 0, Vector2.Zero, 0, 0);
 
 			//godbeams
@@ -152,7 +162,7 @@ namespace StarlightRiver.Content.Tiles.Overgrow
 
 			for (int k = -2; k < 3; k++)
 			{
-				Texture2D tex2 = Request<Texture2D>(AssetDirectory.OvergrowTile + "PitGlow").Value;
+				Texture2D tex2 = texture_AssetDirectory_OvergrowTile___PitGlow.Value;
 				float rot = (float)Main.time / 50 % 6.28f;
 				float sin = (float)Math.Sin(rot + k);
 				float sin2 = (float)Math.Sin(rot + k * 1.4f);
@@ -169,26 +179,26 @@ namespace StarlightRiver.Content.Tiles.Overgrow
 
 			for (int k = -9; k < 8; k++)// small waterfalls
 			{
-				Texture2D watertex = Request<Texture2D>(AssetDirectory.OvergrowTile + "Waterfall").Value;
+				Texture2D watertex = texture_AssetDirectory_OvergrowTile___Waterfall.Value;
 				int frame = (int)Main.time % 16 / 2;
 				spriteBatch.Draw(watertex, dpos + new Vector2(100, k * 64) + FindOffset(pos, 0.22f, true), new Rectangle(0, frame * 32, watertex.Width, 32), Color.White * 0.3f, 0, Vector2.Zero, 2, 0, 0);
 			}
 
 			//front row
-			Texture2D backtex4 = Request<Texture2D>(AssetDirectory.OvergrowTile + "Window1").Value;
+			Texture2D backtex4 = texture_AssetDirectory_OvergrowTile___Window1.Value;
 			spriteBatch.Draw(backtex4, target, GetSource(0.2f, backtex4), Color.White, 0, Vector2.Zero, 0, 0);
 
 			for (int k = -6; k < 6; k++) //big waterfall
 			{
-				Texture2D watertex = Request<Texture2D>(AssetDirectory.OvergrowTile + "Waterfall").Value;
+				Texture2D watertex = texture_AssetDirectory_OvergrowTile___Waterfall.Value;
 				int frame = (int)Main.time % 16 / 2;
 				spriteBatch.Draw(watertex, dpos + new Vector2(300, k * 96) + FindOffset(pos, 0.1f, true), new Rectangle(0, frame * 32, watertex.Width, 32), Color.White * 0.3f, 0, Vector2.Zero, 3, 0, 0);
 			}
 
 			if (timer <= 360) //wall
 			{
-				Texture2D walltex = Request<Texture2D>(AssetDirectory.OvergrowTile + "Dor2").Value;
-				Texture2D walltex2 = Request<Texture2D>(AssetDirectory.OvergrowTile + "Dor1").Value;
+				Texture2D walltex = texture_AssetDirectory_OvergrowTile___Dor2.Value;
+				Texture2D walltex2 = texture_AssetDirectory_OvergrowTile___Dor1.Value;
 				var sourceRect = new Rectangle(0, 0, walltex.Width, walltex.Height - (int)(timer / 360 * 764));
 				var sourceRect2 = new Rectangle(0, (int)(timer / 360 * 564), walltex2.Width, walltex2.Height - (int)(timer / 360 * 564));
 

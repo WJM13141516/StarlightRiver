@@ -9,6 +9,7 @@ namespace StarlightRiver.Content.NPCs.Forest
 {
 	internal class Blover : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private int xFrame = 0;
 		private int yFrame = 0;
 		private int frameCounter = 0;
@@ -101,7 +102,7 @@ namespace StarlightRiver.Content.NPCs.Forest
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D texture = Request<Texture2D>(Texture).Value;
+			Texture2D texture = texture_Texture.Value;
 
 			SpriteEffects effects = SpriteEffects.None;
 			var origin = new Vector2(NPC.width / 2, NPC.height / 2 - 2);

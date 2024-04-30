@@ -9,6 +9,8 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	class ShatteredAegis : SmartAccessory
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_FireTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
 		public int cooldown = 0;
 
 		public override string Texture => AssetDirectory.VitricItem + Name;
@@ -150,11 +152,11 @@ namespace StarlightRiver.Content.Items.Vitric
 			effect.Parameters["time"].SetValue(Projectile.timeLeft * 0.01f);
 			effect.Parameters["repeats"].SetValue(6);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(effect);
 
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_FireTrail.Value);
 
 			trail?.Render(effect);
 		}

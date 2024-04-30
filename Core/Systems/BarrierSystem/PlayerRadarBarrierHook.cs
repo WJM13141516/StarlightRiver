@@ -9,6 +9,8 @@ namespace StarlightRiver.Core.Systems.BarrierSystem
 {
 	class PlayerRadarBarrierHook : HookGroup
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ShieldBarLine = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldBarLine");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ShieldBar1 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldBar1");
 		public override void Load()
 		{
 
@@ -147,7 +149,7 @@ namespace StarlightRiver.Core.Systems.BarrierSystem
 			if (barrier <= 0)
 				return;
 
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldBar1").Value;
+			Texture2D tex = texture_AssetDirectory_GUI___ShieldBar1.Value;
 
 			float factor = Math.Min(barrier / (float)maxBarrier, 1);
 
@@ -158,7 +160,7 @@ namespace StarlightRiver.Core.Systems.BarrierSystem
 
 			if (barrier < maxBarrier && barrier > 0)
 			{
-				Texture2D texLine = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldBarLine").Value;
+				Texture2D texLine = texture_AssetDirectory_GUI___ShieldBarLine.Value;
 
 				var sourceLine = new Rectangle((int)(tex.Width * factor * 1.25f), 0, 2, tex.Height);
 				var targetLine = new Rectangle((int)position.X + (int)(tex.Width * factor * horizontalScale), (int)position.Y, 2, tex.Height);

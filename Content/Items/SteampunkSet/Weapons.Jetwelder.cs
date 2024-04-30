@@ -8,6 +8,19 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 {
 	public class Jetwelder : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SteampunkItem___JetwelderBar_Glow = ModContent.Request<Texture2D>(AssetDirectory.SteampunkItem + "JetwelderBar_Glow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SteampunkItem___JetwelderBar = ModContent.Request<Texture2D>(AssetDirectory.SteampunkItem + "JetwelderBar");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_Texture____Bar = ModContent.Request<Texture2D>(Texture + "_Bar");
+		public static readonly Asset<Texture2D> texture_Texture____Final_Gray = ModContent.Request<Texture2D>(Texture + "_Final_Gray");
+		public static readonly Asset<Texture2D> texture_Texture____Final = ModContent.Request<Texture2D>(Texture + "_Final");
+		public static readonly Asset<Texture2D> texture_Texture____Gatler_Gray = ModContent.Request<Texture2D>(Texture + "_Gatler_Gray");
+		public static readonly Asset<Texture2D> texture_Texture____Gatler = ModContent.Request<Texture2D>(Texture + "_Gatler");
+		public static readonly Asset<Texture2D> texture_Texture____Jumper_Gray = ModContent.Request<Texture2D>(Texture + "_Jumper_Gray");
+		public static readonly Asset<Texture2D> texture_Texture____Jumper = ModContent.Request<Texture2D>(Texture + "_Jumper");
+		public static readonly Asset<Texture2D> texture_Texture____Crawler_Gray = ModContent.Request<Texture2D>(Texture + "_Crawler_Gray");
+		public static readonly Asset<Texture2D> texture_Texture____Crawler = ModContent.Request<Texture2D>(Texture + "_Crawler");
 		private bool clickingRight = false;
 
 		public override string Texture => AssetDirectory.SteampunkItem + Name;
@@ -149,26 +162,26 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 				return false; // This is effectively a UI element. no logic needed for other clients or server
 
 			DrawRobot(Main.spriteBatch,
-					  ModContent.Request<Texture2D>(Texture + "_Crawler").Value,
-					  ModContent.Request<Texture2D>(Texture + "_Crawler_Gray").Value,
+					  texture_Texture____Crawler.Value,
+					  texture_Texture____Crawler_Gray.Value,
 					  -2 * PI_OVER_FOUR,
 					  5,
 					  crawlerScale);
 			DrawRobot(Main.spriteBatch,
-					  ModContent.Request<Texture2D>(Texture + "_Jumper").Value,
-					  ModContent.Request<Texture2D>(Texture + "_Jumper_Gray").Value,
+					  texture_Texture____Jumper.Value,
+					  texture_Texture____Jumper_Gray.Value,
 					  0 * PI_OVER_FOUR,
 					  10,
 					  jumperScale);
 			DrawRobot(Main.spriteBatch,
-					  ModContent.Request<Texture2D>(Texture + "_Gatler").Value,
-					  ModContent.Request<Texture2D>(Texture + "_Gatler_Gray").Value,
+					  texture_Texture____Gatler.Value,
+					  texture_Texture____Gatler_Gray.Value,
 					  2 * PI_OVER_FOUR,
 					  15,
 					  gatlerScale);
 			DrawRobot(Main.spriteBatch,
-					  ModContent.Request<Texture2D>(Texture + "_Final").Value,
-					  ModContent.Request<Texture2D>(Texture + "_Final_Gray").Value,
+					  texture_Texture____Final.Value,
+					  texture_Texture____Final_Gray.Value,
 					  4 * PI_OVER_FOUR, //Yes I know this is PI but it's consistant this way
 					  20,
 					  finalScale);
@@ -335,7 +348,7 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 			scale *= EaseFunction.EaseCubicOut.Ease(scaleCounter);
 			spriteBatch.Draw(tex, pos, null, Color.White * colorMult, 0, tex.Size() / 2, scale, SpriteEffects.None, 0f);
 
-			Texture2D barTex = ModContent.Request<Texture2D>(Texture + "_Bar").Value;
+			Texture2D barTex = texture_Texture____Bar.Value;
 			Vector2 barPos = pos - new Vector2(0, 30 * scale + 10);
 			int numScrapFive = minScrap / 5;
 			var frame = new Rectangle(
@@ -434,13 +447,13 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 
 			int frameHeight = tex.Height / Main.projFrames[Projectile.type];
 			var frame = new Rectangle(0, frameHeight * Projectile.frame, tex.Width, frameHeight);
 
 			SpriteEffects effects = Owner.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipVertically;
-			Texture2D bloomTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D bloomTex = texture_Texture____Glow.Value;
 			Color bloomColor = Color.White;
 			bloomColor.A = 0;
 
@@ -598,8 +611,8 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 			if (Player.HeldItem.type != ModContent.ItemType<Jetwelder>() || Player.whoAmI != Main.myPlayer)
 				return;
 
-			Texture2D barTex = ModContent.Request<Texture2D>(AssetDirectory.SteampunkItem + "JetwelderBar").Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(AssetDirectory.SteampunkItem + "JetwelderBar_Glow").Value;
+			Texture2D barTex = texture_AssetDirectory_SteampunkItem___JetwelderBar.Value;
+			Texture2D glowTex = texture_AssetDirectory_SteampunkItem___JetwelderBar_Glow.Value;
 
 			Vector2 drawPos = Player.MountedCenter - Main.screenPosition - new Vector2(0, 40 - Player.gfxOffY);
 

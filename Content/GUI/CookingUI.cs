@@ -16,6 +16,15 @@ namespace StarlightRiver.Content.GUI
 {
 	public class CookingUI : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_Item_ModItem_Texture = ModContent.Request<Texture2D>(Item.ModItem.Texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_CookSlotB = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/CookSlotB");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_CookSlotG = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/CookSlotG");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_CookSlotY = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/CookSlotY");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_Arrow = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/Arrow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_CookTop, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/CookTop", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_CookStatWindow, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/CookStatWindow", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_CookExit, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/CookExit", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_CookPrep, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/CookPrep", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 		public static bool visible;
 
 		private static bool Moving = false;
@@ -27,10 +36,10 @@ namespace StarlightRiver.Content.GUI
 		public readonly CookingSlot SideSlot0 = new(IngredientType.Side);
 		public readonly CookingSlot SideSlot1 = new(IngredientType.Side);
 		public readonly CookingSlot SeasonSlot = new(IngredientType.Seasoning);
-		private readonly UIImageButton CookButton = new(Request<Texture2D>("StarlightRiver/Assets/GUI/CookPrep", ReLogic.Content.AssetRequestMode.ImmediateLoad));
-		private readonly UIImageButton ExitButton = new(Request<Texture2D>("StarlightRiver/Assets/GUI/CookExit", ReLogic.Content.AssetRequestMode.ImmediateLoad));
-		private readonly UIImage StatBack = new(Request<Texture2D>("StarlightRiver/Assets/GUI/CookStatWindow", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value);
-		private readonly UIImage TopBar = new(Request<Texture2D>("StarlightRiver/Assets/GUI/CookTop", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value);
+		private readonly UIImageButton CookButton = new(texture_StarlightRiver_Assets_GUI_CookPrep, _ReLogic_Content_AssetRequestMode_ImmediateLoad);
+		private readonly UIImageButton ExitButton = new(texture_StarlightRiver_Assets_GUI_CookExit, _ReLogic_Content_AssetRequestMode_ImmediateLoad);
+		private readonly UIImage StatBack = new(texture_StarlightRiver_Assets_GUI_CookStatWindow, _ReLogic_Content_AssetRequestMode_ImmediateLoad.Value);
+		private readonly UIImage TopBar = new(texture_StarlightRiver_Assets_GUI_CookTop, _ReLogic_Content_AssetRequestMode_ImmediateLoad.Value);
 
 		public static Vector2 Basepos = new(Main.screenWidth / 2 - 173, Main.screenHeight / 2 - 122);
 
@@ -189,7 +198,7 @@ namespace StarlightRiver.Content.GUI
 
 				if (lineCount > 5)
 				{
-					Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/GUI/Arrow").Value;
+					Texture2D tex = texture_StarlightRiver_Assets_GUI_Arrow.Value;
 
 					spriteBatch.Draw(TextureAssets.MagicPixel.Value, new Rectangle((int)Basepos.X + 352, (int)Basepos.Y + 60, 4, 80), new Color(20, 20, 10) * 0.5f);
 					spriteBatch.Draw(tex, Basepos + new Vector2(354, 60 + scrollStart / (float)(lineCount - 5) * 80), null, Color.White, 0, tex.Size() / 2, 1, 0, 0);
@@ -301,19 +310,19 @@ namespace StarlightRiver.Content.GUI
 				}
 			}
 
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/GUI/CookSlotY").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_GUI_CookSlotY.Value;
 			switch (Type)
 			{
-				case IngredientType.Main: tex = Request<Texture2D>("StarlightRiver/Assets/GUI/CookSlotY").Value; break;
-				case IngredientType.Side: tex = Request<Texture2D>("StarlightRiver/Assets/GUI/CookSlotG").Value; break;
-				case IngredientType.Seasoning: tex = Request<Texture2D>("StarlightRiver/Assets/GUI/CookSlotB").Value; break;
+				case IngredientType.Main: tex = texture_StarlightRiver_Assets_GUI_CookSlotY.Value; break;
+				case IngredientType.Side: tex = texture_StarlightRiver_Assets_GUI_CookSlotG.Value; break;
+				case IngredientType.Seasoning: tex = texture_StarlightRiver_Assets_GUI_CookSlotB.Value; break;
 			}
 
 			spriteBatch.Draw(tex, GetDimensions().Position(), tex.Frame(), Color.White, 0, Vector2.Zero, 1, 0, 0);
 
 			if (!Item.IsAir)
 			{
-				Texture2D tex2 = Request<Texture2D>(Item.ModItem.Texture).Value;
+				Texture2D tex2 = texture_Item_ModItem_Texture.Value;
 				spriteBatch.Draw(tex2, new Rectangle((int)GetDimensions().X + 30, (int)GetDimensions().Y + 30, (int)MathHelper.Min(tex2.Width, 28), (int)MathHelper.Min(tex2.Height, 28)), tex2.Frame(), Color.White, 0, tex2.Size() / 2, 0, 0);
 
 				if (Item.stack > 1)

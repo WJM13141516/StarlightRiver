@@ -10,6 +10,9 @@ namespace StarlightRiver.Content.NPCs.Vitric
 {
 	internal class Snake : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Moonstone_GlowSmall = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Moonstone/GlowSmall");
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public ref float ActionState => ref NPC.ai[0];
 		public ref float ActionTimer => ref NPC.ai[1];
 
@@ -224,8 +227,8 @@ namespace StarlightRiver.Content.NPCs.Vitric
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			spriteBatch.Draw(Request<Texture2D>(Texture).Value, NPC.Center - screenPos + Vector2.UnitY * 2, NPC.frame, drawColor, NPC.rotation, new Vector2(33, 32), 1, NPC.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
-			spriteBatch.Draw(Request<Texture2D>(Texture + "Glow").Value, NPC.Center - screenPos + Vector2.UnitY * 2, NPC.frame, Color.White, NPC.rotation, new Vector2(33, 32), 1, NPC.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+			spriteBatch.Draw(texture_Texture.Value, NPC.Center - screenPos + Vector2.UnitY * 2, NPC.frame, drawColor, NPC.rotation, new Vector2(33, 32), 1, NPC.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+			spriteBatch.Draw(texture_Texture___Glow.Value, NPC.Center - screenPos + Vector2.UnitY * 2, NPC.frame, Color.White, NPC.rotation, new Vector2(33, 32), 1, NPC.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
 			return false;
 		}
 	}
@@ -294,13 +297,13 @@ namespace StarlightRiver.Content.NPCs.Vitric
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation, tex.Size() / 2, 1, 0, 0);
 		}
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Tiles/Moonstone/GlowSmall").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Tiles_Moonstone_GlowSmall.Value;
 			float alpha = Projectile.timeLeft > 160 ? 1 - (Projectile.timeLeft - 160) / 20f : 1;
 			Color color = new Color(255, 150, 50) * alpha;
 

@@ -7,6 +7,9 @@ namespace StarlightRiver.Content.Items.Manabonds
 {
 	internal class AquaticManabond : Manabond
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_ShadowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/ShadowTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Dusts_Aurora = ModContent.Request<Texture2D>("StarlightRiver/Assets/Dusts/Aurora");
 		public override string Texture => AssetDirectory.ManabondItem + Name;
 
 		public AquaticManabond() : base("Aquatic Manabond", "Your minions can store 40 mana\nYour minions siphon 6 mana per second from you untill full\nYour minions spend 8 mana to attack with a bouncing waterbolt occasionally") { }
@@ -120,8 +123,8 @@ namespace StarlightRiver.Content.Items.Manabonds
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Dusts/Aurora").Value;
-			Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Dusts_Aurora.Value;
+			Texture2D tex2 = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
 			spriteBatch.Draw(tex2, Projectile.Center - Main.screenPosition, null, new Color(40, 90, 255), 0, tex2.Size() / 2, 0.6f, 0, 0);
 			spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, new Color(60, 95, 255), Main.GameUpdateCount * 0.15f, tex.Size() / 2, 0.4f, 0, 0);
 			spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, new Color(90, 145, 255), Main.GameUpdateCount * -0.25f, tex.Size() / 2, 0.3f, 0, 0);
@@ -178,7 +181,7 @@ namespace StarlightRiver.Content.Items.Manabonds
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
 
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/ShadowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_ShadowTrail.Value);
 			trail?.Render(effect);
 		}
 	}

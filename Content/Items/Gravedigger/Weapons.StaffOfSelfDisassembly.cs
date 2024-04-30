@@ -7,6 +7,9 @@ namespace StarlightRiver.Content.Items.Gravedigger
 {
 	internal class StaffOfSelfDisassembly : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_MotionTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/MotionTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
 		public override string Texture => AssetDirectory.GravediggerItem + Name;
 
 		public override void Load()
@@ -260,8 +263,8 @@ namespace StarlightRiver.Content.Items.Gravedigger
 
 			//the lines connecting back to the owner
 			Texture2D tex = Terraria.GameContent.TextureAssets.MagicPixel.Value;
-			Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value;
-			Texture2D tex3 = ModContent.Request<Texture2D>("StarlightRiver/Assets/MotionTrail").Value;
+			Texture2D tex2 = texture_StarlightRiver_Assets_EnergyTrail.Value;
+			Texture2D tex3 = texture_StarlightRiver_Assets_MotionTrail.Value;
 
 			float strength = (0.2f + (float)Math.Sin(Main.GameUpdateCount * 0.1f) * 0.05f) * (healPower * 2);
 
@@ -289,7 +292,7 @@ namespace StarlightRiver.Content.Items.Gravedigger
 			Main.spriteBatch.End();
 			Main.spriteBatch.Begin(default, default, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D mainTex = ModContent.Request<Texture2D>(Texture).Value; //the actual sprite of the minion
+			Texture2D mainTex = texture_Texture.Value; //the actual sprite of the minion
 
 			if (State == 1)  //draw afterimage only when dashing
 			{

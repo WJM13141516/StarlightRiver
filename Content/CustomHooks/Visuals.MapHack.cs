@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.CustomHooks
 {
 	class MapHack : HookGroup
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Misc_SkyMap = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/SkyMap");
 		public override void Load()
 		{
 			if (Main.dedServ)
@@ -40,7 +41,7 @@ namespace StarlightRiver.Content.CustomHooks
 			if (FirstContactSystem.FirstContactFade > 0)
 			{
 				Terraria.Graphics.Effects.Filters.Scene["SpaceMap"].GetShader().Shader.Parameters["uTime"].SetValue(Main.GameUpdateCount / 30f);
-				Terraria.Graphics.Effects.Filters.Scene["SpaceMap"].GetShader().Shader.Parameters["sampleTexture2"].SetValue(Terraria.ModLoader.ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/SkyMap").Value);
+				Terraria.Graphics.Effects.Filters.Scene["SpaceMap"].GetShader().Shader.Parameters["sampleTexture2"].SetValue(Terraria.ModLoader.texture_StarlightRiver_Assets_Misc_SkyMap.Value);
 				Terraria.Graphics.Effects.Filters.Scene["SpaceMap"].GetShader().Shader.Parameters["uOpacity"].SetValue(FirstContactSystem.FirstContactFade);
 
 				Main.spriteBatch.End();

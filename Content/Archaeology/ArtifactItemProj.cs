@@ -6,6 +6,9 @@ namespace StarlightRiver.Content.Archaeology
 {
 	public class ArtifactItemProj : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Shine = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Shine");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public static Color glowColorToAssign;
 		public static int itemTypeToAssign;
 		public static Vector2 sizeToAssign;
@@ -83,9 +86,9 @@ namespace StarlightRiver.Content.Archaeology
 			Main.spriteBatch.End();
 			Main.spriteBatch.Begin(default, BlendState.Additive, SamplerState.PointClamp, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D mainTex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value;
-			Texture2D beamTex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Shine").Value;
+			Texture2D mainTex = texture_Texture.Value;
+			Texture2D glowTex = texture_StarlightRiver_Assets_Keys_Glow.Value;
+			Texture2D beamTex = texture_StarlightRiver_Assets_Keys_Shine.Value;
 
 			Vector2 pos = Projectile.Center + mainTex.Size() / 2 - Main.screenPosition;
 			Main.spriteBatch.Draw(glowTex, pos, null, glowColor * (0.9f + (float)Math.Sin(Main.GameUpdateCount / 25f) * 0.1f), 0f, glowTex.Size() / 2, mainTex.Size() / glowTex.Size() * 1.4f * Fade, SpriteEffects.None, 0f);

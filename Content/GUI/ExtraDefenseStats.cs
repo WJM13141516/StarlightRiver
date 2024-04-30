@@ -10,10 +10,11 @@ namespace StarlightRiver.Content.GUI
 {
 	class ExtraDefenseStats : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___DoTResistBG, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>(AssetDirectory.GUI + "DoTResistBG", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 		public int Timer = 0;
 		public Vector2 basePos;
 
-		public ExtraDefenseInfoPanel DoTResistPanel = new(ModContent.Request<Texture2D>(AssetDirectory.GUI + "DoTResistBG", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value, 1);
+		public ExtraDefenseInfoPanel DoTResistPanel = new(texture_AssetDirectory_GUI___DoTResistBG, _ReLogic_Content_AssetRequestMode_ImmediateLoad.Value, 1);
 
 		public override bool Visible => Main.playerInventory;
 

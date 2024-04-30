@@ -13,6 +13,7 @@ namespace StarlightRiver.Content.Items.Haunted
 {
 	public class TaintedGreataxe : CursedAccessory
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public int ProjectileIndex;
 
 		public override string Texture => AssetDirectory.HauntedItem + Name;
@@ -258,7 +259,7 @@ namespace StarlightRiver.Content.Items.Haunted
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			SpriteEffects spriteEffects = SpriteEffects.None;
 			if (Embedding)
 				spriteEffects = Projectile.direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;

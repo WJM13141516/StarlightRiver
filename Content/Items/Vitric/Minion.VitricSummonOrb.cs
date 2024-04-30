@@ -15,6 +15,7 @@
 //{
 //	internal class VKnife
 //    {
+public static readonly Asset<Texture2D> texture_AssetDirectory_VitricItem___WeaponSprite[Weapon] = ModContent.Request<Texture2D>(AssetDirectory.VitricItem + WeaponSprite[Weapon]);
 //        public Vector2 pos;
 //        public int index;
 //        public int max;
@@ -310,7 +311,7 @@
 //            if (Weapon < 0 || DisabledTime > 0)
 //                return false;
 
-//            Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.VitricItem + WeaponSprite[Weapon]).Value;
+//            Texture2D tex = texture_AssetDirectory_VitricItem___WeaponSprite[Weapon].Value;
 
 //            float scale = Math.Min(AnimationTimer / 15f, 1f);
 //            Rectangle Rect = WhiteFrame(tex.Size().ToRectangle(), false);

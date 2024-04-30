@@ -8,6 +8,8 @@ namespace StarlightRiver.Content.Pickups
 {
 	internal abstract class AbilityPickup : ModNPC, IDrawAdditive
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_RiftCrafting_Glow0 = ModContent.Request<Texture2D>("StarlightRiver/Assets/RiftCrafting/Glow0");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		/// <summary>
 		/// Indicates if the pickup should be visible in-world. Should be controlled using clientside vars.
 		/// </summary>
@@ -149,7 +151,7 @@ namespace StarlightRiver.Content.Pickups
 		{
 			if (Visible)
 			{
-				Texture2D tex = Request<Texture2D>(Texture).Value;
+				Texture2D tex = texture_Texture.Value;
 				Vector2 pos = NPC.Center - screenPos + new Vector2(0, (float)Math.Sin(StarlightWorld.visualTimer) * 5);
 				spriteBatch.Draw(tex, pos, tex.Frame(), Color.White, 0, tex.Size() / 2, 1, 0, 0);
 			}
@@ -161,7 +163,7 @@ namespace StarlightRiver.Content.Pickups
 		{
 			if (Visible)
 			{
-				Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/RiftCrafting/Glow0").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_RiftCrafting_Glow0.Value;
 				Vector2 pos = NPC.Center - Main.screenPosition + new Vector2(0, (float)Math.Sin(StarlightWorld.visualTimer) * 5);
 
 				spriteBatch.Draw(tex, pos, tex.Frame(), GlowColor * 0.3f, 0, tex.Size() / 2, 1, 0, 0);

@@ -10,6 +10,11 @@ namespace StarlightRiver.Content.Items.ArmsDealer
 {
 	internal class DefenseSystem : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_ArmsDealerItem___DefenseSystemStand = ModContent.Request<Texture2D>(AssetDirectory.ArmsDealerItem + "DefenseSystemStand");
+		public static readonly Asset<Texture2D> texture_gunTexPath = ModContent.Request<Texture2D>(gunTexPath);
+		public static readonly Asset<Texture2D> texture_MinigunTex = ModContent.Request<Texture2D>(MinigunTex);
+		public static readonly Asset<Texture2D> texture_ShotgunTex = ModContent.Request<Texture2D>(ShotgunTex);
+		public static readonly Asset<Texture2D> texture_PistolTex = ModContent.Request<Texture2D>(PistolTex);
 		public enum GunType
 		{
 			Pistol,
@@ -176,9 +181,9 @@ namespace StarlightRiver.Content.Items.ArmsDealer
 
 				Texture2D tex = k switch
 				{
-					0 => ModContent.Request<Texture2D>(PistolTex).Value,
-					1 => ModContent.Request<Texture2D>(ShotgunTex).Value,
-					2 => ModContent.Request<Texture2D>(MinigunTex).Value,
+					0 => texture_PistolTex.Value,
+					1 => texture_ShotgunTex.Value,
+					2 => texture_MinigunTex.Value,
 					_ => null
 				};
 
@@ -224,7 +229,7 @@ namespace StarlightRiver.Content.Items.ArmsDealer
 		public float gunRotation;
 		public string gunTexPath;
 
-		public Texture2D GunTex => ModContent.Request<Texture2D>(gunTexPath).Value;
+		public Texture2D GunTex => texture_gunTexPath.Value;
 
 		public Player Owner => Main.player[Projectile.owner];
 
@@ -349,7 +354,7 @@ namespace StarlightRiver.Content.Items.ArmsDealer
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D baseTex = ModContent.Request<Texture2D>(AssetDirectory.ArmsDealerItem + "DefenseSystemStand").Value;
+			Texture2D baseTex = texture_AssetDirectory_ArmsDealerItem___DefenseSystemStand.Value;
 
 			SpriteEffects effects = SpriteEffects.None;
 

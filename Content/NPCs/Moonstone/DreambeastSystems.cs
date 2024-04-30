@@ -16,6 +16,8 @@ namespace StarlightRiver.Content.NPCs.Moonstone
 {
 	internal class DreamBeastDrawSystem : ModSystem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MoonstoneNPC___LunaticEye = ModContent.Request<Texture2D>(AssetDirectory.MoonstoneNPC + "LunaticEye");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Noise_MiscNoise2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Noise/MiscNoise2");
 		public override void Load()
 		{
 			On_Main.DrawNPCs += DrawDreamBeast;
@@ -75,7 +77,7 @@ namespace StarlightRiver.Content.NPCs.Moonstone
 			{
 				Effect effect = Filters.Scene["MoonstoneBeastEffect"].GetShader().Shader;
 				effect.Parameters["baseTexture"].SetValue(target);
-				effect.Parameters["distortTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/Noise/MiscNoise2").Value);
+				effect.Parameters["distortTexture"].SetValue(texture_StarlightRiver_Assets_Noise_MiscNoise2.Value);
 				effect.Parameters["size"].SetValue(target.Size());
 				effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.005f);
 				effect.Parameters["opacity"].SetValue(lunacy / 100f);
@@ -247,7 +249,7 @@ namespace StarlightRiver.Content.NPCs.Moonstone
 			if (Player.dead)
 				return;
 
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.MoonstoneNPC + "LunaticEye").Value;
+			Texture2D tex = texture_AssetDirectory_MoonstoneNPC___LunaticEye.Value;
 
 			Vector2 offset = -Vector2.UnitY * (50 + Player.gfxOffY);
 			Rectangle drawRect = new(0, 0, tex.Width, tex.Height / 5);

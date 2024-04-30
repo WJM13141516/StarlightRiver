@@ -7,6 +7,7 @@ namespace StarlightRiver.Core
 {
 	public abstract class BaseFlailItem : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture____chain = ModContent.Request<Texture2D>(Texture + "_chain");
 		public override void SetDefaults()
 		{
 			Item.useStyle = ItemUseStyleID.Shoot;
@@ -226,7 +227,7 @@ namespace StarlightRiver.Core
 
 		public override bool PreDrawExtras()
 		{
-			Texture2D ChainTexture = ModContent.Request<Texture2D>(Texture + "_chain").Value;
+			Texture2D ChainTexture = texture_Texture____chain.Value;
 			Player Owner = Main.player[Projectile.owner];
 			int timestodrawchain = Math.Max((int)(Projectile.Distance(Owner.MountedCenter) / ChainTexture.Width), 1);
 

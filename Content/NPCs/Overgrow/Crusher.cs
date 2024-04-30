@@ -10,6 +10,8 @@ namespace StarlightRiver.Content.NPCs.Overgrow
 {
 	internal class Crusher : ModNPC, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_NPCs_Overgrow_CrusherTile = ModContent.Request<Texture2D>("StarlightRiver/Assets/NPCs/Overgrow/CrusherTile");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_NPCs_Overgrow_CrusherGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/NPCs/Overgrow/CrusherGlow");
 		public Tile Parent;
 
 		public override string Texture => "StarlightRiver/Assets/NPCs/Overgrow/Crusher";
@@ -103,8 +105,8 @@ namespace StarlightRiver.Content.NPCs.Overgrow
 		}
 		public override void PostDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/NPCs/Overgrow/CrusherGlow").Value;
-			Texture2D tex2 = Request<Texture2D>("StarlightRiver/Assets/NPCs/Overgrow/CrusherTile").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_NPCs_Overgrow_CrusherGlow.Value;
+			Texture2D tex2 = texture_StarlightRiver_Assets_NPCs_Overgrow_CrusherTile.Value;
 
 			spriteBatch.Draw(tex, NPC.Center - screenPos + new Vector2(0, -24), tex.Bounds, Color.White * 0.8f, 0, tex.Size() / 2, 1.2f + (float)Math.Sin(NPC.ai[0] / 80f * 6.28f) * 0.2f, 0, 0);
 

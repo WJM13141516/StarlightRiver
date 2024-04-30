@@ -10,6 +10,8 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	public class FryingPan : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture____BG = ModContent.Request<Texture2D>(Texture + "_BG");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public override void SetStaticDefaults()
@@ -290,7 +292,7 @@ namespace StarlightRiver.Content.Items.Misc
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 
 			SpriteEffects effects = SpriteEffects.None;
 
@@ -411,7 +413,7 @@ namespace StarlightRiver.Content.Items.Misc
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			SpriteEffects effects = SpriteEffects.None;
 
 			Vector2 origin = new Vector2(tex.Width, tex.Height) / 2;
@@ -495,8 +497,8 @@ namespace StarlightRiver.Content.Items.Misc
 		{
 			float colorMult = Math.Min(1, Math.Min((90 - Projectile.alpha) / 15f, Projectile.alpha / 15f));
 			Color bgColor = Color.White * colorMult;
-			Texture2D bgTex = Request<Texture2D>(Texture + "_BG").Value;
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D bgTex = texture_Texture____BG.Value;
+			Texture2D tex = texture_Texture.Value;
 
 			Color color = new Color(255, 255, 255, 0) * colorMult;
 

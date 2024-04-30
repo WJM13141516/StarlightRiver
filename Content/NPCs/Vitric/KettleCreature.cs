@@ -8,6 +8,10 @@ namespace StarlightRiver.Content.NPCs.Vitric
 {
 	internal class KettleCreature : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_NPCs_Vitric_KettleCreatureJoint = ModContent.Request<Texture2D>("StarlightRiver/Assets/NPCs/Vitric/KettleCreatureJoint");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_NPCs_Vitric_KettleCreatureLimb = ModContent.Request<Texture2D>("StarlightRiver/Assets/NPCs/Vitric/KettleCreatureLimb");
 		private const int WALK_RADIUS = 16;
 
 		KettleLimb leftLeg;
@@ -197,8 +201,8 @@ namespace StarlightRiver.Content.NPCs.Vitric
 
 		public void Draw(SpriteBatch sb)
 		{
-			Texture2D limbTex = Request<Texture2D>("StarlightRiver/Assets/NPCs/Vitric/KettleCreatureLimb").Value;
-			Texture2D jointTex = Request<Texture2D>("StarlightRiver/Assets/NPCs/Vitric/KettleCreatureJoint").Value;
+			Texture2D limbTex = texture_StarlightRiver_Assets_NPCs_Vitric_KettleCreatureLimb.Value;
+			Texture2D jointTex = texture_StarlightRiver_Assets_NPCs_Vitric_KettleCreatureJoint.Value;
 
 			sb.Draw(jointTex, joint - Main.screenPosition, null, Color.White, 0, jointTex.Size() / 2, 1, 0, 0);
 			sb.Draw(jointTex, attachPoint - Main.screenPosition, null, Color.White, 0, jointTex.Size() / 2, 1, 0, 0);
@@ -297,14 +301,14 @@ namespace StarlightRiver.Content.NPCs.Vitric
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(effect);
 		}
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
 			spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, new Color(255, 150, 50), 0, tex.Size() / 2, 1, 0, 0);
 			spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.White, 0, tex.Size() / 2, 0.8f, 0, 0);
 		}

@@ -7,6 +7,8 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 {
 	class GlassJavelin : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.Glassweaver + Name;
 
 		public bool isLoaded = false;
@@ -78,7 +80,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Asset<Texture2D> spear = Request<Texture2D>(Texture);
+			Asset<Texture2D> spear = texture_Texture;
 			Rectangle glassFrame = spear.Frame(3, 1, 0);
 			Rectangle hotFrame = spear.Frame(3, 1, 1);
 			Rectangle smallFrame = spear.Frame(3, 1, 2);
@@ -93,7 +95,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 			Color hotFade = new Color(255, 255, 255, 128) * Utils.GetLerpValue(50, 80, Projectile.timeLeft, true);
 			Main.EntitySpriteDraw(spear.Value, Projectile.Center - Main.screenPosition, hotFrame, hotFade, Projectile.rotation, spearOrigin, scale, SpriteEffects.None, 0);
 
-			Asset<Texture2D> bloom = Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+			Asset<Texture2D> bloom = texture_AssetDirectory_Keys___GlowAlpha;
 			float bloomScale = Utils.GetLerpValue(60, 90, Projectile.timeLeft, true) * Projectile.scale;
 
 			//small spear and bloom

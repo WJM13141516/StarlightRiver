@@ -15,16 +15,21 @@ namespace StarlightRiver.Content.GUI
 {
 	class ChefBagUI : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___FoodSlotOver = ModContent.Request<Texture2D>(AssetDirectory.GUI + "FoodSlotOver");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___FoodSlot = ModContent.Request<Texture2D>(AssetDirectory.GUI + "FoodSlot");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_MealButton, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/MealButton", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_IngredientButton, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/IngredientButton", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_SortButton, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/SortButton", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 		public static ChefBag openBag = null;
 		public static bool visible;
 
 		public static UIGrid grid = new();
 		public static UIScrollbar scroll = new();
 
-		public static UIImageButton SortButton = new(Request<Texture2D>("StarlightRiver/Assets/GUI/SortButton", ReLogic.Content.AssetRequestMode.ImmediateLoad));
+		public static UIImageButton SortButton = new(texture_StarlightRiver_Assets_GUI_SortButton, _ReLogic_Content_AssetRequestMode_ImmediateLoad);
 
-		public static UIImageButton IngredientTab = new(Request<Texture2D>("StarlightRiver/Assets/GUI/IngredientButton", ReLogic.Content.AssetRequestMode.ImmediateLoad));
-		public static UIImageButton RecipieTab = new(Request<Texture2D>("StarlightRiver/Assets/GUI/MealButton", ReLogic.Content.AssetRequestMode.ImmediateLoad));
+		public static UIImageButton IngredientTab = new(texture_StarlightRiver_Assets_GUI_IngredientButton, _ReLogic_Content_AssetRequestMode_ImmediateLoad);
+		public static UIImageButton RecipieTab = new(texture_StarlightRiver_Assets_GUI_MealButton, _ReLogic_Content_AssetRequestMode_ImmediateLoad);
 
 		public static string sortMode = "Rarity";
 
@@ -186,8 +191,8 @@ namespace StarlightRiver.Content.GUI
 		{
 			Main.instance.LoadItem(item.type);
 
-			Texture2D tex = Request<Texture2D>(AssetDirectory.GUI + "FoodSlot").Value;
-			Texture2D texOver = Request<Texture2D>(AssetDirectory.GUI + "FoodSlotOver").Value;
+			Texture2D tex = texture_AssetDirectory_GUI___FoodSlot.Value;
+			Texture2D texOver = texture_AssetDirectory_GUI___FoodSlotOver.Value;
 			Texture2D ItemTex = TextureAssets.Item[item.type].Value;
 			Vector2 pos = GetDimensions().Center();
 
@@ -324,8 +329,8 @@ namespace StarlightRiver.Content.GUI
 		{
 			Main.instance.LoadItem(item.type);
 
-			Texture2D tex = Request<Texture2D>(AssetDirectory.GUI + "FoodSlot").Value;
-			Texture2D texOver = Request<Texture2D>(AssetDirectory.GUI + "FoodSlotOver").Value;
+			Texture2D tex = texture_AssetDirectory_GUI___FoodSlot.Value;
+			Texture2D texOver = texture_AssetDirectory_GUI___FoodSlotOver.Value;
 			Texture2D ItemTex = TextureAssets.Item[item.type].Value;
 			Vector2 pos = GetDimensions().Center();
 			pos.X = GetDimensions().X + 25;

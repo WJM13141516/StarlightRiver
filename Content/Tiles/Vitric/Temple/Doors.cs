@@ -12,6 +12,9 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 {
 	class DoorVertical : ModTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___TutorialDoor2Glow = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "TutorialDoor2Glow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___TutorialDoor2 = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "TutorialDoor2");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.VitricTile + Name;
 
 		public override void SetStaticDefaults()
@@ -64,7 +67,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 		{
 			Tile tile = Framing.GetTileSafely(i, j);
 
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			Vector2 pos = (new Vector2(i, j) + Helper.TileAdj) * 16 + Vector2.UnitY * -Helper.BezierEase(GearPuzzle.GearPuzzleHandler.solveTimer / 180f) * 7 * 16;
 			var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
 
@@ -100,7 +103,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 		{
 			Tile tile = Framing.GetTileSafely(i, j);
 
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			Vector2 pos = (new Vector2(i, j) + Helper.TileAdj) * 16 + Vector2.UnitY * -Helper.BezierEase(LightPuzzle.LightPuzzleHandler.solveTimer / 180f) * 5 * 16;
 			var frame = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
 
@@ -174,8 +177,8 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 
 		public override void PostDraw(Color lightColor)
 		{
-			Main.spriteBatch.Draw(Request<Texture2D>(AssetDirectory.VitricTile + "TutorialDoor2").Value, position + Vector2.UnitX * 8 - Main.screenPosition, lightColor);
-			Main.spriteBatch.Draw(Request<Texture2D>(AssetDirectory.VitricTile + "TutorialDoor2Glow").Value, position + Vector2.UnitX * 8 - Main.screenPosition, Helper.IndicatorColor);
+			Main.spriteBatch.Draw(texture_AssetDirectory_VitricTile___TutorialDoor2.Value, position + Vector2.UnitX * 8 - Main.screenPosition, lightColor);
+			Main.spriteBatch.Draw(texture_AssetDirectory_VitricTile___TutorialDoor2Glow.Value, position + Vector2.UnitX * 8 - Main.screenPosition, Helper.IndicatorColor);
 		}
 	}
 

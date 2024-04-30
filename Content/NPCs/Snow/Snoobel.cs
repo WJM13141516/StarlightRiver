@@ -13,6 +13,10 @@ namespace StarlightRiver.Content.NPCs.Snow
 {
 	internal class Snoobel : ModNPC, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_Texture____WhipEnd = ModContent.Request<Texture2D>(Texture + "_WhipEnd");
+		public static readonly Asset<Texture2D> texture_Texture____Whip = ModContent.Request<Texture2D>(Texture + "_Whip");
+		public static readonly Asset<Texture2D> texture_Texture____Bestiary = ModContent.Request<Texture2D>(Texture + "_Bestiary");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private enum AiStates
 		{
 			Walking = 0,
@@ -140,8 +144,8 @@ namespace StarlightRiver.Content.NPCs.Snow
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D texture = Request<Texture2D>(Texture).Value;
-			Texture2D bestiaryTexture = Request<Texture2D>(Texture + "_Bestiary").Value;
+			Texture2D texture = texture_Texture.Value;
+			Texture2D bestiaryTexture = texture_Texture____Bestiary.Value;
 			var slopeOffset = new Vector2(0, NPC.gfxOffY);
 
 			if (NPC.IsABestiaryIconDummy)
@@ -197,8 +201,8 @@ namespace StarlightRiver.Content.NPCs.Snow
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>(Texture + "_Whip").Value);
-			effect.Parameters["sampleTextureEnd"].SetValue(ModContent.Request<Texture2D>(Texture + "_WhipEnd").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_Texture____Whip.Value);
+			effect.Parameters["sampleTextureEnd"].SetValue(texture_Texture____WhipEnd.Value);
 			effect.Parameters["alpha"].SetValue(1);
 			effect.Parameters["flip"].SetValue(NPC.spriteDirection == 1);
 

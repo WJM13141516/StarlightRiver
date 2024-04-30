@@ -6,6 +6,9 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 {
 	internal class Glint : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowAlpha = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowAlpha");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Misc_GlowRing = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/GlowRing");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_StarTexture = ModContent.Request<Texture2D>("StarlightRiver/Assets/StarTexture");
 		public static Func<float, float> ease = Helpers.Helper.CubicBezier(0.25f, 0.8f, 0.75f, 0.01f);
 		public static Func<float, float> ease2 = Helpers.Helper.CubicBezier(0.35f, 0.7f, 0.85f, 0.01f);
 
@@ -52,9 +55,9 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/StarTexture").Value;
-			Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/GlowRing").Value;
-			Texture2D tex3 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowAlpha").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_StarTexture.Value;
+			Texture2D tex2 = texture_StarlightRiver_Assets_Misc_GlowRing.Value;
+			Texture2D tex3 = texture_StarlightRiver_Assets_Keys_GlowAlpha.Value;
 
 			Color color1 = colorMain * ease(Projectile.timeLeft / 60f);
 			color1.A = 0;

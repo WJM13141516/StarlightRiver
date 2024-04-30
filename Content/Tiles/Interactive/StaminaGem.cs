@@ -9,6 +9,8 @@ namespace StarlightRiver.Content.Tiles.Interactive
 {
 	internal class StaminaGem : DummyTile, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Interactive_StaminaGemOn = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Interactive/StaminaGemOn");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Interactive_StaminaGemGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Interactive/StaminaGemGlow");
 		public override int DummyType => DummySystem.DummyType<StaminaGemDummy>();
 
 		public override string Texture => AssetDirectory.InteractiveTile + Name;
@@ -81,8 +83,8 @@ namespace StarlightRiver.Content.Tiles.Interactive
 			if (timer == 0)
 			{
 				Color color = Color.White * (float)Math.Sin(StarlightWorld.visualTimer * 3f);
-				Main.spriteBatch.Draw(Request<Texture2D>("StarlightRiver/Assets/Tiles/Interactive/StaminaGemGlow").Value, position - Main.screenPosition, color);
-				Main.spriteBatch.Draw(Request<Texture2D>("StarlightRiver/Assets/Tiles/Interactive/StaminaGemOn").Value, position - Main.screenPosition, Color.White);
+				Main.spriteBatch.Draw(texture_StarlightRiver_Assets_Tiles_Interactive_StaminaGemGlow.Value, position - Main.screenPosition, color);
+				Main.spriteBatch.Draw(texture_StarlightRiver_Assets_Tiles_Interactive_StaminaGemOn.Value, position - Main.screenPosition, Color.White);
 			}
 		}
 	}

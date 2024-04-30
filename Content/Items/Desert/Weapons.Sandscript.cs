@@ -13,6 +13,11 @@ namespace StarlightRiver.Content.Items.Desert
 {
 	internal class Sandscript : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_LiquidTrailAlt = ModContent.Request<Texture2D>("StarlightRiver/Assets/LiquidTrailAlt");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___StarTexture = ModContent.Request<Texture2D>(AssetDirectory.Assets + "StarTexture");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private float swingDirection = 1f;
 		public override string Texture => AssetDirectory.DesertItem + Name;
 		public override void SetStaticDefaults()
@@ -145,7 +150,7 @@ namespace StarlightRiver.Content.Items.Desert
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 
 			float mult = 1f;
 			if (Projectile.timeLeft > MaxTimeleft * 0.8f)
@@ -268,9 +273,9 @@ namespace StarlightRiver.Content.Items.Desert
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D starTex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "StarTexture").Value;
+			Texture2D starTex = texture_AssetDirectory_Assets___StarTexture.Value;
 
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 
 			float mult = 0f;
 			if (Projectile.timeLeft > maxTimeleft * 0.6f)
@@ -350,11 +355,11 @@ namespace StarlightRiver.Content.Items.Desert
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount);
 			effect.Parameters["repeats"].SetValue(1f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 
 			trail?.Render(effect);
 
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/LiquidTrailAlt").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_LiquidTrailAlt.Value);
 			trail2?.Render(effect);
 		}
 

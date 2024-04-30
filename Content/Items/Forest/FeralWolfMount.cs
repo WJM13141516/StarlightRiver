@@ -9,6 +9,8 @@ namespace StarlightRiver.Content.Items.Forest
 {
 	internal class FeralWolfMount : CombatMount
 	{
+		public static readonly Asset<Texture2D> texture_Texture___Shape = ModContent.Request<Texture2D>(Texture + "Shape");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		readonly List<Projectile> buffedMinions = new();
 
 		public override string PrimaryIconTexture => AssetDirectory.ForestItem + "FeralWolfMountPrimary";
@@ -100,8 +102,8 @@ namespace StarlightRiver.Content.Items.Forest
 
 		public override bool Draw(List<DrawData> playerDrawData, int drawType, Player drawPlayer, ref Texture2D texture, ref Texture2D glowTexture, ref Vector2 drawPosition, ref Rectangle frame, ref Color drawColor, ref Color glowColor, ref float rotation, ref SpriteEffects spriteEffects, ref Vector2 drawOrigin, ref float drawScale, float shadow)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D tex2 = ModContent.Request<Texture2D>(Texture + "Shape").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D tex2 = texture_Texture___Shape.Value;
 			CombatMountPlayer mp = drawPlayer.GetModPlayer<CombatMountPlayer>();
 			float progress = 1 - Math.Max(0, (mp.mountingTime - 15) / 15f);
 

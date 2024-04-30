@@ -15,6 +15,16 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	public class RefractiveBlade : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___GlowTrail = ModContent.Request<Texture2D>(AssetDirectory.Assets + "GlowTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ItemGlow = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ItemGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Keys_GlowSoft = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___GradientBlack = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "GradientBlack");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___BeamTrail = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "BeamTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___BeamCore = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "BeamCore");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricItem___BossBowRing = ModContent.Request<Texture2D>(AssetDirectory.VitricItem + "BossBowRing");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public int combo;
 
 		public override string Texture => AssetDirectory.VitricItem + Name;
@@ -242,8 +252,8 @@ namespace StarlightRiver.Content.Items.Vitric
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = Request<Texture2D>(Texture).Value;
-			Texture2D texGlow = Request<Texture2D>(Texture + "Glow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D texGlow = texture_Texture___Glow.Value;
 
 			float targetAngle = StoredAngle + (-(maxAngle / 2) + Helper.BezierEase(Timer / maxTime) * maxAngle) * Owner.direction * direction;
 			Vector2 pos = Owner.Center + Vector2.UnitX.RotatedBy(targetAngle) * ((float)Math.Sin(Helper.BezierEase(Timer / maxTime) * 3.14f) * 20) - Main.screenPosition;
@@ -299,7 +309,7 @@ namespace StarlightRiver.Content.Items.Vitric
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount);
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(effect);
 		}
@@ -435,8 +445,8 @@ namespace StarlightRiver.Content.Items.Vitric
 		{
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			spriteBatch.Draw(Request<Texture2D>(Texture).Value, Owner.Center - Main.screenPosition, null, lightColor, Projectile.rotation, new Vector2(0, Request<Texture2D>(Texture).Value.Height), Projectile.scale, 0, 0);
-			spriteBatch.Draw(Request<Texture2D>(Texture + "Glow").Value, Owner.Center - Main.screenPosition, null, Color.White, Projectile.rotation, new Vector2(0, Request<Texture2D>(Texture).Value.Height), Projectile.scale, 0, 0);
+			spriteBatch.Draw(texture_Texture.Value, Owner.Center - Main.screenPosition, null, lightColor, Projectile.rotation, new Vector2(0, texture_Texture.Value.Height), Projectile.scale, 0, 0);
+			spriteBatch.Draw(texture_Texture___Glow.Value, Owner.Center - Main.screenPosition, null, Color.White, Projectile.rotation, new Vector2(0, texture_Texture.Value.Height), Projectile.scale, 0, 0);
 
 			float prog1 = Helper.SwoopEase((Charge - 12) / 23f);
 			float prog2 = Helper.SwoopEase((Charge - 17) / 18f);
@@ -469,7 +479,7 @@ namespace StarlightRiver.Content.Items.Vitric
 
 		private void DrawRing(SpriteBatch sb, Vector2 pos, float w, float h, float rotation, float prog, Color color)
 		{
-			Texture2D texRing = Request<Texture2D>(AssetDirectory.VitricItem + "BossBowRing").Value;
+			Texture2D texRing = texture_AssetDirectory_VitricItem___BossBowRing.Value;
 			Effect effect = Filters.Scene["BowRing"].GetShader().Shader;
 
 			effect.Parameters["uTime"].SetValue(rotation);
@@ -501,9 +511,9 @@ namespace StarlightRiver.Content.Items.Vitric
 			int sin = (int)(Math.Sin(StarlightWorld.visualTimer * 3) * 40f); //Just a copy/paste of the boss laser. Need to tune this later
 			var color = new Color(255, 160 + sin, 40 + sin / 2);
 
-			Texture2D texBeam = Request<Texture2D>(AssetDirectory.MiscTextures + "BeamCore").Value;
-			Texture2D texBeam2 = Request<Texture2D>(AssetDirectory.MiscTextures + "BeamTrail").Value;
-			Texture2D texDark = Request<Texture2D>(AssetDirectory.MiscTextures + "GradientBlack").Value;
+			Texture2D texBeam = texture_AssetDirectory_MiscTextures___BeamCore.Value;
+			Texture2D texBeam2 = texture_AssetDirectory_MiscTextures___BeamTrail.Value;
+			Texture2D texDark = texture_AssetDirectory_MiscTextures___GradientBlack.Value;
 
 			var origin = new Vector2(0, texBeam.Height / 2);
 			var origin2 = new Vector2(0, texBeam2.Height / 2);
@@ -557,9 +567,9 @@ namespace StarlightRiver.Content.Items.Vitric
 			spriteBatch.End();
 			spriteBatch.Begin(default, BlendState.Additive, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D impactTex = Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft").Value;
-			Texture2D impactTex2 = Request<Texture2D>(AssetDirectory.GUI + "ItemGlow").Value;
-			Texture2D glowTex = Request<Texture2D>(AssetDirectory.Assets + "GlowTrail").Value;
+			Texture2D impactTex = texture_AssetDirectory_Assets___Keys_GlowSoft.Value;
+			Texture2D impactTex2 = texture_AssetDirectory_GUI___ItemGlow.Value;
+			Texture2D glowTex = texture_AssetDirectory_Assets___GlowTrail.Value;
 
 			spriteBatch.Draw(glowTex, target, source, color * 0.95f, LaserRotation, new Vector2(0, glowTex.Height / 2), 0, 0);
 

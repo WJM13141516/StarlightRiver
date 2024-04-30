@@ -16,6 +16,8 @@ namespace StarlightRiver.Content.Events
 {
 	internal class StarlightEventSequenceSystem : ModSystem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowBlack = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowBlack");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Noise_SwirlyNoiseLooping = ModContent.Request<Texture2D>("StarlightRiver/Assets/Noise/SwirlyNoiseLooping");
 		public static int sequence = 0;
 		public static bool willOccur = false;
 		public static bool occuring = false;
@@ -196,7 +198,7 @@ namespace StarlightRiver.Content.Events
 		{
 			if (IsSceneEffectActive(Main.LocalPlayer))
 			{
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Noise/SwirlyNoiseLooping").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Noise_SwirlyNoiseLooping.Value;
 
 				sb.End();
 				sb.Begin(default, default, SamplerState.PointWrap, default, default);
@@ -211,7 +213,7 @@ namespace StarlightRiver.Content.Events
 
 					if (mn != null)
 					{
-						Texture2D glowTex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowBlack").Value;
+						Texture2D glowTex = texture_StarlightRiver_Assets_Keys_GlowBlack.Value;
 
 						float opacity = Math.Min(1f, mn.CutsceneTimer / 140f);
 						Color color = Color.Black * opacity;
@@ -249,7 +251,7 @@ namespace StarlightRiver.Content.Events
 
 				spriteBatch.Begin(default, BlendState.Additive, SamplerState.PointWrap, default, default);
 
-				Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Noise/SwirlyNoiseLooping").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Noise_SwirlyNoiseLooping.Value;
 				spriteBatch.Draw(tex, new Rectangle(0, 0, Main.screenWidth, Main.screenHeight), new Rectangle((int)Main.GameUpdateCount / 3, 0, tex.Width, tex.Height), new Color(50, 200, 255) * (StarlightEventSequenceSystem.fadeTimer / 300f) * 0.2f);
 
 				spriteBatch.End();

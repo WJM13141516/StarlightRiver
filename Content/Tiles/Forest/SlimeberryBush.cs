@@ -10,6 +10,8 @@ namespace StarlightRiver.Content.Tiles.Forest
 {
 	public class SlimeberryBush : ModTile
 	{
+		public static readonly Asset<Texture2D> texture_Texture___Shine = ModContent.Request<Texture2D>(Texture + "Shine");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.ForestTile + Name;
 
 		public override void SetStaticDefaults()
@@ -201,8 +203,8 @@ namespace StarlightRiver.Content.Tiles.Forest
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			spriteBatch.Draw(Request<Texture2D>(Texture).Value, NPC.position - screenPos, NPC.frame, drawColor.MultiplyRGBA(NPC.color * ((255 - NPC.alpha) / 255f)), NPC.rotation, Vector2.Zero, NPC.scale, 0, 0);
-			spriteBatch.Draw(Request<Texture2D>(Texture + "Shine").Value, NPC.position - screenPos, NPC.frame, drawColor * (0.6f * (255 - NPC.alpha) / 255f), NPC.rotation, Vector2.Zero, NPC.scale, 0, 0);
+			spriteBatch.Draw(texture_Texture.Value, NPC.position - screenPos, NPC.frame, drawColor.MultiplyRGBA(NPC.color * ((255 - NPC.alpha) / 255f)), NPC.rotation, Vector2.Zero, NPC.scale, 0, 0);
+			spriteBatch.Draw(texture_Texture___Shine.Value, NPC.position - screenPos, NPC.frame, drawColor * (0.6f * (255 - NPC.alpha) / 255f), NPC.rotation, Vector2.Zero, NPC.scale, 0, 0);
 			return false;
 		}
 

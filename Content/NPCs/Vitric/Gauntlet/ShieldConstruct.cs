@@ -12,6 +12,9 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 {
 	internal class ShieldConstruct : VitricConstructNPC
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Shield = ModContent.Request<Texture2D>(Texture + "_Shield");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private const int XFRAMES = 2;
 		private const int MAXSTACK = 4; //How many shielders can stack
 
@@ -194,9 +197,9 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D mainTex = Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = Request<Texture2D>(Texture + "_Glow").Value;
-			Texture2D shieldTex = Request<Texture2D>(Texture + "_Shield").Value;
+			Texture2D mainTex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
+			Texture2D shieldTex = texture_Texture____Shield.Value;
 
 			if (NPC.IsABestiaryIconDummy)
 			{
@@ -305,8 +308,8 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 			spriteBatch.End();
 			spriteBatch.Begin(default, BlendState.Additive, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D tex = Request<Texture2D>(Texture).Value;
-			Texture2D shieldTex = Request<Texture2D>(Texture + "_Shield").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D shieldTex = texture_Texture____Shield.Value;
 
 			float sin = 0.5f + (float)Math.Sin(Main.timeForVisualEffects * 0.04f) * 0.5f;
 			float distance = sin * 3 + 4;

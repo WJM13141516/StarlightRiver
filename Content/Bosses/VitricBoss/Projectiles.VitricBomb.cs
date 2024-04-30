@@ -10,6 +10,10 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 {
 	class VitricBomb : ModProjectile, IDrawAdditive
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___BombTell = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "BombTell");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.VitricBoss + Name;
 
 		public override void Load()
@@ -29,21 +33,21 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 		public override bool PreDraw(ref Color lightColor)
 		{
 			var rect = new Rectangle(0, 48 * Projectile.frame, 46, 48);
-			Main.spriteBatch.Draw(Request<Texture2D>(Texture).Value, Projectile.Center - Main.screenPosition, rect, lightColor * 4, 0, Vector2.One * 23, 1, 0, 0);
+			Main.spriteBatch.Draw(texture_Texture.Value, Projectile.Center - Main.screenPosition, rect, lightColor * 4, 0, Vector2.One * 23, 1, 0, 0);
 
 			return false;
 		}
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D tex = Request<Texture2D>(Texture + "Glow").Value;
+			Texture2D tex = texture_Texture___Glow.Value;
 			Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, tex.Frame(), Helper.IndicatorColor, 0, tex.Size() / 2, 1, 0, 0);
 		}
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
-			Texture2D tex2 = Request<Texture2D>(AssetDirectory.VitricBoss + "BombTell").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
+			Texture2D tex2 = texture_AssetDirectory_VitricBoss___BombTell.Value;
 
 			float bright = (300 - Projectile.timeLeft) / 300f * 0.7f;
 

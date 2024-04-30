@@ -8,6 +8,7 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	public class ElectroArrow : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public override void SetStaticDefaults()
@@ -117,7 +118,7 @@ namespace StarlightRiver.Content.Items.Misc
 			if (point1 == Vector2.Zero || point2 == Vector2.Zero)
 				return;
 
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_GlowTrail.Value;
 
 			for (int k = 1; k < nodes.Count; k++)
 			{

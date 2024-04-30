@@ -10,6 +10,10 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple.GearPuzzle
 {
 	public abstract class GearTile : DummyTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___MagicalGearLarge = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MagicalGearLarge");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___MagicalGearMid = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MagicalGearMid");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___MagicalGearSmall = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MagicalGearSmall");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Invisible = ModContent.Request<Texture2D>(AssetDirectory.Invisible);
 		public override int DummyType => DummySystem.DummyType<GearTileDummy>();
 
 		public override string Texture => AssetDirectory.Invisible;
@@ -406,11 +410,11 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple.GearPuzzle
 		{
 			Texture2D tex = GearSize switch
 			{
-				0 => ModContent.Request<Texture2D>(AssetDirectory.Invisible).Value,
-				1 => ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MagicalGearSmall").Value,
-				2 => ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MagicalGearMid").Value,
-				3 => ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MagicalGearLarge").Value,
-				_ => ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MagicalGearSmall").Value,
+				0 => texture_AssetDirectory_Invisible.Value,
+				1 => texture_AssetDirectory_VitricTile___MagicalGearSmall.Value,
+				2 => texture_AssetDirectory_VitricTile___MagicalGearMid.Value,
+				3 => texture_AssetDirectory_VitricTile___MagicalGearLarge.Value,
+				_ => texture_AssetDirectory_VitricTile___MagicalGearSmall.Value,
 			};
 			Main.spriteBatch.Draw(tex, Center - Main.screenPosition, null, Color.White * 0.75f, Rotation, tex.Size() / 2, 1, 0, 0);
 		}

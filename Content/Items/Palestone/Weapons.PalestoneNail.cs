@@ -10,6 +10,8 @@ namespace StarlightRiver.Content.Items.Palestone
 {
 	public class PalestoneNail : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.PalestoneItem + Name;
 
 		public override void SetStaticDefaults()
@@ -672,8 +674,8 @@ namespace StarlightRiver.Content.Items.Palestone
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D texGlow = texture_AssetDirectory_Keys___GlowAlpha.Value;
 
 			SpriteEffects flip = Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : 0f;
 			if (Down && parent != null)

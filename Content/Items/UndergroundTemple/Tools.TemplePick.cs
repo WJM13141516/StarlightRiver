@@ -10,6 +10,7 @@ namespace StarlightRiver.Content.Items.UndergroundTemple
 {
 	class TemplePick : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrailNoEnd = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrailNoEnd");
 		private int charge;
 
 		private int direction;
@@ -267,7 +268,7 @@ namespace StarlightRiver.Content.Items.UndergroundTemple
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * -0.01f);
 			effect.Parameters["repeats"].SetValue(1f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/GlowTrailNoEnd").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrailNoEnd.Value);
 
 			trail?.Render(effect);
 		}

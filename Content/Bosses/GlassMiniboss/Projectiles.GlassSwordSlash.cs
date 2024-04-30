@@ -9,6 +9,8 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 {
 	class GlassSword : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_Texture___Slash = ModContent.Request<Texture2D>(Texture + "Slash");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private readonly int[] slashTime = new int[] { 70, 125, 160 };
 
 		private Vector2 gripPos;
@@ -187,7 +189,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 		{
 			float rot = Projectile.rotation * Parent.direction;
 
-			Asset<Texture2D> sword = Request<Texture2D>(Texture);
+			Asset<Texture2D> sword = texture_Texture;
 			Rectangle frame = sword.Frame(2, 1, 0);
 			Rectangle hotFrame = sword.Frame(2, 1, 1);
 			Vector2 origin = frame.Size() * new Vector2(0.5f, 0.84f);
@@ -202,7 +204,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 			Color hotFade = new Color(255, 255, 255, 128) * Utils.GetLerpValue(75, 60, Timer, true);
 			Main.EntitySpriteDraw(sword.Value, gripPos - Main.screenPosition, hotFrame, hotFade, rot, origin, scaleIn, dir, 0);
 
-			Asset<Texture2D> slash = Request<Texture2D>(Texture + "Slash");
+			Asset<Texture2D> slash = texture_Texture___Slash;
 			Rectangle slashFill = slash.Frame(1, 2, 0, 0);
 			Rectangle slashLine = slash.Frame(1, 2, 0, 1);
 

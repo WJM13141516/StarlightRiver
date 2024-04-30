@@ -15,6 +15,8 @@ namespace StarlightRiver.Content.Items.Dungeon
 	//POTENTIAL TODO: this weapon's projectile is severely unoptimized and could use a rewrite from the ground up
 	class Cloudstrike : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Keys_GlowSoft = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
 		public const int MAXCHARGE = 120;
 
 		private int charge = 1; //How much charge the weapon has (out of MAXCHARGE)
@@ -500,7 +502,7 @@ namespace StarlightRiver.Content.Items.Dungeon
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(1f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 
 			trail?.Render(effect);
 			trail2?.Render(effect);
@@ -522,7 +524,7 @@ namespace StarlightRiver.Content.Items.Dungeon
 			if (Branch)
 				return;
 
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft").Value;
+			Texture2D tex = texture_AssetDirectory_Assets___Keys_GlowSoft.Value;
 
 			Color color = new Color(200, 230, 255) * Fade;
 			for (int i = 0; i < ChargeSqrt; i++)

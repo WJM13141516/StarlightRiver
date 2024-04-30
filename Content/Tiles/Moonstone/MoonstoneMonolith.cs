@@ -16,6 +16,7 @@ namespace StarlightRiver.Content.Tiles.Moonstone
 {
 	class MoonstoneMonolith : ModTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MoonstoneTile___MoonstoneMonolith_Glow = ModContent.Request<Texture2D>(AssetDirectory.MoonstoneTile + "MoonstoneMonolith_Glow");
 		public override string Texture => AssetDirectory.MoonstoneTile + Name;
 
 		public override void SetStaticDefaults()
@@ -100,7 +101,7 @@ namespace StarlightRiver.Content.Tiles.Moonstone
 		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
 		{
 			Tile tile = Main.tile[i, j];
-			Texture2D glowTexture = ModContent.Request<Texture2D>(AssetDirectory.MoonstoneTile + "MoonstoneMonolith_Glow").Value;
+			Texture2D glowTexture = texture_AssetDirectory_MoonstoneTile___MoonstoneMonolith_Glow.Value;
 
 			Vector2 zero = Main.drawToScreen ? Vector2.Zero : new Vector2(Main.offScreenRange);
 			//a
@@ -127,7 +128,7 @@ namespace StarlightRiver.Content.Tiles.Moonstone
 		public override bool PreDraw(int i, int j, SpriteBatch spriteBatch)
 		{
 			//Tile tile = Main.tile[i, j];
-			//Texture2D glowTexture = ModContent.Request<Texture2D>(AssetDirectory.MoonstoneTile + "MoonstoneMonolith_Glow").Value;
+			//Texture2D glowTexture = texture_AssetDirectory_MoonstoneTile___MoonstoneMonolith_Glow.Value;
 
 			//Vector2 zero = Main.drawToScreen ? Vector2.Zero : new Vector2(Main.offScreenRange);
 			////a

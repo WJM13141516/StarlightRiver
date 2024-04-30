@@ -19,6 +19,10 @@ namespace StarlightRiver.Content.Tiles.Permafrost
 {
 	class Touchstone : ModTile, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_FireTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Keys_GlowSoft = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___PortalGlow = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "PortalGlow");
 		public override string Texture => "StarlightRiver/Assets/Tiles/Permafrost/Touchstone";
 
 		public override void SetStaticDefaults()
@@ -60,7 +64,7 @@ namespace StarlightRiver.Content.Tiles.Permafrost
 				float cos1 = 1 + (float)Math.Cos(Main.GameUpdateCount / 10f);
 				auroraColor = new Color(0.5f + cos1 * 0.2f, 0.8f, 0.5f + sin1 * 0.2f);
 
-				Texture2D portalGlow = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "PortalGlow").Value;
+				Texture2D portalGlow = texture_AssetDirectory_SquidBoss___PortalGlow.Value;
 
 				Color portalGlowColor = auroraColor;
 				portalGlowColor.A = 0;
@@ -385,7 +389,7 @@ namespace StarlightRiver.Content.Tiles.Permafrost
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft").Value;
+			Texture2D tex = texture_AssetDirectory_Assets___Keys_GlowSoft.Value;
 
 			float sin1 = 1 + (float)Math.Sin(Main.GameUpdateCount / 10f);
 			float cos1 = 1 + (float)Math.Cos(Main.GameUpdateCount / 10f);
@@ -408,10 +412,10 @@ namespace StarlightRiver.Content.Tiles.Permafrost
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 			trail?.Render(effect);
 
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_FireTrail.Value);
 			trail?.Render(effect);
 		}
 	}

@@ -13,6 +13,7 @@ namespace StarlightRiver.Content.NPCs.Misc
 {
 	public class MagnetizedEnemy : GlobalNPC
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
 		public const int SEGMENTS = 20;
 
 		public bool charged = false;
@@ -238,7 +239,7 @@ namespace StarlightRiver.Content.NPCs.Misc
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(1f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 
 			trail?.Render(effect);
 			trail2?.Render(effect);

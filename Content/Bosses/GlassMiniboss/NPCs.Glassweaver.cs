@@ -16,6 +16,8 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 	[AutoloadBossHead]
 	public partial class Glassweaver : ModNPC, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Glassweaver___Name___Glow = ModContent.Request<Texture2D>(AssetDirectory.Glassweaver + Name + "Glow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Glassweaver___Name = ModContent.Request<Texture2D>(AssetDirectory.Glassweaver + Name);
 		public static readonly Color GlowDustOrange = new(6255, 108, 0);
 		public static readonly Color GlassColor = new(60, 170, 205);
 
@@ -366,8 +368,8 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Asset<Texture2D> weaver = Request<Texture2D>(AssetDirectory.Glassweaver + Name);
-			Asset<Texture2D> weaverGlow = Request<Texture2D>(AssetDirectory.Glassweaver + Name + "Glow");
+			Asset<Texture2D> weaver = texture_AssetDirectory_Glassweaver___Name;
+			Asset<Texture2D> weaverGlow = texture_AssetDirectory_Glassweaver___Name___Glow;
 
 			if (NPC.IsABestiaryIconDummy)
 			{

@@ -15,6 +15,9 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	public class CoachGun : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_MotionTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/MotionTrail");
+		public static readonly Asset<Texture2D> texture_Texture____White = ModContent.Request<Texture2D>(Texture + "_White");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 		private int cooldown = 0;
 
 		public override string Texture => AssetDirectory.MiscItem + Name;
@@ -189,7 +192,7 @@ namespace StarlightRiver.Content.Items.Misc
 			Texture2D mainTex = TextureAssets.Projectile[Projectile.type].Value;
 			Main.spriteBatch.Draw(mainTex, Projectile.Center - Main.screenPosition, null, Color.White, Projectile.rotation, new Vector2(8, mainTex.Height / 2), Projectile.scale, SpriteEffects.None, 0f);
 
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 			Color glowColor = Color.Orange;
 			glowColor.A = 0;
 			Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, glowColor, Projectile.rotation, new Vector2(8, glowTex.Height / 2), Projectile.scale, SpriteEffects.None, 0f);
@@ -324,7 +327,7 @@ namespace StarlightRiver.Content.Items.Misc
 			Texture2D mainTex = TextureAssets.Projectile[Projectile.type].Value;
 			spriteBatch.Draw(mainTex, Projectile.Center - Main.screenPosition, null, lightColor, Projectile.rotation, mainTex.Size() / 2, Projectile.scale, SpriteEffects.None, 0f);
 
-			Texture2D overlayTex = ModContent.Request<Texture2D>(Texture + "_White").Value;
+			Texture2D overlayTex = texture_Texture____White.Value;
 			spriteBatch.Draw(overlayTex, Projectile.Center - Main.screenPosition, null, overlayColor, Projectile.rotation, mainTex.Size() / 2, Projectile.scale, SpriteEffects.None, 0f);
 
 			progress *= progress;
@@ -335,7 +338,7 @@ namespace StarlightRiver.Content.Items.Misc
 			else
 				glowColor = Color.Lerp(Color.Orange, Color.White, (progress - 0.5f) * 2);
 
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 			spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, new Color(glowColor.R, glowColor.G, glowColor.B, 0) * 0.5f, Projectile.rotation, glowTex.Size() / 2, Projectile.scale, SpriteEffects.None, 0f);
 			return false;
 		}
@@ -382,7 +385,7 @@ namespace StarlightRiver.Content.Items.Misc
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/MotionTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_MotionTrail.Value);
 
 			trail?.Render(effect);
 

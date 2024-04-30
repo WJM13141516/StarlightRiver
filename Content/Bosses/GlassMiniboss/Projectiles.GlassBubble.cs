@@ -12,6 +12,13 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 {
 	class GlassBubble : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___GradientBlack = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "GradientBlack");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Glassweaver___BubbleBloom = ModContent.Request<Texture2D>(AssetDirectory.Glassweaver + "BubbleBloom");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Glassweaver___BubbleCrackProgression = ModContent.Request<Texture2D>(AssetDirectory.Glassweaver + "BubbleCrackProgression");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Glassweaver___BubbleCrackMap = ModContent.Request<Texture2D>(AssetDirectory.Glassweaver + "BubbleCrackMap");
+		public static readonly Asset<Texture2D> texture_Texture___Growing = ModContent.Request<Texture2D>(Texture + "Growing");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public const int CRACK_TIME = 850;
 		public const float EXPLOSION_RAD = 300f;
 
@@ -237,8 +244,8 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		private void DrawBubble(ref Color lightColor)
 		{
-			Asset<Texture2D> glassBall = Request<Texture2D>(Texture);
-			Asset<Texture2D> growingBall = Request<Texture2D>(Texture + "Growing");
+			Asset<Texture2D> glassBall = texture_Texture;
+			Asset<Texture2D> growingBall = texture_Texture___Growing;
 
 			int growFrameY = (int)(Utils.GetLerpValue(50, 120, Timer, true) * 5f);
 			Rectangle growFrame = growingBall.Frame(1, 6, 0, growFrameY);
@@ -266,17 +273,17 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 			float crackProgress = (float)Math.Pow(Utils.GetLerpValue(CRACK_TIME - 10, CRACK_TIME + 105, Timer, true), 2);
 
 			Effect crack = Terraria.Graphics.Effects.Filters.Scene["MagmaCracks"].GetShader().Shader;
-			crack.Parameters["sampleTexture2"].SetValue(Request<Texture2D>(AssetDirectory.Glassweaver + "BubbleCrackMap").Value);
-			crack.Parameters["sampleTexture3"].SetValue(Request<Texture2D>(AssetDirectory.Glassweaver + "BubbleCrackProgression").Value);
+			crack.Parameters["sampleTexture2"].SetValue(texture_AssetDirectory_Glassweaver___BubbleCrackMap.Value);
+			crack.Parameters["sampleTexture3"].SetValue(texture_AssetDirectory_Glassweaver___BubbleCrackProgression.Value);
 			crack.Parameters["uTime"].SetValue(crackProgress);
 			crack.Parameters["drawColor"].SetValue((Color.LightGoldenrodYellow * crackProgress * 1.5f).ToVector4());
 			crack.Parameters["sourceFrame"].SetValue(new Vector4(0, 0, 128, 128));
-			crack.Parameters["texSize"].SetValue(Request<Texture2D>(Texture).Value.Size());
+			crack.Parameters["texSize"].SetValue(texture_Texture.Value.Size());
 
 			Main.spriteBatch.End();
 			Main.spriteBatch.Begin(default, BlendState.NonPremultiplied, Main.DefaultSamplerState, default, RasterizerState.CullNone, crack, Main.GameViewMatrix.TransformationMatrix);
 
-			Main.EntitySpriteDraw(Request<Texture2D>(Texture).Value, Projectile.Center - Main.screenPosition, null, Color.Black, Projectile.rotation, Request<Texture2D>(Texture).Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
+			Main.EntitySpriteDraw(texture_Texture.Value, Projectile.Center - Main.screenPosition, null, Color.Black, Projectile.rotation, texture_Texture.Size() * 0.5f, Projectile.scale, SpriteEffects.None, 0);
 
 			Main.spriteBatch.End();
 			Main.spriteBatch.Begin(default, BlendState.AlphaBlend, Main.DefaultSamplerState, default, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
@@ -284,8 +291,8 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		private void DrawBloom()
 		{
-			Asset<Texture2D> bloomTex = Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
-			Asset<Texture2D> shineTex = Request<Texture2D>(AssetDirectory.Glassweaver + "BubbleBloom");
+			Asset<Texture2D> bloomTex = texture_AssetDirectory_Keys___GlowAlpha;
+			Asset<Texture2D> shineTex = texture_AssetDirectory_Glassweaver___BubbleBloom;
 
 			float colLerp = Utils.GetLerpValue(150, 190, Timer, true) * Utils.GetLerpValue(CRACK_TIME + 120, CRACK_TIME, Timer, true);
 			var shine = Color.Lerp(Color.PaleGoldenrod, Glassweaver.GlassColor * 0.3f, colLerp);
@@ -319,7 +326,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 		private void DrawVignette()
 		{
 			float fade = Utils.GetLerpValue(20, 250, Timer, true) * Utils.GetLerpValue(CRACK_TIME + 105, CRACK_TIME + 90, Timer, true);
-			Asset<Texture2D> dark = Request<Texture2D>(AssetDirectory.MiscTextures + "GradientBlack");
+			Asset<Texture2D> dark = texture_AssetDirectory_MiscTextures___GradientBlack;
 
 			for (int i = 0; i < 8; i++)
 			{
@@ -409,7 +416,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Asset<Texture2D> fragment = Request<Texture2D>(Texture);
+			Asset<Texture2D> fragment = texture_Texture;
 			Rectangle fragFrame = fragment.Frame(4, 2, (int)Variant, 0);
 			Rectangle hotFrame = fragment.Frame(4, 2, (int)Variant, 1);
 
@@ -418,7 +425,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 			var hotFade = new Color(255, 255, 255, 128);
 			Main.EntitySpriteDraw(fragment.Value, Projectile.Center - Main.screenPosition, hotFrame, hotFade, Projectile.rotation, hotFrame.Size() * 0.5f, Projectile.scale, 0, 0);
 
-			Asset<Texture2D> fragGlow = Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+			Asset<Texture2D> fragGlow = texture_AssetDirectory_Keys___GlowAlpha;
 			Color glowFade = Color.OrangeRed;
 			glowFade.A = 0;
 			Main.EntitySpriteDraw(fragGlow.Value, Projectile.Center - Main.screenPosition, null, glowFade, Projectile.rotation, fragGlow.Size() * 0.5f, Projectile.scale, 0, 0);

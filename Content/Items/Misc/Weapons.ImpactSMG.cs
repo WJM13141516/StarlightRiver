@@ -12,6 +12,20 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	public class ImpactSMG : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___FireTrail = ModContent.Request<Texture2D>(AssetDirectory.Assets + "FireTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___GlowTrail = ModContent.Request<Texture2D>(AssetDirectory.Assets + "GlowTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___StarTexture = ModContent.Request<Texture2D>(AssetDirectory.Assets + "StarTexture");
+		public static readonly Asset<Texture2D> texture_Texture____BloomMap = ModContent.Request<Texture2D>(Texture + "_BloomMap");
+		public static readonly Asset<Texture2D> texture_Texture____GlowMap = ModContent.Request<Texture2D>(Texture + "_GlowMap");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+		public static readonly Asset<Texture2D> texture_Texture___Flare = ModContent.Request<Texture2D>(Texture + "Flare");
+		public static readonly Asset<Texture2D> texture_Texture____White = ModContent.Request<Texture2D>(Texture + "_White");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscItem___Name____Front_Glow = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + Name + "_Front_Glow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscItem___Name____Front = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + Name + "_Front");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscItem___Name____Back = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + Name + "_Back");
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public override void SetStaticDefaults()
@@ -113,9 +127,9 @@ namespace StarlightRiver.Content.Items.Misc
 
 		public override bool PreDraw(SpriteBatch spriteBatch, int buffIndex, ref BuffDrawParams drawParams)
 		{
-			Texture2D backTex = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + Name + "_Back").Value;
-			Texture2D frontTex = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + Name + "_Front").Value;
-			Texture2D frontTexGlow = ModContent.Request<Texture2D>(AssetDirectory.MiscItem + Name + "_Front_Glow").Value;
+			Texture2D backTex = texture_AssetDirectory_MiscItem___Name____Back.Value;
+			Texture2D frontTex = texture_AssetDirectory_MiscItem___Name____Front.Value;
+			Texture2D frontTexGlow = texture_AssetDirectory_MiscItem___Name____Front_Glow.Value;
 
 			ImpactSMGPlayer mp = Main.LocalPlayer.GetModPlayer<ImpactSMGPlayer>();
 
@@ -401,14 +415,14 @@ namespace StarlightRiver.Content.Items.Misc
 			if (!draw)
 				return false;
 
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
-			Texture2D whiteTex = ModContent.Request<Texture2D>(Texture + "_White").Value;
-			Texture2D flareTex = ModContent.Request<Texture2D>(Texture + "Flare").Value;
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
-			Texture2D glowMap = ModContent.Request<Texture2D>(Texture + "_GlowMap").Value;
-			Texture2D bloomMap = ModContent.Request<Texture2D>(Texture + "_BloomMap").Value;
-			Texture2D starTex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "StarTexture").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
+			Texture2D whiteTex = texture_Texture____White.Value;
+			Texture2D flareTex = texture_Texture___Flare.Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
+			Texture2D glowMap = texture_Texture____GlowMap.Value;
+			Texture2D bloomMap = texture_Texture____BloomMap.Value;
+			Texture2D starTex = texture_AssetDirectory_Assets___StarTexture.Value;
 
 			SpriteEffects flip = Projectile.spriteDirection == -1 ? SpriteEffects.FlipVertically : 0f;
 
@@ -919,7 +933,7 @@ namespace StarlightRiver.Content.Items.Misc
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(1f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 
 			trail2?.Render(effect);
 			trail?.Render(effect);
@@ -1029,12 +1043,12 @@ namespace StarlightRiver.Content.Items.Misc
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
 			effect.Parameters["time"].SetValue(Projectile.timeLeft * -0.03f);
 			effect.Parameters["repeats"].SetValue(2f);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_AssetDirectory_Assets___GlowTrail.Value);
 
 			trail?.Render(effect);
 			trail2?.Render(effect);
 
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.Assets + "FireTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_AssetDirectory_Assets___FireTrail.Value);
 
 			trail2?.Render(effect);
 		}

@@ -14,6 +14,9 @@ namespace StarlightRiver.Content.NPCs.Moonstone
 	//bestiary needs to be done but there isnt a moonstone bestiary template thingy
 	public class AngryCrescent : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Eyes = ModContent.Request<Texture2D>(Texture + "_Eyes");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public int eyeFrame;
 
 		public int flashTimer;
@@ -277,9 +280,9 @@ namespace StarlightRiver.Content.NPCs.Moonstone
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
-			Texture2D eyeTex = ModContent.Request<Texture2D>(Texture + "_Eyes").Value;
+			Texture2D texture = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
+			Texture2D eyeTex = texture_Texture____Eyes.Value;
 			Vector2 origin = texture.Size() / 2f;
 			Main.spriteBatch.End();
 			Main.spriteBatch.Begin(default, BlendState.Additive, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
@@ -474,8 +477,8 @@ namespace StarlightRiver.Content.NPCs.Moonstone
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D texture = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 
 			Rectangle sourceRectangle = texture.Frame(1, Main.projFrames[Projectile.type], frameY: Projectile.frame);
 			Main.spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition, sourceRectangle, Color.White, Projectile.rotation, sourceRectangle.Size() / 2f, Projectile.scale, SpriteEffects.None, 0f);

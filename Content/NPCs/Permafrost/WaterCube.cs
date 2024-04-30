@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.NPCs.Permafrost
 {
 	internal class WaterCube : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_MagicPixel = ModContent.Request<Texture2D>("StarlightRiver/Assets/MagicPixel");
 		public override string Texture => AssetDirectory.Invisible;
 
 		public override void SetDefaults()
@@ -45,7 +46,7 @@ namespace StarlightRiver.Content.NPCs.Permafrost
 
 		public void DrawToTarget(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/MagicPixel").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_MagicPixel.Value;
 			Vector2 pos = (NPC.position - Main.screenPosition) / 2f;
 			var target = new Rectangle((int)pos.X, (int)pos.Y, NPC.width / 2, NPC.height / 2);
 

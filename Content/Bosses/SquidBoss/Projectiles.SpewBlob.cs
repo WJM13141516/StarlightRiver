@@ -5,6 +5,8 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 {
 	class SpewBlob : ModProjectile, IDrawAdditive
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_BreacherItem___OrbitalStrike = ModContent.Request<Texture2D>(AssetDirectory.BreacherItem + "OrbitalStrike");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.SquidBoss + Name;
 
 		public override void SetStaticDefaults()
@@ -60,8 +62,8 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D star = ModContent.Request<Texture2D>(AssetDirectory.BreacherItem + "OrbitalStrike").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D star = texture_AssetDirectory_BreacherItem___OrbitalStrike.Value;
 
 			for (int k = 0; k < Projectile.oldPos.Length; k++)
 			{

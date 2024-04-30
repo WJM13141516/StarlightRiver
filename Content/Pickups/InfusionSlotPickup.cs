@@ -10,6 +10,7 @@ namespace StarlightRiver.Content.Pickups
 {
 	class InfusionSlotPickup : AbilityPickup
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Abilities_BrassSpike = ModContent.Request<Texture2D>("StarlightRiver/Assets/Abilities/BrassSpike");
 		public override string Texture => "StarlightRiver/Assets/Invisible";
 
 		public override Color GlowColor => Color.Black;
@@ -127,7 +128,7 @@ namespace StarlightRiver.Content.Pickups
 			if (timer < 1 || timer > 559)
 				return;
 
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Abilities/BrassSpike").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Abilities_BrassSpike.Value;
 			var origin = new Vector2(0, tex.Height / 2);
 
 			float progressFirst = Math.Min(1, timer / 12f);

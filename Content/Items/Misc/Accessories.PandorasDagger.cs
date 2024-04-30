@@ -11,6 +11,9 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	public class PandorasDagger : SmartAccessory
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowSoft = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowSoft");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___StarTexture = ModContent.Request<Texture2D>(AssetDirectory.Assets + "StarTexture");
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public PandorasDagger() : base("Pandora's Dagger", "Grazes release Discordant Bolts, inflicting stacks of Volatile") { }
@@ -119,7 +122,7 @@ namespace StarlightRiver.Content.Items.Misc
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D texture = ModContent.Request<Texture2D>(AssetDirectory.Assets + "StarTexture").Value;
+			Texture2D texture = texture_AssetDirectory_Assets___StarTexture.Value;
 			var color = new Color(220, 205, 140)
 			{
 				A = 0
@@ -165,14 +168,14 @@ namespace StarlightRiver.Content.Items.Misc
 			effect.Parameters["time"].SetValue(Projectile.timeLeft * -0.03f);
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 
 			trail?.Render(effect);
 		}
 
 		public void DrawAdditive(SpriteBatch sb)
 		{
-			Texture2D texture = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowSoft").Value;
+			Texture2D texture = texture_AssetDirectory_Keys___GlowSoft.Value;
 			var color = new Color(220, 205, 140);
 			sb.Draw(texture, Projectile.Center - Projectile.velocity - Main.screenPosition, null, color * 0.6f, Projectile.rotation, texture.Size() / 2f, Projectile.scale - 0.35f, SpriteEffects.None, 0);
 			sb.Draw(texture, Projectile.Center - Projectile.velocity - Main.screenPosition, null, color, Projectile.rotation, texture.Size() / 2f, Projectile.scale - 0.45f, SpriteEffects.None, 0);

@@ -12,6 +12,7 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	public class Needler : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricItem___NeedlerBloom = ModContent.Request<Texture2D>(AssetDirectory.VitricItem + "NeedlerBloom");
 		public override string Texture => AssetDirectory.VitricItem + Name;
 
 		public override void SetStaticDefaults()
@@ -227,7 +228,7 @@ namespace StarlightRiver.Content.Items.Vitric
 
 			if (stuck)
 			{
-				tex = ModContent.Request<Texture2D>(AssetDirectory.VitricItem + "NeedlerBloom");
+				tex = texture_AssetDirectory_VitricItem___NeedlerBloom;
 				color = Color.Lerp(Color.Orange, Color.Red, needleLerp / 20f);
 				color.A = 0;
 				spriteBatch.Draw(tex.Value, Projectile.Center - Main.screenPosition + new Vector2(0, Projectile.gfxOffY), null, color * 0.66f, Projectile.rotation, tex.Size() * 0.5f, (Projectile.scale * (needleLerp / 10f) + 0.25f) * new Vector2(1f, 1.25f), SpriteEffects.None, 0f);

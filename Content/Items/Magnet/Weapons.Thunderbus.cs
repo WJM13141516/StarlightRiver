@@ -13,6 +13,10 @@ namespace StarlightRiver.Content.Items.Magnet
 {
 	class Thunderbuss : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_LightningTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/LightningTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_BombTell = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/BombTell");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
 		[CloneByReference]
 		public Projectile ball;
 
@@ -454,7 +458,7 @@ namespace StarlightRiver.Content.Items.Magnet
 			if (point1 == Vector2.Zero || point2 == Vector2.Zero)
 				return;
 
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_GlowTrail.Value;
 
 			for (int k = 1; k < nodes.Count; k++)
 			{
@@ -517,7 +521,7 @@ namespace StarlightRiver.Content.Items.Magnet
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(1f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 
 			trail?.Render(effect);
 		}
@@ -698,8 +702,8 @@ namespace StarlightRiver.Content.Items.Magnet
 			float scale = 0;
 			float opacity = 1;
 
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
-			Texture2D texRing = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/BombTell").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
+			Texture2D texRing = texture_StarlightRiver_Assets_Bosses_VitricBoss_BombTell.Value;
 
 			if (Projectile.timeLeft <= 30)
 			{
@@ -795,7 +799,7 @@ namespace StarlightRiver.Content.Items.Magnet
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(1f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/LightningTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_LightningTrail.Value);
 
 			trail?.Render(effect);
 			trail2?.Render(effect);

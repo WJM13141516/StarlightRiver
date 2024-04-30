@@ -4,6 +4,12 @@ namespace StarlightRiver.Compat.BossChecklist
 {
 	class AuroraclePortrait
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Dusts_Aurora = ModContent.Request<Texture2D>("StarlightRiver/Assets/Dusts/Aurora");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_BossChecklist_SquidBossSpecular = ModContent.Request<Texture2D>("StarlightRiver/Assets/BossChecklist/SquidBossSpecular");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_BossChecklist_SquidBossGlowBlur = ModContent.Request<Texture2D>("StarlightRiver/Assets/BossChecklist/SquidBossGlowBlur");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_BossChecklist_SquidBossGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/BossChecklist/SquidBossGlow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_BossChecklist_SquidBoss = ModContent.Request<Texture2D>("StarlightRiver/Assets/BossChecklist/SquidBoss");
 		private readonly static ParticleSystem auroracleSystem = new("StarlightRiver/Assets/Dusts/Aurora", n =>
 		{
 			n.Velocity *= 0.995f;
@@ -32,11 +38,11 @@ namespace StarlightRiver.Compat.BossChecklist
 
 			//float sin = 0.8f + (float)Math.Sin(Main.GameUpdateCount / 100f) * 0.1f;
 
-			Texture2D body = ModContent.Request<Texture2D>("StarlightRiver/Assets/BossChecklist/SquidBoss").Value;
-			Texture2D glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/BossChecklist/SquidBossGlow").Value;
-			Texture2D blur = ModContent.Request<Texture2D>("StarlightRiver/Assets/BossChecklist/SquidBossGlowBlur").Value;
-			Texture2D specular = ModContent.Request<Texture2D>("StarlightRiver/Assets/BossChecklist/SquidBossSpecular").Value;
-			Texture2D circleGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value;
+			Texture2D body = texture_StarlightRiver_Assets_BossChecklist_SquidBoss.Value;
+			Texture2D glow = texture_StarlightRiver_Assets_BossChecklist_SquidBossGlow.Value;
+			Texture2D blur = texture_StarlightRiver_Assets_BossChecklist_SquidBossGlowBlur.Value;
+			Texture2D specular = texture_StarlightRiver_Assets_BossChecklist_SquidBossSpecular.Value;
+			Texture2D circleGlow = texture_StarlightRiver_Assets_Keys_Glow.Value;
 
 			spriteBatch.Draw(circleGlow, rect, null, Color.Black * 0.6f, 0, Vector2.UnitY * 2, 0, 0);
 
@@ -64,7 +70,7 @@ namespace StarlightRiver.Compat.BossChecklist
 			spriteBatch.Draw(body, rect.Center(), null, color, 0, body.Size() / 2, 1, 0, 0);
 			spriteBatch.Draw(specular, rect.Center(), null, Color.White, 0, specular.Size() / 2, 1, 0, 0);
 
-			auroracleSystem.SetTexture(ModContent.Request<Texture2D>("StarlightRiver/Assets/Dusts/Aurora").Value);
+			auroracleSystem.SetTexture(texture_StarlightRiver_Assets_Dusts_Aurora.Value);
 		}
 	}
 }

@@ -5,6 +5,8 @@ namespace StarlightRiver.Core.Systems.BarrierSystem
 {
 	class BarrierNPC : GlobalNPC
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ShieldBarLine = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldBarLine");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ShieldBar1 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldBar1");
 		public int lastNonZeroBarrier = 0; //For barrier bar drawing
 		public int maxBarrier = 0;
 		public int barrier = 0;
@@ -120,7 +122,7 @@ namespace StarlightRiver.Core.Systems.BarrierSystem
 
 				Main.instance.DrawHealthBar((int)position.X, (int)position.Y, NPC.life, NPC.lifeMax, bright, scale);
 
-				Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldBar1").Value;
+				Texture2D tex = texture_AssetDirectory_GUI___ShieldBar1.Value;
 
 				float factor = Math.Min(barrier / (float)lastNonZeroBarrier, 1);
 
@@ -131,7 +133,7 @@ namespace StarlightRiver.Core.Systems.BarrierSystem
 
 				if (barrier < lastNonZeroBarrier)
 				{
-					Texture2D texLine = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ShieldBarLine").Value;
+					Texture2D texLine = texture_AssetDirectory_GUI___ShieldBarLine.Value;
 
 					var sourceLine = new Rectangle((int)(tex.Width * factor), 0, 2, tex.Height);
 					var targetLine = new Rectangle((int)(position.X - Main.screenPosition.X) + (int)(tex.Width * factor), (int)(position.Y - Main.screenPosition.Y), (int)(2 * scale), (int)(tex.Height * scale));

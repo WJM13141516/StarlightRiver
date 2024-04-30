@@ -7,6 +7,10 @@ namespace StarlightRiver.Content.Tiles.Moonstone
 {
 	public class MoonstoneOre : ModTile, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MoonstoneTile___GlowLines, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>(AssetDirectory.MoonstoneTile + "GlowLines", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MoonstoneTile___GlowMid = ModContent.Request<Texture2D>(AssetDirectory.MoonstoneTile + "GlowMid");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MoonstoneTile___GlowSlopeLeftHalf = ModContent.Request<Texture2D>(AssetDirectory.MoonstoneTile + "GlowSlopeLeftHalf");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MoonstoneTile___GlowSlopeRightHalf = ModContent.Request<Texture2D>(AssetDirectory.MoonstoneTile + "GlowSlopeRightHalf");
 		public override string Texture => AssetDirectory.MoonstoneTile + Name;
 
 		public override void SetStaticDefaults()
@@ -83,16 +87,16 @@ namespace StarlightRiver.Content.Tiles.Moonstone
 				slopes = true;
 				if (RightHighest > LeftHighest)
 				{
-					midTex = Request<Texture2D>(AssetDirectory.MoonstoneTile + "GlowSlopeRightHalf").Value;
+					midTex = texture_AssetDirectory_MoonstoneTile___GlowSlopeRightHalf.Value;
 				}
 				else
 				{
-					midTex = Request<Texture2D>(AssetDirectory.MoonstoneTile + "GlowSlopeLeftHalf").Value;
+					midTex = texture_AssetDirectory_MoonstoneTile___GlowSlopeLeftHalf.Value;
 				}
 			}
 			else
 			{
-				midTex = Request<Texture2D>(AssetDirectory.MoonstoneTile + "GlowMid").Value;
+				midTex = texture_AssetDirectory_MoonstoneTile___GlowMid.Value;
 			}
 
 			bool fillInBottomGap = Main.tile[i, j].IsHalfBlock || Main.tile[i, j].TopSlope;
@@ -104,7 +108,7 @@ namespace StarlightRiver.Content.Tiles.Moonstone
 			//Utils.DrawBorderString(spriteBatch, LeftHighest.ToString(), (new Vector2(i + 12, j + 8 - (i % 4)) * 16) - Main.screenPosition, Color.Green, 0.75f);
 			//Utils.DrawBorderString(spriteBatch, stepUp.ToString(), (new Vector2(i + 12, j + 9 - (i % 4)) * 16) - Main.screenPosition, Color.Blue, 0.75f);
 
-			Texture2D glowLines = Request<Texture2D>(AssetDirectory.MoonstoneTile + "GlowLines", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+			Texture2D glowLines = texture_AssetDirectory_MoonstoneTile___GlowLines, _ReLogic_Content_AssetRequestMode_ImmediateLoad.Value;
 			int realX = i * 16;
 			int realY = (int)((j + yOffsetLeft + yOffsetRight) * 16);
 			int realWidth = glowLines.Width - 1; //1 pixel offset since the texture has a empty row of pixels on the side, this is also accounted for elsewhere below

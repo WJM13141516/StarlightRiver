@@ -7,6 +7,7 @@ namespace StarlightRiver.Content.Tiles.Vitric
 {
 	class ForgeInnerDoor : ModTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___ForgeInnerDoorGlow = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "ForgeInnerDoorGlow");
 		public override string Texture => AssetDirectory.VitricTile + Name;
 
 		public override void SetStaticDefaults()
@@ -19,7 +20,7 @@ namespace StarlightRiver.Content.Tiles.Vitric
 		public override void PostDraw(int i, int j, SpriteBatch spriteBatch)
 		{
 			Vector2 pos = (new Vector2(i, j) + Helpers.Helper.TileAdj) * 16 - Main.screenPosition;
-			Texture2D tex = Request<Texture2D>(AssetDirectory.VitricTile + "ForgeInnerDoorGlow").Value;
+			Texture2D tex = texture_AssetDirectory_VitricTile___ForgeInnerDoorGlow.Value;
 			Tile tile = Framing.GetTileSafely(i, j);
 			var source = new Rectangle(tile.TileFrameX, tile.TileFrameY, 16, 16);
 

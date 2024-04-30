@@ -12,6 +12,9 @@ namespace StarlightRiver.Content.NPCs.Misc
 {
 	class Fogbinder : ModNPC, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Chain = ModContent.Request<Texture2D>(Texture + "_Chain");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private class BindedNPC //I made it a class instead of a struct so that I can consistantly pass by reference
 		{
 			public NPC npc;
@@ -149,9 +152,9 @@ namespace StarlightRiver.Content.NPCs.Misc
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D texture = Request<Texture2D>(Texture).Value;
-			Texture2D glowTexture = Request<Texture2D>(Texture + "_Glow").Value;
-			Texture2D chainTex = Request<Texture2D>(Texture + "_Chain").Value;
+			Texture2D texture = texture_Texture.Value;
+			Texture2D glowTexture = texture_Texture____Glow.Value;
+			Texture2D chainTex = texture_Texture____Chain.Value;
 
 			SpriteEffects effects = SpriteEffects.FlipHorizontally;
 			var origin = new Vector2(NPC.width / 2, NPC.height / 2);

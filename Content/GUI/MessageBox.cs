@@ -9,8 +9,9 @@ namespace StarlightRiver.Content.GUI
 {
 	public class MessageBox : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_ExitButton, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/ExitButton", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 		private readonly MessageBoxInner innerBox = new();
-		public UIImage exitButton = new(Request<Texture2D>("StarlightRiver/Assets/GUI/ExitButton", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value);
+		public UIImage exitButton = new(texture_StarlightRiver_Assets_GUI_ExitButton, _ReLogic_Content_AssetRequestMode_ImmediateLoad.Value);
 
 		public override int InsertionIndex(List<GameInterfaceLayer> layers)
 		{

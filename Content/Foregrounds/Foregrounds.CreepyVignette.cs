@@ -5,6 +5,7 @@ namespace StarlightRiver.Content.Foregrounds
 {
 	class CreepyVignette : Foreground
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Foregrounds_Vignette = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Foregrounds/Vignette");
 		public static Vector2 offset;
 		public static float opacityMult = 1;
 		public static bool visible;
@@ -15,7 +16,7 @@ namespace StarlightRiver.Content.Foregrounds
 
 		public override void Draw(SpriteBatch spriteBatch, float opacity)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Foregrounds/Vignette").Value;
+			Texture2D tex = texture_AssetDirectory_Assets___Foregrounds_Vignette.Value;
 			var targetRect = new Rectangle(Main.screenWidth / 2 + (int)offset.X - (int)holeSize.X / 2, Main.screenHeight / 2 + (int)offset.Y - (int)holeSize.Y / 2, (int)holeSize.X, (int)holeSize.Y);
 
 			var targetLeft = new Rectangle(0, 0, targetRect.X, Main.screenHeight);

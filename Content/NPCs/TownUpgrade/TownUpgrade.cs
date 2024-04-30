@@ -8,6 +8,7 @@ namespace StarlightRiver.Content.NPCs.TownUpgrade
 {
 	public abstract class TownUpgrade
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_NPCs_TownUpgrade____NPCName___Icon = ModContent.Request<Texture2D>("StarlightRiver/Assets/NPCs/TownUpgrade/" + NPCName + "Icon");
 		public readonly string buttonName;
 		public readonly string NPCName;
 		public readonly string questName;
@@ -27,7 +28,7 @@ namespace StarlightRiver.Content.NPCs.TownUpgrade
 			this.questTip = questTip;
 			this.title = title;
 
-			icon = Request<Texture2D>("StarlightRiver/Assets/NPCs/TownUpgrade/" + NPCName + "Icon").Value;
+			icon = texture_StarlightRiver_Assets_NPCs_TownUpgrade____NPCName___Icon.Value;
 		}
 
 		public virtual void ClickButton() { }

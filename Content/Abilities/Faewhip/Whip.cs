@@ -9,6 +9,11 @@ namespace StarlightRiver.Content.Abilities.Faewhip
 {
 	public class Whip : Ability
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Abilities___WhipEndRoot = ModContent.Request<Texture2D>("StarlightRiver/Assets/Abilities/WhipEndRoot");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Abilities___WhipEndGrab = ModContent.Request<Texture2D>("StarlightRiver/Assets/Abilities/WhipEndGrab");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail", ReLogic.Content.AssetRequestMode.ImmediateLoad);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail", ReLogic.Content.AssetRequestMode.ImmediateLoad);
 		public override string Name => "Fae Whip";
 		public override string Tooltip => "Channel Starlight to forge the energies of connection into an appendage extending from your own arm, allowing you to manipualate objects at a distance and maneuver yourself with the dexterity of the Overgrowth's denizens. NEWBLOCK " +
 			"Objects with a thin, pulsing yellow outline can be grabbed with this appendage, as well as enemies and walls. Anything you can overpower can be manipulated, and anything you can't can be used as an anchor to fling yourself.";
@@ -298,8 +303,8 @@ namespace StarlightRiver.Content.Abilities.Faewhip
 			{
 				spriteBatch.End();
 
-				Texture2D tex0 = Request<Texture2D>("StarlightRiver/Assets/EnergyTrail", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
-				Texture2D tex1 = Request<Texture2D>("StarlightRiver/Assets/GlowTrail", ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+				Texture2D tex0 = texture_StarlightRiver_Assets_EnergyTrail.Value;
+				Texture2D tex1 = texture_StarlightRiver_Assets_GlowTrail.Value;
 
 				var world = Matrix.CreateTranslation(-Main.screenPosition.Vec3());
 				Matrix view = Main.GameViewMatrix.TransformationMatrix;
@@ -335,8 +340,8 @@ namespace StarlightRiver.Content.Abilities.Faewhip
 				spriteBatch.End();
 				spriteBatch.Begin(default, BlendState.Additive, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-				Texture2D endTex = Request<Texture2D>("StarlightRiver/Assets/Abilities/" + (endRooted ? "WhipEndRoot" : "WhipEndGrab")).Value;
-				Texture2D endGlow = Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
+				Texture2D endTex = endRooted ? texture_StarlightRiver_Assets_Abilities___WhipEndRoot.Value : texture_StarlightRiver_Assets_Abilities___WhipEndGrab.Value;
+				Texture2D endGlow = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
 
 				spriteBatch.Draw(endTex, tipsPosition - Main.screenPosition, null, new Color(255, 190, 100), Main.GameUpdateCount * 0.1f, endTex.Size() / 2, endScale * 0.75f, 0, 0);
 				spriteBatch.Draw(endGlow, tipsPosition - Main.screenPosition, null, new Color(255, 190, 100), 0, endGlow.Size() / 2, endScale, 0, 0);

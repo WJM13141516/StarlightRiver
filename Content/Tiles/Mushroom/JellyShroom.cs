@@ -11,6 +11,11 @@ namespace StarlightRiver.Content.Tiles.Mushroom
 {
 	class JellyShroom : DummyTile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Mushroom_JellyShroom3 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Mushroom/JellyShroom3");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Mushroom_JellyShroom2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Mushroom/JellyShroom2");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Mushroom_JellyShroom1 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Mushroom/JellyShroom1");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Mushroom_JellyShroom0 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Mushroom/JellyShroom0");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Tiles_Mushroom_JellyShroomBack = ModContent.Request<Texture2D>("StarlightRiver/Assets/Tiles/Mushroom/JellyShroomBack");
 		public override int DummyType => DummySystem.DummyType<JellyShroomDummy>();
 
 		public override string Texture => AssetDirectory.Invisible;
@@ -79,11 +84,11 @@ namespace StarlightRiver.Content.Tiles.Mushroom
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D back = Request<Texture2D>("StarlightRiver/Assets/Tiles/Mushroom/JellyShroomBack").Value;
-			Texture2D blob0 = Request<Texture2D>("StarlightRiver/Assets/Tiles/Mushroom/JellyShroom0").Value;
-			Texture2D blob1 = Request<Texture2D>("StarlightRiver/Assets/Tiles/Mushroom/JellyShroom1").Value;
-			Texture2D blob2 = Request<Texture2D>("StarlightRiver/Assets/Tiles/Mushroom/JellyShroom2").Value;
-			Texture2D blob3 = Request<Texture2D>("StarlightRiver/Assets/Tiles/Mushroom/JellyShroom3").Value;
+			Texture2D back = texture_StarlightRiver_Assets_Tiles_Mushroom_JellyShroomBack.Value;
+			Texture2D blob0 = texture_StarlightRiver_Assets_Tiles_Mushroom_JellyShroom0.Value;
+			Texture2D blob1 = texture_StarlightRiver_Assets_Tiles_Mushroom_JellyShroom1.Value;
+			Texture2D blob2 = texture_StarlightRiver_Assets_Tiles_Mushroom_JellyShroom2.Value;
+			Texture2D blob3 = texture_StarlightRiver_Assets_Tiles_Mushroom_JellyShroom3.Value;
 
 			Vector2 pos = position - Main.screenPosition;
 

@@ -13,6 +13,11 @@ namespace StarlightRiver.Content.Items.Misc.SoilgunFiles
 	//kinda just turned magmite gore into projectile cause I think it would be good for grains of sand
 	class SoilgunSandGrain : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Orange = ModContent.Request<Texture2D>(Texture + "_Orange");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_ShadowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/ShadowTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_LightningTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/LightningTrail");
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public override void SetStaticDefaults()
@@ -176,11 +181,11 @@ namespace StarlightRiver.Content.Items.Misc.SoilgunFiles
 			effect.Parameters["time"].SetValue(Projectile.timeLeft * -0.01f);
 			effect.Parameters["repeats"].SetValue(1);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/LightningTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_LightningTrail.Value);
 
 			trail?.Render(effect);
 
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/ShadowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_ShadowTrail.Value);
 
 			trail?.Render(effect);
 		}
@@ -537,11 +542,11 @@ namespace StarlightRiver.Content.Items.Misc.SoilgunFiles
 			effect.Parameters["time"].SetValue(Projectile.timeLeft * -0.01f);
 			effect.Parameters["repeats"].SetValue(1);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/ShadowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_ShadowTrail.Value);
 
 			trail?.Render(effect);
 
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(effect);
 		}
@@ -667,7 +672,7 @@ namespace StarlightRiver.Content.Items.Misc.SoilgunFiles
 		public override bool PreDraw(ref Color lightColor)
 		{
 			SpriteBatch spriteBatch = Main.spriteBatch;
-			var texture = (Texture2D)ModContent.Request<Texture2D>(Texture);
+			var texture = (Texture2D)texture_Texture;
 
 			Rectangle frameRect = texture.Frame(1, Main.projFrames[Projectile.type], frameY: Projectile.frame);
 			Vector2 drawOrigin = frameRect.Size() / 2f;
@@ -679,7 +684,7 @@ namespace StarlightRiver.Content.Items.Misc.SoilgunFiles
 
 			if (exploding)
 			{
-				texture = (Texture2D)ModContent.Request<Texture2D>(Texture + "_Orange");
+				texture = (Texture2D)texture_Texture____Orange;
 				drawColor = Color.Lerp(Color.Transparent, Color.White, 1 - Projectile.timeLeft / 120f);
 				spriteBatch.Draw(texture, Projectile.Center - Main.screenPosition + new Vector2(0f, Projectile.gfxOffY),
 					frameRect, drawColor, Projectile.rotation, drawOrigin, Projectile.scale, SpriteEffects.None, 0);

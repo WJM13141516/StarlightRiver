@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.CustomHooks
 {
 	class MouseSlotUsableInator : HookGroup
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_TempBack = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/TempBack");
 		public override void Load()
 		{
 			On_Player.dropItemCheck += DontDropCoolStuff;
@@ -23,7 +24,7 @@ namespace StarlightRiver.Content.CustomHooks
 
 			if (inv[slot].ModItem is InworldItem && context == 13)
 			{
-				Texture2D back = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/TempBack").Value;
+				Texture2D back = texture_StarlightRiver_Assets_GUI_TempBack.Value;
 				var source = new Rectangle(0, 52 * (int)(Main.GameUpdateCount / 4 % 4), 52, 52);
 
 				sb.Draw(back, position, source, Color.White, 0f, default, Main.inventoryScale, SpriteEffects.None, 0f);

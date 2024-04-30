@@ -7,6 +7,7 @@ namespace StarlightRiver.Content.Items
 {
 	public static class ArmorHelper
 	{
+		public static readonly Asset<Texture2D> texture_texture = ModContent.Request<Texture2D>(texture);
 		public static bool IsSetEquipped(this ModItem Item, Player Player)
 		{
 			return Item.IsArmorSet(Player.armor[0], Player.armor[1], Player.armor[2]);
@@ -17,7 +18,7 @@ namespace StarlightRiver.Content.Items
 			if (info.drawPlayer.ActiveAbility<Whip>())
 				return;
 
-			Texture2D tex = Request<Texture2D>(texture).Value;
+			Texture2D tex = texture_texture.Value;
 
 			info.DrawDataCache.Add(new DrawData(tex, (info.drawPlayer.position - Main.screenPosition + offset).ToPoint16().ToVector2(), null, color * ((255 - info.drawPlayer.immuneAlpha) * 0.003921568627f), info.drawPlayer.headRotation, tex.Size() * 0.5f, scale, info.playerEffect, 0));
 		}
@@ -36,7 +37,7 @@ namespace StarlightRiver.Content.Items
 		{
 			//TODO: somewhere this is hardcoded to the sheet size, as gravity flip is broken for old starwood hat, for now it has a temp fix
 
-			Texture2D newTex = Request<Texture2D>(texture).Value;
+			Texture2D newTex = texture_texture.Value;
 
 			//uses body frame for the 1.3 sheets because headframe is always zero for some reason
 			int frame = (int)(info.drawPlayer.bodyFrame.Y / info.drawPlayer.bodyFrame.Height);//(int)((info.drawPlayer.bodyFrame.Y / 1120f) * 20);
@@ -69,7 +70,7 @@ namespace StarlightRiver.Content.Items
 		/// <param name="immuneFade"></param>
 		public static void QuickDrawBodyFramed(PlayerDrawSet info, string texture, float scale, Vector2 offset, Color? color = null, bool immuneFade = false)
 		{
-			Texture2D newTex = Request<Texture2D>(texture).Value;
+			Texture2D newTex = texture_texture.Value;
 
 			const int frameCountX = 9;
 			const int frameCountY = 4;
@@ -123,7 +124,7 @@ namespace StarlightRiver.Content.Items
 
 		public static void QuickDrawFrontArmsFramed(PlayerDrawSet info, string texture, float scale, Vector2 offset, Color? color = null, bool immuneFade = false)
 		{
-			Texture2D newTex = Request<Texture2D>(texture).Value;
+			Texture2D newTex = texture_texture.Value;
 
 			const int frameCountX = 9;
 			const int frameCountY = 4;
@@ -197,7 +198,7 @@ namespace StarlightRiver.Content.Items
 		/// <param name="immuneFade"></param>
 		public static void QuickDrawLegsFramed(PlayerDrawSet info, string texture, float scale, Vector2 offset, Color? color = null, bool immuneFade = false)
 		{
-			Texture2D newTex = Request<Texture2D>(texture).Value;
+			Texture2D newTex = texture_texture.Value;
 			int frame = (int)(info.drawPlayer.legFrame.Y * 0.01785714286f);//(int)((frame / 1120f) * 20);
 			var pos = (info.drawPlayer.position + info.drawPlayer.legPosition - Main.screenPosition + offset).ToPoint16().ToVector2();
 			int height = (int)(newTex.Height * 0.05f);//tex.Height / 20

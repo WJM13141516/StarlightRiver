@@ -8,6 +8,7 @@ namespace StarlightRiver.Content.GUI
 {
 	public class RichTextBox : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_FancyBoxCustom = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/FancyBoxCustom");
 		private static string message;
 		private static string title;
 		private static Texture2D icon;
@@ -160,7 +161,7 @@ namespace StarlightRiver.Content.GUI
 
 		public static void DrawBox(SpriteBatch sb, Rectangle target)
 		{
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/GUI/FancyBoxCustom").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_GUI_FancyBoxCustom.Value;
 			Color color = Color.White * 0.8f * opacity;
 
 			if (target.Width < 12 || target.Height < 12)

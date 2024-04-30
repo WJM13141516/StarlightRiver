@@ -12,6 +12,10 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	class FacetAndLattice : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___SmallBar1 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "SmallBar1");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___SmallBar0 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "SmallBar0");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_FireTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail");
 		public bool buffed = false;
 		public int buffPower = 0;
 
@@ -260,7 +264,7 @@ namespace StarlightRiver.Content.Items.Vitric
 			if (BuffPower <= 0)
 				return;
 
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_FireTrail.Value;
 			var color = new Color(255, 200, 100);
 
 			var source = new Rectangle((int)(Projectile.timeLeft / 50f * tex.Width / 2), 0, tex.Width / 2, tex.Height);
@@ -447,13 +451,13 @@ namespace StarlightRiver.Content.Items.Vitric
 		{
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, new Rectangle(0, 32 * Projectile.frame, 22, 32), lightColor, Projectile.rotation, new Vector2(11, 16), Projectile.scale, 0, 0);
 
 			if (Main.LocalPlayer == Main.player[Projectile.owner])
 			{
-				Texture2D barTex = ModContent.Request<Texture2D>(AssetDirectory.GUI + "SmallBar0").Value;
-				Texture2D barTex2 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "SmallBar1").Value;
+				Texture2D barTex = texture_AssetDirectory_GUI___SmallBar0.Value;
+				Texture2D barTex2 = texture_AssetDirectory_GUI___SmallBar1.Value;
 
 				Vector2 pos = Main.LocalPlayer.Center - Main.screenPosition + new Vector2(0, -36) - barTex.Size() / 2;
 				var target = new Rectangle((int)pos.X + 1, (int)pos.Y - 2, (int)(ShieldLife / 50f * barTex2.Width), barTex2.Height);

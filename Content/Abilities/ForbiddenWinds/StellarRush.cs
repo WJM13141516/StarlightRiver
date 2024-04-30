@@ -12,6 +12,7 @@ namespace StarlightRiver.Content.Abilities.ForbiddenWinds
 {
 	class StellarRush : Dash
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
 		public override float ActivationCostDefault => 1.5f;
 
 		public override void OnActivate()
@@ -139,7 +140,7 @@ namespace StarlightRiver.Content.Abilities.ForbiddenWinds
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.0025f);
 			effect.Parameters["repeats"].SetValue(1f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(effect);
 

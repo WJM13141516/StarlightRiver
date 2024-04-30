@@ -4,6 +4,8 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple.LightPuzzle
 {
 	internal class LightBlocker : ModTile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___Blocker = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "Blocker");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___MirrorUnder = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MirrorUnder");
 		public override string Texture => AssetDirectory.Invisible;
 
 		public override void SetStaticDefaults()
@@ -27,10 +29,10 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple.LightPuzzle
 				Vector2 pos = (new Vector2(i, j) + Helpers.Helper.TileAdj) * 16 + Vector2.One * 24;
 				Color lighting = Lighting.GetColor(i, j);
 
-				Texture2D texUnder = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MirrorUnder").Value;
+				Texture2D texUnder = texture_AssetDirectory_VitricTile___MirrorUnder.Value;
 				Main.spriteBatch.Draw(texUnder, pos - Main.screenPosition, null, lighting, 0, texUnder.Size() / 2, 1, 0, 0);
 
-				Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "Blocker").Value;
+				Texture2D tex = texture_AssetDirectory_VitricTile___Blocker.Value;
 				var drawFrame = new Rectangle(50 * frame, 0, 50, 50);
 				Main.spriteBatch.Draw(tex, pos - Main.screenPosition, drawFrame, lighting, 0, Vector2.One * 25, 1, 0, 0);
 			}

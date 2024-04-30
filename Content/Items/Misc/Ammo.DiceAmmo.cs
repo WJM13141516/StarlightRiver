@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	public class DiceAmmo : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public override void SetStaticDefaults()
@@ -138,7 +139,7 @@ namespace StarlightRiver.Content.Items.Misc
 		public override bool PreDraw(ref Color lightColor)
 		{
 			Texture2D tex = TextureAssets.Projectile[Projectile.type].Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 			int width = tex.Width / FRAME_COUNT;
 			var sourceRect = new Rectangle(Projectile.frame * width, 0, width, tex.Height);
 			Main.spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, sourceRect, lightColor, Projectile.rotation, new Vector2(width, tex.Height) / 2, 1f, default, default);

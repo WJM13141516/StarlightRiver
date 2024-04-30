@@ -18,6 +18,10 @@ namespace StarlightRiver.Content.NPCs.Misc
 {
 	internal class LootWraith : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Chain_White = ModContent.Request<Texture2D>(Texture + "_Chain_White");
+		public static readonly Asset<Texture2D> texture_Texture____Chain = ModContent.Request<Texture2D>(Texture + "_Chain");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private const int NUM_SEGMENTS = 20;
 
 		private int xFrame = 0;
@@ -263,7 +267,7 @@ namespace StarlightRiver.Content.NPCs.Misc
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D texture = Request<Texture2D>(Texture).Value;
+			Texture2D texture = texture_Texture.Value;
 
 			SpriteEffects effects = SpriteEffects.None;
 			var origin = new Vector2(NPC.width / 2, NPC.height / 2);
@@ -279,7 +283,7 @@ namespace StarlightRiver.Content.NPCs.Misc
 			for (int i = 0; i < 2; i++)
 				Main.spriteBatch.Draw(texture, slopeOffset + NPC.Center - screenPos, NPC.frame, drawColor, NPC.rotation, origin, NPC.scale, effects, 0f);
 
-			Texture2D glowTex = Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 
 			for (int i = 0; i < oldPos.Count; i++)
 			{
@@ -397,7 +401,7 @@ namespace StarlightRiver.Content.NPCs.Misc
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>(Texture + "_Chain").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_Texture____Chain.Value);
 			effect.Parameters["flip"].SetValue(false);
 			effect.Parameters["alpha"].SetValue(1);
 
@@ -415,7 +419,7 @@ namespace StarlightRiver.Content.NPCs.Misc
 			trail?.Render(effect);
 			Main.graphics.GraphicsDevice.BlendState = oldState;
 
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>(Texture + "_Chain_White").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_Texture____Chain_White.Value);
 
 			Main.spriteBatch.Begin(default, BlendState.Additive, Main.DefaultSamplerState, default, default, default, Main.GameViewMatrix.TransformationMatrix);
 		}

@@ -12,6 +12,10 @@ namespace StarlightRiver.Content.Items.Breacher
 {
 	public class SupplyBeacon : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_Texture____Star = ModContent.Request<Texture2D>(Texture + "_Star");
+		public static readonly Asset<Texture2D> texture_Texture____Symbol = ModContent.Request<Texture2D>(Texture + "_Symbol");
+		public static readonly Asset<Texture2D> texture_Texture____Display = ModContent.Request<Texture2D>(Texture + "_Display");
 		public override string Texture => AssetDirectory.BreacherItem + Name;
 
 		public override void SetStaticDefaults()
@@ -173,8 +177,8 @@ namespace StarlightRiver.Content.Items.Breacher
 
 			if (landed)
 			{
-				Texture2D displayTex = ModContent.Request<Texture2D>(Texture + "_Display").Value;
-				Texture2D symbolTex = ModContent.Request<Texture2D>(Texture + "_Symbol").Value;
+				Texture2D displayTex = texture_Texture____Display.Value;
+				Texture2D symbolTex = texture_Texture____Symbol.Value;
 
 				Color displayColor = GetColor();
 				displayColor.A = 0;
@@ -193,7 +197,7 @@ namespace StarlightRiver.Content.Items.Breacher
 
 			Main.spriteBatch.Draw(mainTex, position, null, lightColor, Projectile.rotation, mainTex.Size() / 2, Projectile.scale, SpriteEffects.None, 0);
 
-			Texture2D starTex = ModContent.Request<Texture2D>(Texture + "_Star").Value;
+			Texture2D starTex = texture_Texture____Star.Value;
 			Color color = GetColor();
 			color.A = 0;
 			Color color2 = Color.White;
@@ -304,7 +308,7 @@ namespace StarlightRiver.Content.Items.Breacher
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 			effect.Parameters["alpha"].SetValue(trailAlpha);
 
 			trail?.Render(effect);

@@ -6,6 +6,9 @@ namespace StarlightRiver.Content.Tiles.Underground.EvasionShrineBullets
 {
 	public class SawbladeSmall : EvasionProjectile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_ItemGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/ItemGlow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
 		public static int timeLeftToAssign;
 
 		public Vector2 storedVelocity = Vector2.Zero;
@@ -66,7 +69,7 @@ namespace StarlightRiver.Content.Tiles.Underground.EvasionShrineBullets
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "Glow").Value;
+			Texture2D glowTex = texture_Texture___Glow.Value;
 			Main.spriteBatch.Draw(glowTex, Projectile.Center - Main.screenPosition, null, new Color(100, 0, 255) * Alpha, Projectile.rotation, glowTex.Size() / 2, 1, 0, 0);
 		}
 
@@ -77,8 +80,8 @@ namespace StarlightRiver.Content.Tiles.Underground.EvasionShrineBullets
 			spriteBatch.End();
 			spriteBatch.Begin(default, BlendState.Additive, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
-			Texture2D texStar = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/ItemGlow").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
+			Texture2D texStar = texture_StarlightRiver_Assets_GUI_ItemGlow.Value;
 
 			spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, new Color(100, 0, 255) * Alpha, Projectile.rotation, tex.Size() / 2, 1.8f, 0, 0);
 

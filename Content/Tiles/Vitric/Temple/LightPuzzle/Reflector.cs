@@ -14,6 +14,13 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple.LightPuzzle
 {
 	class Reflector : DummyTile, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___GlowTrail = ModContent.Request<Texture2D>(AssetDirectory.Assets + "GlowTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___ItemGlow = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ItemGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___Keys_GlowSoft = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_MiscTextures___BeamCore = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "BeamCore");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___TickLine = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "TickLine");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___Reflector = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "Reflector");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___MirrorUnder = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MirrorUnder");
 		public override int DummyType => DummySystem.DummyType<ReflectorDummy>();
 
 		public override string Texture => AssetDirectory.Debug;
@@ -166,10 +173,10 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple.LightPuzzle
 
 		public override void PostDraw(Color lightColor)
 		{
-			Texture2D texUnder = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "MirrorUnder").Value;
+			Texture2D texUnder = texture_AssetDirectory_VitricTile___MirrorUnder.Value;
 			Main.spriteBatch.Draw(texUnder, Center - Main.screenPosition, null, lightColor, 0, texUnder.Size() / 2, 1, 0, 0);
 
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "Reflector").Value;
+			Texture2D tex = texture_AssetDirectory_VitricTile___Reflector.Value;
 			var drawFrame = new Rectangle(50 * frame, 0, 50, 50);
 			Main.spriteBatch.Draw(tex, Center - Main.screenPosition, drawFrame, lightColor, rotation - 1.57f, Vector2.One * 25, 1, 0, 0);
 		}
@@ -179,7 +186,7 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple.LightPuzzle
 			if (!Main.LocalPlayer.InModBiome<VitricTempleBiome>())
 				return;
 
-			Texture2D tickTexture = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "TickLine").Value;
+			Texture2D tickTexture = texture_AssetDirectory_VitricTile___TickLine.Value;
 			float opacity = rotateAnimation / 15f;
 
 			for (int k = 0; k < 30; k++)
@@ -199,8 +206,8 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple.LightPuzzle
 			int sin = (int)(Math.Sin(StarlightWorld.visualTimer * 3) * 20f); //Just a copy/paste of the boss laser. Need to tune this later
 			Color color2 = new Color(100, 200 + sin, 255) * 0.65f;
 
-			Texture2D texBeam = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "BeamCore").Value;
-			Texture2D texBeam2 = ModContent.Request<Texture2D>(AssetDirectory.MiscTextures + "BeamCore").Value;
+			Texture2D texBeam = texture_AssetDirectory_MiscTextures___BeamCore.Value;
+			Texture2D texBeam2 = texture_AssetDirectory_MiscTextures___BeamCore.Value;
 
 			var origin = new Vector2(0, texBeam.Height / 2);
 			var origin2 = new Vector2(0, texBeam2.Height / 2);
@@ -234,9 +241,9 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple.LightPuzzle
 			spriteBatch.End();
 			spriteBatch.Begin(default, BlendState.Additive, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D impactTex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "Keys/GlowSoft").Value;
-			Texture2D impactTex2 = ModContent.Request<Texture2D>(AssetDirectory.GUI + "ItemGlow").Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "GlowTrail").Value;
+			Texture2D impactTex = texture_AssetDirectory_Assets___Keys_GlowSoft.Value;
+			Texture2D impactTex2 = texture_AssetDirectory_GUI___ItemGlow.Value;
+			Texture2D glowTex = texture_AssetDirectory_Assets___GlowTrail.Value;
 
 			target = new Rectangle((int)pos.X, (int)pos.Y, width, (int)(height * 4.5f));
 			spriteBatch.Draw(glowTex, target, source, color2 * 0.75f, rotation, new Vector2(0, glowTex.Height / 2), 0, 0);

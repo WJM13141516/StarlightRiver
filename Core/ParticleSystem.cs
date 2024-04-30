@@ -8,6 +8,7 @@ namespace StarlightRiver.Core
 {
 	public class ParticleSystem
 	{
+		public static readonly Asset<Texture2D> texture_texture, _ReLogic_Content_AssetRequestMode_ImmediateLoad = ModContent.Request<Texture2D>(texture, ReLogic.Content.AssetRequestMode.ImmediateLoad);
 		public enum AnchorOptions
 		{
 			World,
@@ -38,7 +39,7 @@ namespace StarlightRiver.Core
 			if (Main.dedServ)
 				return;
 
-			this.texture = Request<Texture2D>(texture, ReLogic.Content.AssetRequestMode.ImmediateLoad).Value;
+			this.texture = texture_texture,_ReLogic_Content_AssetRequestMode_ImmediateLoad.Value;
 			updateFunction = updateDelegate;
 			anchorType = anchor;
 			this.maxParticles = maxParticles;

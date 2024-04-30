@@ -21,6 +21,18 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 	[AutoloadBossHead]
 	public partial class SquidBoss : ModNPC, IUnderwater, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GUI___BossBarFrame = ModContent.Request<Texture2D>(AssetDirectory.GUI + "BossBarFrame");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___BodyBlur = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "BodyBlur");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___BodyOverSpecular = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "BodyOverSpecular");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___BodyOverGlow = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "BodyOverGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___BodyOver = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "BodyOver");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___BodyGlow = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "BodyGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___BodyRingBlur = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "BodyRingBlur");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___BodyRingSpecular = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "BodyRingSpecular");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___BodyRingGlow = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "BodyRingGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___BodyRing = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "BodyRing");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___BodyUnder = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "BodyUnder");
 		public enum AIStates
 		{
 			SpawnEffects = 0,
@@ -96,7 +108,7 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 			NPC.Center += Main.screenPosition - screenPos;
 			NPC.ai[1]++;
 
-			Texture2D body = Request<Texture2D>(AssetDirectory.SquidBoss + "BodyUnder").Value;
+			Texture2D body = texture_AssetDirectory_SquidBoss___BodyUnder.Value;
 			spriteBatch.Draw(body, NPC.Center - Main.screenPosition, NPC.frame, Color.White, NPC.rotation, NPC.frame.Size() / 2, 1, 0, 0);
 
 			DrawHeadBlobs(spriteBatch);
@@ -228,13 +240,13 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 
 		public void DrawUnderWater(SpriteBatch spriteBatch, int NPCLayer)
 		{
-			Texture2D ring = Request<Texture2D>(AssetDirectory.SquidBoss + "BodyRing").Value;
-			Texture2D ringGlow = Request<Texture2D>(AssetDirectory.SquidBoss + "BodyRingGlow").Value;
-			Texture2D ringSpecular = Request<Texture2D>(AssetDirectory.SquidBoss + "BodyRingSpecular").Value;
-			Texture2D ringBlur = Request<Texture2D>(AssetDirectory.SquidBoss + "BodyRingBlur").Value;
+			Texture2D ring = texture_AssetDirectory_SquidBoss___BodyRing.Value;
+			Texture2D ringGlow = texture_AssetDirectory_SquidBoss___BodyRingGlow.Value;
+			Texture2D ringSpecular = texture_AssetDirectory_SquidBoss___BodyRingSpecular.Value;
+			Texture2D ringBlur = texture_AssetDirectory_SquidBoss___BodyRingBlur.Value;
 
-			Texture2D body = Request<Texture2D>(AssetDirectory.SquidBoss + "BodyUnder").Value;
-			Texture2D bodyGlow = Request<Texture2D>(AssetDirectory.SquidBoss + "BodyGlow").Value;
+			Texture2D body = texture_AssetDirectory_SquidBoss___BodyUnder.Value;
+			Texture2D bodyGlow = texture_AssetDirectory_SquidBoss___BodyGlow.Value;
 
 			for (int k = 3; k > 0; k--) //handles the drawing of the jelly rings under the boss.
 			{
@@ -286,17 +298,17 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 
 			if (Phase >= (int)AIStates.SecondPhase)
 			{
-				Texture2D sore = Request<Texture2D>(Texture).Value;
+				Texture2D sore = texture_Texture.Value;
 				spriteBatch.Draw(sore, NPC.Center - Main.screenPosition, sore.Frame(), lightColor * 1.2f, NPC.rotation, sore.Size() / 2, 1, 0, 0);
 			}
 		}
 
 		private void DrawHeadBlobs(SpriteBatch spriteBatch)
 		{
-			Texture2D headBlob = Request<Texture2D>(AssetDirectory.SquidBoss + "BodyOver").Value;
-			Texture2D headBlobGlow = Request<Texture2D>(AssetDirectory.SquidBoss + "BodyOverGlow").Value;
-			Texture2D headBlobSpecular = Request<Texture2D>(AssetDirectory.SquidBoss + "BodyOverSpecular").Value;
-			Texture2D headBlobBlur = Request<Texture2D>(AssetDirectory.SquidBoss + "BodyBlur").Value;
+			Texture2D headBlob = texture_AssetDirectory_SquidBoss___BodyOver.Value;
+			Texture2D headBlobGlow = texture_AssetDirectory_SquidBoss___BodyOverGlow.Value;
+			Texture2D headBlobSpecular = texture_AssetDirectory_SquidBoss___BodyOverSpecular.Value;
+			Texture2D headBlobBlur = texture_AssetDirectory_SquidBoss___BodyBlur.Value;
 
 			for (int k = 0; k < 5; k++) //draws the head blobs
 			{
@@ -534,7 +546,7 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 
 				FindEssentialNPCs();
 
-				BossBarOverlay.SetTracked(NPC, ", The Venerated", Request<Texture2D>(AssetDirectory.GUI + "BossBarFrame").Value);
+				BossBarOverlay.SetTracked(NPC, ", The Venerated", texture_AssetDirectory_GUI___BossBarFrame.Value);
 			}
 
 			if (Phase == (int)AIStates.SpawnAnimation)

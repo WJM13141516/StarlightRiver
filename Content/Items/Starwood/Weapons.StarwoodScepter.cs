@@ -11,9 +11,14 @@ namespace StarlightRiver.Content.Items.Starwood
 {
 	public class StarwoodScepter : StarwoodItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+		public static readonly Asset<Texture2D> texture_Texture____Blur = ModContent.Request<Texture2D>(Texture + "_Blur");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_StarwoodItem___StarwoodScepter_Alt = ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodScepter_Alt");
 		public override string Texture => AssetDirectory.StarwoodItem + Name;
 
-		public StarwoodScepter() : base(ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodScepter_Alt").Value) { }
+		public StarwoodScepter() : base(texture_AssetDirectory_StarwoodItem___StarwoodScepter_Alt.Value) { }
 
 		public override void SetStaticDefaults()
 		{
@@ -217,10 +222,10 @@ namespace StarlightRiver.Content.Items.Starwood
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
-			Texture2D blurTex = ModContent.Request<Texture2D>(Texture + "_Blur").Value;
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
+			Texture2D blurTex = texture_Texture____Blur.Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 
 			if (HasEmpoweredStar)
 				return false;
@@ -684,10 +689,10 @@ namespace StarlightRiver.Content.Items.Starwood
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
-			Texture2D blurTex = ModContent.Request<Texture2D>(Texture + "_Blur").Value;
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
+			Texture2D blurTex = texture_Texture____Blur.Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 
 			lightColor = Color.White;
 

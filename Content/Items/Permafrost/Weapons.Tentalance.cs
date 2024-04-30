@@ -11,6 +11,11 @@ namespace StarlightRiver.Content.Items.Permafrost
 {
 	internal class Tentalance : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_PermafrostItem___Name___Segment = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + Name + "Segment");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_PermafrostItem___Name___Glow2 = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + Name + "Glow2");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_PermafrostItem___Name___Glow = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + Name + "Glow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_PermafrostItem___Name = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + Name);
 		public override string Texture => AssetDirectory.PermafrostItem + Name;
 
 		public override void SetStaticDefaults()
@@ -184,9 +189,9 @@ namespace StarlightRiver.Content.Items.Permafrost
 			Vector2 basePos = Owner.Center + Vector2.UnitY * Owner.gfxOffY;
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + Name).Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + Name + "Glow").Value;
-			Texture2D texGlow2 = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + Name + "Glow2").Value;
+			Texture2D tex = texture_AssetDirectory_PermafrostItem___Name.Value;
+			Texture2D texGlow = texture_AssetDirectory_PermafrostItem___Name___Glow.Value;
+			Texture2D texGlow2 = texture_AssetDirectory_PermafrostItem___Name___Glow2.Value;
 
 			spriteBatch.Draw(tex, Projectile.Center - Projectile.velocity - Main.screenPosition, null, lightColor, Projectile.rotation + 1.57f / 2, tex.Size() / 2, 1, 0, 0);
 
@@ -197,7 +202,7 @@ namespace StarlightRiver.Content.Items.Permafrost
 			{
 				var pos = Vector2.Lerp(basePos, Projectile.Center, k / 29f);
 				pos += Vector2.Normalize(Projectile.velocity).RotatedBy(1.57f) * (float)Math.Sin(k / 24f * 6.28f * 2) * 5;
-				Texture2D texSegment = ModContent.Request<Texture2D>(AssetDirectory.PermafrostItem + Name + "Segment").Value;
+				Texture2D texSegment = texture_AssetDirectory_PermafrostItem___Name___Segment.Value;
 
 				spriteBatch.Draw(texSegment, pos - Main.screenPosition, null, Lighting.GetColor((int)pos.X / 16, (int)pos.Y / 16), Projectile.rotation, texSegment.Size() / 2, 1, 0, 0);
 			}
@@ -212,7 +217,7 @@ namespace StarlightRiver.Content.Items.Permafrost
 			effect.Parameters["time"].SetValue(Projectile.timeLeft * -0.01f);
 			effect.Parameters["repeats"].SetValue(1);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(effect);
 

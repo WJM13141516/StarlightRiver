@@ -12,6 +12,8 @@ namespace StarlightRiver.Content.GUI
 {
 	class BarrierDyeSlot : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_Item_ModItem_Texture = ModContent.Request<Texture2D>(Item.ModItem.Texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_BarrierDyeSlot = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/BarrierDyeSlot");
 		private const int leftPos = -186;
 		private int topPos = 430;
 
@@ -70,14 +72,14 @@ namespace StarlightRiver.Content.GUI
 			Item Item = mp.barrierDyeItem;
 
 			Texture2D tex = TextureAssets.InventoryBack8.Value;
-			Texture2D texSlot = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/BarrierDyeSlot").Value;
+			Texture2D texSlot = texture_StarlightRiver_Assets_GUI_BarrierDyeSlot.Value;
 
 			spriteBatch.Draw(tex, GetDimensions().Center(), null, Color.White * 0.8f, 0, tex.Size() / 2, 0.85f, 0, 0);
 			spriteBatch.Draw(texSlot, GetDimensions().Center(), null, Color.White * 0.4f, 0, texSlot.Size() / 2, 0.85f, 0, 0);
 
 			if (!Item.IsAir)
 			{
-				Texture2D tex2 = ModContent.Request<Texture2D>(Item.ModItem.Texture).Value;
+				Texture2D tex2 = texture_Item_ModItem_Texture.Value;
 				spriteBatch.Draw(tex2, GetDimensions().Center(), null, Color.White, 0, tex2.Size() / 2, 0.85f, 0, 0);
 			}
 

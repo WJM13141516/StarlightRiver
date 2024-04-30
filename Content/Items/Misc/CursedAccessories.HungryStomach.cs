@@ -8,6 +8,7 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	internal class HungryStomach : CursedAccessory
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_StaminaBlood = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaBlood");
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public override void SetStaticDefaults()
@@ -45,7 +46,7 @@ namespace StarlightRiver.Content.Items.Misc
 
 		public override void SafeUpdateAccessory(Player Player, bool hideVisual)
 		{
-			GUI.StaminaBar.overrideTexture = Request<Texture2D>("StarlightRiver/Assets/GUI/StaminaBlood").Value;
+			GUI.StaminaBar.overrideTexture = texture_StarlightRiver_Assets_GUI_StaminaBlood.Value;
 		}
 
 		private void DisableRegen(StarlightPlayer Player)

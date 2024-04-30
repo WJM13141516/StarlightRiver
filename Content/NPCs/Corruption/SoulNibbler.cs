@@ -6,6 +6,8 @@ namespace StarlightRiver.Content.NPCs.Corruption
 {
 	internal class SoulNibbler : Swarmer
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowAlpha = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowAlpha");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public ref float Timer => ref NPC.ai[0];
 		public ref float State => ref NPC.ai[1];
 
@@ -121,8 +123,8 @@ namespace StarlightRiver.Content.NPCs.Corruption
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowAlpha").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D texGlow = texture_StarlightRiver_Assets_Keys_GlowAlpha.Value;
 			var frame = new Rectangle(0, (int)(Timer % 30 / 10) * 34, 32, 34);
 
 			var color = new Color(50, 80, 0)

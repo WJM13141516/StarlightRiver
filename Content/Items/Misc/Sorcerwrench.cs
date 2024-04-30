@@ -10,6 +10,7 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	class Sorcerwrench : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GravediggerItem___RottenMana = ModContent.Request<Texture2D>(AssetDirectory.GravediggerItem + "RottenMana");
 		[CloneByReference]
 		public Projectile proj;
 
@@ -405,7 +406,7 @@ namespace StarlightRiver.Content.Items.Misc
                 {
                     if (manaDrawn - rottenManaAmount < 20)
                     {
-                        var tex1 = Request<Texture2D>(AssetDirectory.GravediggerItem + "RottenMana").Value;
+                        var tex1 = texture_AssetDirectory_GravediggerItem___RottenMana.Value;
                         var pos1 = new Vector2(Main.screenWidth - 25, (30 + manaTex.Height / 2f) + (manaTex.Height - manaTex.Height * starHeight) / 2f + (28 * (i - 1)));
 
                         int off = (int)(rottenManaAmount % 20 / 20f * tex1.Height);
@@ -416,7 +417,7 @@ namespace StarlightRiver.Content.Items.Misc
                         continue;
                     }
 
-                    var tex = Request<Texture2D>(AssetDirectory.GravediggerItem + "RottenMana").Value;
+                    var tex = texture_AssetDirectory_GravediggerItem___RottenMana.Value;
                     var pos = new Vector2(Main.screenWidth - 25, (30 + manaTex.Height / 2f) + (manaTex.Height - manaTex.Height * starHeight) / 2f + (28 * (i - 1)));
 
                     Main.spriteBatch.Draw(tex, pos, null, Color.White, 0f, tex.Size() / 2, starHeight, 0, 0);

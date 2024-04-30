@@ -9,6 +9,9 @@ namespace StarlightRiver.Content.Items.Manabonds
 {
 	internal class ShockingManabond : Manabond
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Dusts_Aurora = ModContent.Request<Texture2D>("StarlightRiver/Assets/Dusts/Aurora");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
 		public override string Texture => AssetDirectory.ManabondItem + Name;
 
 		public ShockingManabond() : base("Shocking Manabond", "Your minions can store 40 mana\nYour minions siphon 6 mana per second from you untill full\nYour minions spend 12 mana to attack with chain lightning occasionally\nChain lightning inflicts overcharged, decreasing defense") { }
@@ -181,7 +184,7 @@ namespace StarlightRiver.Content.Items.Manabonds
 			if (point1 == Vector2.Zero || point2 == Vector2.Zero)
 				return;
 
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_GlowTrail.Value;
 
 			Color color = new Color(200, 230, 255) * (Projectile.timeLeft <= 5 ? Projectile.timeLeft / 5f : 1);
 
@@ -203,8 +206,8 @@ namespace StarlightRiver.Content.Items.Manabonds
 
 			foreach (NPC target in targets)
 			{
-				Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Dusts/Aurora").Value;
-				Texture2D tex3 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
+				Texture2D tex2 = texture_StarlightRiver_Assets_Dusts_Aurora.Value;
+				Texture2D tex3 = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
 
 				sb.Draw(tex2, target.Center - Main.screenPosition, null, color, 0, tex2.Size() / 2f, 0.3f, 0, 0);
 				sb.Draw(tex3, target.Center - Main.screenPosition, null, color, 0, tex3.Size() / 2f, 0.5f, 0, 0);

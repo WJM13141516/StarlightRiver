@@ -8,6 +8,7 @@ namespace StarlightRiver.Content.GUI
 {
 	internal class BossRushScore : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_Images_UI_CharCreation_PanelGrayscale = ModContent.Request<Texture2D>("Images/UI/CharCreation/PanelGrayscale");
 		public static int timer;
 
 		public UIText button;
@@ -70,7 +71,7 @@ namespace StarlightRiver.Content.GUI
 			var dims = button.GetDimensions().ToRectangle();
 			dims.Inflate(10, 10);
 
-			Texture2D background = Main.Assets.Request<Texture2D>("Images/UI/CharCreation/PanelGrayscale").Value;
+			Texture2D background = Main.Assets.texture_Images_UI_CharCreation_PanelGrayscale.Value;
 			float opacity = button.IsMouseHovering ? 1 : 0.75f;
 
 			Utils.DrawSplicedPanel(spriteBatch, background, dims.X, dims.Y, dims.Width, dims.Height, 10, 10, 10, 10, new Color(73, 94, 171) * opacity);

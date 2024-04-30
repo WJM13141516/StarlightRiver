@@ -10,6 +10,7 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	public class Sling : MultiAmmoWeapon
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public override List<AmmoStruct> ValidAmmos => new()
@@ -426,7 +427,7 @@ namespace StarlightRiver.Content.Items.Misc
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			Vector2 drawOrigin = tex.Size() / 2f;
 			for (int k = 0; k < Projectile.oldPos.Length; k++)
 			{
@@ -497,7 +498,7 @@ namespace StarlightRiver.Content.Items.Misc
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			Vector2 drawOrigin = tex.Size() / 2f;
 			for (int k = 0; k < Projectile.oldPos.Length; k++)
 			{

@@ -9,6 +9,7 @@ namespace StarlightRiver.Content.Items.Misc
 {
 	class GraveBuster : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public override void SetStaticDefaults()
@@ -147,7 +148,7 @@ namespace StarlightRiver.Content.Items.Misc
 
 					if (tile.TileType == 85 && tile.HasTile && tile2.TileType == 85 && tile2.HasTile)
 					{
-						Texture2D tex = Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+						Texture2D tex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 						Vector2 drawPos = new Vector2(i + 1, j + 1) * 16;
 
 						Color color = Color.White * Progress * 0.3f;

@@ -12,6 +12,10 @@ namespace StarlightRiver.Content.Items.Geomancer
 	[AutoloadEquip(EquipType.Head)]
 	public class GeomancerHood : ModItem, IArmorLayerDrawable
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GeomancerItem___GeomancerPants_Legs_Gems = ModContent.Request<Texture2D>(AssetDirectory.GeomancerItem + "GeomancerPants_Legs_Gems");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GeomancerItem___GeomancerRobe_Body_Rims = ModContent.Request<Texture2D>(AssetDirectory.GeomancerItem + "GeomancerRobe_Body_Rims");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GeomancerItem___GeomancerRobe_Body_Gems = ModContent.Request<Texture2D>(AssetDirectory.GeomancerItem + "GeomancerRobe_Body_Gems");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_GeomancerItem___GeomancerHood_Head_Gems = ModContent.Request<Texture2D>(AssetDirectory.GeomancerItem + "GeomancerHood_Head_Gems");
 		internal static Item dummyItem = new();
 
 		public override string Texture => AssetDirectory.GeomancerItem + Name;
@@ -105,7 +109,7 @@ namespace StarlightRiver.Content.Items.Geomancer
 			//but this is left as is since you could wear a second set of the armor over itself to stop the visual effects
 			if (modPlayer.SetBonusActive && modPlayer.activeGem != StoredGem.None && info.drawPlayer.armor[10].type == ItemID.None)
 			{
-				GeomancerDrawer.Draw(ModContent.Request<Texture2D>(AssetDirectory.GeomancerItem + "GeomancerHood_Head_Gems").Value, info, info.drawPlayer.bodyFrame, info.drawPlayer.headRotation);
+				GeomancerDrawer.Draw(texture_AssetDirectory_GeomancerItem___GeomancerHood_Head_Gems.Value, info, info.drawPlayer.bodyFrame, info.drawPlayer.headRotation);
 			}
 		}
 
@@ -157,8 +161,8 @@ namespace StarlightRiver.Content.Items.Geomancer
 			GeomancerPlayer modPlayer = info.drawPlayer.GetModPlayer<GeomancerPlayer>();
 			if (modPlayer.SetBonusActive && modPlayer.activeGem != StoredGem.None && info.drawPlayer.armor[11].type == ItemID.None)
 			{
-				GeomancerDrawer.Draw(ModContent.Request<Texture2D>(AssetDirectory.GeomancerItem + "GeomancerRobe_Body_Gems").Value, info, info.drawPlayer.bodyFrame, info.drawPlayer.bodyRotation);
-				GeomancerDrawer.Draw(ModContent.Request<Texture2D>(AssetDirectory.GeomancerItem + "GeomancerRobe_Body_Rims").Value, info, info.drawPlayer.bodyFrame, info.drawPlayer.bodyRotation);
+				GeomancerDrawer.Draw(texture_AssetDirectory_GeomancerItem___GeomancerRobe_Body_Gems.Value, info, info.drawPlayer.bodyFrame, info.drawPlayer.bodyRotation);
+				GeomancerDrawer.Draw(texture_AssetDirectory_GeomancerItem___GeomancerRobe_Body_Rims.Value, info, info.drawPlayer.bodyFrame, info.drawPlayer.bodyRotation);
 			}
 		}
 
@@ -196,7 +200,7 @@ namespace StarlightRiver.Content.Items.Geomancer
 			GeomancerPlayer modPlayer = info.drawPlayer.GetModPlayer<GeomancerPlayer>();
 
 			if (modPlayer.SetBonusActive && modPlayer.activeGem != StoredGem.None && info.drawPlayer.armor[12].type == ItemID.None)
-				GeomancerDrawer.Draw(ModContent.Request<Texture2D>(AssetDirectory.GeomancerItem + "GeomancerPants_Legs_Gems").Value, info, info.drawPlayer.legFrame, info.drawPlayer.bodyRotation);
+				GeomancerDrawer.Draw(texture_AssetDirectory_GeomancerItem___GeomancerPants_Legs_Gems.Value, info, info.drawPlayer.legFrame, info.drawPlayer.bodyRotation);
 		}
 
 		public override void AddRecipes()

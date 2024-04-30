@@ -11,6 +11,8 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 {
 	class GlassSpear : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Glassweaver___BubbleBloom = ModContent.Request<Texture2D>(AssetDirectory.Glassweaver + "BubbleBloom");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		Vector2 origin;
 
 		public bool boundToParent = true;
@@ -193,7 +195,7 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Asset<Texture2D> spear = Request<Texture2D>(Texture);
+			Asset<Texture2D> spear = texture_Texture;
 			Rectangle frame = spear.Frame(3, 1, 0);
 			Rectangle hotFrame = spear.Frame(3, 1, 1);
 			Rectangle smallFrame = spear.Frame(3, 1, 2);
@@ -348,11 +350,11 @@ namespace StarlightRiver.Content.Bosses.GlassMiniboss
 			{
 				float scale = Projectile.scale * Utils.GetLerpValue(0, 16, Timer, true);
 
-				Asset<Texture2D> glob = Request<Texture2D>(Texture);
+				Asset<Texture2D> glob = texture_Texture;
 				Rectangle frame = glob.Frame(1, 3, 0, Projectile.frame);
 				var origin = new Vector2(frame.Height * 0.5f);
 
-				Asset<Texture2D> bloom = Request<Texture2D>(AssetDirectory.Glassweaver + "BubbleBloom");
+				Asset<Texture2D> bloom = texture_AssetDirectory_Glassweaver___BubbleBloom;
 				Color bloomFade = Color.OrangeRed;
 				bloomFade.A = 0;
 

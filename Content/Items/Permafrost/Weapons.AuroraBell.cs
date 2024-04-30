@@ -10,6 +10,12 @@ namespace StarlightRiver.Content.Items.Permafrost
 {
 	class AuroraBell : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_Texture____Clapper = ModContent.Request<Texture2D>(Texture + "_Clapper");
+		public static readonly Asset<Texture2D> texture_Texture____Front = ModContent.Request<Texture2D>(Texture + "_Front");
+		public static readonly Asset<Texture2D> texture_Texture____Back = ModContent.Request<Texture2D>(Texture + "_Back");
+		public static readonly Asset<Texture2D> texture_Texture____Outline = ModContent.Request<Texture2D>(Texture + "_Outline");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.PermafrostItem + "AuroraBell";
 
 		public override void SetStaticDefaults()
@@ -83,8 +89,8 @@ namespace StarlightRiver.Content.Items.Permafrost
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D outlineTex = ModContent.Request<Texture2D>(Texture + "_Outline").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D outlineTex = texture_Texture____Outline.Value;
 
 			Vector2 offset = 8 * new Vector2((float)Math.Cos(counter * 0.05f), (float)Math.Sin(counter * 0.05f));
 
@@ -95,9 +101,9 @@ namespace StarlightRiver.Content.Items.Permafrost
 			Vector2 centerer = (Projectile.rotation - 1.57f).ToRotationVector2() * (tex.Height / 2);
 			Main.spriteBatch.Draw(tex, Projectile.Center + offset - centerer - new Vector2(0, tex.Height / 2) - Main.screenPosition, null, Color.White * transparency * Opacity, Projectile.rotation, new Vector2(tex.Width / 2, tex.Height / 2), Projectile.scale * scale, SpriteEffects.None, 0f);
 
-			Texture2D backTex = ModContent.Request<Texture2D>(Texture + "_Back").Value;
-			Texture2D frontTex = ModContent.Request<Texture2D>(Texture + "_Front").Value;
-			Texture2D clapperTex = ModContent.Request<Texture2D>(Texture + "_Clapper").Value;
+			Texture2D backTex = texture_Texture____Back.Value;
+			Texture2D frontTex = texture_Texture____Front.Value;
+			Texture2D clapperTex = texture_Texture____Clapper.Value;
 			centerer = (Projectile.rotation - 1.57f).ToRotationVector2() * (tex.Height * 0.75f);
 			Main.spriteBatch.Draw(backTex, Projectile.Center + offset - new Vector2(0, tex.Height / 2) - Main.screenPosition, null, lightColor * Opacity, Projectile.rotation, new Vector2(tex.Width / 2, 0), Projectile.scale, SpriteEffects.None, 0f);
 			Main.spriteBatch.Draw(clapperTex, Projectile.Center + offset - centerer - new Vector2(0, tex.Height / 2) - Main.screenPosition, null, lightColor * Opacity, -Projectile.rotation, new Vector2(tex.Width / 2, tex.Height * 0.75f), Projectile.scale, SpriteEffects.None, 0f);
@@ -373,7 +379,7 @@ namespace StarlightRiver.Content.Items.Permafrost
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 			effect.Parameters["alpha"].SetValue(1);
 
 			trail?.Render(effect);
@@ -481,7 +487,7 @@ namespace StarlightRiver.Content.Items.Permafrost
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 			effect.Parameters["alpha"].SetValue(1);
 
 			trail?.Render(effect);

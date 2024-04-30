@@ -6,6 +6,12 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 {
 	internal class SpikeMine : ModProjectile, IDrawAdditive
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_ItemGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/ItemGlow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Shine = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Shine");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___BossSpikeGlow = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "BossSpikeGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___BossSpike = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "BossSpike");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricBoss___SpikeSource = ModContent.Request<Texture2D>(AssetDirectory.VitricBoss + "SpikeSource");
 		public override string Texture => AssetDirectory.Invisible;
 
 		public ref float Timer => ref Projectile.ai[0];
@@ -62,14 +68,14 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 			if (Timer < 120)
 			{
 				float alpha = Math.Min(Timer / 20f, 1);
-				Texture2D tex = Request<Texture2D>(AssetDirectory.VitricBoss + "SpikeSource").Value;
+				Texture2D tex = texture_AssetDirectory_VitricBoss___SpikeSource.Value;
 				spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.White * alpha, 0, tex.Size() / 2, 1, 0, 0);
 			}
 
 			if (Timer > 90)
 			{
-				Texture2D spike = Request<Texture2D>(AssetDirectory.VitricBoss + "BossSpike").Value;
-				Texture2D glow = Request<Texture2D>(AssetDirectory.VitricBoss + "BossSpikeGlow").Value;
+				Texture2D spike = texture_AssetDirectory_VitricBoss___BossSpike.Value;
+				Texture2D glow = texture_AssetDirectory_VitricBoss___BossSpikeGlow.Value;
 
 				var rand = new Random(Projectile.GetHashCode());
 
@@ -91,7 +97,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 			if (Timer < 120)
 			{
 				float alpha = Math.Min(Timer / 90f, 1);
-				Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
 				spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, new Color(255, 200, 100) * alpha, 0, tex.Size() / 2, 1, 0, 0);
 			}
 
@@ -99,10 +105,10 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 			{
 				float alpha = (float)Math.Sin((Timer - 90) / 40f * 3.14f);
 
-				Texture2D texShine = Request<Texture2D>("StarlightRiver/Assets/Keys/Shine").Value;
+				Texture2D texShine = texture_StarlightRiver_Assets_Keys_Shine.Value;
 				Vector2 pos = Projectile.Center - Main.screenPosition;
 
-				Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/GUI/ItemGlow").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_GUI_ItemGlow.Value;
 				spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, new Color(255, 200, 50) * alpha * 0.5f, Main.GameUpdateCount / 20f, tex.Size() / 2, alpha * 1.5f, 0, 0);
 				spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.White * alpha * 0.5f, Main.GameUpdateCount / 22f, tex.Size() / 2, alpha * 1.1f, 0, 0);
 			}

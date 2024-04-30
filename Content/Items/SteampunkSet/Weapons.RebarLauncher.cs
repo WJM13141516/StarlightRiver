@@ -12,6 +12,10 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 {
 	public class RebarLauncher : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SteampunkItem___RebarNoiseTexture = ModContent.Request<Texture2D>(AssetDirectory.SteampunkItem + "RebarNoiseTexture");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SteampunkItem___RebarTrailTexture = ModContent.Request<Texture2D>(AssetDirectory.SteampunkItem + "RebarTrailTexture");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture____White = ModContent.Request<Texture2D>(Texture + "_White");
 		Vector2 direction = Vector2.Zero;
 
 		public override string Texture => AssetDirectory.SteampunkItem + Name;
@@ -294,8 +298,8 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 		{
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			Texture2D overlay = ModContent.Request<Texture2D>(Texture + "_White").Value;
-			Texture2D glow = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D overlay = texture_Texture____White.Value;
+			Texture2D glow = texture_Texture____Glow.Value;
 			Color color = HeatColor(trailWidth / 4f, 0.5f);
 			color.A = 0;
 
@@ -403,8 +407,8 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 			Matrix view = Main.GameViewMatrix.TransformationMatrix;
 			var projection = Matrix.CreateOrthographicOffCenter(0, Main.screenWidth, Main.screenHeight, 0, -1, 1);
 
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.SteampunkItem + "RebarTrailTexture").Value);
-			effect.Parameters["noiseTexture"].SetValue(ModContent.Request<Texture2D>(AssetDirectory.SteampunkItem + "RebarNoiseTexture").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_AssetDirectory_SteampunkItem___RebarTrailTexture.Value);
+			effect.Parameters["noiseTexture"].SetValue(texture_AssetDirectory_SteampunkItem___RebarNoiseTexture.Value);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
 			effect.Parameters["progress"].SetValue(trailWidth / 4f);
 			effect.Parameters["repeats"].SetValue(18);

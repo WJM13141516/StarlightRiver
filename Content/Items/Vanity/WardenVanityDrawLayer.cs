@@ -5,6 +5,7 @@ namespace StarlightRiver.Content.Items.Vanity
 {
 	public class WardenVanityDrawLayer : PlayerDrawLayer
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VanityItem___WardenRobeRealBody = ModContent.Request<Texture2D>(AssetDirectory.VanityItem + "WardenRobeRealBody");
 		public int yFrame = 0;
 
 		public override bool GetDefaultVisibility(PlayerDrawSet drawInfo)
@@ -23,7 +24,7 @@ namespace StarlightRiver.Content.Items.Vanity
 			WardenVanityPlayer modPlayer = armorOwner.GetModPlayer<WardenVanityPlayer>();
 
 			drawInfo.armorHidesArms = true;
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.VanityItem + "WardenRobeRealBody").Value;
+			Texture2D tex = texture_AssetDirectory_VanityItem___WardenRobeRealBody.Value;
 
 			Vector2 drawPos = armorOwner.MountedCenter - Main.screenPosition - new Vector2(0, 3 - armorOwner.gfxOffY);
 

@@ -9,6 +9,8 @@ namespace StarlightRiver.Content.NPCs.Forest
 {
 	class TreeBat : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public enum BehaviorStates
 		{
 			Waiting,
@@ -156,8 +158,8 @@ namespace StarlightRiver.Content.NPCs.Forest
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			spriteBatch.Draw(Request<Texture2D>(Texture).Value, NPC.Center - screenPos, NPC.frame, drawColor, NPC.rotation, new Vector2(13, 10), NPC.scale, NPC.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
-			spriteBatch.Draw(Request<Texture2D>(Texture + "Glow").Value, NPC.Center - screenPos, NPC.frame, Color.White, NPC.rotation, new Vector2(13, 10), NPC.scale, NPC.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+			spriteBatch.Draw(texture_Texture.Value, NPC.Center - screenPos, NPC.frame, drawColor, NPC.rotation, new Vector2(13, 10), NPC.scale, NPC.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
+			spriteBatch.Draw(texture_Texture___Glow.Value, NPC.Center - screenPos, NPC.frame, Color.White, NPC.rotation, new Vector2(13, 10), NPC.scale, NPC.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0);
 			return false;
 		}
 

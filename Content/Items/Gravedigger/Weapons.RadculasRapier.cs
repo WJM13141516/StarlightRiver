@@ -12,6 +12,9 @@ namespace StarlightRiver.Content.Items.Gravedigger
 {
 	public class RadculasRapier : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
 		public override string Texture => AssetDirectory.MiscItem + Name;
 
 		public override void SetStaticDefaults()
@@ -120,7 +123,7 @@ namespace StarlightRiver.Content.Items.Gravedigger
 					Main.spriteBatch.Draw(PlayerTarget.Target, PlayerTarget.getPlayerTargetPosition(player.whoAmI),
 								 PlayerTarget.getPlayerTargetSourceRectangle(player.whoAmI), new Color(150, 0, 0) * (player.GetModPlayer<RadculasRapierPlayer>().teleportTimer / 60f), player.fullRotation, Vector2.Zero, 1f, 0f, 0f);
 
-					Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+					Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 					Main.spriteBatch.Draw(bloomTex, player.Center - Main.screenPosition, null, new Color(255, 0, 0) * (player.GetModPlayer<RadculasRapierPlayer>().teleportTimer / 60f), 0f, bloomTex.Size() / 2f, 2f, 0f, 0f);
 				}
 
@@ -445,8 +448,8 @@ namespace StarlightRiver.Content.Items.Gravedigger
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D texGlow = texture_Texture____Glow.Value;
 
 			Vector2 off = new Vector2(0, -20).RotatedBy(Projectile.rotation - MathHelper.PiOver2);
 
@@ -777,8 +780,8 @@ namespace StarlightRiver.Content.Items.Gravedigger
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D texGlow = texture_Texture____Glow.Value;
 
 			float fade = 1f;
 

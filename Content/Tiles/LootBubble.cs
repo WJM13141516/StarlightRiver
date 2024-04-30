@@ -9,6 +9,8 @@ namespace StarlightRiver.Content.Tiles
 {
 	abstract class LootBubble : DummyTile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow");
+		public static readonly Asset<Texture2D> texture_BubbleTexture = ModContent.Request<Texture2D>(BubbleTexture);
 		public virtual List<Loot> GoldLootPool => null;
 
 		public virtual string BubbleTexture => "StarlightRiver/Assets/Tiles/Bubble";
@@ -37,7 +39,7 @@ namespace StarlightRiver.Content.Tiles
 			var ItemTarget = new Rectangle((int)pos.X + 8, (int)pos.Y + 8, 16, 16);
 			spriteBatch.Draw(tex2, ItemTarget, Color.White);
 
-			Texture2D tex = Request<Texture2D>(BubbleTexture).Value;
+			Texture2D tex = texture_BubbleTexture.Value;
 			int sin = (int)(Math.Sin(time) * 4);
 			int sin2 = (int)(Math.Sin(time + 0.75f) * 4);
 			var bubbleTarget = new Rectangle((int)pos.X - sin / 2, (int)pos.Y + sin2 / 2, 32 + sin, 32 - sin2);
@@ -93,7 +95,7 @@ namespace StarlightRiver.Content.Tiles
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Keys_Glow.Value;
 			float sin = 0.5f + (float)(Math.Sin(StarlightWorld.visualTimer) * 0.5f);
 			spriteBatch.Draw(tex, Center - Main.screenPosition, null, Color.SkyBlue * (0.4f + sin * 0.1f), 0, tex.Size() / 2, 0.8f + sin * 0.1f, 0, 0);
 		}

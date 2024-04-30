@@ -13,6 +13,7 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	public class CoachGunUpgrade : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private int cooldown = 0;
 
 		public override string Texture => AssetDirectory.VitricItem + Name;
@@ -288,7 +289,7 @@ namespace StarlightRiver.Content.Items.Vitric
 		{
 			SpriteEffects spriteEffects = Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
-			Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D texture = texture_Texture.Value;
 
 			int frameHeight = texture.Height / Main.projFrames[Projectile.type];
 			int startY = frameHeight * Projectile.frame;

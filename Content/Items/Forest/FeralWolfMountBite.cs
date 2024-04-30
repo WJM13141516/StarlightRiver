@@ -5,6 +5,9 @@ namespace StarlightRiver.Content.Items.Forest
 {
 	internal class FeralWolfMountBite : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Misc_TriTell = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/TriTell");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_ForestItem___FeralWolfMountBiteBot = ModContent.Request<Texture2D>(AssetDirectory.ForestItem + "FeralWolfMountBiteBot");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_ForestItem___FeralWolfMountBiteTop = ModContent.Request<Texture2D>(AssetDirectory.ForestItem + "FeralWolfMountBiteTop");
 		public ref float maxTime => ref Projectile.ai[0];
 
 		public float Progress => 1 - Projectile.timeLeft / maxTime;
@@ -59,9 +62,9 @@ namespace StarlightRiver.Content.Items.Forest
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D topTex = ModContent.Request<Texture2D>(AssetDirectory.ForestItem + "FeralWolfMountBiteTop").Value;
-			Texture2D botTex = ModContent.Request<Texture2D>(AssetDirectory.ForestItem + "FeralWolfMountBiteBot").Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/TriTell").Value;
+			Texture2D topTex = texture_AssetDirectory_ForestItem___FeralWolfMountBiteTop.Value;
+			Texture2D botTex = texture_AssetDirectory_ForestItem___FeralWolfMountBiteBot.Value;
+			Texture2D glowTex = texture_StarlightRiver_Assets_Misc_TriTell.Value;
 
 			float swoop = (float)Math.Log10(Progress * 100 + 1) * 0.65f;
 			Color glowColor = new Color(255, 70, 60) * (float)Math.Sin((float)Math.Pow(Progress, 0.5f) * 3.14f);

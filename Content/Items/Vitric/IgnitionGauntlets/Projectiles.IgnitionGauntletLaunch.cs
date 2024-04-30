@@ -6,6 +6,10 @@ namespace StarlightRiver.Content.Items.Vitric.IgnitionGauntlets
 {
 	public class IgnitionGauntletLaunch : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_Texture____pallette = ModContent.Request<Texture2D>(Texture + "_pallette");
+		public static readonly Asset<Texture2D> texture_Texture____noise = ModContent.Request<Texture2D>(Texture + "_noise");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_Texture____Star = ModContent.Request<Texture2D>(Texture + "_Star");
 		public float noiseRotation;
 
 		public float noiseRotation2;
@@ -85,17 +89,17 @@ namespace StarlightRiver.Content.Items.Vitric.IgnitionGauntlets
 				if (Projectile.active && Projectile.type == ModContent.ProjectileType<IgnitionGauntletLaunch>() && Main.player[Projectile.owner].GetModPlayer<IgnitionPlayer>().loadedCharge > 15)
 				{
 					Player player = Main.player[Projectile.owner];
-					Texture2D starTex = ModContent.Request<Texture2D>(Texture + "_Star").Value;
+					Texture2D starTex = texture_Texture____Star.Value;
 
 					var mp = Projectile.ModProjectile as IgnitionGauntletLaunch;
-					Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+					Texture2D tex = texture_Texture.Value;
 					Effect effect = Filters.Scene["ConicalNoise"].GetShader().Shader;
 					Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
 
-					effect.Parameters["vnoise"].SetValue(ModContent.Request<Texture2D>(Texture + "_noise").Value);
+					effect.Parameters["vnoise"].SetValue(texture_Texture____noise.Value);
 					effect.Parameters["rotation"].SetValue(mp.noiseRotation);
 					effect.Parameters["transparency"].SetValue(1f);
-					effect.Parameters["pallette"].SetValue(ModContent.Request<Texture2D>(Texture + "_pallette").Value);
+					effect.Parameters["pallette"].SetValue(texture_Texture____pallette.Value);
 					effect.Parameters["color"].SetValue(Color.White.ToVector4());
 					effect.CurrentTechnique.Passes[0].Apply();
 
@@ -104,10 +108,10 @@ namespace StarlightRiver.Content.Items.Vitric.IgnitionGauntlets
 					Main.spriteBatch.End();
 					Main.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.GameViewMatrix.TransformationMatrix);
 
-					effect.Parameters["vnoise"].SetValue(ModContent.Request<Texture2D>(Texture + "_noise").Value);
+					effect.Parameters["vnoise"].SetValue(texture_Texture____noise.Value);
 					effect.Parameters["rotation"].SetValue(mp.noiseRotation2);
 					effect.Parameters["transparency"].SetValue(1f);
-					effect.Parameters["pallette"].SetValue(ModContent.Request<Texture2D>(Texture + "_pallette").Value);
+					effect.Parameters["pallette"].SetValue(texture_Texture____pallette.Value);
 					effect.Parameters["color"].SetValue(Color.White.ToVector4());
 					effect.CurrentTechnique.Passes[0].Apply();
 

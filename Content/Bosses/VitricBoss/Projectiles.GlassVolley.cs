@@ -6,6 +6,11 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 {
 	internal class GlassVolley : ModProjectile, IDrawAdditive
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrailOneEnd = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrailOneEnd");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowHarsh = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowHarsh");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_VolleyTell = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/VolleyTell");
 		public ref float Timer => ref Projectile.ai[0];
 		public ref float Rotation => ref Projectile.ai[1];
 
@@ -54,7 +59,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 		{
 			if (Timer <= 30) //draws the proejctile's tell ~0.75 seconds before it goes off
 			{
-				Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/VolleyTell").Value;
+				Texture2D tex = texture_StarlightRiver_Assets_Bosses_VitricBoss_VolleyTell.Value;
 				float alpha = (float)Math.Sin(Timer / 30f * 3.14f) * 0.8f;
 				spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, tex.Frame(), new Color(200, 255, 255) * alpha, Projectile.rotation - 1.57f, new Vector2(tex.Width / 2, tex.Height), 1, 0, 0);
 			}
@@ -116,18 +121,18 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 		{
 			Color color = Helpers.Helper.MoltenVitricGlow(MathHelper.Min(600 - Projectile.timeLeft, 120));
 
-			Texture2D glow = Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
+			Texture2D glow = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
 
 			Color bloomColor = color;
 			bloomColor.A = 0;
 
 			Main.EntitySpriteDraw(glow, Projectile.Center - Main.screenPosition, null, bloomColor, Projectile.rotation * 0.2f, glow.Size() * 0.5f, 1 - Projectile.timeLeft / 600f * 0.75f, SpriteEffects.None, 0);
 
-			Main.EntitySpriteDraw(Request<Texture2D>(Texture).Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, 32, 128), lightColor, Projectile.rotation, new Vector2(16, 64), Projectile.scale, 0, 0);
-			Main.EntitySpriteDraw(Request<Texture2D>(Texture).Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 128, 32, 128), color, Projectile.rotation, new Vector2(16, 64), Projectile.scale, 0, 0);
+			Main.EntitySpriteDraw(texture_Texture.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 0, 32, 128), lightColor, Projectile.rotation, new Vector2(16, 64), Projectile.scale, 0, 0);
+			Main.EntitySpriteDraw(texture_Texture.Value, Projectile.Center - Main.screenPosition, new Rectangle(0, 128, 32, 128), color, Projectile.rotation, new Vector2(16, 64), Projectile.scale, 0, 0);
 
-			Texture2D tell = Request<Texture2D>("StarlightRiver/Assets/Keys/GlowHarsh").Value;
-			Texture2D trail = Request<Texture2D>("StarlightRiver/Assets/GlowTrailOneEnd").Value;
+			Texture2D tell = texture_StarlightRiver_Assets_Keys_GlowHarsh.Value;
+			Texture2D trail = texture_StarlightRiver_Assets_GlowTrailOneEnd.Value;
 			float tellLength = Helpers.Helper.BezierEase(1 - (Projectile.timeLeft - 570) / 30f) * 18f;
 
 			color = Color.Lerp(new Color(150, 225, 255), color, color.R / 255f);

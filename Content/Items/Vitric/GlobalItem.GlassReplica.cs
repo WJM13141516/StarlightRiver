@@ -7,6 +7,7 @@ namespace StarlightRiver.Content.Items.Vitric
 {
 	class GlassReplica : GlobalItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_RiftCrafting_Glow1 = ModContent.Request<Texture2D>("StarlightRiver/Assets/RiftCrafting/Glow1");
 		public override bool InstancePerEntity => true;
 
 		public bool isReplica;
@@ -59,7 +60,7 @@ namespace StarlightRiver.Content.Items.Vitric
 					spriteBatch.End();
 					spriteBatch.Begin(default, BlendState.Additive, SamplerState.PointClamp, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-					Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/RiftCrafting/Glow1").Value;
+					Texture2D tex = texture_StarlightRiver_Assets_RiftCrafting_Glow1.Value;
 					float scale1 = Terraria.GameContent.TextureAssets.Item[item.type].Size().Length() / tex.Size().Length();
 					var color = new Color(180, 240, 255);
 

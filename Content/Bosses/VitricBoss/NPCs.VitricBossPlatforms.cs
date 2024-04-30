@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 {
 	internal class VitricBossPlatformUp : MovingPlatform
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public const int MaxHeight = 880;
 		public override string Texture => AssetDirectory.VitricBoss + "VitricBossPlatform";
 
@@ -105,7 +106,7 @@ namespace StarlightRiver.Content.Bosses.VitricBoss
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 
 			if (dontCollide)
 				drawColor *= 0.25f;

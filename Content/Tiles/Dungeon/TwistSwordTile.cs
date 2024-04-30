@@ -12,6 +12,8 @@ namespace StarlightRiver.Content.Tiles.Dungeon
 {
 	public class TwistSwordTile : DummyTile
 	{
+		public static readonly Asset<Texture2D> texture_texturePath____Glow = ModContent.Request<Texture2D>(texturePath + "_Glow");
+		public static readonly Asset<Texture2D> texture_texturePath = ModContent.Request<Texture2D>(texturePath);
 		public override string Texture => AssetDirectory.Invisible;
 
 		public override int DummyType => DummySystem.DummyType<TwistSwordDummy>();
@@ -51,8 +53,8 @@ namespace StarlightRiver.Content.Tiles.Dungeon
 		{
 			string texturePath = AssetDirectory.DungeonTile + "TwistSwordTile";
 
-			Texture2D tex = ModContent.Request<Texture2D>(texturePath).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(texturePath + "_Glow").Value;
+			Texture2D tex = texture_texturePath.Value;
+			Texture2D glowTex = texture_texturePath____Glow.Value;
 			Main.spriteBatch.Draw(tex, position - Main.screenPosition, null, lightColor, rotation - 1.57f, new Vector2(tex.Width / 2, 0), 1, SpriteEffects.None, 0f);
 			Main.spriteBatch.Draw(glowTex, position - Main.screenPosition, null, Color.White, rotation - 1.57f, new Vector2(tex.Width / 2, 0), 1, SpriteEffects.None, 0f);
 		}

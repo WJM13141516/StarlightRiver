@@ -5,9 +5,10 @@ namespace StarlightRiver.Content.Items.Starwood
 {
 	public class StarwoodStaff : StarwoodItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_StarwoodItem___StarwoodStaff_Alt = ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodStaff_Alt");
 		public override string Texture => AssetDirectory.StarwoodItem + Name;
 
-		public StarwoodStaff() : base(ModContent.Request<Texture2D>(AssetDirectory.StarwoodItem + "StarwoodStaff_Alt").Value) { }
+		public StarwoodStaff() : base(texture_AssetDirectory_StarwoodItem___StarwoodStaff_Alt.Value) { }
 
 		public override void SetStaticDefaults()
 		{

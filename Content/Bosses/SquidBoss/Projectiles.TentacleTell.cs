@@ -6,6 +6,9 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 {
 	class TentacleTell : ModProjectile, IDrawAdditive
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___TentacleTellBody = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "TentacleTellBody");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public static Vector2 endPointToAssign;
 
 		public Vector2 endPoint;
@@ -40,9 +43,9 @@ namespace StarlightRiver.Content.Bosses.SquidBoss
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D top = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D body = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "TentacleTellBody").Value;
-			Texture2D glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value;
+			Texture2D top = texture_Texture.Value;
+			Texture2D body = texture_AssetDirectory_SquidBoss___TentacleTellBody.Value;
+			Texture2D glow = texture_StarlightRiver_Assets_GlowTrail.Value;
 			Texture2D flat = Terraria.GameContent.TextureAssets.MagicPixel.Value;
 
 			float timer = 60 - Projectile.timeLeft;

@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.Items.Breacher
 {
 	public class ScrappodItem : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.BreacherItem + Name;
 
 		public override void SetStaticDefaults()
@@ -110,7 +111,7 @@ namespace StarlightRiver.Content.Items.Breacher
 		{
 			SpriteEffects spriteEffects = Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
-			Texture2D texture = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D texture = texture_Texture.Value;
 
 			int frameHeight = texture.Height / Main.projFrames[Projectile.type];
 			int startY = frameHeight * Projectile.frame;

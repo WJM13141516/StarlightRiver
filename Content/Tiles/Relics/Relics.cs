@@ -11,6 +11,8 @@ namespace StarlightRiver.Content.Tiles.Relics
 {
 	public class RelicLoader : SimpleTileLoader
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_StarTexture = ModContent.Request<Texture2D>("StarlightRiver/Assets/StarTexture");
+		public static readonly Asset<Texture2D> texture_RelicTextureName = ModContent.Request<Texture2D>(RelicTextureName);
 		public override string AssetRoot => "StarlightRiver/Assets/Tiles/Relics/";
 
 		public override void Load()
@@ -70,7 +72,7 @@ namespace StarlightRiver.Content.Tiles.Relics
 		public override void Load()
 		{
 			if (!Main.dedServ)
-				RelicTexture = ModContent.Request<Texture2D>(RelicTextureName);
+				RelicTexture = texture_RelicTextureName;
 		}
 
 		public override void Unload()
@@ -181,7 +183,7 @@ namespace StarlightRiver.Content.Tiles.Relics
 			Vector2 drawPos = worldPos + offScreen - Main.screenPosition + new Vector2(0f, -40f) + new Vector2(0f, offset * 4f);
 
 			// background glow
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/StarTexture").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_StarTexture.Value;
 			float sin = (float)Math.Sin(Main.GameUpdateCount * 0.05f);
 			float sin2 = (float)Math.Sin(Main.GameUpdateCount * 0.05f + 2f);
 

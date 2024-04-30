@@ -13,6 +13,10 @@ namespace StarlightRiver.Content.NPCs.Dungeon
 {
 	internal class CrescentCaster : ModNPC, IDrawPrimitive, IHintable
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_Texture____Star = ModContent.Request<Texture2D>(Texture + "_Star");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private const float ACCELERATION = 0.15f;
 		private const float MAXSPEED = 2;
 
@@ -245,9 +249,9 @@ namespace StarlightRiver.Content.NPCs.Dungeon
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
-			Texture2D starTex = ModContent.Request<Texture2D>(Texture + "_Star").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
+			Texture2D starTex = texture_Texture____Star.Value;
 
 			var origin = new Vector2(NPC.frame.Width / 2, 52);
 			SpriteEffects effects = SpriteEffects.FlipHorizontally;
@@ -300,7 +304,7 @@ namespace StarlightRiver.Content.NPCs.Dungeon
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(1f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 
 			foreach (CrescentCasterBolt bolt in Bolts)
 			{

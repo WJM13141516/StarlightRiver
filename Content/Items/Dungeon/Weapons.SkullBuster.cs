@@ -14,6 +14,11 @@ namespace StarlightRiver.Content.Items.Dungeon
 {
 	public class SkullBuster : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_Texture___skullNumber_ToString( = ModContent.Request<Texture2D>(Texture + skullNumber.ToString();
+		public static readonly Asset<Texture2D> texture_Texture____Crosshair = ModContent.Request<Texture2D>(Texture + "_Crosshair");
+		public static readonly Asset<Texture2D> texture_Texture____White = ModContent.Request<Texture2D>(Texture + "_White");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private int cooldown = 0;
 
 		public override string Texture => AssetDirectory.DungeonItem + Name;
@@ -212,7 +217,7 @@ namespace StarlightRiver.Content.Items.Dungeon
 			if (frameCounter < 2)
 				return false;
 
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			int frameHeight = tex.Height / Main.projFrames[Projectile.type];
 			var frame = new Rectangle(0, frameHeight * Projectile.frame, tex.Width, frameHeight);
 
@@ -398,7 +403,7 @@ namespace StarlightRiver.Content.Items.Dungeon
 			if (released)
 			{
 				float rot = direction.ToRotation();
-				Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+				Texture2D tex = texture_Texture.Value;
 				var origin = new Vector2(10, tex.Height * 0.75f);
 				SpriteEffects effects = SpriteEffects.None;
 
@@ -555,9 +560,9 @@ namespace StarlightRiver.Content.Items.Dungeon
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D whiteTex = ModContent.Request<Texture2D>(Texture + "_White").Value;
-			Texture2D crosshairTex = ModContent.Request<Texture2D>(Texture + "_Crosshair").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D whiteTex = texture_Texture____White.Value;
+			Texture2D crosshairTex = texture_Texture____Crosshair.Value;
 
 			float progress = 1 - Projectile.timeLeft / 150f;
 			Color overlayColor = Color.White;
@@ -655,7 +660,7 @@ namespace StarlightRiver.Content.Items.Dungeon
 
 		public void DrawAdditive(SpriteBatch sb)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture + skullNumber.ToString()).Value;
+			Texture2D tex = texture_Texture___skullNumber_ToString().Value;
 			float opacity = fadeOut;
 			float scale = fadeIn + 0.25f * (1 - fadeOut);
 			sb.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.Aqua * opacity, Projectile.rotation, tex.Size() / 2, scale, SpriteEffects.None, 0f);
@@ -760,7 +765,7 @@ namespace StarlightRiver.Content.Items.Dungeon
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(2f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 
 			trail?.Render(effect);
 		}

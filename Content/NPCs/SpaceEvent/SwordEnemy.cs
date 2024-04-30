@@ -5,6 +5,8 @@ namespace StarlightRiver.Content.NPCs.SpaceEvent
 {
 	class SwordEnemy : ModNPC
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SpaceEventNPC___SwordEnemySlash = ModContent.Request<Texture2D>(AssetDirectory.SpaceEventNPC + "SwordEnemySlash");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public ref float Timer => ref NPC.ai[0];
 		public ref float Phase => ref NPC.ai[1];
 
@@ -138,8 +140,8 @@ namespace StarlightRiver.Content.NPCs.SpaceEvent
 			NPC.frame.Width = 192;
 			NPC.frame.Height = 164;
 
-			Texture2D tex = Request<Texture2D>(Texture).Value;
-			Texture2D texSlash = Request<Texture2D>(AssetDirectory.SpaceEventNPC + "SwordEnemySlash").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D texSlash = texture_AssetDirectory_SpaceEventNPC___SwordEnemySlash.Value;
 
 			SpriteEffects effects = NPC.direction == -1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 

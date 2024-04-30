@@ -6,6 +6,9 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 {
 	public class JetwelderCrawler : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Gun_Flash = ModContent.Request<Texture2D>(Texture + "_Gun_Flash");
+		public static readonly Asset<Texture2D> texture_Texture____Gun = ModContent.Request<Texture2D>(Texture + "_Gun");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private const int BASE_DURATION = 1200;
 		private const int SPEED = 3;
 		private const int GUN_FRAMES = 4;
@@ -73,15 +76,15 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 		{
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			int frameHeight = tex.Height / Main.projFrames[Projectile.type];
 			var frame = new Rectangle(0, frameHeight * Projectile.frame, tex.Width, frameHeight);
 
 			SpriteEffects effects = flipVertical ? SpriteEffects.FlipVertically : SpriteEffects.None;
 			spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, frame, lightColor, Projectile.rotation % 6.28f, tex.Size() / new Vector2(2, 2 * Main.projFrames[Projectile.type]), Projectile.scale, effects, 0f);
 
-			Texture2D gunTex = ModContent.Request<Texture2D>(Texture + "_Gun").Value;
-			Texture2D flashTex = ModContent.Request<Texture2D>(Texture + "_Gun_Flash").Value;
+			Texture2D gunTex = texture_Texture____Gun.Value;
+			Texture2D flashTex = texture_Texture____Gun_Flash.Value;
 			SpriteEffects gunEffects = flipGun ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
 			int gunFrameHeight = gunTex.Height / GUN_FRAMES;

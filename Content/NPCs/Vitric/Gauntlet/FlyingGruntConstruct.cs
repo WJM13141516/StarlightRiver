@@ -20,6 +20,8 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 
 	internal class FlyingGruntConstruct : VitricConstructNPC
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private const int XFRAMES = 5;
 
 		public ref float attackPhase => ref NPC.ai[0];
@@ -154,8 +156,8 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 
 		public override bool PreDraw(SpriteBatch spriteBatch, Vector2 screenPos, Color drawColor)
 		{
-			Texture2D mainTex = Request<Texture2D>(Texture).Value;
-			Texture2D glowTex = Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D mainTex = texture_Texture.Value;
+			Texture2D glowTex = texture_Texture____Glow.Value;
 
 			DrawConstruct(mainTex, glowTex, spriteBatch, screenPos, drawColor, NPC.IsABestiaryIconDummy ? new Vector2(-16, 0) : Vector2.Zero, true);
 			return false;
@@ -498,7 +500,7 @@ namespace StarlightRiver.Content.NPCs.Vitric.Gauntlet
 			spriteBatch.End();
 			spriteBatch.Begin(default, BlendState.Additive, Main.DefaultSamplerState, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D tex = Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			float sin = 0.5f + (float)Math.Sin(Main.timeForVisualEffects * 0.04f) * 0.5f;
 			float distance = sin * 3 + 4;
 

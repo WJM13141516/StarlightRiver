@@ -14,6 +14,12 @@ namespace StarlightRiver.Content.Items.Haunted
 	/// </summary>
 	class EchochainSystem : ModSystem
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_EnergyTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_FireTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_HauntedItem___EchochainWhipChain_Blur = ModContent.Request<Texture2D>(AssetDirectory.HauntedItem + "EchochainWhipChain_Blur");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_HauntedItem___EchochainWhipChain_Glow = ModContent.Request<Texture2D>(AssetDirectory.HauntedItem + "EchochainWhipChain_Glow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_HauntedItem___EchochainWhipChain = ModContent.Request<Texture2D>(AssetDirectory.HauntedItem + "EchochainWhipChain");
 		// These represent the graph for the echo chain's connection. Essentially
 		// every NPC acts as a node, and are connected by edges which are created
 		// when NPCs are struck by the weapon. Damage sharing is handled via a
@@ -383,10 +389,10 @@ namespace StarlightRiver.Content.Items.Haunted
 
 			DrawPrimitives(spriteBatch);
 
-			Texture2D tex = ModContent.Request<Texture2D>(AssetDirectory.HauntedItem + "EchochainWhipChain").Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>(AssetDirectory.HauntedItem + "EchochainWhipChain_Glow").Value;
-			Texture2D texBlur = ModContent.Request<Texture2D>(AssetDirectory.HauntedItem + "EchochainWhipChain_Blur").Value;
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D tex = texture_AssetDirectory_HauntedItem___EchochainWhipChain.Value;
+			Texture2D texGlow = texture_AssetDirectory_HauntedItem___EchochainWhipChain_Glow.Value;
+			Texture2D texBlur = texture_AssetDirectory_HauntedItem___EchochainWhipChain_Blur.Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 			Vector2 chainStart = start.npc.Center;
 			Vector2 chainEnd = end.npc.Center;
 
@@ -450,13 +456,13 @@ namespace StarlightRiver.Content.Items.Haunted
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * -0.025f);
 			effect.Parameters["repeats"].SetValue(1f);
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_FireTrail.Value);
 
 			trail?.Render(effect);
 
 			effect.Parameters["time"].SetValue(Main.GameUpdateCount * 0.05f);
 			effect.Parameters["repeats"].SetValue(2f);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/EnergyTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_EnergyTrail.Value);
 
 			trail?.Render(effect);
 

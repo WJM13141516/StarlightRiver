@@ -9,6 +9,9 @@ namespace StarlightRiver.Content.Items.Moonstone
 {
 	public class CrescentOrb : ModProjectile, IDrawAdditive
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_LaserBallDistort = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/LaserBallDistort");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Items_Moonstone_CrescentQuarterstaffMap = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Moonstone/CrescentQuarterstaffMap");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow");
 		public override string Texture => AssetDirectory.MoonstoneItem + Name;
 
 		public override void SetStaticDefaults()
@@ -63,7 +66,7 @@ namespace StarlightRiver.Content.Items.Moonstone
 		{
 			Projectile.Opacity = Projectile.timeLeft > 10 ? 1 : Projectile.timeLeft / 10f;
 
-			Texture2D texGlow = Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value;
+			Texture2D texGlow = texture_StarlightRiver_Assets_Keys_Glow.Value;
 
 			int sin = (int)(Math.Sin(StarlightWorld.visualTimer * 3) * 40f);
 			var color = new Color(72 + sin, 30 + sin / 2, 127);
@@ -72,8 +75,8 @@ namespace StarlightRiver.Content.Items.Moonstone
 			spriteBatch.Draw(texGlow, Projectile.Center - Main.screenPosition, null, color * Projectile.scale * 1.2f * Projectile.Opacity, 0, texGlow.Size() / 2, Projectile.scale * 0.8f, default, default);
 
 			Effect effect1 = Filters.Scene["CrescentOrb"].GetShader().Shader;
-			effect1.Parameters["sampleTexture"].SetValue(Request<Texture2D>("StarlightRiver/Assets/Items/Moonstone/CrescentQuarterstaffMap").Value);
-			effect1.Parameters["sampleTexture2"].SetValue(Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/LaserBallDistort").Value);
+			effect1.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_Items_Moonstone_CrescentQuarterstaffMap.Value);
+			effect1.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_Bosses_VitricBoss_LaserBallDistort.Value);
 			effect1.Parameters["uTime"].SetValue(Main.GameUpdateCount * 0.01f);
 			effect1.Parameters["opacity"].SetValue(Projectile.Opacity);
 
@@ -85,7 +88,7 @@ namespace StarlightRiver.Content.Items.Moonstone
 			spriteBatch.End();
 			spriteBatch.Begin(default, BlendState.Additive, SamplerState.PointWrap, default, RasterizerState.CullNone, default, Main.GameViewMatrix.TransformationMatrix);
 
-			Texture2D tex = Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Keys_Glow.Value;
 			var glowColor = new Color(78, 87, 191);
 			spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, tex.Frame(), glowColor * Projectile.Opacity * 0.8f, 0, tex.Size() / 2, 2.5f * Projectile.scale * Projectile.Opacity, 0, 0);
 		}

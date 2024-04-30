@@ -4,6 +4,10 @@ namespace StarlightRiver.Compat.BossChecklist
 {
 	class CeirosPortrait
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_BossChecklist_VitricBossGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/BossChecklist/VitricBossGlow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_BossChecklist_VitricBoss = ModContent.Request<Texture2D>("StarlightRiver/Assets/BossChecklist/VitricBoss");
 		private readonly static ParticleSystem ceirosSystem = new("StarlightRiver/Assets/Keys/GlowSoft", n =>
 		{
 			n.Velocity.X = (float)Math.Sin(n.Timer / 10f);
@@ -23,9 +27,9 @@ namespace StarlightRiver.Compat.BossChecklist
 
 			float sin = 0.6f + (float)Math.Sin(Main.GameUpdateCount / 100f) * 0.2f;
 
-			Texture2D tex0 = ModContent.Request<Texture2D>("StarlightRiver/Assets/BossChecklist/VitricBoss").Value;
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/BossChecklist/VitricBossGlow").Value;
-			Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value;
+			Texture2D tex0 = texture_StarlightRiver_Assets_BossChecklist_VitricBoss.Value;
+			Texture2D tex = texture_StarlightRiver_Assets_BossChecklist_VitricBossGlow.Value;
+			Texture2D tex2 = texture_StarlightRiver_Assets_Keys_Glow.Value;
 			spriteBatch.Draw(tex2, rect, null, Color.Black * 0.6f, 0, Vector2.UnitY * 2, 0, 0);
 
 			spriteBatch.End();
@@ -39,7 +43,7 @@ namespace StarlightRiver.Compat.BossChecklist
 
 			spriteBatch.Draw(tex0, rect.Center(), null, color, 0, tex0.Size() / 2, 1, 0, 0);
 
-			ceirosSystem.SetTexture(ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value);
+			ceirosSystem.SetTexture(texture_StarlightRiver_Assets_Keys_GlowSoft.Value);
 		}
 	}
 }

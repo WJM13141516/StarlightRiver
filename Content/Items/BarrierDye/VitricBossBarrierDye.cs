@@ -6,6 +6,7 @@ namespace StarlightRiver.Content.Items.BarrierDye
 {
 	class VitricBossBarrierDye : BarrierDye
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Bosses_VitricBoss_ShieldMap = ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/ShieldMap");
 		public override string Texture => AssetDirectory.BarrierDyeItem + Name;
 
 		public override float RechargeAnimationRate => 0.01f;
@@ -43,7 +44,7 @@ namespace StarlightRiver.Content.Items.BarrierDye
 			Vector2 pos = CustomHooks.PlayerTarget.getPositionOffset(Player.whoAmI);
 
 			Effect effect = Terraria.Graphics.Effects.Filters.Scene["MoltenFormAndColor"].GetShader().Shader;
-			effect.Parameters["sampleTexture2"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/Bosses/VitricBoss/ShieldMap").Value);
+			effect.Parameters["sampleTexture2"].SetValue(texture_StarlightRiver_Assets_Bosses_VitricBoss_ShieldMap.Value);
 			effect.Parameters["uTime"].SetValue(barrier.rechargeAnimationTimer * 2 + (barrier.rechargeAnimationTimer >= 1 ? Main.GameUpdateCount / 30f % 2f : 0));
 			effect.Parameters["sourceFrame"].SetValue(new Vector4((int)pos.X - 30, (int)pos.Y - 60, 60, 120));
 			effect.Parameters["texSize"].SetValue(tex.Size());

@@ -7,8 +7,10 @@ namespace StarlightRiver.Content.Tiles.Vitric.Temple
 {
 	class VitricTempleWall : ModWall
 	{
-		public static Texture2D CustomTexture = Request<Texture2D>(AssetDirectory.VitricTile + "VitricTempleWall").Value;
-		public static Texture2D CustomBackTexture = Request<Texture2D>(AssetDirectory.VitricTile + "VitricTempleWallEdge").Value;
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___VitricTempleWallEdge = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "VitricTempleWallEdge");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_VitricTile___VitricTempleWall = ModContent.Request<Texture2D>(AssetDirectory.VitricTile + "VitricTempleWall");
+		public static Texture2D CustomTexture = texture_AssetDirectory_VitricTile___VitricTempleWall.Value;
+		public static Texture2D CustomBackTexture = texture_AssetDirectory_VitricTile___VitricTempleWallEdge.Value;
 
 		public override string Texture => AssetDirectory.VitricTile + "VitricTempleWall";
 

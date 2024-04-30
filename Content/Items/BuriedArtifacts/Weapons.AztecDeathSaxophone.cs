@@ -10,6 +10,10 @@ namespace StarlightRiver.Content.Items.BuriedArtifacts
 {
 	public class AztecDeathSaxophone : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Blurred = ModContent.Request<Texture2D>(Texture + "_Blurred");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public const float MAX_CHARGE = 60f;
 
 		public float charge;
@@ -149,9 +153,9 @@ namespace StarlightRiver.Content.Items.BuriedArtifacts
 
 		public override bool PreDrawInInventory(SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D texGlow = texture_Texture____Glow.Value;
+			Texture2D glowTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 
 			spriteBatch.Draw(tex, position, frame, drawColor, 0f, origin, scale, 0f, 0f);
 
@@ -284,9 +288,9 @@ namespace StarlightRiver.Content.Items.BuriedArtifacts
 		{
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
-			Texture2D glowTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D texGlow = texture_Texture____Glow.Value;
+			Texture2D glowTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 
 			SpriteEffects flip = Projectile.spriteDirection == -1 ? SpriteEffects.FlipHorizontally : 0f;
 
@@ -335,8 +339,8 @@ namespace StarlightRiver.Content.Items.BuriedArtifacts
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D texBlur = ModContent.Request<Texture2D>(Texture + "_Blurred").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D texBlur = texture_Texture____Blurred.Value;
 
 			var color = new Color(100, 0, 0, 0);
 			if (Projectile.timeLeft < 10)

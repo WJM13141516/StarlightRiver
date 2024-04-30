@@ -7,6 +7,11 @@ namespace StarlightRiver.Content.Items.Manabonds
 {
 	internal class InfernalManabond : Manabond
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_FireTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GlowTrail = ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Dusts_Aurora = ModContent.Request<Texture2D>("StarlightRiver/Assets/Dusts/Aurora");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_GlowSoft = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow");
 		public override string Texture => AssetDirectory.ManabondItem + Name;
 
 		public InfernalManabond() : base("Infernal Manabond", "Your minions can store 40 mana\nYour minions siphon 6 mana per second from you untill full\nYour minions spend 20 mana to attack with an exploding fireball occasionally") { }
@@ -142,14 +147,14 @@ namespace StarlightRiver.Content.Items.Manabonds
 
 		public void DrawAdditive(SpriteBatch spriteBatch)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value;
-			Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/GlowSoft").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Keys_Glow.Value;
+			Texture2D tex2 = texture_StarlightRiver_Assets_Keys_GlowSoft.Value;
 			spriteBatch.Draw(tex2, Projectile.Center - Main.screenPosition, null, new Color(255, 220, 20), 0, tex2.Size() / 2, 1.4f, 0, 0);
 			spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, Color.White, 0, tex.Size() / 2, 0.8f, 0, 0);
 
 			if (State == 1 && Projectile.timeLeft <= 15)
 			{
-				Texture2D tex3 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Dusts/Aurora").Value;
+				Texture2D tex3 = texture_StarlightRiver_Assets_Dusts_Aurora.Value;
 				spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, null, new Color(255, 100 + (int)(Projectile.timeLeft / 15f * 155), 50) * (Projectile.timeLeft / 15f), 0, tex.Size() / 2, (15 - Projectile.timeLeft) * 0.6f, 0, 0);
 				spriteBatch.Draw(tex3, Projectile.Center - Main.screenPosition, null, new Color(255, 100 + (int)(Projectile.timeLeft / 15f * 155), 50) * (Projectile.timeLeft / 15f) * 1.5f, 0, tex3.Size() / 2, (15 - Projectile.timeLeft) * 0.4f, 0, 0);
 			}
@@ -213,11 +218,11 @@ namespace StarlightRiver.Content.Items.Manabonds
 			effect.Parameters["transformMatrix"].SetValue(world * view * projection);
 
 			effect.Parameters["opacity"].SetValue(0.25f);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/GlowTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_GlowTrail.Value);
 			trail?.Render(effect);
 
 			effect.Parameters["opacity"].SetValue(1f);
-			effect.Parameters["sampleTexture"].SetValue(ModContent.Request<Texture2D>("StarlightRiver/Assets/FireTrail").Value);
+			effect.Parameters["sampleTexture"].SetValue(texture_StarlightRiver_Assets_FireTrail.Value);
 			trail?.Render(effect);
 		}
 	}

@@ -10,6 +10,10 @@ namespace StarlightRiver.Content.Items.UndergroundTemple
 {
 	class RuneStaff : ModItem
 	{
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Keys___GlowAlpha = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_Assets___StarTexture = ModContent.Request<Texture2D>(AssetDirectory.Assets + "StarTexture");
+		public static readonly Asset<Texture2D> texture_Texture____Glow = ModContent.Request<Texture2D>(Texture + "_Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string Texture => AssetDirectory.CaveTempleItem + Name;
 
 		public override bool CanUseItem(Player player)
@@ -308,12 +312,12 @@ namespace StarlightRiver.Content.Items.UndergroundTemple
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D texGlow = ModContent.Request<Texture2D>(Texture + "_Glow").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D texGlow = texture_Texture____Glow.Value;
 
-			Texture2D starTex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "StarTexture").Value;
+			Texture2D starTex = texture_AssetDirectory_Assets___StarTexture.Value;
 
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 
 			SpriteEffects flip = Owner.direction == -1 ? SpriteEffects.FlipHorizontally : 0f;
 
@@ -444,9 +448,9 @@ namespace StarlightRiver.Content.Items.UndergroundTemple
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D starTex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "StarTexture").Value;
+			Texture2D starTex = texture_AssetDirectory_Assets___StarTexture.Value;
 
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 
 			Main.spriteBatch.Draw(bloomTex, Projectile.Center - Main.screenPosition, null, new Color(150, 150, 10, 0), 0f, bloomTex.Size() / 2f, 0.25f, 0, 0);
 
@@ -493,9 +497,9 @@ namespace StarlightRiver.Content.Items.UndergroundTemple
 
 		public override bool PreDraw(ref Color lightColor)
 		{
-			Texture2D starTex = ModContent.Request<Texture2D>(AssetDirectory.Assets + "StarTexture").Value;
+			Texture2D starTex = texture_AssetDirectory_Assets___StarTexture.Value;
 
-			Texture2D bloomTex = ModContent.Request<Texture2D>(AssetDirectory.Keys + "GlowAlpha").Value;
+			Texture2D bloomTex = texture_AssetDirectory_Keys___GlowAlpha.Value;
 
 			float lerper = EaseBuilder.EaseCircularInOut.Ease(Projectile.timeLeft / 15f);
 

@@ -10,6 +10,8 @@ namespace StarlightRiver.Content.GUI
 {
 	public class TextCard : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Keys_Glow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Keys/Glow");
+		public static readonly Asset<Texture2D> texture_texturePath = ModContent.Request<Texture2D>(texturePath);
 		private Ability abilityToAnnounce;
 		private bool usedAnnouncedAbility = false;
 
@@ -25,7 +27,7 @@ namespace StarlightRiver.Content.GUI
 		private int tempTime = 0;
 		private int tempTimeMax = 0;
 
-		private Texture2D Texture => Request<Texture2D>(texturePath).Value;
+		private Texture2D Texture => texture_texturePath.Value;
 
 		public override int InsertionIndex(List<GameInterfaceLayer> layers)
 		{
@@ -69,7 +71,7 @@ namespace StarlightRiver.Content.GUI
 			spriteBatch.End();
 			spriteBatch.Begin(default, BlendState.AlphaBlend, SamplerState.PointClamp, default, default, default, Main.UIScaleMatrix);
 
-			spriteBatch.Draw(Request<Texture2D>("StarlightRiver/Assets/Keys/Glow").Value, new Rectangle(startX - (int)(Longest * 2 * slide2), startY - (int)(25 * textScale), (int)(Longest * 4 * slide2), (int)(150 * textScale)), Color.Black * 0.6f * Math.Clamp(timer / 60f, 0f, 1f));
+			spriteBatch.Draw(texture_StarlightRiver_Assets_Keys_Glow.Value, new Rectangle(startX - (int)(Longest * 2 * slide2), startY - (int)(25 * textScale), (int)(Longest * 4 * slide2), (int)(150 * textScale)), Color.Black * 0.6f * Math.Clamp(timer / 60f, 0f, 1f));
 
 			spriteBatch.End();
 			spriteBatch.Begin(default, default, SamplerState.PointClamp, default, default, default, Main.UIScaleMatrix);

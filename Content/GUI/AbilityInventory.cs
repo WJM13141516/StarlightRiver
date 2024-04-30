@@ -9,6 +9,8 @@ namespace StarlightRiver.Content.GUI
 {
 	public class AbilityInventory : SmartUIState
 	{
+		public static readonly Asset<Texture2D> texture_ability_Texture = ModContent.Request<Texture2D>(ability.Texture);
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_GUI_blank = ModContent.Request<Texture2D>("StarlightRiver/Assets/GUI/blank");
 		public static Ability activeAbility;
 		public static bool shouldReset = false;
 		public static Dictionary<Type, Vector2> abilityIconPositions = new(); //to easily communicate ability icon positions to other UI
@@ -83,7 +85,7 @@ namespace StarlightRiver.Content.GUI
 			bool unlocked = Main.LocalPlayer.GetHandler().Unlocked(ability.GetType());
 
 			Vector2 pos = GetDimensions().Center() - Vector2.One;
-			Texture2D tex = !unlocked ? Request<Texture2D>("StarlightRiver/Assets/GUI/blank").Value : Request<Texture2D>(ability.Texture).Value;
+			Texture2D tex = !unlocked ? texture_StarlightRiver_Assets_GUI_blank.Value : texture_ability_Texture.Value;
 
 			spriteBatch.Draw(tex, pos, tex.Frame(), Color.White, 0, tex.Size() / 2, 1, 0, 0);
 

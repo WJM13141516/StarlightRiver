@@ -6,6 +6,8 @@ namespace StarlightRiver.Content.Items.Beach
 {
 	class SaltCogs : SmartAccessory
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Items_Beach_SaltGearSmall = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Beach/SaltGearSmall");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Items_Beach_SaltGear = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Beach/SaltGear");
 		public const int COG_DURATION = 240; // 240 = 2 seconds with the additional extra update. Will end up being shorter on sentries that already have an extra update set.
 
 		public override string Texture => AssetDirectory.Assets + "Items/Beach/" + Name;
@@ -50,8 +52,8 @@ namespace StarlightRiver.Content.Items.Beach
 				{
 					int prog = Projectile.SentryLifeTime - projectile.timeLeft;
 
-					Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Beach/SaltGear").Value;
-					Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Items/Beach/SaltGearSmall").Value;
+					Texture2D tex = texture_StarlightRiver_Assets_Items_Beach_SaltGear.Value;
+					Texture2D tex2 = texture_StarlightRiver_Assets_Items_Beach_SaltGearSmall.Value;
 					var color = new Color(255, 220, 220);
 
 					if (prog > COG_DURATION - 40)

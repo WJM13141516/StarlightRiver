@@ -6,6 +6,10 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 {
 	public class JetwelderGatler : ModProjectile
 	{
+		public static readonly Asset<Texture2D> texture_Texture____Flash = ModContent.Request<Texture2D>(Texture + "_Flash");
+		public static readonly Asset<Texture2D> texture_Texture____GunIdle = ModContent.Request<Texture2D>(Texture + "_GunIdle");
+		public static readonly Asset<Texture2D> texture_Texture____Gun = ModContent.Request<Texture2D>(Texture + "_Gun");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		private const int MAX_RANGE = 500;
 		private const int MIN_RANGE = 150;
 		private const float SPEED = 15f;
@@ -87,7 +91,7 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 		{
 			SpriteBatch spriteBatch = Main.spriteBatch;
 
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
+			Texture2D tex = texture_Texture.Value;
 			SpriteEffects spriteEffects = Projectile.spriteDirection == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
 			int frameHeight = tex.Height / Main.projFrames[Projectile.type];
@@ -96,14 +100,14 @@ namespace StarlightRiver.Content.Items.SteampunkSet
 			var frame = new Rectangle(0, frameHeight * Projectile.frame, tex.Width, frameHeight);
 			spriteBatch.Draw(tex, Projectile.Center - Main.screenPosition, frame, lightColor, Projectile.rotation, origin, Projectile.scale, spriteEffects, 0f);
 
-			Texture2D gunTex = ModContent.Request<Texture2D>(Texture + "_Gun").Value;
-			Texture2D gunTexIdle = ModContent.Request<Texture2D>(Texture + "_GunIdle").Value;
+			Texture2D gunTex = texture_Texture____Gun.Value;
+			Texture2D gunTexIdle = texture_Texture____GunIdle.Value;
 			var gunFrame = new Rectangle(0, frameHeight * Projectile.frame, tex.Width, frameHeight);
 			spriteBatch.Draw(firing ? gunTex : gunTexIdle, Projectile.Center - Main.screenPosition, firing ? gunFrame : new Rectangle(0, 0, gunTexIdle.Width, gunTexIdle.Height), lightColor, Projectile.rotation, origin, Projectile.scale, spriteEffects, 0f);
 
 			if (firing)
 			{
-				Texture2D flashTex = ModContent.Request<Texture2D>(Texture + "_Flash").Value;
+				Texture2D flashTex = texture_Texture____Flash.Value;
 				spriteBatch.Draw(flashTex, Projectile.Center - Main.screenPosition, gunFrame, Color.White, Projectile.rotation, origin, Projectile.scale, spriteEffects, 0f);
 			}
 

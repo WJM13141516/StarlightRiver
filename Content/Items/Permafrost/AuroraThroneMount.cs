@@ -8,6 +8,10 @@ namespace StarlightRiver.Content.Items.Permafrost
 {
 	internal class AuroraThroneMount : CombatMount
 	{
+		public static readonly Asset<Texture2D> texture_Texture___Shape = ModContent.Request<Texture2D>(Texture + "Shape");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___PortalGlow = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "PortalGlow");
+		public static readonly Asset<Texture2D> texture_Texture___Glow = ModContent.Request<Texture2D>(Texture + "Glow");
+		public static readonly Asset<Texture2D> texture_Texture = ModContent.Request<Texture2D>(Texture);
 		public override string PrimaryIconTexture => AssetDirectory.PermafrostItem + "AuroraThroneMountPrimary";
 		public override string SecondaryIconTexture => AssetDirectory.PermafrostItem + "AuroraThroneMountSecondary";
 
@@ -114,10 +118,10 @@ namespace StarlightRiver.Content.Items.Permafrost
 		{
 			SetStaticDefaults();
 
-			Texture2D tex = ModContent.Request<Texture2D>(Texture).Value;
-			Texture2D tex2 = ModContent.Request<Texture2D>(Texture + "Glow").Value;
-			Texture2D tex3 = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "PortalGlow").Value;
-			Texture2D tex4 = ModContent.Request<Texture2D>(Texture + "Shape").Value;
+			Texture2D tex = texture_Texture.Value;
+			Texture2D tex2 = texture_Texture___Glow.Value;
+			Texture2D tex3 = texture_AssetDirectory_SquidBoss___PortalGlow.Value;
+			Texture2D tex4 = texture_Texture___Shape.Value;
 			CombatMountPlayer mp = drawPlayer.GetModPlayer<CombatMountPlayer>();
 			float progress = 1 - Math.Max(0, (mp.mountingTime - 15) / 15f);
 

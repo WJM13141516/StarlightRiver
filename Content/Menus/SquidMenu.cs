@@ -7,6 +7,17 @@ namespace StarlightRiver.Content.Menus
 {
 	internal class SquidMenu : ModMenu
 	{
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Misc_MenuIconGlow = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/MenuIconGlow");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Misc_MenuIconGlow2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/MenuIconGlow2");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___Godray = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "Godray");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___WindowInGlow = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "WindowInGlow");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___WindowIn = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "WindowIn");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___WindowDome = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "WindowDome");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___Window = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "Window");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___Background2 = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "Background2");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___Background1 = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "Background1");
+		public static readonly Asset<Texture2D> texture_AssetDirectory_SquidBoss___Background0 = ModContent.Request<Texture2D>(AssetDirectory.SquidBoss + "Background0");
+		public static readonly Asset<Texture2D> texture_StarlightRiver_Assets_Misc_MenuIcon = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/MenuIcon");
 		public NPC fakeBoss;
 
 		float VisualTimerA;
@@ -16,7 +27,7 @@ namespace StarlightRiver.Content.Menus
 		public override string DisplayName => "Auroracle";
 		public override int Music => MusicLoader.GetMusicSlot(Mod, "Sounds/Music/SquidArena");
 
-		public override Asset<Texture2D> Logo => Request<Texture2D>("StarlightRiver/Assets/Misc/MenuIcon");
+		public override Asset<Texture2D> Logo => texture_StarlightRiver_Assets_Misc_MenuIcon;
 
 		private static void UpdateBubblesBody(Particle particle)
 		{
@@ -62,9 +73,9 @@ namespace StarlightRiver.Content.Menus
 
 			Vector2 center = Main.screenPosition + new Vector2(Main.screenWidth / 2, Main.screenHeight / 2);
 
-			Texture2D layer0 = Request<Texture2D>(AssetDirectory.SquidBoss + "Background0").Value;
-			Texture2D layer1 = Request<Texture2D>(AssetDirectory.SquidBoss + "Background1").Value;
-			Texture2D layer2 = Request<Texture2D>(AssetDirectory.SquidBoss + "Background2").Value;
+			Texture2D layer0 = texture_AssetDirectory_SquidBoss___Background0.Value;
+			Texture2D layer1 = texture_AssetDirectory_SquidBoss___Background1.Value;
+			Texture2D layer2 = texture_AssetDirectory_SquidBoss___Background2.Value;
 
 			Vector2 pos = center;
 			Vector2 dpos = pos - Main.screenPosition;
@@ -105,21 +116,21 @@ namespace StarlightRiver.Content.Menus
 			spriteBatch.End();
 			spriteBatch.Begin(SpriteSortMode.Deferred, default, SamplerState.PointClamp, default, default, default, Main.UIScaleMatrix);
 
-			Texture2D backdrop = Request<Texture2D>(AssetDirectory.SquidBoss + "Window").Value;
+			Texture2D backdrop = texture_AssetDirectory_SquidBoss___Window.Value;
 			spriteBatch.Draw(backdrop, center - backdrop.Size() / 2 + new Vector2(0, -886) - Main.screenPosition, new Color(45, 45, 60));
 
 			spriteBatch.End();
 			spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.Additive, SamplerState.PointClamp, default, default, default, Main.UIScaleMatrix);
 
-			Texture2D dome = Request<Texture2D>(AssetDirectory.SquidBoss + "WindowDome").Value;
+			Texture2D dome = texture_AssetDirectory_SquidBoss___WindowDome.Value;
 			spriteBatch.Draw(dome, center - dome.Size() / 2 + Vector2.UnitY * -886 - Main.screenPosition, null, Color.White * 0.325f, 0, Vector2.Zero, 1, 0, 0);
 
-			Texture2D glass = Request<Texture2D>(AssetDirectory.SquidBoss + "WindowIn").Value;
-			Texture2D glass2 = Request<Texture2D>(AssetDirectory.SquidBoss + "WindowInGlow").Value;
+			Texture2D glass = texture_AssetDirectory_SquidBoss___WindowIn.Value;
+			Texture2D glass2 = texture_AssetDirectory_SquidBoss___WindowInGlow.Value;
 			spriteBatch.Draw(glass, center + new Vector2(0, -7 * 16 - 3) - Main.screenPosition, null, Color.White * 0.325f, 0, glass.Size() / 2, 1, 0, 0);
 			spriteBatch.Draw(glass2, center + new Vector2(0, -7 * 16 - 3) - Main.screenPosition, null, Color.White * 0.2f, 0, glass.Size() / 2, 1, 0, 0);
 
-			Texture2D ray = Request<Texture2D>(AssetDirectory.SquidBoss + "Godray").Value;
+			Texture2D ray = texture_AssetDirectory_SquidBoss___Godray.Value;
 
 			for (int k = 0; k < 4; k++)
 			{
@@ -138,12 +149,12 @@ namespace StarlightRiver.Content.Menus
 
 		public override void PostDrawLogo(SpriteBatch spriteBatch, Vector2 logoDrawCenter, float logoRotation, float logoScale, Color drawColor)
 		{
-			Texture2D tex2 = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/MenuIconGlow2").Value;
+			Texture2D tex2 = texture_StarlightRiver_Assets_Misc_MenuIconGlow2.Value;
 			Color color = Color.White;
 			color.A = 0;
 			spriteBatch.Draw(tex2, logoDrawCenter, null, color, logoRotation, tex2.Size() / 2f, logoScale, 0, 0);
 
-			Texture2D tex = ModContent.Request<Texture2D>("StarlightRiver/Assets/Misc/MenuIconGlow").Value;
+			Texture2D tex = texture_StarlightRiver_Assets_Misc_MenuIconGlow.Value;
 			spriteBatch.Draw(tex, logoDrawCenter, null, Color.White, logoRotation, tex.Size() / 2f, logoScale, 0, 0);
 		}
 
